@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.ipynb_checkpoints/
+
+# env / secrets
+.venv/
+venv/
+.env
+*.env
+
+# Hugging Face / transformers cache (keep outside repo anyway)
+cache*/
+.cache/
+**/hub/
+**/snapshots/
+**/blobs/
+**/refs/
+
+# outputs / logs
+results/
+figures/
+evaluations/
+*.log
+*.tmp
+
+# OS junk
+.DS_Store
+__MACOSX/
+
+# archives / big vendor dirs
+*.tar.gz
+glibc-*/
