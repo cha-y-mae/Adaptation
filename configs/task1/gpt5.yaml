@@ -14,6 +14,6 @@ task:
   type: mcq                #task 1: mcq or task 2: answer_generation
 
 output:
-  predictions_path: results/predictions/test.csv #specify output pred file
+  predictions_path: results/predictions/task1/test.csv #specify output pred file
   metrics_path: results/metrics/task1/test.json  #specift output pred file
 

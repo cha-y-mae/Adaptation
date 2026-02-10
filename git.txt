@@ -1,0 +1,30 @@
+------------- Step 1: Synch ----------------
+1. Make sure you’re on main
+
+git checkout main
+
+2. Get latest changes from GitHub
+
+git pull
+
+---------- Step 2: Create Branch -----------
+1. Create branch 
+
+git checkout -b chaimae/scaffold
+
+---------Step 3: Work + Commit-------------
+1. Check what changed 
+
+git status 
+
+2. Commit 
+
+git add -A
+git commit -m "Create scaffold: scripts, models, configs"
+
+3. Push branch 
+
+git push -u origin chaimae/scaffold
+
+4. Open PullReauests on Github and merge to main 
+
