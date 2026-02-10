@@ -31,6 +31,9 @@ pip install -r requirements.txt
 
 ## 2. Repository Structure (Relevant Parts)
 
+## Repository Structure
+
+```text
 Adaptation/
 ├── configs/                # YAML configs per task & model
 │   ├── task1/
@@ -39,18 +42,18 @@ Adaptation/
 │       └── gpt5.yaml
 │
 ├── datasets/
-│   └── qa/                 # task 1&2 datasets 
+│   └── qa/                 # Task 1 & Task 2 datasets
 │       ├── arastem.json
 │       ├── medarabench.json
 │       ├── medarabiq.json
 │       ├── mmlu-arabic.json
 │
-├── evals/                  # evaluation scripts
+├── evals/                  # Evaluation scripts
 │   ├── evaluator.py
 │   ├── metrics.py
 │   └── __init__.py
 │
-├── models/                 # model handlers / wrappers
+├── models/                 # Model handlers / wrappers
 │   ├── llama70.py
 │   ├── meditron70_handler.py
 │   ├── openai_handler.py
@@ -60,19 +63,21 @@ Adaptation/
 │   ├── task1.txt
 │   └── task2.txt
 │
-├── scripts/                # entry-point scripts
+├── scripts/                # Entry-point scripts
 │   ├── run_evaluation.py
 │   ├── utils.py
 │   └── __init__.py
 │
 ├── results/
-│   ├── metrics/            # aggregated evaluation results
+│   ├── metrics/            # Aggregated evaluation results
 │   │   ├── task1/
 │   │   └── task2/
-│   └── predictions/        # model outputs/predictions
+│   └── predictions/        # Model outputs / predictions
 │       ├── task1/
 │       └── task2/
+│
 └── README.md
+
 
 ## 3. Running an Experiment
 
