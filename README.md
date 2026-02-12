@@ -29,7 +29,7 @@ pip install -r requirements.txt
 
 ---
 
-## 2. Repository Structure (Relevant Parts)
+## 2. Repository Structure 
 
 ## Repository Structure
 
