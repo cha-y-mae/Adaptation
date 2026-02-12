@@ -79,7 +79,6 @@ Adaptation/
 └── README.md
 ```
 
-
 ## 3. Running an Experiment
 
 ### Set API Keys
@@ -98,7 +97,6 @@ Each config defines:
 * model type and model name
 * dataset paths
 * prompt/task settings
-* caching behavior
 
 
 ### Run the Experiment
