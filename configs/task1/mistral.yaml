@@ -1,13 +1,13 @@
 experiment_name: task1_gpt5 
 
 model:
-  type: openai            #model handler type as written in models/__init__.py
-  name: o3               #change to model name 
+  type: mistral            #model handler type as written in models/__init__.py
+  name: mistralai/Mistral-Small-3.2-24B-Instruct-2506  # just as it appears in huggingface
 
 cache_dir: /scratch/ca2627/huggingface #modify to your own cache directory
 
 dataset:
-  path: datasets/qa/medarabiq/test.json   #path to dataset JSON file
+  path: datasets/qa/medarabench.json   #path to dataset JSON file
   instruction_path: prompts/task1.txt  #path to instruction file (default.txt)
 
 task:

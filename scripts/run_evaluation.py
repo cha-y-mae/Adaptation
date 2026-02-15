@@ -1,8 +1,18 @@
 '''
-
-This script is for running an evaluation experiment defined by a yaml config: loads data, queries a model handler, saves predictions. It saves partial results periodically and evaluates partial outputs on interruption, final outputs on success. 
-
+This script runs an MCQ evaluation experiment defined by a yaml config:
+- loads data (JSON list of dicts)
+- queries a model handler
+- saves predictions periodically
+- evaluates partial outputs on interruption, final outputs on success
 '''
+
+import sys
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+
+
 
 import json
 import logging
@@ -13,18 +23,47 @@ from pathlib import Path
 from tqdm import tqdm
 from scripts.utils import load_config, save_predictions
 from models import load_model_handler
-from evaluations.evaluator import evaluate, split_prediction
+from evals.evaluator import evaluate, split_prediction
 
 SAVE_EVERY = 50
+
+
+def build_mcq_text(item: dict) -> str:
+    """Build a readable MCQ block from the new dataset schema."""
+    stem = (item.get("question") or "").strip()
+
+    option_map = {
+        "A": item.get("opa"),
+        "B": item.get("opb"),
+        "C": item.get("opc"),
+        "D": item.get("opd"),
+        "E": item.get("ope"),
+        "F": item.get("opf"),
+    }
+
+    lines = []
+    for letter in ["A", "B", "C", "D", "E", "F"]:
+        txt = option_map.get(letter)
+        if txt is None:
+            continue
+        txt = str(txt).strip()
+        if not txt:
+            continue
+        lines.append(f"{letter}) {txt}")
+
+    if stem and lines:
+        return stem + "\n\n" + "\n".join(lines)
+    return stem or ""
 
 
 def run_experiment(config_path):
     logging.info(f"loading config from {config_path}")
     config = load_config(config_path)
 
+    # ---- MCQ ONLY ----
     task_type = config["task"]["type"]
-    if task_type not in ("mcq", "answer_generation"):
-        raise ValueError(f"unsupported task.type:{task_type} expected mcq or answer_generation")
+    if task_type != "mcq":
+        raise ValueError(f"unsupported task.type:{task_type} expected mcq only")
 
     logging.info(f"initializing model:{config['model']['name']}")
     model_handler = load_model_handler(config)
@@ -35,9 +74,11 @@ def run_experiment(config_path):
 
     model_cfg = config.get("model", {})
     batch_size = model_cfg.get("batch_size", 4)
+    max_tokens = model_cfg.get("max_tokens", 8)
 
     with open(dataset_path, "r", encoding="utf-8") as f:
         dataset = json.load(f)
+
     with open(instruction_path, "r", encoding="utf-8") as f:
         instruction = f.read().strip()
 
@@ -79,64 +120,62 @@ def run_experiment(config_path):
 
     use_batch = hasattr(model_handler, "prompt_batch")
 
-    if task_type == "mcq":
-        max_tokens = model_cfg.get("max_tokens", 8)
-    else:
-        max_tokens = model_cfg.get("max_tokens", 256)
-
     if use_batch:
         logging.info(f"using prompt_batch batch_size={batch_size}")
 
         for start in tqdm(range(0, len(dataset), batch_size), desc="processing examples"):
             batch_items = dataset[start : start + batch_size]
 
-            batch_input_texts = []
-            batch_meta = []
-
+            # Keep only valid MCQ items (must have stem + at least A-D)
+            filtered_items = []
             for offset, item in enumerate(batch_items):
                 global_idx = start + offset + 1
-                input_text = item.get("Question")
-                if not input_text:
-                    logging.warning(f"no input text found for item {global_idx} skipping")
+                stem = (item.get("question") or "").strip()
+                if not stem:
+                    logging.warning(f"missing question for item #{global_idx}; skipping")
                     continue
-                batch_input_texts.append(input_text)
-                batch_meta.append((global_idx, item))
 
-            if not batch_input_texts:
+                # require at least A-D for MCQ
+                if not all((item.get(k) for k in ["opa", "opb", "opc", "opd"])):
+                    logging.warning(f"missing one of opa/opb/opc/opd for item #{global_idx}; skipping")
+                    continue
+
+                filtered_items.append((global_idx, item))
+
+            if not filtered_items:
                 continue
 
+            # Pass dicts directly (new handler expects dicts)
+            batch_payload = [it for (_, it) in filtered_items]
+
             batch_predictions = model_handler.prompt_batch(
-                batch_input_texts,
+                batch_payload,
                 instruction=instruction,
-                task_type=task_type,
                 max_tokens=max_tokens,
             )
 
-            for (global_idx, item), prediction in zip(batch_meta, batch_predictions):
-                letter_gt = item.get("Answer")
-                text_gt = item.get("answer_text")
+            for (global_idx, item), prediction in zip(filtered_items, batch_predictions):
+                item_id = item.get("id", str(global_idx))
+                letter_gt = (item.get("answer") or "").strip().upper()  # A/B/C/D/...
 
-                gt_for_eval = letter_gt if task_type == "mcq" else text_gt
-                pred_main, pred_aux = split_prediction(prediction, task_type)
+                # For CSV readability, store the MCQ text we actually asked about
+                input_text = build_mcq_text(item)
 
-                pred_expl = None
-                pred_conf = None
-                if task_type == "answer_generation":
-                    pred_expl = pred_aux
+                pred_main, _ = split_prediction(prediction, "mcq")
+                pred_letter = "" if pred_main is None else pred_main
+
 
                 predictions.append(
-                    {
-                        "id": global_idx,
-                        "input": item.get("Question"),
-                        "prediction": prediction,
-                        "prediction_letter": pred_main if task_type == "mcq" else None,
-                        "prediction_explanation": pred_expl,
-                        "prediction_confidence": pred_conf,
-                        "ground_truth": gt_for_eval,
-                        "ground_truth_letter": letter_gt,
-                        "ground_truth_text": text_gt,
-                    }
-                )
+                {
+                    "id": item_id,
+                    "input": input_text,
+                    "prediction": pred_letter,     # <-- clean letter only
+                    "ground_truth": letter_gt,
+                }
+            )
+
+
+
 
                 if len(predictions) % SAVE_EVERY == 0:
                     save_now(partial_path)
@@ -146,46 +185,43 @@ def run_experiment(config_path):
         logging.info("using prompt per-example")
 
         for idx, item in enumerate(tqdm(dataset, desc="processing examples"), start=1):
-            input_text = item.get("Question")
-            if not input_text:
-                logging.warning(f"no input text found for item {idx} skipping")
+            stem = (item.get("question") or "").strip()
+            if not stem:
+                logging.warning(f"missing question for item #{idx}; skipping")
+                continue
+
+            if not all((item.get(k) for k in ["opa", "opb", "opc", "opd"])):
+                logging.warning(f"missing one of opa/opb/opc/opd for item #{idx}; skipping")
                 continue
 
             prediction = model_handler.prompt(
-                input_text,
-                instruction,
-                task_type=task_type,
+                item,  # pass dict directly
+                instruction=instruction,
                 max_tokens=max_tokens,
             )
 
-            letter_gt = item.get("Answer")
-            text_gt = item.get("answer_text")
+            item_id = item.get("id", str(idx))
+            letter_gt = (item.get("answer") or "").strip().upper()
 
-            gt_for_eval = letter_gt if task_type == "mcq" else text_gt
-            pred_main, pred_aux = split_prediction(prediction, task_type)
+            input_text = build_mcq_text(item)
+            pred_main, _ = split_prediction(prediction, "mcq")
+            pred_letter = "" if pred_main is None else pred_main
+
 
             if idx <= 3:
-                logging.info(f"[debug] raw prediction:{repr(prediction)[:500]}")
-                logging.info(f"[debug] split main={pred_main} aux={repr(pred_aux)[:200]}")
-
-            pred_expl = None
-            pred_conf = None
-            if task_type == "answer_generation":
-                pred_expl = pred_aux
+                logging.info(f"[debug] id={item_id} raw prediction:{repr(prediction)[:500]}")
+                logging.info(f"[debug] split main={pred_main}")
 
             predictions.append(
-                {
-                    "id": idx,
-                    "input": input_text,
-                    "prediction": prediction,
-                    "prediction_letter": pred_main if task_type == "mcq" else None,
-                    "prediction_explanation": pred_expl,
-                    "prediction_confidence": pred_conf,
-                    "ground_truth": gt_for_eval,
-                    "ground_truth_letter": letter_gt,
-                    "ground_truth_text": text_gt,
-                }
-            )
+            {
+                "id": item_id,
+                "input": input_text,
+                "prediction": pred_letter,     # <-- clean letter only
+                "ground_truth": letter_gt,
+            }
+        )
+
+
 
             if len(predictions) % SAVE_EVERY == 0:
                 save_now(partial_path)
@@ -196,7 +232,7 @@ def run_experiment(config_path):
     save_now(partial_path)
 
     logging.info("starting evaluation")
-    m = evaluate(output_path, metrics_path, task_type)
+    m = evaluate(output_path, metrics_path, "mcq")
     logging.info(f"evaluation completed metrics saved to {metrics_path}")
     logging.info(f"metrics:{json.dumps(m, indent=4, ensure_ascii=False)}")
 

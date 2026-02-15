@@ -313,6 +313,7 @@ tzdata @ file:///home/conda/feedstock_root/build_artifacts/python-tzdata_1707747
 uri-template @ file:///home/conda/feedstock_root/build_artifacts/uri-template_1688655812972/work/dist
 urllib3 @ file:///home/conda/feedstock_root/build_artifacts/urllib3_1708239446578/work
 wandb==0.17.2
+mistral-common==<version>
 wcwidth @ file:///home/conda/feedstock_root/build_artifacts/wcwidth_1704731205417/work
 webcolors @ file:///home/conda/feedstock_root/build_artifacts/webcolors_1679900785843/work
 webencodings @ file:///home/conda/feedstock_root/build_artifacts/webencodings_1694681268211/work

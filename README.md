@@ -104,6 +104,6 @@ Each config defines:
 Always run experiments **from the root directory of the repository**. Same command below: 
 
 ```bash
-python scripts/run_experiment.py configs/task1/gpt5.yaml
+python scripts/run_evaluation.py configs/task1/gpt5.yaml
 ```
 

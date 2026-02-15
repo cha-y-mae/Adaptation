@@ -1,26 +1,50 @@
 from .openai_handler import OpenAIHandler
-# do same here to import other model handlers 
+# do same here to import other model handlers !!!!!!!
+from .mistral import MistralSmallMCQHandler #first name is name of python file and second name is that of the class from mistral.py 
+from .medgemma import MedGemma27BMCQHandler
 
-import os  # To access environment variables
+import os
+
 
 def load_model_handler(config):
-    '''
-    loading the appropriate model handler based on config.
-    '''
-    model_type = config["model"]["type"]
-    matching_mode = config.get("task", {}).get("matching", "letter")
+    """
+    Load the appropriate model handler based on config.
+    MCQ-only setup.
+    """
+
+    model_cfg = config["model"]
+    model_type = model_cfg["type"]
 
     if model_type == "openai":
-        #retrieve API key from environment
-        api_key = config["model"].get("api_key", os.getenv("OPENAI_API_KEY"))
+        api_key = model_cfg.get("api_key", os.getenv("OPENAI_API_KEY"))
         if not api_key:
             raise ValueError(
                 "API key is not provided in config or environment variable (OPENAI_API_KEY)."
             )
+
         return OpenAIHandler(
             api_key=api_key,
-            model=config["model"]["name"]
+            model=model_cfg["name"]
         )
-    
+
+    elif model_type == "mistral":
+        return MistralSmallMCQHandler(
+            model_name=model_cfg.get(
+                "name",
+                "mistralai/Mistral-Small-3.2-24B-Instruct-2506"
+            ),
+            cache_dir=model_cfg.get("cache_dir"),
+            offline=model_cfg.get("offline", True),
+        )
+
+    elif model_type == "medgemma":
+        return MedGemma27BMCQHandler(model_name=model_cfg.get(
+            "name",
+            "google/medgemma-27b-text-it"
+        ),
+        cache_dir=model_cfg.get("cache_dir"),
+        offline=model_cfg.get("offline", True),
+        )
+
     else:
         raise ValueError(f"Unsupported model type: {model_type}")

@@ -2,7 +2,6 @@
 STILL NEED TO FIX FoR NEW TASKS
 '''
 
-
 import os
 import re
 import torch
@@ -22,11 +21,9 @@ os.environ.setdefault("CUDA_LAUNCH_BLOCKING", "1")
 os.environ.setdefault("TORCH_USE_CUDA_DSA", "1")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
-
 class Llama70MCQHandler:
     """
     Llama-3.3-70B-Instruct handler for MCQ tasks (A–F).
-
     """
 
     def __init__(
