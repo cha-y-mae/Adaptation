@@ -89,6 +89,14 @@ Make sure the required API keys are set as environment variables:
 export OPENAI_API_KEY="your_openai_api_key_here"
 ```
 
+### Set environment variables for variables/caching
+
+```bash
+HF_HOME=/scratch/$USER/huggingface
+HF_HUB_CACHE=/scratch/$USER/huggingface/hub
+TRANSFORMERS_CACHE=/scratch/$USER/huggingface/transformers
+```
+
 ### Configure the Experiment
 
 Configuration files are stored under the `configs/` directory.
