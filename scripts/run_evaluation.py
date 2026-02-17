@@ -25,7 +25,6 @@ from scripts.utils import load_config, save_predictions
 from models import load_model_handler
 from evals.evaluator import evaluate, split_prediction
 
-SAVE_EVERY = 50
 
 
 def build_mcq_text(item: dict) -> str:
@@ -169,17 +168,10 @@ def run_experiment(config_path):
                 {
                     "id": item_id,
                     "input": input_text,
-                    "prediction": pred_letter,     # <-- clean letter only
+                    "prediction": pred_letter,     
                     "ground_truth": letter_gt,
                 }
             )
-
-
-
-
-                if len(predictions) % SAVE_EVERY == 0:
-                    save_now(partial_path)
-                    logging.info(f"saved {len(predictions)} partial predictions to {partial_path}")
 
     else:
         logging.info("using prompt per-example")
@@ -222,14 +214,8 @@ def run_experiment(config_path):
         )
 
 
-
-            if len(predictions) % SAVE_EVERY == 0:
-                save_now(partial_path)
-                logging.info(f"saved {len(predictions)} partial predictions to {partial_path}")
-
     logging.info(f"saving predictions to {output_path}")
     save_now(output_path)
-    save_now(partial_path)
 
     logging.info("starting evaluation")
     m = evaluate(output_path, metrics_path, "mcq")
