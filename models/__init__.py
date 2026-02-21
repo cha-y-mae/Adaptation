@@ -3,6 +3,8 @@ from .openai_handler import OpenAIHandler
 from .mistral import MistralSmallMCQHandler #first name is name of python file and second name is that of the class from mistral.py 
 from .medgemma import MedGemma27BMCQHandler
 from .gptoss import GPTOSS20BHandler
+from .meditron import Meditron3MCqHandler
+from .med42 import Med42MCQHandler
 
 import os
 
@@ -47,6 +49,27 @@ def load_model_handler(config):
             cache_dir=model_cfg.get("cache_dir"),
             offline=model_cfg.get("offline", True),
             
+        )
+
+    elif model_type == "med42":
+        return GPTOSS20BHandler(
+            model_name=model_cfg.get(
+            "name",
+            "m42-health/Llama3-Med42-70B"
+            ),
+            cache_dir=model_cfg.get("cache_dir"),
+            offline=model_cfg.get("offline", True),
+            
+        )
+    
+    elif model_type == "meditron":
+        return Meditron3MCqHandler(
+            model_name=model_cfg.get(
+            "name",
+            "OpenMeditron/Meditron3-70B"
+            ),
+            cache_dir=model_cfg.get("cache_dir"),
+            offline=model_cfg.get("offline", True),
         )
 
     elif model_type == "medgemma":

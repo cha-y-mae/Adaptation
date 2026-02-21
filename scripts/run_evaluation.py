@@ -27,6 +27,7 @@ from evals.evaluator import evaluate, split_prediction
 
 
 
+
 def build_mcq_text(item: dict) -> str:
     """Build a readable MCQ block from the new dataset schema."""
     stem = (item.get("question") or "").strip()
@@ -207,11 +208,17 @@ def run_experiment(config_path):
             predictions.append(
             {
                 "id": item_id,
-                "input": input_text,
-                "prediction": pred_letter,     # <-- clean letter only
+                "question": (item.get("question") or "").strip(),
+                "opa": (item.get("opa") or "").strip(),
+                "opb": (item.get("opb") or "").strip(),
+                "opc": (item.get("opc") or "").strip(),
+                "opd": (item.get("opd") or "").strip(),
+                "ope": (item.get("ope") or "").strip() if item.get("ope") is not None else "",
+                "opf": (item.get("opf") or "").strip() if item.get("opf") is not None else "",
+                "prediction": pred_letter,
                 "ground_truth": letter_gt,
             }
-        )
+            )
 
 
     logging.info(f"saving predictions to {output_path}")

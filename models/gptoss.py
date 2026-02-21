@@ -138,76 +138,92 @@ class GPTOSS20BHandler:
 
         return None
 
-    def prompt(self, sample: dict, instruction: str, max_tokens: int = 12):
+    def prompt(self, sample: dict, instruction: str, max_tokens: int = 10):
         user_text = self._build_mcq_text(sample)
         if not user_text:
             print("[GPTOSS20BMCQ] Empty stem/options; cannot build prompt.")
             return None
     
-        # Reduce reasoning verbosity (Harmony supports this)
-        # Put this at the TOP of the system message.
-        system_prompt = "Reasoning: low\n" + instruction.strip()
+        # keep it strict + short
+        system_prompt = instruction.strip()
     
         messages = [
             {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_text},
+            {"role": "user", "content": user_text + "\n\nOutput exactly one line: ANSWER: <LETTER>"},
         ]
     
         try:
-            torch.cuda.empty_cache()
-    
-            # IMPORTANT: return_dict=True to avoid your previous shape issue
-            inputs = self.tokenizer.apply_chat_template(
+            out = self.pipe(
                 messages,
-                add_generation_prompt=True,
-                return_tensors="pt",
-                return_dict=True,
-            ).to(self.model.device)
-    
-            with torch.no_grad():
-                outputs = self.model.generate(
-                    **inputs,
-                    max_new_tokens=max(64, int(max_tokens)),  # give room
-                    do_sample=False,
-                )
-    
-            completion_ids = outputs[0][inputs["input_ids"].shape[-1]:]
-            raw = self.tokenizer.decode(completion_ids, skip_special_tokens=False)
-    
+                max_new_tokens=max(96, int(max_tokens)),  # IMPORTANT: give room
+                do_sample=False,
+            )
         except Exception as e:
             print("[GPTOSS20BMCQ] Error during generation:", e)
             return None
-        finally:
-            torch.cuda.empty_cache()
     
-        if not raw.strip():
-            return None
-    
-        print(f"[GPTOSS20BMCQ] RAW COMPLETION: {repr(raw)[:300]}")
-    
-        # ---- Parse Harmony "final" ----
-        # Many gpt-oss outputs contain markers like "assistantfinal".
-        # Keep everything after assistantfinal if present.
-        upper = raw.upper()
-    
-        # 1) If "ASSISTANTFINAL" exists, use text after it
-        if "ASSISTANTFINAL" in upper:
-            raw_final = raw.split("assistantfinal", 1)[-1]
+        gen = out[0].get("generated_text")
+        # gen is list of {role, content}; take assistant content
+        assistant = ""
+        if isinstance(gen, list):
+            for msg in reversed(gen):
+                if isinstance(msg, dict) and msg.get("role") == "assistant":
+                    assistant = (msg.get("content") or "").strip()
+                    break
+            if not assistant and gen:
+                last = gen[-1]
+                assistant = (last.get("content") if isinstance(last, dict) else str(last)).strip()
         else:
-            # 2) Otherwise, try to strip any leading analysis tag
-            raw_final = re.sub(r"^\s*analysis\s*", "", raw, flags=re.IGNORECASE)
+            assistant = str(gen).strip()
     
-        raw_final = raw_final.strip()
-        print(f"[GPTOSS20BMCQ] PARSED FINAL: {repr(raw_final)[:200]}")
+        # strip leading "analysis"
+        assistant = re.sub(r"^\s*analysis\s*", "", assistant, flags=re.IGNORECASE).strip()
+        print(f"[GPTOSS20BMCQ] raw assistant: {repr(assistant)[:200]}")
     
-        # Extract letter
-        m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", raw_final.upper())
+        # try extract
+        upper = assistant.upper()
+        m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
+        if m:
+            return m.group(1)
+        m = re.search(r"\b([A-F])\b", upper)
         if m:
             return m.group(1)
     
-        m = re.search(r"\b([A-F])\b", raw_final.upper())
-        if m:
-            return m.group(1)
+        # follow-up forcing final line
+        followup = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_text},
+            {"role": "assistant", "content": assistant},
+            {"role": "user", "content": "Output ONLY one line: ANSWER: A/B/C/D/E/F"},
+        ]
     
-        print("[GPTOSS20BMCQ] Could not extract a clean letter.")
+        try:
+            out2 = self.pipe(followup, max_new_tokens=10, do_sample=False)
+            gen2 = out2[0].get("generated_text")
+            assistant2 = ""
+            if isinstance(gen2, list):
+                for msg in reversed(gen2):
+                    if isinstance(msg, dict) and msg.get("role") == "assistant":
+                        assistant2 = (msg.get("content") or "").strip()
+                        break
+                if not assistant2 and gen2:
+                    last = gen2[-1]
+                    assistant2 = (last.get("content") if isinstance(last, dict) else str(last)).strip()
+            else:
+                assistant2 = str(gen2).strip()
+    
+            assistant2 = re.sub(r"^\s*analysis\s*", "", assistant2, flags=re.IGNORECASE).strip()
+            print(f"[GPTOSS20BMCQ] followup assistant: {repr(assistant2)[:200]}")
+    
+            upper2 = assistant2.upper()
+            m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper2)
+            if m:
+                return m.group(1)
+            m = re.search(r"\b([A-F])\b", upper2)
+            if m:
+                return m.group(1)
+    
+        except Exception as e:
+            print("[GPTOSS20BMCQ] followup error:", e)
+    
         return None
