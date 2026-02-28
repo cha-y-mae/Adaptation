@@ -87,6 +87,7 @@ Make sure the required API keys are set as environment variables:
 
 ```bash
 export OPENAI_API_KEY="your_openai_api_key_here"
+export HF_KEY="your_openai_api_key_here"
 ```
 
 ### Set environment variables for variables/caching
