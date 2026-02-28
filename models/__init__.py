@@ -1,10 +1,12 @@
-from .openai_handler import OpenAIHandler
 # do same here to import other model handlers !!!!!!!
 from .mistral import MistralSmallMCQHandler #first name is name of python file and second name is that of the class from mistral.py 
 from .medgemma import MedGemma27BMCQHandler
-from .gptoss import GPTOSS20BHandler
 from .meditron import Meditron3MCqHandler
 from .med42 import Med42MCQHandler
+from .deepseek import DeepSeekV32MCQHandler
+from .fanar import Fanar19BMCQHandler
+from .gemini import Gemini3ProHandler
+from .claude import ClaudeOpus45MCQHandler
 
 import os
 
@@ -40,19 +42,8 @@ def load_model_handler(config):
             offline=model_cfg.get("offline", True),
         )
 
-    elif model_type == "gptoss":
-        return GPTOSS20BHandler(
-            model_name=model_cfg.get(
-            "name",
-            "openai/gpt-oss-20b"
-            ),
-            cache_dir=model_cfg.get("cache_dir"),
-            offline=model_cfg.get("offline", True),
-            
-        )
-
     elif model_type == "med42":
-        return GPTOSS20BHandler(
+        return Med42MCQHandler(
             model_name=model_cfg.get(
             "name",
             "m42-health/Llama3-Med42-70B"
@@ -61,6 +52,51 @@ def load_model_handler(config):
             offline=model_cfg.get("offline", True),
             
         )
+
+    elif model_type == "gemini":
+        return Gemini3ProHandler(
+            api_key=os.getenv("GEMINI_API_KEY"),
+            model=model_cfg.get(
+                "name",
+                "gemini-3.1-pro-preview"
+            ),
+        )
+
+    elif model_type == "fanar":
+        return Fanar19BMCQHandler(
+            model_name=model_cfg.get(
+            "name",
+            "QCRI/Fanar-1-9"
+            ),
+            cache_dir=model_cfg.get("cache_dir"),
+            offline=model_cfg.get("offline", True),
+            
+        )
+        
+    elif model_type == "deepseek":
+        api_key = os.getenv("DEEPSEEK_API_KEY") or model_cfg.get("api_key")
+        if not api_key:
+            raise ValueError("DEEPSEEK_API_KEY is not set (env var or config).")
+    
+        return DeepSeekV32MCQHandler(
+            api_key=api_key,
+            model_name=model_cfg.get("model_name", "deepseek-chat"),
+            max_retries=model_cfg.get("max_retries", 3),
+            # do NOT pass cache_dir/offline to API handlers
+        )
+
+    elif model_type == "claude":
+        api_key = os.getenv("ANTHROPIC_API_KEY") or model_cfg.get("api_key")
+        if not api_key:
+            raise ValueError("ANTHROPI_API_KEY is not set (env var or config).")
+    
+        return ClaudeOpus45MCQHandler(
+            api_key=api_key,
+            model_name=model_cfg.get("model_name", "claude-opus-4-6"),
+            max_retries=model_cfg.get("max_retries", 3),
+            # do NOT pass cache_dir/offline to API handlers
+        )
+    
     
     elif model_type == "meditron":
         return Meditron3MCqHandler(
