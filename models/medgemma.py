@@ -11,7 +11,6 @@ os.environ.setdefault("CUDA_LAUNCH_BLOCKING", "1")
 os.environ.setdefault("TORCH_USE_CUDA_DSA", "1")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
-
 class MedGemma27BMCQHandler:
     """
     MCQ-only handler.
@@ -70,7 +69,6 @@ class MedGemma27BMCQHandler:
 
         if self.tokenizer.pad_token_id is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
-
 
         # --------------------------
         # Load model

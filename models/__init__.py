@@ -7,6 +7,9 @@ from .deepseek import DeepSeekV32MCQHandler
 from .fanar import Fanar19BMCQHandler
 from .gemini import Gemini3ProHandler
 from .claude import ClaudeOpus45MCQHandler
+from .jais import Jais2ChatMCQHandler
+from .falcon import FalconH1MCQHandler
+from .silma import Silma9BMCQHandler
 
 import os
 
@@ -53,6 +56,13 @@ def load_model_handler(config):
             
         )
 
+    elif model_type == "jais":
+        return Jais2ChatMCQHandler(
+            model_name=model_cfg.get("name", "inceptionai/Jais-2-8B-Chat"),
+            cache_dir=model_cfg.get("cache_dir"),
+            offline=model_cfg.get("offline", True),
+        )
+
     elif model_type == "gemini":
         return Gemini3ProHandler(
             api_key=os.getenv("GEMINI_API_KEY"),
@@ -95,6 +105,23 @@ def load_model_handler(config):
             model_name=model_cfg.get("model_name", "claude-opus-4-6"),
             max_retries=model_cfg.get("max_retries", 3),
             # do NOT pass cache_dir/offline to API handlers
+        )
+
+    elif model_type == "falcon":
+        return FalconH1MCQHandler(
+            model_name=model_cfg.get(
+                "name",
+                "tiiuae/Falcon-H1-7B-Instruct"
+            ),
+            cache_dir=model_cfg.get("cache_dir"),
+            offline=model_cfg.get("offline", True),
+        )
+
+    elif model_type == "silma":
+        return Silma9BMCQHandler(
+            model_name=model_cfg.get("name", "silma-ai/SILMA-9B-Instruct-v1.0"),
+            cache_dir=model_cfg.get("cache_dir"),
+            offline=model_cfg.get("offline", True),
         )
     
     

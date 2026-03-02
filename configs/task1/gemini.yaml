@@ -2,7 +2,7 @@ experiment_name: task1_gemini
 
 model:
   type: gemini           #model handler type as written in models/__init__.py
-  name: gemini-3.1-pro-preview  # just as it appears in huggingface
+  name: gemini-3.1-pro-preview  # just as it appears in huggingface 
 
 cache_dir: /scratch/ca2627/huggingface #modify to your own cache directory
 
