@@ -61,8 +61,34 @@ def calculate_accuracy(predictions, ground_truths):
 
 #------------------------------------------Task 2 ----------------------------------------------#
 
+def _safe_tokenize(text: str, lang: str = "en") -> List[str]:
+    text = "" if text is None else str(text).strip()
+    if not text:
+        return []
 
-def calculate_bleu(predictions: List[str], references: List[str], lang: str = "en") -> float:
+    # Arabic: safer than NLTK punkt requirements
+    if lang.lower().startswith("ar"):
+        return re.findall(r"\w+|[^\w\s]", text, flags=re.UNICODE)
+
+    try:
+        return word_tokenize(text)
+    except Exception:
+        return re.findall(r"\w+|[^\w\s]", text, flags=re.UNICODE)
+
+
+def _normalize_arabic(text: str) -> str:
+    if text is None:
+        return ""
+    text = str(text)
+    text = re.sub(r"[\u064B-\u0652]", "", text)  # remove diacritics
+    text = text.replace("آ", "ا").replace("أ", "ا").replace("إ", "ا")
+    text = text.replace("ى", "ي").replace("ؤ", "و").replace("ئ", "ي")
+    text = text.replace("ة", "ه")
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def calculate_bleu(predictions: List[str], references: List[str], lang: str = "ar") -> float:
     smoothie = SmoothingFunction().method1
     scores = []
 
@@ -70,8 +96,12 @@ def calculate_bleu(predictions: List[str], references: List[str], lang: str = "e
         hyp = "" if hyp is None else str(hyp)
         ref = "" if ref is None else str(ref)
 
-        ref_tokens = word_tokenize(ref, language=lang) if ref else []
-        hyp_tokens = word_tokenize(hyp, language=lang) if hyp else []
+        if lang.lower().startswith("ar"):
+            hyp = _normalize_arabic(hyp)
+            ref = _normalize_arabic(ref)
+
+        ref_tokens = _safe_tokenize(ref, lang=lang)
+        hyp_tokens = _safe_tokenize(hyp, lang=lang)
 
         if not ref_tokens and not hyp_tokens:
             scores.append(1.0)
@@ -86,22 +116,24 @@ def calculate_bleu(predictions: List[str], references: List[str], lang: str = "e
     return float(sum(scores) / len(scores)) if scores else 0.0
 
 
-def calculate_rouge(predictions: List[str], references: List[str]) -> Dict[str, float]:
-    scorer = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=True)
+def calculate_rouge(predictions: List[str], references: List[str], lang: str = "en") -> Dict[str, float]:
+    # stemming is English-centric; disable for Arabic
+    use_stemmer = not lang.lower().startswith("ar")
+    scorer = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=use_stemmer)
 
-    r1 = 0.0
-    r2 = 0.0
-    rl = 0.0
+    r1 = r2 = rl = 0.0
     n = 0
 
     for hyp, ref in zip(predictions, references):
         hyp = "" if hyp is None else str(hyp)
         ref = "" if ref is None else str(ref)
 
+        if lang.lower().startswith("ar"):
+            hyp = _normalize_arabic(hyp)
+            ref = _normalize_arabic(ref)
+
         if not hyp and not ref:
-            r1 += 1.0
-            r2 += 1.0
-            rl += 1.0
+            r1 += 1.0; r2 += 1.0; rl += 1.0
             n += 1
             continue
 

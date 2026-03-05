@@ -1,5 +1,5 @@
 # do same here to import other model handlers !!!!!!!
-from .mistral import MistralSmallMCQHandler #first name is name of python file and second name is that of the class from mistral.py 
+from .mistral import MistralSmallHandler #first name is name of python file and second name is that of the class from mistral.py 
 from .medgemma import MedGemma27BMCQHandler
 from .meditron import Meditron3MCqHandler
 from .med42 import Med42MCQHandler
@@ -36,7 +36,7 @@ def load_model_handler(config):
         )
 
     elif model_type == "mistral":
-        return MistralSmallMCQHandler(
+        return MistralSmallHandler(
             model_name=model_cfg.get(
                 "name",
                 "mistralai/Mistral-Small-3.2-24B-Instruct-2506"

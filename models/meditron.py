@@ -175,3 +175,4 @@ class Meditron3MCqHandler:
 
         print("[Meditron3-70B] Could not extract a clean letter.")
         return None
+

@@ -97,6 +97,8 @@ class ClaudeOpus45MCQHandler:
         instruction: str,
         max_tokens: int = 8,
         temperature: float = 0.0,
+        task_type: Optional[str] = None,
+        **kwargs,
     ) -> Optional[str]:
         """
         - sample: dict record

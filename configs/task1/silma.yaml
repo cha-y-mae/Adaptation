@@ -7,14 +7,14 @@ model:
 cache_dir: /scratch/ca2627/huggingface #modify to your own cache directory
 
 dataset:
-  path: datasets/qa/arastem.json   #path to dataset JSON file
+  path: datasets/qa/medarabench.json   #path to dataset JSON file
   instruction_path: prompts/task1.txt  #path to instruction file (default.txt)
 
 task:
   type: mcq                #task 1: mcq or task 2: answer_generation
 
 output:
-  predictions_path: results/predictions/task1/arastem/silma.csv #specify output pred file
-  metrics_path: results/metrics/task1/arastem/silma.json  #specift output pred file
+  predictions_path: results/predictions/task1/medarabench/silma.csv #specify output pred file
+  metrics_path: results/metrics/task1/medarabench/silma.json  #specift output pred file
 
 

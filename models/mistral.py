@@ -1,7 +1,8 @@
 import os
 import re
-import torch
+from typing import List, Optional
 
+import torch
 from mistral_common.protocol.instruct.request import ChatCompletionRequest
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 from transformers import Mistral3ForConditionalGeneration
@@ -14,11 +15,15 @@ os.environ.setdefault("TORCH_USE_CUDA_DSA", "1")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 
-class MistralSmallMCQHandler:
+class MistralSmallHandler:
     """
-    MCQ-only handler.
-    - Input is a dict (one sample) with keys: question, opa/opb/opc/opd/(ope/opf optional)
-    - Output is a single letter A–F.
+    Unified handler for:
+      - task_type="mcq"              -> returns a single letter A–F (or None)
+      - task_type="answer_generation"-> returns generated text (or "")
+
+    Input sample (dict):
+      - For MCQ: question + opa/opb/opc/opd (+ optional ope/opf)
+      - For Answer generation: question (and optionally any extra fields you add later)
     """
 
     def __init__(
@@ -27,10 +32,10 @@ class MistralSmallMCQHandler:
         cache_dir: str = HF_CACHE,
         offline: bool = True,
     ):
-        print(f"[MistralSmallMCQ] Handler file: {__file__}")
-        print(f"[MistralSmallMCQ] HF_HOME={os.environ.get('HF_HOME')}")
-        print(f"[MistralSmallMCQ] cache_dir={cache_dir}")
-        print(f"[MistralSmallMCQ] offline={offline}")
+        print(f"[MistralSmall] Handler file: {__file__}")
+        print(f"[MistralSmall] HF_HOME={os.environ.get('HF_HOME')}")
+        print(f"[MistralSmall] cache_dir={cache_dir}")
+        print(f"[MistralSmall] offline={offline}")
 
         self.model_name = model_name
         self.cache_dir = cache_dir or HF_CACHE
@@ -39,7 +44,7 @@ class MistralSmallMCQHandler:
         if self.cache_dir:
             os.makedirs(self.cache_dir, exist_ok=True)
 
-        self.local_files_only = bool(self.offline)
+        self.local_files_only = True
         if self.offline:
             os.environ["HF_HUB_OFFLINE"] = "1"
         else:
@@ -49,9 +54,9 @@ class MistralSmallMCQHandler:
         # Inspect GPUs (debug)
         # -------------------------
         num_gpus = torch.cuda.device_count()
-        print(f"[MistralSmallMCQ] Available GPUs: {num_gpus}")
+        print(f"[MistralSmall] Available GPUs: {num_gpus}")
         if num_gpus == 0:
-            raise RuntimeError("No CUDA GPUs available for MistralSmallMCQ.")
+            raise RuntimeError("No CUDA GPUs available for MistralSmall.")
 
         for i in range(num_gpus):
             print(
@@ -60,15 +65,18 @@ class MistralSmallMCQHandler:
             )
 
         # -------------------------
-        # Load tokenizer
+        # Tokenizer
         # -------------------------
-        print("[MistralSmallMCQ] Loading tokenizer...")
-        self.tokenizer = MistralTokenizer.from_hf_hub(self.model_name)
+        print("[MistralSmall] Loading tokenizer...")
+        if os.path.isdir(self.model_name):
+            self.tokenizer = MistralTokenizer.from_file(os.path.join(self.model_name, "tekken.json"))
+        else:
+            self.tokenizer = MistralTokenizer.from_hf_hub(self.model_name)
 
         # --------------------------
-        # Load model
+        # Model
         # --------------------------
-        print("[MistralSmallMCQ] Loading model...")
+        print("[MistralSmall] Loading model...")
         self.model = Mistral3ForConditionalGeneration.from_pretrained(
             self.model_name,
             torch_dtype=torch.bfloat16,
@@ -77,9 +85,9 @@ class MistralSmallMCQHandler:
             local_files_only=self.local_files_only,
         )
 
-        print("[MistralSmallMCQ] Model loaded.")
+        print("[MistralSmall] Model loaded.")
         if hasattr(self.model, "hf_device_map"):
-            print("[MistralSmallMCQ] Model device distribution:")
+            print("[MistralSmall] Model device distribution:")
             for layer, dev in self.model.hf_device_map.items():
                 print(f"  {layer}: {dev}")
 
@@ -88,21 +96,15 @@ class MistralSmallMCQHandler:
             reserv = torch.cuda.memory_reserved(i) / 1024**3
             print(f"  GPU {i} after load: {alloc:.2f}GB allocated, {reserv:.2f}GB reserved")
 
+    # -------------------------
+    # Builders
+    # -------------------------
     @staticmethod
     def _build_mcq_text(sample: dict) -> str:
-        """
-        Build a clean MCQ block from your new JSON schema.
-
-        Expected:
-          sample["question"]
-          sample["opa"], sample["opb"], sample["opc"], sample["opd"]
-          optional: sample["ope"], sample["opf"]
-        """
         stem = (sample.get("question") or "").strip()
         if not stem:
             return ""
 
-        # Collect options in order A..F from opa..opf if present
         option_map = {
             "A": sample.get("opa"),
             "B": sample.get("opb"),
@@ -118,91 +120,133 @@ class MistralSmallMCQHandler:
             if txt is None:
                 continue
             txt = str(txt).strip()
-            if txt == "":
-                continue
-            lines.append(f"{letter}) {txt}")
+            if txt:
+                lines.append(f"{letter}) {txt}")
 
-        if len(lines) < 2:
-            # still allow it, but it’s probably malformed data
-            pass
+        # Allow even if imperfect, but typically should have A-D
+        return stem + ("\n\n" + "\n".join(lines) if lines else "")
 
-        return stem + "\n\n" + "\n".join(lines)
 
-    def prompt(self, sample: dict, instruction: str, max_tokens: int = 12):
+    @staticmethod
+    def _build_ansgen_text(sample: dict) -> str:
         """
-        MCQ-only interface:
-        - sample is ONE JSON record (dict).
-        - returns: 'A'..'F' or None
+        For answer_generation:
+        Only expose the question.
+        Explicitly ignore all option fields and gold fields.
         """
+        question = (sample.get("question") or "").strip()
+        if not question:
+            return ""
+    
+        # Defensive: never include options even if present
+        return f"QUESTION:\n{question}"
 
-        user_text = self._build_mcq_text(sample)
-        if not user_text:
-            print("[MistralSmallMCQ] Empty stem/options; cannot build prompt.")
-            return None
-
-        system_prompt = instruction.strip()
-
+    # -------------------------
+    # Core generation
+    # -------------------------
+    def _generate(self, system_prompt: str, user_text: str, max_tokens: int, do_sample: bool = False) -> str:
         messages = [
-            {"role": "system", "content": system_prompt},
-            {
-                "role": "user",
-                "content": [{"type": "text", "text": user_text}],
-            },
+            {"role": "system", "content": (system_prompt or "").strip()},
+            {"role": "user", "content": [{"type": "text", "text": user_text}]},
         ]
 
-        print("[MistralSmallMCQ] MAX TOKENS:", max_tokens)
         try:
             torch.cuda.empty_cache()
 
             req = ChatCompletionRequest(messages=messages)
             tokenized = self.tokenizer.encode_chat_completion(req)
 
-            input_ids = torch.tensor(
-                [tokenized.tokens],
-                dtype=torch.long,
-                device=self.model.device,
-            )
+            input_ids = torch.tensor([tokenized.tokens], dtype=torch.long, device=self.model.device)
             attention_mask = torch.ones_like(input_ids)
 
-            with torch.no_grad():
+            with torch.inference_mode():
                 outputs = self.model.generate(
                     input_ids=input_ids,
                     attention_mask=attention_mask,
                     max_new_tokens=max_tokens,
-                    do_sample=False,  # greedy
+                    do_sample=do_sample,
                 )
 
-        except Exception as e:
-            print("[MistralSmallMCQ] Error during generation:", e)
-            return None
+            if outputs is None or outputs.shape[0] == 0:
+                return ""
+
+            input_len = len(tokenized.tokens)
+            gen_ids = outputs[0][input_len:]
+            raw_text = self.tokenizer.decode(gen_ids).strip()
+            return raw_text or ""
+
         finally:
             torch.cuda.empty_cache()
 
-        if outputs is None or outputs.shape[0] == 0:
-            print("[MistralSmallMCQ] Empty generation output.")
+    # -------------------------
+    # Public API
+    # -------------------------
+    def prompt(
+        self,
+        sample: dict,
+        instruction: str,
+        max_tokens: int = 12,
+        task_type: str = "mcq",
+    ):
+        """
+        task_type:
+          - "mcq": returns A-F or None
+          - "answer_generation": returns generated string (may be empty string)
+        """
+        task_type = (task_type or "mcq").strip().lower()
+
+        if task_type == "mcq":
+            user_text = self._build_mcq_text(sample)
+            if not user_text:
+                print("[MistralSmall] Empty stem/options; cannot build MCQ prompt.")
+                return None
+
+            # (Optional but recommended) enforce the anchor in system prompt
+            # so the model tends to output "Answer: X"
+            system_prompt = (instruction or "").strip()
+
+            raw_text = self._generate(system_prompt=system_prompt, user_text=user_text, max_tokens=max_tokens)
+
+            if not raw_text:
+                return None
+
+            print(f"[MistralSmall] MCQ raw generated: {repr(raw_text)}")
+            upper = raw_text.upper()
+
+            m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
+            if m:
+                return m.group(1)
+
+            m = re.search(r"\b([A-F])\b", upper)
+            if m:
+                return m.group(1)
+
+            print("[MistralSmall] Could not extract a clean letter.")
             return None
 
-        input_len = len(tokenized.tokens)
-        gen_ids = outputs[0][input_len:]
-        raw_text = self.tokenizer.decode(gen_ids).strip()
+        if task_type == "answer_generation":
+            user_text = self._build_ansgen_text(sample)
+            if not user_text:
+                print("[MistralSmall] Empty question; cannot build answer-generation prompt.")
+                return ""
 
-        if not raw_text:
-            return None
+            system_prompt = (instruction or "").strip()
 
-        print(f"[MistralSmallMCQ] MCQ raw generated: {repr(raw_text)}")
+            raw_text = self._generate(system_prompt=system_prompt, user_text=user_text, max_tokens=max_tokens)
 
-        # Extract letter
-        upper = raw_text.upper()
+            # For task2 we return raw text (no regex)
+            if raw_text:
+                print(f"[MistralSmall] Answer-gen raw generated (trunc): {repr(raw_text[:300])}")
+            return raw_text.strip()
 
-        # Prefer strict format: ANSWER: X
-        m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
-        if m:
-            return m.group(1)
+        raise ValueError(f"Unsupported task_type={task_type}. Expected 'mcq' or 'answer_generation'.")
 
-        # Fallbacks (if model deviates)
-        m = re.search(r"\b([A-F])\b", upper)
-        if m:
-            return m.group(1)
-
-        print("[MistralSmallMCQ] Could not extract a clean letter.")
-        return None
+    def prompt_batch(
+        self,
+        samples: List[dict],
+        instruction: str,
+        max_tokens: int = 12,
+        task_type: str = "mcq",
+    ):
+        # Simple safe batching (sequential). Real batching is possible but more work with mistral_common.
+        return [self.prompt(s, instruction=instruction, max_tokens=max_tokens, task_type=task_type) for s in samples]
