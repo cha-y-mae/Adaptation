@@ -190,4 +190,115 @@ def calculate_bert_score(
     except Exception:
         return None
 
+def calculate_bleu_per_example(
+    predictions: List[str],
+    references: List[str],
+    lang: str = "ar",
+) -> List[float]:
+    smoothie = SmoothingFunction().method1
+    scores = []
+
+    for hyp, ref in zip(predictions, references):
+        hyp = "" if hyp is None else str(hyp)
+        ref = "" if ref is None else str(ref)
+
+        if lang.lower().startswith("ar"):
+            hyp = _normalize_arabic(hyp)
+            ref = _normalize_arabic(ref)
+
+        ref_tokens = _safe_tokenize(ref, lang=lang)
+        hyp_tokens = _safe_tokenize(hyp, lang=lang)
+
+        if not ref_tokens and not hyp_tokens:
+            scores.append(1.0)
+            continue
+        if not ref_tokens or not hyp_tokens:
+            scores.append(0.0)
+            continue
+
+        bleu = sentence_bleu([ref_tokens], hyp_tokens, smoothing_function=smoothie)
+        scores.append(float(bleu))
+
+    return scores
+
+
+def calculate_rouge_per_example(
+    predictions: List[str],
+    references: List[str],
+    lang: str = "en",
+) -> List[Dict[str, float]]:
+    use_stemmer = not lang.lower().startswith("ar")
+    scorer = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=use_stemmer)
+
+    rows = []
+
+    for hyp, ref in zip(predictions, references):
+        hyp = "" if hyp is None else str(hyp)
+        ref = "" if ref is None else str(ref)
+
+        if lang.lower().startswith("ar"):
+            hyp = _normalize_arabic(hyp)
+            ref = _normalize_arabic(ref)
+
+        if not hyp and not ref:
+            rows.append({
+                "rouge1": 1.0,
+                "rouge2": 1.0,
+                "rougeL": 1.0,
+            })
+            continue
+
+        scores = scorer.score(ref, hyp)
+        rows.append({
+            "rouge1": float(scores["rouge1"].fmeasure),
+            "rouge2": float(scores["rouge2"].fmeasure),
+            "rougeL": float(scores["rougeL"].fmeasure),
+        })
+
+    return rows
+
+def calculate_bert_score_per_example(
+    predictions: List[str],
+    references: List[str],
+    lang: str = "en",
+    model_type: Optional[str] = None,
+    device: str = "cpu",
+    rescale_with_baseline: bool = True,
+) -> Optional[List[Dict[str, float]]]:
+    if bert_score is None:
+        return None
+
+    hyps = ["" if p is None else str(p) for p in predictions]
+    refs = ["" if r is None else str(r) for r in references]
+
+    if not hyps or not refs:
+        return None
+
+    try:
+        P, R, F1 = bert_score.score(
+            hyps,
+            refs,
+            lang=lang,
+            model_type=model_type,
+            device=device,
+            rescale_with_baseline=rescale_with_baseline,
+            verbose=False,
+        )
+
+        p = np.clip(P.detach().cpu().numpy(), 0.0, 1.0)
+        r = np.clip(R.detach().cpu().numpy(), 0.0, 1.0)
+        f1 = np.clip(F1.detach().cpu().numpy(), 0.0, 1.0)
+
+        rows = []
+        for pi, ri, f1i in zip(p, r, f1):
+            rows.append({
+                "bert_precision": float(pi),
+                "bert_recall": float(ri),
+                "bert_f1": float(f1i),
+            })
+        return rows
+
+    except Exception:
+        return None
+
 

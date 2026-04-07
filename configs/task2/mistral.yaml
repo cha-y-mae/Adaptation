@@ -15,5 +15,5 @@ task:
 
 output:
   predictions_path: results/predictions/task2/medarabiq/test.csv #specify output pred file
-  metrics_path: results/metrics/task2/test.json  #specift output pred file
+  metrics_path: results/metrics/task2/medarabiq/test.json  #specift output pred file
 

@@ -1,3 +1,4 @@
+import gc
 import os
 import re
 import torch
@@ -15,8 +16,8 @@ class Med42MCQHandler:
         cache_dir: str = HF_CACHE,
         offline: bool = True,
         use_plain_prompt: bool = False,
-        max_new_tokens_cap: int = 16,  # hard cap to prevent accidental large generations
-        use_cache: bool = False,       # memory saver for generation
+        max_new_tokens_cap: int = 8,
+        use_cache: bool = False,
     ):
         self.model_name = model_name
         self.cache_dir = cache_dir or HF_CACHE
@@ -33,6 +34,10 @@ class Med42MCQHandler:
             os.environ["HF_HUB_OFFLINE"] = "1"
         else:
             os.environ.pop("HF_HUB_OFFLINE", None)
+
+        gc.collect()
+        if torch.cuda.is_available():
+            torch.cuda.empty_cache()
 
         num_gpus = torch.cuda.device_count()
         print(f"[Med42] GPUs: {num_gpus}")
@@ -74,20 +79,19 @@ class Med42MCQHandler:
         )
 
         print("[Med42] Loading model (4-bit) with balanced sharding...")
-        max_memory = {i: "36GiB" for i in range(num_gpus)}  # leave headroom on each A100-40GB
-        max_memory["cpu"] = "120GiB"
+        max_memory = {i: "36GiB" for i in range(num_gpus)}
+        max_memory["cpu"] = "64GiB"
 
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_name,
             quantization_config=bnb_config,
-            device_map="balanced",      # ✅ spreads across GPUs better than "auto"
-            max_memory=max_memory,      # ✅ prevents GPU0 from being overfilled
-            low_cpu_mem_usage=True,     # ✅ reduces peak memory during load
+            device_map="balanced",
+            max_memory=max_memory,
+            low_cpu_mem_usage=True,
             cache_dir=self.cache_dir,
             local_files_only=self.local_files_only,
         )
 
-        # keep generation memory stable
         try:
             self.model.config.use_cache = self.use_cache
         except Exception:
@@ -102,7 +106,6 @@ class Med42MCQHandler:
             c = Counter(self.model.hf_device_map.values())
             print(dict(c))
 
-        # device to place inputs on (first shard device)
         self.first_param_device = next(self.model.parameters()).device
         print(f"[Med42] first_param_device: {self.first_param_device}")
 
@@ -135,63 +138,125 @@ class Med42MCQHandler:
     def _build_plain_prompt(self, instruction: str, user_text: str) -> str:
         instruction = (instruction or "").strip()
         return (
-            "You are a medical assistant. Answer the multiple-choice question.\n"
+            "You are a medical assistant answering a multiple-choice question.\n"
             f"{'INSTRUCTION: ' + instruction + chr(10) if instruction else ''}"
-            "Return only one letter (A-F) in the format: Answer: X\n\n"
+            "Return only one letter (A-F) in the format: ANSWER: X\n"
+            "Do not explain.\n\n"
             f"QUESTION:\n{user_text}\n\n"
-            "Answer:"
+            "ANSWER:"
         )
 
-    def prompt(self, sample: dict, instruction: str, max_tokens: int = 12):
-        user_text = self._build_mcq_text(sample)
-        if not user_text:
-            return None
-
+    def _format_prompt(self, instruction: str, user_text: str) -> str:
         system_prompt = (instruction or "").strip()
-        max_new = min(int(max_tokens), self.max_new_tokens_cap)
 
         if (not self.use_plain_prompt) and self.has_chat_template:
             messages = [
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_text},
             ]
-            inputs = self.tokenizer.apply_chat_template(
-                messages,
-                add_generation_prompt=True,
-                tokenize=True,
-                return_dict=True,
-                return_tensors="pt",
-            )
-        else:
-            prompt_str = self._build_plain_prompt(system_prompt, user_text)
-            inputs = self.tokenizer(
-                prompt_str,
-                return_tensors="pt",
-                add_special_tokens=True,
-            )
+            try:
+                return self.tokenizer.apply_chat_template(
+                    messages,
+                    tokenize=False,
+                    add_generation_prompt=True,
+                )
+            except Exception as e:
+                print(f"[Med42] chat_template failed, using plain prompt: {e}", flush=True)
 
-        # ✅ do NOT force cuda:0; move to the first shard device
-        inputs = {k: v.to(self.first_param_device) for k, v in inputs.items()}
-        input_len = inputs["input_ids"].shape[-1]
+        return self._build_plain_prompt(system_prompt, user_text)
 
-        with torch.inference_mode():
-            generation = self.model.generate(
-                **inputs,
-                max_new_tokens=max_new,
-                do_sample=False,
-                use_cache=self.use_cache,
-                pad_token_id=self.tokenizer.pad_token_id,
-                eos_token_id=self.stop_token_ids[0],
-            )
-
-        gen_ids = generation[0][input_len:]
-        raw_text = self.tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
+    @staticmethod
+    def _postprocess(raw_text: str):
+        raw_text = (raw_text or "").strip()
         if not raw_text:
             return None
 
         upper = raw_text.upper()
+
         m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
         if m:
             return m.group(1)
+
+        m = re.search(r"^\s*([A-F])\s*[\.\)]?", upper)
+        if m:
+            return m.group(1)
+
         m = re.search(r"\b([A-F])\b", upper)
         return m.group(1) if m else None
+
+    def prompt_batch(
+        self,
+        samples,
+        instruction: str,
+        task_type=None,
+        max_tokens: int = 8,
+        temperature: float = 0.0,
+        **kwargs,
+    ):
+        max_new = min(int(max_tokens), self.max_new_tokens_cap)
+
+        prompts = [None] * len(samples)
+        valid_positions = []
+
+        for i, sample in enumerate(samples):
+            user_text = self._build_mcq_text(sample)
+            if not user_text:
+                continue
+            prompts[i] = self._format_prompt(instruction, user_text)
+            valid_positions.append(i)
+
+        if not valid_positions:
+            return [None] * len(samples)
+
+        valid_prompts = [prompts[i] for i in valid_positions]
+
+        enc = self.tokenizer(
+            valid_prompts,
+            return_tensors="pt",
+            padding=True,
+            truncation=True,
+        )
+        enc = {k: v.to(self.first_param_device) for k, v in enc.items()}
+
+        seq_len = enc["input_ids"].shape[1]
+
+        gen_kwargs = dict(
+            **enc,
+            max_new_tokens=max_new,
+            do_sample=False,
+            use_cache=self.use_cache,
+            pad_token_id=self.tokenizer.pad_token_id,
+            eos_token_id=self.stop_token_ids[0],
+        )
+
+        with torch.inference_mode():
+            out_ids = self.model.generate(**gen_kwargs)
+
+        results = [None] * len(samples)
+
+        for row_idx, orig_idx in enumerate(valid_positions):
+            new_tokens = out_ids[row_idx, seq_len:]
+            raw_text = self.tokenizer.decode(new_tokens, skip_special_tokens=True).strip()
+            print(f"[Med42] Raw: {repr(raw_text)}", flush=True)
+            results[orig_idx] = self._postprocess(raw_text)
+
+        return results
+
+    def prompt(
+        self,
+        sample: dict,
+        instruction: str,
+        max_tokens: int = 8,
+        temperature: float = 0.0,
+        task_type=None,
+        **kwargs,
+    ):
+        outs = self.prompt_batch(
+            [sample],
+            instruction=instruction,
+            task_type=task_type,
+            max_tokens=max_tokens,
+            temperature=temperature,
+            **kwargs,
+        )
+        return outs[0] if outs else None

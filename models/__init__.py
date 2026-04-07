@@ -10,6 +10,8 @@ from .claude import ClaudeOpus45MCQHandler
 from .jais import Jais2ChatMCQHandler
 from .falcon import FalconH1MCQHandler
 from .silma import Silma9BMCQHandler
+from .bimedix import BiMediXMCQHandler
+from .autocap import AutoCAPMCQHandler
 
 import os
 
@@ -81,6 +83,32 @@ def load_model_handler(config):
             cache_dir=model_cfg.get("cache_dir"),
             offline=model_cfg.get("offline", True),
             
+        )
+
+    elif model_type == "autocap":
+        return AutoCAPMCQHandler(
+            model_name=model_cfg.get(
+                "name",
+                "mistralai/Mistral-Small-3.2-24B-Instruct-2506"
+            ),
+            cache_dir=model_cfg.get("cache_dir"),
+            offline=model_cfg.get("offline", True),
+            candidate_languages=model_cfg.get(
+                "candidate_languages",
+                ["Arabic", "English", "French"]
+            ),
+            top_k_languages=model_cfg.get("top_k_languages", 3),
+            selection_max_tokens=model_cfg.get("selection_max_tokens", 96),
+            weight_max_tokens=model_cfg.get("weight_max_tokens", 96),
+            reasoning_max_tokens=model_cfg.get("reasoning_max_tokens", 32),
+            do_sample=model_cfg.get("do_sample", False),
+        )
+
+    elif model_type == "bimedix":
+        return BiMediXMCQHandler(
+            model_name=model_cfg.get("name", "BiMediX/BiMediX-Bi"),
+            cache_dir=model_cfg.get("cache_dir"),
+            offline=model_cfg.get("offline", True),
         )
         
     elif model_type == "deepseek":

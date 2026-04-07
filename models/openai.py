@@ -31,9 +31,9 @@ def extract_letter_from_text_en(text: str) -> Optional[str]:
 
 class OpenAIHandler:
     """
-    MCQ-only handler for OpenAI models, aligned with the Meditron eval setup:
-      - input is sample: dict with keys question, opa/opb/opc/opd/(ope/opf optional)
-      - prompt() returns a single letter A–F (or None if extraction fails)
+    Handler for OpenAI models:
+      - task_type="mcq" -> returns a single letter A–F (or None)
+      - task_type="answer_generation" -> returns generated text (one line) or ""
 
     Routing:
       - gpt-5*, o1*, o3* → Responses API
@@ -80,6 +80,13 @@ class OpenAIHandler:
 
         return stem + "\n\n" + "\n".join(lines) if lines else stem
 
+    @staticmethod
+    def _build_ansgen_text(sample: Dict[str, Any]) -> str:
+        q = (sample.get("question") or "").strip()
+        if not q:
+            return ""
+        return q
+
     # ----------- prompt style (keep pipeline, align with Meditron anchors) -----------
 
     def _build_user_block(self, instruction: str, user_text: str) -> str:
@@ -89,8 +96,6 @@ class OpenAIHandler:
         """
         instruction = (instruction or "").strip()
 
-        # This block is what we send as the "user" content (for both APIs)
-        # We keep it simple + deterministic + anchored.
         base = []
         if instruction:
             base.append(instruction)
@@ -141,65 +146,126 @@ class OpenAIHandler:
         sample: Dict[str, Any],
         instruction: str,
         task_type: str = "mcq",
-        max_tokens: int = 12,   # match Meditron default-ish; you can override from yaml
+        max_tokens: int = 12,
         temperature: float = 0.0,
         top_p: float = 1.0,
         reasoning_effort: str = "low",
         **kwargs,
-    ) -> Optional[str]:
+    ):
         """
-        Returns extracted letter A–F, or None if it can't be extracted.
+        Returns:
+          - mcq -> extracted letter A–F, or None
+          - answer_generation -> generated one-line text, or ""
         """
 
-        user_text = self._build_mcq_text(sample)
-        if not user_text:
-            print("[OpenAIHandler] Empty stem/options; cannot build prompt.")
-            return None
+        task_type = (task_type or "mcq").strip().lower()
 
-        user_block = self._build_user_block(instruction, user_text)
+        if task_type == "mcq":
+            user_text = self._build_mcq_text(sample)
+            if not user_text:
+                print("[OpenAIHandler] Empty stem/options; cannot build prompt.")
+                return None
 
-        # -------- Chat Completions path --------
-        if not self._is_responses_model():
-            resp = self._with_retries(
-                self.client.chat.completions.create,
+            user_block = self._build_user_block(instruction, user_text)
+
+            # -------- Chat Completions path --------
+            if not self._is_responses_model():
+                resp = self._with_retries(
+                    self.client.chat.completions.create,
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": "Follow instructions strictly."},
+                        {"role": "user", "content": user_block},
+                    ],
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    top_p=top_p,
+                )
+                raw = (resp.choices[0].message.content or "").strip()
+                letter = extract_letter_from_text_en(raw)
+                if letter is None:
+                    print(f"[OpenAIHandler] Could not extract a clean letter. Raw: {repr(raw)}")
+                return letter
+
+            # -------- Responses API path --------
+            payload = dict(
                 model=self.model,
-                messages=[
-                    {"role": "system", "content": "Follow instructions strictly."},
-                    {"role": "user", "content": user_block},
-                ],
-                max_tokens=max_tokens,
+                instructions="Follow instructions strictly.",
+                input=user_block,
+                text={"format": {"type": "text"}},
+                reasoning={"effort": reasoning_effort},
+                max_output_tokens=max_tokens,
                 temperature=temperature,
                 top_p=top_p,
             )
-            raw = (resp.choices[0].message.content or "").strip()
+
+            resp = self._with_retries(self.client.responses.create, **payload)
+            raw = self._parse_responses_text(resp)
+
+            # tiny fallback if empty
+            if not raw:
+                payload["input"] = user_block + "\n\nAnswer: "
+                resp = self._with_retries(self.client.responses.create, **payload)
+                raw = self._parse_responses_text(resp)
+
+            raw = (raw or "").strip()
             letter = extract_letter_from_text_en(raw)
             if letter is None:
                 print(f"[OpenAIHandler] Could not extract a clean letter. Raw: {repr(raw)}")
             return letter
 
-        # -------- Responses API path --------
-        payload = dict(
-            model=self.model,
-            instructions="Follow instructions strictly.",
-            input=user_block,
-            text={"format": {"type": "text"}},
-            reasoning={"effort": reasoning_effort},
-            max_output_tokens=max_tokens,   # respects yaml, no longer forced to 16
-            temperature=temperature,
-            top_p=top_p,
-        )
+        elif task_type == "answer_generation":
+            user_text = self._build_ansgen_text(sample)
+            if not user_text:
+                print("[OpenAIHandler] Empty question; cannot build answer-generation prompt.")
+                return ""
 
-        resp = self._with_retries(self.client.responses.create, **payload)
-        raw = self._parse_responses_text(resp)
+            # keep the same style, just without options and without forcing Answer: X format
+            instruction = (instruction or "").strip()
+            user_block = f"{instruction}\n\nQUESTION:\n{user_text}".strip()
 
-        # tiny fallback if empty
-        if not raw:
-            payload["input"] = user_block + "\n\nAnswer: "
+            # -------- Chat Completions path --------
+            if not self._is_responses_model():
+                resp = self._with_retries(
+                    self.client.chat.completions.create,
+                    model=self.model,
+                    messages=[
+                        {"role": "system", "content": "Follow instructions strictly."},
+                        {"role": "user", "content": user_block},
+                    ],
+                    max_tokens=max_tokens,
+                    temperature=temperature,
+                    top_p=top_p,
+                )
+                raw = (resp.choices[0].message.content or "").strip()
+                if not raw:
+                    return ""
+                one_line = raw.split("\n")[0].strip()
+                print(f"[OpenAIHandler] Answer-gen raw (one line): {repr(one_line[:200])}")
+                return one_line
+
+            # -------- Responses API path --------
+            payload = dict(
+                model=self.model,
+                instructions="Follow instructions strictly.",
+                input=user_block,
+                text={"format": {"type": "text"}},
+                reasoning={"effort": reasoning_effort},
+                max_output_tokens=max_tokens,
+                temperature=temperature,
+                top_p=top_p,
+            )
+
             resp = self._with_retries(self.client.responses.create, **payload)
             raw = self._parse_responses_text(resp)
+            raw = (raw or "").strip()
 
-        raw = (raw or "").strip()
-        letter = extract_letter_from_text_en(raw)
-        if letter is None:
-            print(f"[OpenAIHandler] Could not extract a clean letter. Raw: {repr(raw)}")
-        return letter
+            if not raw:
+                return ""
+
+            one_line = raw.split("\n")[0].strip()
+            print(f"[OpenAIHandler] Answer-gen raw (one line): {repr(one_line[:200])}")
+            return one_line
+
+        else:
+            raise ValueError(f"Unsupported task_type={task_type}. Expected 'mcq' or 'answer_generation'.")
