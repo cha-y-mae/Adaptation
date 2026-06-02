@@ -1,7 +1,7 @@
 import os
+import re
 import time
 from typing import Optional, Dict, Any
-
 from google import genai
 from google.genai import types
 
@@ -9,29 +9,37 @@ LETTER_SET = {"A", "B", "C", "D", "E", "F"}
 
 
 class Gemini3ProHandler:
+    """
+    Gemini handler aligned with the Claude / DeepSeek handlers:
+      - task_type="mcq"               -> returns 'A'..'F' or None
+      - task_type="answer_generation" -> returns generated text (one line) or ""
+    """
+
     def __init__(
         self,
         api_key: Optional[str] = None,
         model: str = "gemini-2.5-flash",
         min_request_interval: float = 2.6,
         max_retries: int = 6,
+        **kwargs,
     ):
         api_key = api_key or os.getenv("GEMINI_API_KEY")
         if not api_key:
             raise ValueError("GEMINI_API_KEY missing.")
-
         self.client = genai.Client(api_key=api_key)
         self.model_name = model
         self.min_request_interval = float(min_request_interval)
         self.max_retries = int(max_retries)
         self._last_call_time = 0.0
 
+    # -----------------------------------------------------------
+    # Build MCQ text
+    # -----------------------------------------------------------
     @staticmethod
     def _build_mcq_text(sample: Dict[str, Any]) -> str:
         stem = (sample.get("question") or "").strip()
         if not stem:
             return ""
-
         option_map = {
             "A": sample.get("opa"),
             "B": sample.get("opb"),
@@ -40,7 +48,6 @@ class Gemini3ProHandler:
             "E": sample.get("ope"),
             "F": sample.get("opf"),
         }
-
         lines = []
         for letter in ["A", "B", "C", "D", "E", "F"]:
             txt = option_map.get(letter)
@@ -49,7 +56,6 @@ class Gemini3ProHandler:
             txt = str(txt).strip()
             if txt:
                 lines.append(f"{letter}) {txt}")
-
         return (
             "Choose the single best answer.\n"
             "Return exactly one uppercase letter from this set only: A, B, C, D, E, F.\n"
@@ -59,22 +65,32 @@ class Gemini3ProHandler:
             f"{stem}\n\n" + "\n".join(lines)
         )
 
+    # -----------------------------------------------------------
+    # Build answer-generation text (question only, no options/letters)
+    # -----------------------------------------------------------
+    @staticmethod
+    def _build_ansgen_text(sample: Dict[str, Any]) -> str:
+        return (sample.get("question") or "").strip()
+
+    # -----------------------------------------------------------
+    # Rate limiting
+    # -----------------------------------------------------------
     def _respect_rate_limit(self):
         now = time.time()
         elapsed = now - self._last_call_time
         if elapsed < self.min_request_interval:
             time.sleep(self.min_request_interval - elapsed)
 
+    # -----------------------------------------------------------
+    # MCQ letter extraction
+    # -----------------------------------------------------------
     @staticmethod
     def _extract_label(resp) -> Optional[str]:
-        # Fast path
         text = getattr(resp, "text", None)
         if text:
             t = str(text).strip().upper().strip('"').strip()
             if t in LETTER_SET:
                 return t
-
-        # Candidate/parts fallback
         candidates = getattr(resp, "candidates", None) or []
         for cand in candidates:
             content = getattr(cand, "content", None)
@@ -86,6 +102,26 @@ class Gemini3ProHandler:
                     if t in LETTER_SET:
                         return t
         return None
+
+    # -----------------------------------------------------------
+    # Generic text extraction (for answer generation)
+    # -----------------------------------------------------------
+    @staticmethod
+    def _extract_text(resp) -> str:
+        text = getattr(resp, "text", None)
+        if text:
+            return str(text)
+        # fallback: join all parts
+        chunks = []
+        candidates = getattr(resp, "candidates", None) or []
+        for cand in candidates:
+            content = getattr(cand, "content", None)
+            parts = getattr(content, "parts", None) if content is not None else None
+            for part in parts or []:
+                txt = getattr(part, "text", None)
+                if txt:
+                    chunks.append(str(txt))
+        return "".join(chunks)
 
     @staticmethod
     def _debug_response(resp):
@@ -101,6 +137,36 @@ class Gemini3ProHandler:
         except Exception as e:
             print(f"[GeminiMCQ][DEBUG] response inspection failed: {e}", flush=True)
 
+    # -----------------------------------------------------------
+    # Shared API call helper (with retries + rate limit)
+    # -----------------------------------------------------------
+    def _generate(self, user_text: str, cfg: "types.GenerateContentConfig"):
+        last_err = None
+        for attempt in range(self.max_retries):
+            try:
+                self._respect_rate_limit()
+                resp = self.client.models.generate_content(
+                    model=self.model_name,
+                    contents=user_text,
+                    config=cfg,
+                )
+                self._last_call_time = time.time()
+                return resp, None
+            except Exception as e:
+                last_err = e
+                msg = str(e)
+                print(f"[GeminiMCQ] Error: {msg}", flush=True)
+                if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
+                    sleep_s = max(7.0, self.min_request_interval * (attempt + 2))
+                    print(f"[GeminiMCQ] Sleeping {sleep_s:.1f}s before retry...", flush=True)
+                    time.sleep(sleep_s)
+                    continue
+                return None, e
+        return None, last_err
+
+    # -----------------------------------------------------------
+    # Main Entry
+    # -----------------------------------------------------------
     def prompt(
         self,
         sample,
@@ -110,49 +176,38 @@ class Gemini3ProHandler:
         task_type=None,
         **kwargs,
     ):
-        user_text = self._build_mcq_text(sample)
-        if not user_text:
-            return None
-
+        task_type = (task_type or "mcq").strip().lower()
         sample_id = sample.get("id", "N/A")
-        print(f"\n[GeminiMCQ] Processing sample id={sample_id}", flush=True)
 
-        system_prompt = (
-            (instruction or "").strip()
-            or "You answer medical multiple-choice questions. Output exactly one uppercase letter only."
-        )
+        # ----------------------- MCQ -----------------------
+        if task_type == "mcq":
+            user_text = self._build_mcq_text(sample)
+            if not user_text:
+                return None
+            print(f"\n[GeminiMCQ] Processing sample id={sample_id} (mcq)", flush=True)
 
-        cfg = types.GenerateContentConfig(
-            system_instruction=system_prompt,
-            temperature=float(temperature),
-            max_output_tokens=int(max_tokens),
+            system_prompt = (
+                (instruction or "").strip()
+                or "You answer medical multiple-choice questions. Output exactly one uppercase letter only."
+            )
 
-            # Disable thinking for 2.5 Flash
-            thinking_config=types.ThinkingConfig(thinking_budget=0),
+            cfg = types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                temperature=float(temperature),
+                max_output_tokens=int(max_tokens),
+                thinking_config=types.ThinkingConfig(thinking_budget=0),
+                response_mime_type="text/plain",
+                automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
+                tool_config=types.ToolConfig(
+                    function_calling_config=types.FunctionCallingConfig(mode="NONE")
+                ),
+            )
 
-            # Make output plain text, not JSON
-            response_mime_type="text/plain",
-
-            # Disable AFC noise/pathways
-            automatic_function_calling=types.AutomaticFunctionCallingConfig(
-                disable=True
-            ),
-            tool_config=types.ToolConfig(
-                function_calling_config=types.FunctionCallingConfig(mode="NONE")
-            ),
-        )
-
-        last_err = None
-        for attempt in range(self.max_retries):
-            try:
-                self._respect_rate_limit()
-
-                resp = self.client.models.generate_content(
-                    model=self.model_name,
-                    contents=user_text,
-                    config=cfg,
-                )
-                self._last_call_time = time.time()
+            for attempt in range(self.max_retries):
+                resp, err = self._generate(user_text, cfg)
+                if resp is None:
+                    print(f"[GeminiMCQ] Failed after retries: {err}", flush=True)
+                    return None
 
                 print("\n==============================", flush=True)
                 print("[GeminiMCQ] RAW RESPONSE:", flush=True)
@@ -161,33 +216,65 @@ class Gemini3ProHandler:
 
                 pred = self._extract_label(resp)
                 print(f"[GeminiMCQ] PARSED PREDICTION: {pred}", flush=True)
-
                 if pred:
                     return pred
 
                 self._debug_response(resp)
 
-                # One retry with a bit more room if still truncated
                 candidates = getattr(resp, "candidates", None) or []
                 finish_reason = getattr(candidates[0], "finish_reason", None) if candidates else None
                 if str(finish_reason) == "MAX_TOKENS" and attempt < self.max_retries - 1:
-                    cfg.max_output_tokens = 8
+                    cfg.max_output_tokens = max(cfg.max_output_tokens * 2, 8)
                     continue
-
                 return None
+            return None
 
-            except Exception as e:
-                last_err = e
-                msg = str(e)
-                print(f"[GeminiMCQ] Error: {msg}", flush=True)
+        # ---------------- Answer generation ----------------
+        elif task_type == "answer_generation":
+            user_text = self._build_ansgen_text(sample)
+            if not user_text:
+                print("[GeminiMCQ] Empty question; cannot build answer-generation prompt.", flush=True)
+                return ""
+            print(f"\n[GeminiMCQ] Processing sample id={sample_id} (answer_generation)", flush=True)
 
-                if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
-                    sleep_s = max(7.0, self.min_request_interval * (attempt + 2))
-                    print(f"[GeminiMCQ] Sleeping {sleep_s:.1f}s before retry...", flush=True)
-                    time.sleep(sleep_s)
-                    continue
+            system_prompt = (instruction or "").strip() or (
+                "You are a medical expert. Answer the question concisely in the same language "
+                "as the question. Output only the answer text, no explanation."
+            )
 
-                return None
+            # Give generation enough room; callers can still override.
+            gen_max_tokens = int(max_tokens) if max_tokens and int(max_tokens) > 32 else 256
 
-        print(f"[GeminiMCQ] Failed after {self.max_retries} retries: {last_err}", flush=True)
-        return None
+            cfg = types.GenerateContentConfig(
+                system_instruction=system_prompt,
+                temperature=float(temperature),
+                max_output_tokens=gen_max_tokens,
+                thinking_config=types.ThinkingConfig(thinking_budget=0),
+                response_mime_type="text/plain",
+                automatic_function_calling=types.AutomaticFunctionCallingConfig(disable=True),
+                tool_config=types.ToolConfig(
+                    function_calling_config=types.FunctionCallingConfig(mode="NONE")
+                ),
+            )
+
+            resp, err = self._generate(user_text, cfg)
+            if resp is None:
+                print(f"[GeminiMCQ] Answer-gen failed after retries: {err}", flush=True)
+                return ""
+
+            raw = self._extract_text(resp) or ""
+            raw = raw.strip()
+            if not raw:
+                self._debug_response(resp)
+                return ""
+
+            # Strip a leading "Answer:" / "ANSWER:" if the model echoes it.
+            cleaned = re.sub(r"^\s*ANSWER\s*[:=]\s*", "", raw, flags=re.IGNORECASE).strip()
+            one_line = cleaned.split("\n")[0].strip()
+            print(f"[GeminiMCQ] Answer-gen raw (one line): {repr(one_line[:200])}", flush=True)
+            return one_line
+
+        else:
+            raise ValueError(
+                f"Unsupported task_type={task_type}. Expected 'mcq' or 'answer_generation'."
+            )

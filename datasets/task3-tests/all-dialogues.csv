@@ -1,0 +1,700 @@
+﻿case_id,clinician_name,organ_system,problem_type,patient_profile,symptoms_and_history,red_flag_symptoms,primary_reasoning_objective,dialogue,ideal_response
+1,Dr. Khaled ,Endocrinology,Clinic non emergency,"A 64-year-old postmenopausal female with a history of osteopenia.
+She has no previous history of neck surgery or radiation exposure.","The patient reports vague &quot;aching in her bones&quot; and
+recurrent bouts of constipation over several months. She has experienced two
+episodes of painful kidney stones in the last three years. Physical exam is
+unremarkable, but she mentions feeling increasingly ""foggy""; and fatigued.
+Laboratory tests reveal a persistently elevated serum calcium of 10.8 mg/dL. Her
+vitamin D levels are within the normal range.",Chronic hypercalcemia.,"Diagnosis of Primary Hyperparathyroidism;
+elevated calcium with inappropriately normal or high PTH suggests a parathyroid
+adenoma.","مريض: السلام عليكم دكتور، أشعر بآلام في عظامي منذ عدة أشهر، وأعاني من الإمساك المتكرر. كما أنني أشعر بالتعب والضبابية في تفكيري
+مساعد طبي: وعليكم السلام، أفهم شكواكم. هل يمكنكم وصف آلام العظام بتفصيل أكثر؟ وهل عانيتم من حصوات الكلى مؤخراً؟
+مريض: الآلام غير محددة المكان، أشعر وكأن عظامي تؤلمني من الداخل. وللأسف، أصبت بحصوات الكلى مرتين في السنوات الثلاث الماضية
+مساعد طبي: أرى، هذا مهم. بناءً على أعراضكم وتاريخكم مع حصوات الكلى، والفحوصات التي تشير لارتفاع مستوى الكالسيوم في الدم، قد تكونوا تعانون من فرط نشاط الغدة الجاردرقية. سنحتاج لإجراء فحوصات إضافية لتأكيد التشخيص
+مريض: فرط نشاط الغدة الجاردرقية؟ لم أسمع بهذا من قبل. هل هذا خطير؟ وما هو العلاج المطلوب؟",
+2,Dr. Khaled ,Endocrinology,Clinic non emergency,"A 32-year-old female who recently returned to work after maternity
+leave. She has a family history of autoimmune disorders, specifically Type 1
+Diabetes.","She complains of significant weight gain despite a decreased
+appetite and persistent &quot;cold intolerance.&quot; Her skin has become noticeably dry, and
+her hair is thinning at the temples. She describes a feeling of fullness in her neck but
+denies any difficulty swallowing. Her menstrual cycles have become heavier and
+more frequent over the last three months. Heart rate is 58 beats per minute on
+examination.","Firm, painless goiter.","Diagnosis of Hashimoto’s Thyroiditis; requires TPO
+antibody testing and TSH/Free T4 correlation.","مريض: السلام عليكم دكتور. أشعر بتعب شديد منذ عودتي من إجازة الأمومة، وقد زاد وزني كثيراً رغم أنني لا آكل كما كنت من قبل.
+مساعد طبي: وعليكم السلام. أفهم قلقك، فترة ما بعد الولادة قد تكون مرهقة. هل تشعرين بأعراض أخرى غير زيادة الوزن وقلة الشهية؟
+مريض: نعم، أشعر بالبرد باستمرار حتى في الطقس الدافئ، وبشرتي أصبحت جافة جداً. كما لاحظت أن شعري بدأ يتساقط من الجانبين.
+مساعد طبي: هذه الأعراض مهمة. هل لاحظت أي تغيرات في الدورة الشهرية أو أي انتفاخ في منطقة الرقبة؟
+مريض: بالفعل، الدورة الشهرية أصبحت أكثر غزارة وتأتي كل ثلاثة أسابيع بدلاً من شهر. وأشعر بشيء في رقبتي، كأنها منتفخة قليلاً لكن بدون ألم.
+مساعد طبي: أفهم. هل لديك تاريخ عائلي من أمراض الغدد أو أمراض المناعة الذاتية؟ وهل تشعرين بصعوبة في البلع؟
+مريض: نعم، والدتي مصابة بداء السكري النوع الأول. أما البلع فلا أشعر بأي صعوبة، لكنني قلقة من هذه الأعراض جميعاً معاً.",
+3,Dr. Khaled ,Endocrinology,Clinic non emergency,"A 27-year-old male with no significant past medical history. He is
+not taking any psychiatric or gastrointestinal medications.","He presents with a six-month history of decreased libido and
+erectile dysfunction. He has noticed a subtle decrease in the frequency of shaving due
+to reduced facial hair growth. Recently, he has developed persistent ""dull""; headaches
+and feels his peripheral vision is slightly blurry. He denies any nipple discharge,
+though he notes mild gynecomastia. He has no history of head trauma or cranial
+surgery.",Bitemporal hemianopsia (visual field loss).,"Diagnosis of a Pituitary Macroadenoma
+(Prolactinoma); requires serum prolactin levels and MRI of the Sella Turcica.","مريض: السلام عليكم دكتور. أنا أعاني من مشاكل منذ حوالي ستة أشهر وأريد استشارتكم
+مساعد طبي: وعليكم السلام. أهلاً بك، يمكنني مساعدتك. ما هي المشاكل التي تواجهها بالتحديد؟
+مريض: أعاني من ضعف في الرغبة الجنسية وضعف في الانتصاب، كما لاحظت أن نمو شعر وجهي قل وأصبحت أحلق أقل من المعتاد
+مساعد طبي: أفهم. هذه أعراض مهمة. هل تعاني من أي أعراض أخرى؟ مثل صداع أو مشاكل في الرؤية أو أي تغيرات في الجسم؟
+مريض: نعم، في الآونة الأخيرة أعاني من صداع مستمر وخفيف، وأشعر أن الرؤية الجانبية عندي أصبحت ضبابية قليلاً. كما لاحظت تضخم بسيط في الثدي
+مساعد طبي: هذه معلومات مفيدة جداً. هل تأخذ أي أدوية حالياً؟ وهل تعرضت لأي إصابة في الرأس أو عمليات جراحية سابقاً؟
+مريض: لا، لا آخذ أي أدوية ولم أتعرض لأي إصابات في الرأس أو عمليات جراحية. هل هذه الأعراض مترابطة؟ أنا قلق جداً",
+4,Dr. Khaled ,Endocrinology,Clinic non emergency,"A 41-year-old female with a recent diagnosis of &quot;difficult-to-control&quot;
+hypertension. She has no history of long-term corticosteroid use for asthma or rashes.","She has gained 12 kg in one year, primarily concentrated in
+her abdomen and face. She reports muscle weakness, specifically when trying to stand
+up from a deep chair. Bright purple streaks (striae) have appeared across her
+midsection and thighs. She has developed new-onset facial hair and irregular
+menstrual periods. Her fasting glucose is mildly elevated at 115 mg/dL. Elevated
+Hga1c 8. Normal CMP.",Proximal muscle wasting.,Diagnosis of Cushing’s Disease,"مريض: السلام عليكم دكتور. أنا قلقة جداً من الأعراض التي أعاني منها مؤخراً. لقد زاد وزني 12 كيلوغراماً خلال السنة الماضية، وأشعر بضعف شديد في عضلاتي.
+مساعد طبي: وعليكم السلام. أفهم قلقك. هذه زيادة وزن ملحوظة. هل يمكنك أن تخبريني أين تتركز هذه الزيادة في الوزن تحديداً؟ وما نوع ضعف العضلات الذي تشعرين به؟
+مريض: الوزن الزائد يتركز بشكل أساسي في منطقة البطن والوجه. أما بالنسبة لضعف العضلات، فأجد صعوبة كبيرة في النهوض من الكرسي العميق، وكأن عضلات ساقي لا تستطيع حملي. كما ظهرت خطوط بنفسجية اللون على بطني وفخذي.
+مساعد طبي: هذه الأعراض مهمة. هل لاحظت أي تغيرات أخرى مؤخراً؟ على سبيل المثال، أي تغيرات في الدورة الشهرية أو نمو شعر غير طبيعي؟
+مريض: نعم، دورتي الشهرية أصبحت غير منتظمة، وظهر شعر جديد على وجهي. كما أن طبيبي قال لي أن ضغط الدم عندي مرتفع ويصعب السيطرة عليه، وأن مستوى السكر في الدم أصبح مرتفعاً قليلاً.
+مساعد طبي: شكراً لك على هذه المعلومات المفصلة. هذه الأعراض مجتمعة - زيادة الوزن المركزة، الخطوط البنفسجية، ضعف العضلات، عدم انتظام الدورة الشهرية، نمو الشعر، وارتفاع ضغط الدم والسكر - تشير إلى احتمال وجود اضطراب هرموني. سأحتاج لإجراء فحوصات هرمونية محددة لتأكيد التشخيص.
+مريض: هل تعتقد أن هذا شيء خطير؟ أنا قلقة جداً لأن كل هذه الأعراض ظهرت بسرعة خلال السنة الماضية فقط.",
+5,Dr. Khaled ,Endocrinology,Clinic non emergency,"A 19-year-old male who was involved in a minor motorcycle
+accident two months ago. He suffered a mild concussion but no skull fractures at the
+time.","He reports an insatiable thirst, drinking upwards of 8 liters
+of water per day. He is waking up every hour at night to urinate, which is significantly
+impacting his sleep. His urine appears ""clear like water""; regardless of how much he
+drinks. He has lost 3 kg over the last month due to constant fluid intake replacing
+meals. He denies any blurred vision or family history of high blood sugar.
+ Red flag Symptom: Intense polydipsia and dilute polyuria.",Intense polydipsia and dilute polyuria.,"Diagnosis of Central Diabetes Insipidus; the prior
+head trauma suggests a deficiency in Antidiuretic Hormone (ADH).","مريض: السلام عليكم دكتور. أعاني من عطش شديد جداً منذ حوالي شهر، وأشرب كميات كبيرة من الماء يومياً ولا أشعر بالارتواء أبداً.
+مساعد طبي: وعليكم السلام. أهلاً بك. هذا أمر يحتاج لتقييم دقيق. كم لتراً من الماء تشرب تقريباً في اليوم؟ وهل لاحظت تغيراً في عدد مرات التبول؟
+مريض: أشرب حوالي 8 لترات أو أكثر يومياً! وأستيقظ كل ساعة تقريباً ليلاً للتبول، مما يؤثر على نومي بشدة. البول أصبح شفافاً مثل الماء تماماً.
+مساعد طبي: هذا مقلق فعلاً. هل تعرضت لأي إصابة في الرأس مؤخراً؟ وهل لاحظت أي تغيير في وزنك خلال الفترة الأخيرة؟
+مريض: نعم، تعرضت لحادث دراجة نارية بسيط منذ شهرين وأصبت بارتجاج خفيف في المخ، لكن الأطباء قالوا إنه لا يوجد كسور في الجمجمة. وقد فقدت 3 كيلوغرامات خلال الشهر الماضي.
+مساعد طبي: أفهم الآن. هل تعاني من أي أعراض أخرى مثل تشوش الرؤية؟ وهل يوجد تاريخ عائلي للسكري أو مشاكل في السكر؟
+مريض: لا، رؤيتي طبيعية ولا يوجد تاريخ عائلي لمرض السكري. المشكلة الوحيدة هي هذا العطش الشديد والتبول المستمر الذي يجعلني أشرب الماء بدلاً من تناول الوجبات أحياناً.",
+6,Dr. Khaled ,Endocrinology,Clinic non emergency,"A 22-year-old female college student with a BMI of 31. She has
+struggled with acne since puberty that has not responded to topical treatments.","Her menstrual periods occur only three or four times per
+year. She has noticed dark, coarse hair growth on her chin and upper lip. On her neck
+and armpits, there are patches of darkened, velvety skin (acanthosis nigricans). She
+expresses frustration with her inability to lose weight despite a caloric deficit. Pelvic
+examination is normal, but she reports a history of ""cysts""; mentioned during a
+previous ultrasound.",Clinical hyperandrogenism (hirsutism).,"Diagnosis of PCOS; necessitates checking the
+LH/FSH ratio and androgen profile.","مريض: السلام عليكم دكتور. أنا طالبة جامعية عمري 22 سنة وأعاني من مشاكل عديدة منذ فترة البلوغ. الدورة الشهرية عندي غير منتظمة أبداً، تأتي فقط ثلاث أو أربع مرات في السنة.
+مساعد طبي: وعليكم السلام. أفهم قلقك بشأن عدم انتظام الدورة الشهرية. هل تواجهين أي أعراض أخرى مثل تغيرات في الوزن أو نمو الشعر أو مشاكل في البشرة؟
+مريض: نعم بالفعل. أعاني من حب الشباب منذ البلوغ ولم تنفع معي العلاجات الموضعية. كما ألاحظ نمو شعر خشن وداكن على الذقن والشفة العليا، وهذا محرج جداً بالنسبة لي.
+مساعد طبي: أفهم انزعاجك من هذه الأعراض. هل لاحظت أي تغيرات في لون الجلد، خاصة في منطقة الرقبة أو تحت الإبطين؟ وما هو وزنك الحالي تقريباً؟
+مريض: نعم، هناك بقع داكنة ومخملية الملمس في رقبتي وتحت إبطي. أما بالنسبة للوزن، فأنا أعاني من زيادة الوزن ومؤشر كتلة الجسم عندي 31. رغم أنني أتبع حمية غذائية وأقلل السعرات الحرارية، لكن لا أستطيع إنقاص وزني وهذا محبط جداً.
+مساعد طبي: بناءً على الأعراض التي تصفينها - عدم انتظام الدورة الشهرية، نمو الشعر الزائد، حب الشباب، والبقع الداكنة على الجلد - قد تكونين تعانين من متلازمة تكيس المبايض. هل سبق أن أجريت فحوصات بالموجات فوق الصوتية للحوض؟
+مريض: نعم، أجريت فحص بالموجات فوق الصوتية من قبل وذكر الطبيب شيئاً عن وجود ""أكياس"" لكنني لم أفهم التفاصيل جيداً. هل هذا مرتبط بكل هذه المشاكل التي أعاني منها؟",
+7,Dr. Khaled ,Endocrinology,Clinic non emergency,"A 45-year-old male who was recently diagnosed with hypertension.
+He is otherwise fit and maintains a low-sodium diet.","Despite being on two anti-hypertensive medications, his
+blood pressure remains 165/105 mmHg. He complains of occasional muscle cramps
+and generalized weakness. Routine blood work showed a surprisingly low potassium
+level of 2.9 mEq/L. He denies using any herbal supplements, licorice, or diuretics. He
+has no family history of early-onset stroke or kidney disease.",Spontaneous hypokalemia.,"Diagnosis of Conn’s Syndrome (Primary
+Aldosteronism); requires a suppressed plasma renin activity and high aldosterone
+level.","مريض: السلام عليكم دكتور. أنا قلق بشأن ضغط الدم لدي. رغم أنني أتناول دوائين لضغط الدم، إلا أن القراءات ما زالت مرتفعة وأشعر بتشنجات في العضلات وضعف عام.
+مساعد طبي: وعليكم السلام. أفهم قلقك. هل يمكنك أن تخبرني ما هي آخر قراءة لضغط الدم؟ ومتى بدأت تشعر بهذه التشنجات والضعف؟
+مريض: آخر قراءة كانت 165/105. التشنجات بدأت منذ أسابيع قليلة، خاصة في الساقين، والضعف العام يزداد تدريجياً. كما أن نتائج التحاليل أظهرت انخفاضاً في البوتاسيوم.
+مساعد طبي: هذا مقلق فعلاً، خاصة مع انخفاض البوتاسيوم. هل تتناول أي مكملات عشبية أو عرق السوس؟ وهل لديك تاريخ عائلي للسكتة الدماغية المبكرة أو أمراض الكلى؟
+مريض: لا، لا أتناول أي مكملات عشبية أو عرق السوس، ولا يوجد تاريخ عائلي للسكتة أو أمراض الكلى. أحافظ على نظام غذائي قليل الصوديوم كما نصحتموني.
+مساعد طبي: بناءً على الأعراض وانخفاض البوتاسيوم مع ارتفاع ضغط الدم رغم العلاج، قد نحتاج لفحوصات إضافية لاستبعاد حالة تسمى متلازمة كون. سأحيلك للدكتور خالد لإجراء فحص مستوى الألدوستيرون والرينين في الدم.
+مريض: ما هي متلازمة كون هذه؟ وهل هي خطيرة؟ متى يمكنني إجراء هذه الفحوصات؟",
+8,Dr. Khaled ,Endocrinology,Clinic non emergency,"A 50-year-old male who underwent successful surgery for a non-
+secreting pituitary adenoma five years ago. He has been on stable thyroid and
+testosterone replacement ever since.","He reports a profound, unexplained lack of energy and a
+&quot;flat&quot; mood. He has noticed an increase in abdominal fat and a decrease in muscle
+mass despite regular exercise. His skin appears thinner and more wrinkled than his
+peers. He describes a reduced sense of well-being and social isolation. Recent bone
+density scans show a worsening T-score in the lumbar spine.",Patient is already on other hormone replacements.,"Diagnosis of Adult Growth Hormone Deficiency;
+requires an insulin tolerance test or glucagon stimulation test.","مريض: دكتور، أشعر بإرهاق شديد وانعدام في الطاقة منذ فترة طويلة. رغم أنني أتناول أدوية الغدة الدرقية والتستوستيرون بانتظام بعد عملية الغدة النخامية، إلا أنني لا أشعر بتحسن.
+مساعد طبي: أفهم شكواك. هل يمكنك أن تخبرني أكثر عن طبيعة هذا الإرهاق؟ وهل لاحظت أي تغييرات أخرى في جسمك أو حالتك النفسية؟
+مريض: نعم، ألاحظ زيادة في دهون البطن رغم ممارستي للرياضة بانتظام، وكذلك نقص في الكتلة العضلية. كما أن بشرتي أصبحت أرق وأكثر تجعداً من أقراني في نفس العمر.
+مساعد طبي: هذه أعراض مهمة. هل تشعر بتغيير في حالتك النفسية أو الاجتماعية؟ وهل أجريت أي فحوصات حديثة؟
+مريض: نعم، أشعر بمزاج منبسط ونقص في الإحساس بالرفاهية، وأتجنب الأنشطة الاجتماعية أكثر من السابق. كما أن آخر فحص لكثافة العظام أظهر تراجعاً في منطقة أسفل الظهر.
+مساعد طبي: بناءً على الأعراض التي تصفها، أعتقد أنك قد تعاني من نقص في هرمون النمو. هذا شائع بعد جراحة الغدة النخامية. سنحتاج لإجراء فحص تحفيز الهرمون للتأكد من التشخيص.
+مريض: هل تقصد أنني أحتاج لعلاج إضافي؟ كم من الوقت قد يستغرق هذا الفحص وما هي المخاطر المحتملة؟",
+9,Dr. Khaled ,Endocrinology,Emergency,"A 17-year-old female with known Type 1 Diabetes. She recently
+started using an insulin pump but has had trouble with the infusion set.","She presents to the ED with severe nausea, vomiting, and
+diffuse abdominal pain. Her breathing is deep and rapid, and her breath has a distinct,
+fruity odor. She is lethargic and moderately dehydrated with dry mucous membranes.
+Her blood glucose is 480 mg/dL upon arrival. She mentions she hasn&#39;t felt well since
+her &quot;pump site looked red&quot; yesterday.",Kussmaul respirations and ketonuria.,"Management of DKA; priority is IV fluids and an
+insulin drip with close potassium monitoring.","مريض: أشعر بألم شديد في بطني وغثيان مستمر، ولا أستطيع التوقف عن التقيؤ منذ الصباح الباكر
+مساعد طبي: أفهم أنك تشعرين بضيق شديد. أرى في ملفك أنك مصابة بداء السكري من النوع الأول وتستخدمين مضخة الأنسولين. متى بدأت هذه الأعراض؟ وكيف حال مضخة الأنسولين؟
+مريض: بدأت الأعراض أمس عندما لاحظت أن موقع المضخة أصبح أحمر اللون ومتورم قليلاً، ولكنني لم أغير الأنبوب. واليوم أشعر بتعب شديد وتنفسي أصبح سريعاً وعميقاً
+مساعد طبي: هذا مهم جداً. عدم تغيير أنبوب المضخة عند ظهور الاحمرار قد يعني عدم وصول الأنسولين بشكل صحيح. هل قمت بفحص مستوى السكر في الدم مؤخراً؟ وهل تشعرين بجفاف في الفم؟
+مريض: نعم، فمي جاف جداً ولساني يبدو جافاً أيضاً. لم أفحص السكر منذ أمس لأنني كنت أشعر بالمرض الشديد
+مساعد طبي: سأحتاج لفحص مستوى السكر فوراً وإجراء بعض الفحوصات الأخرى. هذه الأعراض - الغثيان، القيء، ألم البطن، التنفس السريع والعميق، والجفاف - قد تشير إلى حالة طبية طارئة تسمى الحماض الكيتوني السكري. سنبدأ العلاج بالسوائل الوريدية والأنسولين فوراً
+مريض: أشعر بالخوف الشديد، هل هذا خطير؟ وهل كان عليّ تغيير أنبوب المضخة بمجرد أن رأيت الاحمرار؟",
+10,Dr. Khaled ,Endocrinology,Emergency,"A 38-year-old female with a history of Graves&#39; disease who has been
+non-compliant with her Methimazole. She was admitted to the hospital for a severe
+urinary tract infection.","She suddenly develops a fever of 40.2°C and a heart rate of
+160 beats per minute. She is extremely agitated, screaming at staff, and appears
+confused about her location. Her skin is flushed and diaphoretic, and she is
+experiencing frequent watery diarrhea. Physical exam reveals a prominent goiter and
+mild bulging of the eyes (exophthalmos). Her blood pressure is starting to drop,
+currently 90/50 mmHg.",Precipitated by a secondary infection (UTI).,"Immediate treatment of Thyroid Storm; requires
+beta-blockers, thionamides, and glucocorticoids.","مريض: أشعر بحرارة شديدة وقلبي يخفق بسرعة جداً! لا أستطيع التحكم في نفسي، أشعر بالارتباك الشديد
+مساعد طبي: أفهم أنك تشعرين بتوعك شديد. هل تتذكرين إذا كنت تتناولين دواء الميثيمازول بانتظام لعلاج فرط نشاط الغدة الدرقية؟
+مريض: لا... لم أتناول الدواء منذ أسابيع. كان لدي التهاب في المسالك البولية وأُدخلت المستشفى بسببه
+مساعد طبي: هذا مهم جداً. أرى أن لديك حمى عالية وسرعة في ضربات القلب مع إسهال مائي متكرر. هل تشعرين بتعرق شديد أيضاً؟
+مريض: نعم! أتعرق كثيراً وأشعر بالحر الشديد. كما أن ضغط دمي منخفض والممرضات قلقات جداً
+مساعد طبي: حالتك تتطلب علاجاً فورياً لما يُسمى بالعاصفة الدرقية. سنبدأ فوراً بحاصرات البيتا والكورتيكوستيرويدات والأدوية المضادة للدرقية. هذه حالة طارئة
+مريض: أشعر بالخوف الشديد... هل هذا خطير؟ لا أفهم ما يحدث لي بالضبط",
+11,Dr. Khaled ,Endocrinology,Emergency,"A 44-year-old male with a known history of Addison&#39;s disease. He
+has been taking his maintenance hydrocortisone daily without issue until now.","He presents with profound weakness, vomiting, and severe
+lower back pain. He recently had a &quot;stomach flu&quot; and was unable to keep down his
+oral medications for 24 hours. He is now hypotensive (BP 80/40) and tachycardic. His
+skin shows significant hyperpigmentation, particularly over his knuckles and old
+surgical scars. Laboratory results show a potassium of 6.2 mEq/L and sodium of 128
+mEq/L.",Inability to tolerate &quot;stress-dose&quot; oral steroids due to GI illness.,"Immediate Adrenal Crisis management; requires IV
+hydrocortisone bolus and saline resuscitation.","مريض: دكتور، أشعر بضعف شديد جداً ولا أستطيع الوقوف، وأتقيأ باستمرار منذ أمس
+مساعد طبي: أفهم حالتك. أخبرني، هل لديك أي حالات طبية مزمنة؟ وهل تتناول أي أدوية بانتظام؟
+مريض: نعم، لديّ مرض أديسون وأتناول الهيدروكورتيزون يومياً. لكن أصبت بنزلة معوية قبل يومين ولم أستطع الاحتفاظ بالدواء في معدتي لمدة ٢٤ ساعة كاملة
+مساعد طبي: هذا خطير جداً. هل تعاني من آلام أخرى؟ وهل لاحظت أي تغيرات في لون جلدك؟
+مريض: نعم، لديّ ألم شديد في أسفل الظهر، وأشعر بالدوار عندما أحاول الجلوس. وجلدي أصبح أغمق، خاصة على المفاصل
+مساعد طبي: حالتك تشير إلى أزمة قصور الكظر وتحتاج رعاية طبية فورية. يجب نقلك للمستشفى حالاً لإعطائك الهيدروكورتيزون عبر الوريد ومحاليل طبية
+مريض: هل هذا خطير؟ أشعر أنني أزداد سوءاً كل ساعة",
+12,Dr. Khaled ,Endocrinology,Emergency,"An 78-year-old female found unresponsive in her unheated
+apartment during a winter cold snap. She has a history of &quot;thyroid problems&quot; but has
+not seen a doctor in years.","She is profoundly bradycardic (HR 36) and hypothermic
+(Temp 33.1°C). Her face and limbs are extremely swollen with non-pitting edema
+(myxedema). She is breathing very shallowly, and an ABG shows significant CO2
+retention. She does not respond to painful stimuli, and her reflexes are delayed. There
+is a visible horizontal scar on her lower neck from a remote surgery.","Advanced age and environmental exposure masking the endocrine
+cause.","Diagnosis of Myxedema Coma; requires IV
+Levothyroxine (T4) and possibly Liothyronine (T3).","مريض: ابنتي وجدتني فاقدة الوعي في شقتي الباردة، وأحضرتني إلى المستشفى. أشعر بالبرد الشديد ولا أستطيع التفكير بوضوح.
+مساعد طبي: أفهم أنك تمرين بوضع صعب. هل تتذكرين ما حدث قبل فقدان الوعي؟ وهل تعانين من مشاكل في الغدة الدرقية؟
+مريض: لدي مشاكل في الغدة الدرقية منذ سنوات، لكنني لم أراجع الطبيب منذ فترة طويلة. لاحظت أن وجهي ويديّ منتفخان جداً مؤخراً.
+مساعد طبي: متى كانت آخر مرة تناولت فيها أدوية الغدة الدرقية؟ وهل خضعت لأي عمليات جراحية في الرقبة من قبل؟
+مريض: أجريت عملية في الرقبة منذ سنوات عديدة، وأتناول حبوب الغدة الدرقية لكنني نفدت منها منذ أشهر ولم أجددها.
+مساعد طبي: هذا يفسر حالتك الحالية. أنت تعانين من حالة خطيرة تسمى غيبوبة الوذمة المخاطية بسبب نقص هرمونات الغدة الدرقية. نحتاج لبدء العلاج الطارئ بهرمونات الغدة الدرقية عبر الوريد فوراً.
+مريض: هل هذا خطير؟ أشعر بصعوبة في التنفس وبطء شديد في حركتي.",
+13,Dr. Khaled ,Endocrinology,Emergency,"A 65-year-old male with Type 2 Diabetes on Insulin and Glyburide.
+He has been trying a new &quot;fasting&quot; diet to lose weight.","He was found unconscious by his spouse in the late
+morning. He is diaphoretic (sweaty) and shaking, with a heart rate of 120. He does not
+have a &quot;fruity&quot; breath odor and was acting &quot;confused and angry&quot; just before losing
+consciousness. He skipped breakfast this morning after taking his full dose of
+morning medications. His bedside glucose reading is 32 mg/dL.",Neuroglycopenic coma (unresponsiveness due to low sugar).,"Immediate administration of IV Dextrose (D50) or
+Glucagon to restore blood glucose.","مريض: زوجي فقد الوعي هذا الصباح! وجدته في غرفة النوم مغشياً عليه وهو يرتجف ويتعرق بشدة. عمره خمسة وستون عاماً ولديه مرض السكري ويتناول الإنسولين والجليبيريد.
+مساعد طبي: أفهم قلقك، هذه حالة طارئة. هل تم قياس مستوى السكر في دمه؟ وهل كان يتصرف بشكل طبيعي قبل فقدان الوعي؟
+مريض: نعم، قسنا السكر وكان اثنين وثلاثين فقط! قبل أن يفقد الوعي كان يتصرف بطريقة غريبة، كان مرتبكاً وغاضباً جداً. نبضه سريع حوالي مئة وعشرين نبضة في الدقيقة.
+مساعد طبي: هذا انخفاض شديد في سكر الدم يتطلب تدخلاً فورياً. هل تناول أدويته صباح اليوم؟ وهل تناول وجبة الإفطار؟ أيضاً، هل تشم رائحة فواكه في نفسه؟
+مريض: تناول أدويته كاملة صباحاً لكنه لم يتناول الإفطار. إنه يتبع حمية صيام جديدة لإنقاص الوزن. ولا، ليس هناك رائحة فواكه في نفسه.
+مساعد طبي: يجب نقله فوراً إلى المستشفى لإعطائه محلول الجلوكوز الوريدي أو حقنة الجلوكاجون. هذه حالة غيبوبة نقص السكر العصبية وتحتاج تدخل طبي عاجل. اتصل بالإسعاف الآن.
+مريض: سأتصل بالإسعاف فوراً. هل يمكنني أن أفعل شيئاً الآن لمساعدته حتى وصول الإسعاف؟",
+14,Dr. Khaled ,Endocrinology,Emergency,"An 80-year-old male resident of a nursing home with Type 2
+Diabetes and dementia. He has recently been treated for pneumonia.","He is brought to the ED with profound dehydration and a
+severely altered level of consciousness. Unlike DKA patients, he is not breathing
+rapidly and has no ketones in his urine. His blood glucose is extremely high at 950
+mg/dL. He has lost a significant amount of weight over the last week and has very
+poor skin turgor. His calculated serum osmolality is 350 mOsm/kg (very high).","Extreme hyperglycemia (&gt;600 mg/dL) and high serum
+osmolality.","Management of HHS; focus on massive fluid
+resuscitation and gradual insulin administration.","مريض: السلام عليكم، أنا ابن المريض. والدي البالغ من العمر ثمانين عامًا في دار المسنين وقد أُحضر إلى الطوارئ لأن حالته تدهورت بشكل مفاجئ. إنه فاقد الوعي تقريبًا ولا يستجيب لنا كالمعتاد
+مساعد طبي: وعليكم السلام. أتفهم قلقكم. هل يمكنكم إخباري بالتاريخ الطبي لوالدكم؟ وما هي الأعراض التي لاحظتموها عليه مؤخرًا؟
+مريض: والدي مصاب بداء السكري من النوع الثاني والخرف. كان يعاني من التهاب رئوي مؤخرًا وتم علاجه. في الأسبوع الماضي لاحظنا أنه فقد وزنًا كبيرًا وبدا عليه الجفاف الشديد. جلده أصبح مترهلًا جدًا
+مساعد طبي: هذه أعراض مقلقة جدًا. هل لاحظتم أي تغيير في تنفسه؟ هل كان يتنفس بسرعة أو بصعوبة؟ وما هو آخر مستوى سكر تم قياسه له؟
+مريض: لا، تنفسه ليس سريعًا ولكنه ضعيف. عندما وصلنا المستشفى قالوا إن مستوى السكر في الدم عنده مرتفع جدًا - 950! كما أجروا له فحوصات أخرى وقالوا إن شيئًا اسمه الأسمولية مرتفع جدًا أيضًا
+مساعد طبي: هذا وضع طارئ يتطلب تدخلًا فوريًا. والدكم يعاني من حالة تسمى متلازمة فرط الأسمولية اللاكيتونية. سنحتاج لإعطائه سوائل وريدية بكميات كبيرة بشكل تدريجي ومنظم، بالإضافة إلى الأنسولين بجرعات محسوبة. هل لديكم أي أسئلة حول خطة العلاج؟
+مريض: شكرًا لكم على التوضيح. نثق بالفريق الطبي تمامًا. فقط أريد أن أعرف هل ستتحسن حالته؟ وكم من الوقت قد يستغرق العلاج؟ نحن قلقون جدًا عليه",
+15,Dr. Khaled ,Endocrinology,Emergency,"A 24-year-old female who is exactly 24 hours post-total
+thyroidectomy for a large goiter. The surgeon noted that the parathyroid glands were
+difficult to visualize during the procedure.","She complains of intense tingling and numbness
+(paresthesia) around her mouth and in her fingertips. While checking her blood
+pressure, her hand spontaneously cramps into a &quot;claw-like&quot; position (Trousseau’s
+sign). She feels &quot;twitchy&quot; and anxious, and you notice her facial muscles spasm when
+you tap on her cheek (Chvostek’s sign). She denies any shortness of breath but
+appears very distressed. Her serum ionized calcium is 0.8 mmol/L (critically low).",Carpopedal spasm and positive Chvostek/Trousseau signs.,"Diagnosis of Acute Hypoparathyroidism; requires
+immediate IV Calcium Gluconate to prevent laryngospasm or seizures.","مريض: دكتور، أشعر بتنميل شديد حول فمي وأطراف أصابعي منذ ساعات قليلة. كما أنني أشعر بقلق شديد وتوتر غريب
+مساعد طبي: أفهم قلقك. أنت أجريت عملية استئصال الغدة الدرقية بالكامل أمس، أليس كذلك؟ هل لاحظت أي تشنجات في يديك أو وجهك؟
+مريض: نعم، بالضبط قبل ٢٤ ساعة. والغريب أنه عندما قاس الممرض ضغط الدم منذ قليل، تشنجت يدي وأصبحت مثل المخلب! لا أستطيع التحكم بها
+مساعد طبي: هذا مؤشر مهم جداً. دعني أفحص وجهك قليلاً. هل تشعرين بأي صعوبة في التنفس أو البلع حالياً؟
+مريض: لا، التنفس طبيعي لكنني أشعر بتشنجات في عضلات وجهي أيضاً. هل هذا طبيعي بعد العملية؟ أشعر بخوف شديد
+مساعد طبي: ما تواجهينه ليس طبيعياً ويتطلب علاجاً فورياً. هذه أعراض نقص حاد في الكالسيوم بسبب تأثر الغدد جارات الدرقية أثناء العملية. سنبدأ العلاج بالكالسيوم الوريدي فوراً لمنع حدوث مضاعفات خطيرة
+مريض: أوه الله! إذن هذا خطير؟ متى سأشعر بتحسن؟ هل ستبقى هذه الأعراض معي للأبد؟",
+16,Dr. Khaled ,Respiratory,Clinic non emergency,"A 45-year-old male construction worker with a 20-pack-year smoking
+history. He has spent the last two decades involved in the renovation of older residential
+buildings.","He presents with a dry, persistent cough and mild shortness of
+breath that occurs only during heavy lifting. He denies any chest pain, fever, or hemoptysis,
+though he notes his exercise tolerance has slowly declined. On physical exam, fine &quot;Velcro-
+like&quot; inspiratory crackles are heard at both lung bases. There is no evidence of digital
+clubbing or cyanosis at this stage.",History of prolonged asbestos exposure.,"Evaluation for Asbestosis; the combination of exposure
+history, crackles, and reduced DLCO necessitates High-Resolution CT (HRCT) to look for
+pleural plaques or interstitial fibrosis.","مريض: السلام عليكم دكتور. أعاني من سعال جاف مستمر منذ فترة، وأشعر بضيق في التنفس عندما أرفع أشياء ثقيلة في العمل.
+مساعد طبي: وعليكم السلام. أفهم معاناتك. هل يمكنك إخباري عن طبيعة عملك وكم سنة تعمل به؟
+مريض: أعمل في البناء منذ عشرين عاماً، وأقوم بترميم المباني السكنية القديمة. كما أنني مدخن منذ سنوات طويلة.
+مساعد طبي: هذا مهم جداً. هل تشعر بألم في الصدر أو حمى؟ وهل لاحظت أي دم مع السعال؟
+مريض: لا، لا يوجد ألم في الصدر ولا حمى، ولا دم مع السعال. لكنني ألاحظ أن قدرتي على ممارسة الرياضة قد انخفضت تدريجياً.
+مساعد طبي: بناءً على تاريخك المهني وأعراضك، أحتاج لإجراء فحوصات إضافية. سأحولك للدكتور خالد لإجراء أشعة مقطعية عالية الدقة على الصدر لتقييم الرئتين بدقة.
+مريض: هل هناك خطر من التعرض للغبار والمواد في المباني القديمة؟ أشعر بالقلق من هذه الأعراض.",
+17,Dr. Khaled ,Respiratory,Clinic non emergency,"A 52-year-old male with a BMI of 38 and a neck circumference of 18 inches.
+He has a history of treated hypertension but no known lung disease.","He reports severe daytime somnolence and frequently falls asleep
+during meetings or while reading. His spouse complains of extremely loud snoring and
+observed episodes where he appears to stop breathing followed by a loud gasp. He wakes
+up most mornings with a dull frontal headache and a dry mouth. He denies any history of
+asthma or tobacco use.",Epworth Sleepiness Scale score of 18/24 (severe sleepiness).,"Diagnosis of Obstructive Sleep Apnea; requires an urgent
+polysomnography and immediate counseling regarding driving safety until CPAP therapy is
+initiated.","مريض: السلام عليكم دكتور، أعاني من مشكلة في النوم وأشعر بتعب شديد طوال النهار رغم أنني أنام ساعات كافية
+مساعد طبي: وعليكم السلام، أهلاً بك. هل يمكنك أن تخبرني أكثر عن هذا التعب؟ متى تشعر به وما مدى شدته؟
+مريض: الحقيقة أنني أنام في أوقات غير مناسبة تماماً، حتى في الاجتماعات أو عندما أقرأ. وزوجتي تشكو دائماً من الشخير العالي جداً
+مساعد طبي: أفهم، هذا مهم جداً. هل لاحظت زوجتك أو أي شخص آخر توقفاً في التنفس أثناء نومك؟ وكيف تشعر عندما تستيقظ صباحاً؟
+مريض: نعم بالفعل، زوجتي تقول أنني أتوقف عن التنفس ثم أصدر صوت شهيق عالي مفاجئ. وأستيقظ كل صباح وأنا أعاني من صداع في مقدمة الرأس وفمي جاف جداً
+مساعد طبي: هذه أعراض مهمة جداً وتشير إلى احتمالية إصابتك بانقطاع التنفس أثناء النوم. أحتاج لأن أسألك، هل تدخن؟ وهل لديك تاريخ مرضي مع أمراض الرئة أو الربو؟
+مريض: لا، أنا لا أدخن إطلاقاً ولا أعاني من أي أمراض في الرئة أو الربو. لكن عندي ضغط دم وأتناول أدوية له منذ فترة",
+18,Dr. Khaled ,Respiratory,Clinic non emergency,"A 29-year-old female elementary school teacher with no significant past
+medical history. She has a history of childhood eczema but no diagnosed respiratory
+conditions.","She presents with a persistent, non-productive cough that has lasted
+for eight weeks following a viral upper respiratory infection. The cough is strictly nocturnal
+and is also triggered by talking for long periods in the classroom or exposure to cold air. She
+denies any wheezing, chest tightness, or shortness of breath. Physical examination of the
+chest reveals clear lungs with no audible wheeze or crackles.",Nocturnal cough triggered by cold air.,"Evaluation for Cough-Variant Asthma; consider a
+methacholine challenge test or a therapeutic trial of an inhaled
+corticosteroid/bronchodilator.","مريض: السلام عليكم دكتور. أعاني من سعال مستمر منذ شهرين تقريباً، وهو يزعجني كثيراً خاصة في الليل
+مساعد طبي: وعليكم السلام. أفهم أن السعال مستمر منذ شهرين. هل بدأ هذا السعال بعد نزلة برد أو التهاب في الجهاز التنفسي؟
+مريض: نعم، بدأ بعد نزلة برد أصبت بها. والمشكلة أن السعال جاف تماماً ولا يخرج معه أي بلغم، ويزداد سوءاً عندما أتحدث كثيراً في الفصل لأنني مدرسة
+مساعد طبي: أفهم. وهل تلاحظين أن هناك أشياء أخرى تثير السعال غير الحديث الطويل؟
+مريض: نعم، عندما أتعرض للهواء البارد يزداد السعال. وهل يهم أنني كان لدي أكزيما في الطفولة؟
+مساعد طبي: نعم، هذا مهم جداً. تاريخ الأكزيما في الطفولة قد يكون له علاقة. هل تشعرين بضيق في التنفس أو صفير في الصدر أو ضيق في الصدر؟
+مريض: لا، لا أشعر بأي من هذه الأعراض. فقط السعال الجاف الذي يزعجني خاصة في الليل ولا يتركني أنام بهدوء",
+19,Dr. Khaled ,Respiratory,Clinic non emergency,"A 21-year-old male who has been thin his entire life despite a high-calorie
+diet. He has no family history of asthma or cystic fibrosis.","He complains of a lifelong productive cough with thick, green,
+tenacious sputum that has worsened significantly over the last year. He has required
+multiple courses of antibiotics for &quot;bronchitis&quot; and has recently lost 4 kg. He reports
+frequent, oily stools and abdominal bloating after eating fatty meals. Physical exam reveals
+an emaciated appearance, digital clubbing, and coarse bilateral rhonchi.",Chronic tenacious sputum and digital clubbing in a young adult.,"Diagnosis of Cystic Fibrosis; the multisystem involvement
+(pulmonary and GI) warrants a sweat chloride test and genetic screening.","مريض: السلام عليكم دكتور. أعاني من كحة مستمرة منذ سنوات طويلة، وقد ازدادت سوءاً في السنة الماضية. البلغم أصبح أكثر كثافة ولونه أخضر.
+مساعد طبي: وعليكم السلام. أفهم معاناتك مع هذه الكحة المزمنة. هل لاحظت أي أعراض أخرى مصاحبة؟ وهل تناولت مضادات حيوية من قبل لهذه المشكلة؟
+مريض: نعم، تناولت مضادات حيوية عدة مرات بسبب ما قال الأطباء أنه التهاب شعبي. كما أنني أعاني من انتفاخ في البطن وإسهال دهني خاصة بعد تناول الوجبات الدسمة. وقد فقدت 4 كيلوغرامات في الآونة الأخيرة.
+مساعد طبي: هذه الأعراض مقلقة نوعاً ما. هل لديك تاريخ عائلي للإصابة بالربو أو أمراض تنفسية وراثية؟ وكيف كان وزنك عموماً طوال حياتك؟
+مريض: لا، ليس لدي تاريخ عائلي للربو أو أمراض وراثية. أما بالنسبة للوزن، فأنا نحيف منذ الطفولة رغم أنني آكل كميات كبيرة من الطعام. هذا الأمر محير لي ولعائلتي.
+مساعد طبي: بناءً على الأعراض التي تصفها - الكحة المزمنة مع البلغم الكثيف، فقدان الوزن رغم الأكل الكثير، والمشاكل الهضمية - أعتقد أننا بحاجة لإجراء فحوصات متخصصة. سأحولك للدكتور خالد لإجراء فحص شامل وفحوصات مخبرية خاصة.
+مريض: شكراً لك. هل تعتقد أن هناك مشكلة خطيرة؟ أنا قلق لأن هذه الأعراض تؤثر على حياتي اليومية وعملي، وأريد أن أعرف السبب الحقيقي وراء كل هذا.",
+20,Dr. Khaled ,Respiratory,Clinic non emergency,"A 70-year-old female with a history of recurrent urinary tract infections
+(UTIs). She has no history of smoking or occupational dust exposure.","She presents with a six-month history of progressive shortness of
+breath and a dry, hacking cough. She has been taking daily nitrofurantoin for UTI prophylaxis
+for the last two years. Physical examination reveals fine inspiratory crackles at both lung
+bases. Chest X-ray shows increased interstitial markings, and her urologist is concerned
+about her declining oxygen saturation (92% on room air).",Use of nitrofurantoin combined with basilar crackles.,"Recognition of Nitrofurantoin-induced Pulmonary Fibrosis;
+management involves immediate cessation of the drug and HRCT to assess the pattern of
+injury.","مريض: السلام عليكم دكتور. أنا أعاني من ضيق في التنفس منذ حوالي ستة أشهر، وأصبح الأمر أسوأ تدريجياً. كما أن لديّ سعال جاف مستمر يزعجني كثيراً.
+مساعد طبي: وعليكم السلام. أفهم معاناتك من ضيق التنفس والسعال الجاف. هل يمكنك إخباري عن تاريخك المرضي؟ وهل تتناولين أي أدوية حالياً؟
+مريض: نعم، لديّ تاريخ مع التهابات المسالك البولية المتكررة. ولهذا السبب أتناول دواء النيتروفيورانتوين يومياً منذ حوالي سنتين كوقاية. لم أدخن قط ولم أتعرض لأي غبار في العمل.
+مساعد طبي: هذه معلومات مهمة جداً. النيتروفيورانتوين يمكن أن يسبب مشاكل في الرئة عند الاستخدام المطول. هل تم فحص صدرك مؤخراً؟ وما هي نتائج قياس الأكسجين في الدم؟
+مريض: نعم، عملت أشعة على الصدر وأظهرت زيادة في العلامات الخلالية. كما أن طبيب المسالك البولية قلق من انخفاض نسبة الأكسجين لديّ، حيث وصلت إلى ٩٢٪ على الهواء الطبيعي. وعند الفحص السريري سمع الطبيب أصواتاً في قاعدة الرئتين.
+مساعد طبي: بناءً على الأعراض والتاريخ الدوائي والفحوصات، يبدو أنك تعانين من تليف رئوي ناتج عن النيتروفيورانتوين. يجب إيقاف هذا الدواء فوراً والتنسيق مع طبيب المسالك البولية لإيجاد بديل آمن. كما سنحتاج لعمل أشعة مقطعية عالية الدقة للرئتين لتقييم مدى الضرر.
+مريض: هذا مقلق جداً. هل يعني هذا أن الدواء الذي كان يحميني من التهابات المسالك البولية تسبب في ضرر رئتيّ؟ وهل يمكن أن تتحسن حالتي بعد إيقاف الدواء؟",
+21,Dr. Khaled ,Respiratory,Clinic non emergency,"A 70-year-old male with a history of coronary artery disease and atrial
+fibrillation. He was hospitalized one month ago for a cardiac event.","Since his discharge, he has developed increasing shortness of breath
+and a non-productive cough. He denies fever or chest pain, but his oxygen saturation has
+
+dropped to 90% on room air. He was started on amiodarone and apixaban during his last
+hospital stay. Chest X-ray reveals new, bilateral, rounded pulmonary infiltrates that were not
+present thirty days ago.",New infiltrates after starting amiodarone.,"Diagnosis of Amiodarone Pulmonary Toxicity; requires
+discontinuation of the drug and potentially a course of corticosteroids.","مريض: السلام عليكم دكتور. أشعر بضيق في التنفس منذ خروجي من المستشفى الشهر الماضي، والأمر يزداد سوءاً يوماً بعد يوم.
+مساعد طبي: وعليكم السلام. أفهم قلقك. هل تعاني من أي أعراض أخرى مثل الحمى أو ألم في الصدر؟ وما هي الأدوية التي تتناولها حالياً؟
+مريض: لا أعاني من حمى أو ألم في الصدر، لكن لديّ سعال جاف مستمر. الطبيب وصف لي الأميودارون والأبيكسابان بعد المشكلة القلبية الأخيرة.
+مساعد طبي: متى بدأت هذه الأعراض بالضبط؟ وهل لاحظت تغيراً في قدرتك على ممارسة الأنشطة اليومية العادية؟
+مريض: بدأت الأعراض بعد أسبوعين من بدء العلاج تقريباً. أصبح صعود الدرج مرهقاً جداً، وأشعر بضيق التنفس حتى عند المشي لمسافات قصيرة.
+مساعد طبي: هذا مهم جداً. الأميودارون قد يسبب أحياناً مشاكل في الرئتين. سأحيلك فوراً للدكتور خالد لفحص عاجل وإجراء أشعة سينية للصدر. قد نحتاج لإيقاف الأميودارون.
+مريض: هل تعني أن الدواء قد يكون السبب في هذه المشاكل؟ أشعر بالقلق لأن تنفسي أصبح أصعب من قبل.",
+22,Dr. Khaled ,Respiratory,Clinic non emergency,"A 60-year-old male with a history of GERD and hiatal hernia. He lives in a
+suburban home and recently took in his daughter&#39;s pet parakeet.","He describes a dry cough and a low-grade fever that occurs
+sporadically, mostly in the evenings. His shortness of breath has been progressive over the
+last few months, making it difficult to climb stairs. He denies smoking or any history of
+asthma. CT imaging shows a &quot;mosaic&quot; pattern of attenuation and centrilobular nodules.",Progressive dyspnea in the presence of a pet bird.,"Diagnosis of Hypersensitivity Pneumonitis (Bird Fancier&#39;s
+Lung); requires environmental antigen removal and a workup for chronic fibrosis.","مريض: السلام عليكم دكتور. أعاني من سعال جاف منذ عدة أسابيع، وأشعر بصعوبة في التنفس خاصة عند صعود الدرج
+مساعد طبي: وعليكم السلام. أفهم معاناتك. هل تشعر بحمى أيضاً؟ ومتى بدأت هذه الأعراض بالضبط؟
+مريض: نعم، أحياناً أشعر بحمى خفيفة في المساء. بدأت الأعراض منذ حوالي ثلاثة أشهر، وتزداد سوءاً تدريجياً
+مساعد طبي: هل تدخن أو لديك تاريخ مرضي بالربو؟ وهل حدثت أي تغييرات في بيئة منزلك مؤخراً؟
+مريض: لا أدخن ولم أعاني من الربو من قبل. لكن ابنتي تركت عندي طائر البادجي الخاص بها منذ حوالي أربعة أشهر
+مساعد طبي: هذا مهم جداً. وجود الطائر قد يكون له علاقة بأعراضك. هل تشعر بتحسن عندما تكون خارج المنزل لفترات طويلة؟
+مريض: الآن وأنت تذكرني، نعم أشعر ببعض التحسن عندما أكون في العمل أو خارج المنزل لساعات طويلة. هل هذا يعني أن الطائر هو السبب؟",
+23,Dr. Khaled ,Respiratory,Clinic non emergency,"A 50-year-old female nurse from the Philippines. She has no history of
+diabetes, hypertension, or asthma.","She presents with a chronic cough, night sweats, and a 5 kg weight
+loss over the last two months. She recalls having a positive Interferon-Gamma Release Assay
+(IGRA) in the past but never completed prophylactic treatment. She has noticed occasional
+blood-streaked sputum in the mornings. Her vital signs are currently stable, but her
+symptoms are worsening.",Positive IGRA history and night sweats in a healthcare worker.,"High suspicion of Active Pulmonary Tuberculosis; requires
+immediate respiratory isolation and sputum testing for AFB and GeneXpert.","مريض: السلام عليكم دكتور. أنا ممرضة من الفلبين، عمري خمسون سنة. أعاني من سعال مزمن منذ شهرين تقريباً، وأشعر بتعرق ليلي شديد يوقظني من النوم. كما لاحظت نقصاً في وزني حوالي خمسة كيلوغرامات.
+مساعد طبي: وعليكم السلام. أفهم معاناتك، هذه أعراض تحتاج لتقييم دقيق. هل لاحظت أي تغيرات في البلغم أو وجود دم فيه؟ وهل لديك تاريخ سابق مع أي فحوصات للسل؟
+مريض: نعم، في الصباح أحياناً ألاحظ خطوط دم في البلغم. وبصراحة، قبل فترة عملت فحص IGRA وكان إيجابياً، لكن للأسف لم أكمل العلاج الوقائي الذي وُصف لي.
+مساعد طبي: هذه معلومات مهمة جداً. كونك ممرضة وتعرضت للسل سابقاً مع وجود هذه الأعراض يثير القلق. هل تعانين من أي أمراض مزمنة كالسكري أو ارتفاع الضغط أو الربو؟
+مريض: لا، الحمد لله ليس لدي أي من هذه الأمراض. لكن السعال يزداد سوءاً والتعرق الليلي أصبح يومياً تقريباً. هل تعتقد أن هذا قد يكون سل نشط؟
+مساعد طبي: نعم، الأعراض التي تصفينها مع تاريخك الطبي تشير بقوة لاحتمالية الإصابة بالسل الرئوي النشط. سنحتاج لعزلك فوراً كإجراء وقائي وعمل فحوصات للبلغم شاملة AFB وGeneXpert للتأكد من التشخيص.
+مريض: أفهم ضرورة الإجراءات الوقائية، خاصة أنني أعمل في المجال الطبي. متى يمكنني البدء بهذه الفحوصات؟ وهل سأحتاج للبقاء في المستشفى؟",
+24,Dr. Khaled ,Respiratory,Emergency,"A 16-year-old female from Sudan who has lived in the UAE for two years.
+She has no history of tobacco use and maintains regular menstrual cycles.","She is brought to the ED with an acute episode of coughing up blood
+(hemoptysis) which has been intermittent for a year but is now worsening. She reports
+
+significant chest tightness and shortness of breath even at rest. Her vitals show tachycardia
+(112 bpm) and hypotension (98/48 mmHg). CT angiogram shows a massively dilated
+pulmonary artery and right heart chambers.",Progressive hemoptysis and hemodynamic instability.,"Management of Pulmonary Arterial Hypertension (likely WHO
+Group 1 or 4); requires ICU admission, echocardiography, and stabilized RHC.","مريض: السلام عليكم دكتور، أنا خائفة جداً. ابنتي عمرها ستة عشر عاماً وهي تسعل دماً منذ فترة، واليوم الوضع أسوأ بكثير وتواجه صعوبة شديدة في التنفس
+مساعد طبي: وعليكم السلام، أفهم قلقكم. متى بدأت هذه الأعراض لأول مرة؟ وهل كان السعال مصحوباً بالدم دائماً أم أن هذا تطور جديد؟
+مريض: السعال مع الدم يحدث على فترات منذ حوالي سنة، لكن اليوم أصبح أسوأ بكثير. وهي تشكو من ضيق شديد في الصدر وصعوبة في التنفس حتى وهي مستريحة
+مساعد طبي: هذه أعراض خطيرة تستدعي التقييم العاجل. هل ابنتكم تدخن أو لديها أي مشاكل صحية سابقة؟ وهل تتناول أي أدوية حالياً؟
+مريض: لا، هي لا تدخن إطلاقاً ولم تكن لديها مشاكل صحية من قبل. نحن من السودان ونعيش في الإمارات منذ سنتين. دورتها الشهرية منتظمة ولا تتناول أي أدوية
+مساعد طبي: شكراً للمعلومات. بناءً على الأعراض والفحوصات الأولية، يبدو أن ابنتكم تحتاج لرعاية طبية فورية في وحدة العناية المركزة. سنحتاج لإجراء المزيد من الفحوصات المتخصصة للقلب والرئتين
+مريض: هل الوضع خطير جداً؟ أنا قلقة للغاية وأريد أن أفهم ما يحدث معها بالضبط",
+25,Dr. Khaled ,Respiratory,Emergency,"A 16-year-old male with a known history of asthma who admits to not using
+his preventer inhaler. He has required hospitalization for his breathing once before in early
+childhood.","He presents in significant respiratory distress, using accessory
+muscles to breathe. He has been using his rescue inhaler (albuterol) every hour for the last
+day with no relief. On exam, he is tachycardic (120 bpm) and tachypneic (30 breaths/min).
+His lungs have loud, bilateral wheezing, and he is unable to speak in full sentences.",Impending respiratory failure and severe distress.,"Treatment of Acute Severe Asthma (Status Asthmaticus);
+requires aggressive nebulization, systemic steroids, and arterial blood gas to monitor for
+hypercapnia.","مريض: دكتور، أنا لا أستطيع التنفس بشكل طبيعي، صدري ضيق جداً ولا أقدر أكمل كلامي
+مساعد طبي: أفهم أنك تواجه صعوبة في التنفس. هل تعاني من الربو؟ ومتى بدأت هذه الأعراض؟
+مريض: نعم، عندي ربو منذ الطفولة... دخلت المستشفى مرة وأنا صغير... أمس كله وأنا أستخدم البخاخ كل ساعة لكن ما في فايدة
+مساعد طبي: هذا وضع خطير ويتطلب عناية فورية. هل تستخدم البخاخ الوقائي بانتظام؟ وما نوع البخاخ الذي تستخدمه للطوارئ؟
+مريض: البخاخ الوقائي... صراحة ما كنت أستخدمه بانتظام... والطوارئ هو الفنتولين... لكن ما عاد ينفع معي
+مساعد طبي: أرى أنك تستخدم عضلات إضافية للتنفس وأسمع صوت أزيز. هذا يشير إلى نوبة ربو حادة تحتاج علاج طارئ فوري. سنبدأ بالبخاخات المركزة والكورتيزون
+مريض: هل الوضع خطير؟ أنا خايف... ما أقدر أتكلم كتير",
+26,Dr. Khaled ,Respiratory,Emergency,"A 25-year-old female who is tall and thin. She works as a teacher and has no
+significant past medical or smoking history.","She presents with sudden, sharp, right-sided chest pain and
+shortness of breath that began while she was sitting at home. She denies any trauma, fever,
+or prior episodes of this nature. On physical exam, she appears anxious and has absent
+breath sounds over the right upper chest. Her oxygen saturation is 92% on room air.",Sudden onset pleuritic chest pain and absent breath sounds.,"Recognition of Spontaneous Pneumothorax; requires a STAT
+chest X-ray and potential needle or tube thoracostomy.","مريض: السلام عليكم، أحتاج مساعدة عاجلة. أشعر بألم حاد مفاجئ في الجانب الأيمن من صدري وأواجه صعوبة في التنفس منذ ساعة تقريباً.
+مساعد طبي: وعليكم السلام. أفهم أنك تشعرين بألم في الصدر وصعوبة في التنفس. متى بدأت هذه الأعراض بالضبط؟ وهل كنت تقومين بأي نشاط معين عندما بدأت؟
+مريض: بدأ الألم فجأة وأنا جالسة في المنزل، لم أكن أقوم بأي نشاط بدني. الألم حاد جداً ويزداد عندما أتنفس بعمق.
+مساعد طبي: هذا يبدو مقلقاً. هل تعرضت لأي إصابة أو حادث مؤخراً؟ وهل لديك تاريخ مرضي سابق أو تدخنين؟
+مريض: لا، لم أتعرض لأي إصابة ولا أدخن. ليس لدي أي مشاكل صحية سابقة. عمري 25 سنة وأعمل كمدرسة.
+مساعد طبي: بناء على الأعراض التي تصفينها - الألم الحاد المفاجئ في الصدر وصعوبة التنفس - هذا يتطلب تقييماً طبياً فورياً. أنصحك بالتوجه إلى قسم الطوارئ فوراً لإجراء أشعة سينية على الصدر وفحص شامل.
+مريض: حسناً، سأتوجه للمستشفى الآن. هل يمكن أن يكون هذا شيئاً خطيراً؟ أشعر بالقلق الشديد والألم لا يتحسن.",
+27,Dr. Khaled ,Respiratory,Emergency,"A 35-year-old female with Antiphospholipid Antibody Syndrome and a
+history of multiple DVTs. She has been on long-term anticoagulation with apixaban.","She presents with acute chest pain and worsening shortness of breath over the last 48 hours. She has noticed progressive exercise intolerance and lower extremity edema over the last year. Her BP is low (90/80 mmHg) and her heart rate is 120
+bpm. CT angiogram reveals acute clots layered over chronic filling defects in the pulmonary
+arteries.",Hypotension and signs of right heart failure.,"Management of Chronic Thromboembolic Pulmonary
+Hypertension (CTEPH) with an acute PE component; requires PERT team activation.","مريض: دكتور، أعاني من ألم شديد في الصدر وضيق في التنفس منذ يومين، والوضع يزداد سوءاً
+مساعد طبي: أفهم قلقك. هل يمكنك وصف طبيعة ألم الصدر؟ وهل تعانين من أي تورم في الساقين؟
+مريض: الألم حاد ويزداد مع التنفس، وأشعر بخفقان سريع في القلب. نعم، ساقاي متورمتان منذ عدة أشهر
+مساعد طبي: بناءً على تاريخك المرضي مع متلازمة الأجسام المضادة للفوسفوليبيد والجلطات السابقة، هذه أعراض مقلقة تستدعي تقييماً فورياً. هل تتناولين دواء أبيكسابان كما هو موصوف؟
+مريض: نعم، أتناوله بانتظام. لكن في السنة الماضية أصبح من الصعب علي ممارسة أي نشاط بدني، حتى صعود الدرج أصبح متعباً جداً
+مساعد طبي: هذا التدهور التدريجي مع الأعراض الحالية يشير إلى حالة خطيرة. سأطلب فحص أشعة مقطعية للرئتين فوراً وسأتواصل مع فريق الطوارئ المتخصص في الجلطات الرئوية
+مريض: هل الوضع خطير جداً؟ أشعر بدوار أيضاً وكأنني قد أفقد الوعي",
+28,Dr. Khaled ,Respiratory,Emergency,"A 30-year-old female from Lebanon with a history of joint pain and a facial
+rash. Her mother has systemic lupus erythematosus (SLE).","She presents with a three-day history of coughing up significant
+amounts of blood. She also reports blood in her urine and a new, purple-spotted rash on her
+forearms. Her creatinine is acutely elevated (200 µmol/L), and her chest X-ray shows patchy,
+bilateral ground-glass opacities. She is febrile and tachycardic on arrival.","Combined hemoptysis and acute renal failure (Pulmonary-Renal
+Syndrome).","Diagnosis of Small Vessel Vasculitis (such as GPA or SLE);
+requires emergent pulse-dose steroids and serologic testing.","مريض: السلام عليكم دكتور، أنا قلقة جداً. منذ ثلاثة أيام وأنا أسعل دم، والكمية كبيرة ومخيفة. كما أنني ألاحظ دم في البول أيضاً.
+مساعد طبي: وعليكم السلام، أفهم قلقك تماماً. هذه أعراض تستدعي الاهتمام الفوري. هل لاحظت أي أعراض أخرى مؤخراً؟ وما هو تاريخك المرضي السابق؟
+مريض: نعم، ظهرت لي بقع بنفسجية جديدة على ذراعي، وأشعر بحمى وتعب شديد. أما بالنسبة لتاريخي المرضي، فأنا أعاني من آلام في المفاصل وطفح جلدي على الوجه منذ فترة. والدتي مصابة بمرض الذئبة الحمراء.
+مساعد طبي: هذه معلومات مهمة جداً. التاريخ العائلي مع الذئبة الحمراء والأعراض التي تصفينها - السعال المدمم، الدم في البول، والطفح الجلدي - تشير إلى احتمال إصابتك بمتلازمة رئوية كلوية. هذه حالة طارئة تحتاج تدخل فوري.
+مريض: متلازمة رئوية كلوية؟ هل هذا خطير؟ وماذا يعني ذلك بالضبط؟
+مساعد طبي: نعم، هي حالة خطيرة تؤثر على الرئتين والكليتين معاً بسبب التهاب في الأوعية الدموية الصغيرة. نحتاج لإجراء فحوصات عاجلة وبدء علاج بالكورتيزون بجرعات عالية فوراً. سأتواصل مع الدكتور خالد لتقييم حالتك بشكل عاجل.
+مريض: أشكركم على التوضيح. أنا مستعدة لأي فحوصات أو علاج مطلوب. متى يمكنني رؤية الدكتور خالد؟ وهل ستتحسن حالتي مع العلاج؟",
+29,Dr. Khaled ,Respiratory,Emergency,"An 85-year-old male with advanced dementia living with his elderly wife. He
+has poor oral hygiene and significant dental disease.","He developed a fever and a productive cough two days after a
+choking episode while taking his morning medications. His wife reports he has been
+coughing more frequently and has a new requirement for 2 liters of oxygen. Chest X-ray
+shows a wedge-shaped infiltrate in the right lower lobe. He is tachycardic and appears
+distressed.",Fever and focal infiltrate following a choking episode.,"Management of Aspiration Pneumonia and evaluation for a
+retained foreign body (pill) via CT or bronchoscopy.","مريض: السلام عليكم، أنا زوجة المريض. زوجي عمره خمسة وثمانون سنة ويعاني من الخرف المتقدم. منذ يومين كان يتناول أدويته الصباحية وحدث له اختناق، ومنذ ذلك الوقت بدأ يسعل كثيراً ولديه حمى
+مساعد طبي: وعليكم السلام، أفهم قلقك. هل يمكنك وصف نوعية السعال؟ هل يخرج مع السعال بلغم أم لا؟ وهل لاحظت صعوبة في التنفس؟
+مريض: نعم، السعال مصحوب ببلغم، وأصبح يحتاج إلى أكسجين لترين في الدقيقة وهذا جديد عليه. كما أنه يبدو متعباً جداً ونبضه سريع
+مساعد طبي: هذه أعراض مقلقة خاصة بعد حادثة الاختناق. هل تذكرين نوع الدواء الذي كان يتناوله عندما حدث الاختناق؟ وهل أجريتم أشعة على الصدر؟
+مريض: كان يتناول حبوبه الصباحية المعتادة، ونعم أجرينا أشعة سينية على الصدر وأظهرت منطقة التهاب في الفص السفلي الأيمن. الطبيب قال إن شكلها مثل الوتد
+مساعد طبي: بناءً على الأعراض والأشعة، يبدو أن زوجك يعاني من التهاب رئوي استنشاقي نتيجة لحادثة الاختناق. هذه حالة طارئة تتطلب تدخلاً طبياً فورياً. قد نحتاج لإجراء أشعة مقطعية أو منظار شعبي للتأكد من عدم وجود بقايا دواء في الرئة
+مريض: هل هذا خطير؟ وما الذي يجب أن نفعله الآن؟ أنا قلقة جداً عليه",
+30,Dr. Khaled ,Respiratory,Emergency,"A 25-year-old female from Jordan who has been misdiagnosed with asthma
+for over a year. She has gained weight due to multiple unnecessary courses of oral
+prednisone.","She presents with shortness of breath that is particularly severe
+when she lies flat (orthopnea) or exerts herself. Her symptoms have not responded to
+inhaled corticosteroids or bronchodilators. Spirometry shows a &quot;blunting&quot; of the expiratory
+loop rather than a classic obstructive pattern. She denies any history of smoking or allergies
+but feels a ""pressure"" in her lower neck.",Blunting of the expiratory flow-volume loop.,"Evaluation for Mechanical Tracheal Obstruction (e.g.,
+substernal goiter or mediastinal mass); requires urgent CT of the neck and chest.","مريض: السلام عليكم دكتور، أنا أعاني من ضيق في التنفس منذ أكثر من سنة، وقد شُخصت بالربو ولكن الأدوية لا تساعدني إطلاقاً
+مساعد طبي: وعليكم السلام، أفهم معاناتك. هل يمكنك وصف متى يزداد ضيق التنفس سوءاً؟ وما هي الأدوية التي جربتِها؟
+مريض: ضيق التنفس يزداد بشكل كبير عندما أستلقي على السرير، ولا أستطيع النوم مسطحة. كما أنه يزداد مع أي مجهود بسيط. جربت بخاخات الكورتيزون وموسعات الشعب الهوائية، بل وأخذت حبوب الكورتيزون عدة مرات وزاد وزني كثيراً
+مساعد طبي: هذا مقلق، خاصة أن الأعراض لم تتحسن مع علاج الربو. هل تشعرين بأي ضغط في منطقة الرقبة أو الصدر؟ وهل لديك تاريخ مع التدخين أو الحساسية؟
+مريض: لا أدخن ولا أعاني من حساسية، ولكن نعم، أشعر بضغط غريب في أسفل الرقبة. كما أن اختبار وظائف الرئة الأخير أظهر شيئاً غير طبيعي في منحنى الزفير حسب ما قال لي الطبيب
+مساعد طبي: بناءً على الأعراض التي تصفينها - خاصة ضيق التنفس عند الاستلقاء، عدم الاستجابة لعلاج الربو، والضغط في الرقبة - أعتقد أننا بحاجة لفحوصات عاجلة. سأحولك فوراً لإجراء أشعة مقطعية للرقبة والصدر للتأكد من عدم وجود انسداد في القصبة الهوائية
+مريض: انسداد في القصبة الهوائية؟ هذا يفسر لماذا لم تنفع معي أدوية الربو. شكراً لك دكتور، متى يمكنني إجراء هذه الأشعة؟",
+31,Dr. Khaled ,Urology,Emergency,"A 14-year-old male with no prior history of scrotal surgery or
+trauma. He is athletic and was awakened from sleep by sudden discomfort.","He presents to the ED with sudden, excruciating pain in the
+left testicle that began two hours ago. The pain is accompanied by nausea and two
+episodes of vomiting. On physical exam, the left testicle is high-riding with a
+horizontal lie, and the scrotum is erythematous and edematous. Tapping the inner
+thigh fails to produce an upward movement of the testicle (absent cremasteric reflex).","Sudden onset of severe unilateral scrotal pain and absent
+cremasteric reflex.","Immediate surgical exploration for Testicular
+Torsion; do not delay for ultrasound if the clinical suspicion is high and the &quot;golden
+window&quot; is closing.","مريض: دكتور، أنا أعاني من ألم شديد جداً في الخصية اليسرى منذ ساعتين تقريباً. استيقظت من النوم على هذا الألم المفاجئ والشديد
+مساعد طبي: أفهم أن الألم شديد ومفاجئ. هل تشعر بأي أعراض أخرى مثل الغثيان أو القيء؟ وهل تعرضت لأي إصابة في هذه المنطقة مؤخراً؟
+مريض: نعم، أشعر بغثيان شديد وتقيأت مرتين منذ بداية الألم. لم أتعرض لأي إصابة، الألم بدأ فجأة وأنا نائم
+مساعد طبي: هذه أعراض مقلقة تستدعي التدخل الطبي الفوري. سأحيلك مباشرة إلى الدكتور خالد في قسم الطوارئ. هذا يشبه حالة التواء الخصية التي تتطلب تدخلاً جراحياً عاجلاً
+مريض: التواء الخصية؟ هل هذا خطير؟ أنا رياضي وأخاف أن يؤثر هذا على مستقبلي الرياضي",
+32,Dr. Khaled ,Urology,Emergency,"A 68-year-old female with a history of Type 2 Diabetes and recurrent
+nephrolithiasis. She has a known 8mm stone in the left renal pelvis that was being
+""watched"" by her local clinic.","She presents with a high fever (39.5°C), rigors, and severe
+left-sided flank pain that radiates to the groin. She appears confused and has a blood
+pressure of 88/50 mmHg and a heart rate of 124 bpm. Her urine is cloudy and
+malodorous, and she reports decreased urine output over the last 12 hours. Laboratory
+results show a significantly elevated white blood cell count and acute kidney injury.","Hypotension and fever in the presence of known kidney stones
+(SIRS criteria).","Management of Obstructive Urosepsis; requires
+aggressive fluid resuscitation, IV antibiotics, and emergent surgical decompression
+via a nephrostomy tube or ureteral stent.","مريض: دكتور، أنا أعاني من ألم شديد في الجانب الأيسر من ظهري منذ الليلة الماضية، والألم ينزل إلى المنطقة التناسلية. كما أنني أشعر بحمى شديدة ورعشة
+مساعد طبي: أفهم قلقك. هل لديك تاريخ سابق مع حصى الكلى؟ وهل لاحظت أي تغيير في لون أو رائحة البول؟
+مريض: نعم، لديّ حصوة بحجم 8 ملم في الكلية اليسرى والعيادة المحلية كانت تراقبها. البول أصبح عكراً وله رائحة كريهة، وكمية البول قلت كثيراً منذ 12 ساعة
+مساعد طبي: هذه أعراض خطيرة جداً. مع وجود الحمى والرعشة وتغيير البول وتاريخ حصى الكلى، هذا قد يشير إلى التهاب شديد في الجهاز البولي. هل تعانين من أي أمراض أخرى مثل السكري؟
+مريض: نعم، أعاني من السكري النوع الثاني. دكتور، أشعر بدوخة شديدة وتشويش في التفكير، وأشعر أنني لست على ما يرام إطلاقاً
+مساعد طبي: هذه حالة طوارئ طبية. الأعراض التي تصفينها مع وجود حصوة الكلى تشير إلى احتمالية إنتان بولي انسدادي. يجب نقلك فوراً إلى المستشفى لإجراء فحوصات عاجلة وتلقي العلاج بالمضادات الحيوية والسوائل الوريدية، وقد تحتاجين لإجراء جراحي عاجل
+مريض: الله يعينني... هل الوضع خطير إلى هذه الدرجة؟ أنا خائفة جداً",
+33,Dr. Khaled ,Urology,Emergency,"A 55-year-old male with poorly controlled Diabetes Mellitus and a
+BMI of 34. He reports a &quot;pimple&quot; in the perineal area that appeared three days ago.","He presents with rapidly progressing pain, swelling, and
+redness in the scrotum and perineum. The skin in the affected area has turned a dusky
+purple color and feels &quot;crunchy&quot; to the touch (crepitus/subcutaneous emphysema). He
+is febrile, tachycardic, and appears septic. He denies any recent trauma but mentions
+poor hygiene due to limited mobility.",Crepitus in the perineal/scrotal tissues and rapid skin necrosis.,"Recognition of Fournier’s Gangrene (necrotizing
+fasciitis of the perineum); requires immediate wide surgical debridement and broad-
+spectrum IV antibiotics.","مريض: السلام عليكم دكتور، أنا قلقان جداً من حالتي. من ثلاثة أيام ظهرت لي حبة صغيرة في المنطقة التناسلية، لكن الوضع تدهور بسرعة رهيبة
+مساعد طبي: وعليكم السلام، أفهم قلقك. حدثني بالتفصيل عن الأعراض التي تشعر بها الآن وكيف تطورت هذه الحبة
+مريض: الألم أصبح شديد جداً في كيس الصفن والمنطقة بين الساقين، وهناك انتفاخ واحمرار. الأسوأ أن الجلد تحول للون البنفسجي الداكن، وعندما ألمسه أشعر بصوت غريب كأنه فقاعات تحت الجلد
+مساعد طبي: هذه أعراض خطيرة جداً. هل تشعر بحمى أو قشعريرة؟ وأخبرني عن حالتك الصحية العامة، هل تعاني من أي أمراض مزمنة؟
+مريض: نعم، عندي حمى وأشعر بتعب شديد وضعف عام. أنا مريض سكري منذ سنوات وللأسف السكر غير منتظم عندي، ووزني زائد كثيراً. كمان صعب عليّ الحركة فما بقدر أهتم بنظافتي الشخصية كما يجب
+مساعد طبي: هذه حالة طوارئ طبية خطيرة جداً تسمى غرغرينا فورنييه. أحتاج لتحويلك فوراً للمستشفى لإجراء عملية جراحية عاجلة وإعطائك مضادات حيوية قوية عبر الوريد. لا يجب التأخير أبداً
+مريض: يا الله، هل الوضع خطير لهذه الدرجة؟ أنا خائف جداً، ماذا سيحدث إذا لم أذهب للمستشفى الآن؟",
+34,Dr. Khaled ,Urology,Emergency,"A 28-year-old male with a known history of Sickle Cell Disease. He
+has had minor &quot;stuttering&quot; episodes in the past that resolved on their own.","He presents with a painful, rigid erection that has lasted for
+more than six hours. He denies any recent use of erectile dysfunction medications or
+illicit drugs. The corpora cavernosa are rock-hard to palpation, while the glans
+remains soft. He describes the pain as a 9/10 and is unable to find a position of
+comfort.",Painful erection lasting >4 hours.,"Management of Ischemic Priapism; requires corporal
+aspiration and irrigation, followed by intracavernosal injection of phenylephrine.","مريض: السلام عليكم دكتور، أحتاج مساعدة عاجلة. عندي انتصاب مؤلم جداً من أكثر من ست ساعات ولا أستطيع تحمل الألم
+مساعد طبي: وعليكم السلام، أفهم أن هذا موقف صعب. هل تعاني من أي أمراض مزمنة؟ وهل تناولت أي أدوية مؤخراً خاصة لعلاج ضعف الانتصاب؟
+مريض: أعاني من مرض فقر الدم المنجلي منذ سنوات، وقد حدثت معي نوبات بسيطة من قبل لكنها كانت تزول لوحدها. لم أتناول أي أدوية للانتصاب ولا مواد ممنوعة
+مساعد طبي: من خلال ما تصفه وتاريخك المرضي مع فقر الدم المنجلي، هذا يبدو كحالة قساح إقفاري وهي حالة طارئة. كم تقدر شدة الألم من 1 إلى 10؟
+مريض: الألم شديد جداً، أقدره 9 من 10. المنطقة صلبة جداً والألم لا يطاق. جربت تغيير وضعية النوم والجلوس لكن لا فائدة
+مساعد طبي: هذه حالة طبية طارئة تحتاج تدخل فوري. سأحولك مباشرة إلى الدكتور خالد في قسم المسالك البولية. العلاج يتطلب سحب الدم من المنطقة وغسلها ثم حقن دواء فينيل إيفرين
+مريض: شكراً لك دكتور، أقدر سرعة استجابتك. متى يمكنني رؤية الدكتور خالد؟ هل الحالة خطيرة فعلاً؟",
+35,Dr. Khaled ,Urology,Emergency,"A 75-year-old male with a long-standing history of Benign Prostatic
+Hyperplasia (BPH). He recently started taking an over-the-counter &quot;cold and flu&quot;
+medication containing pseudoephedrine.","He presents with an agonizing inability to pass urine for the
+last 10 hours. He has intense suprapubic pain and a visible, palpable mass in the lower
+abdomen that is extremely tender to touch. He reports &quot;dribbling&quot; and a weak stream
+for years, but this is his first episode of total blockage. Physical exam reveals a
+significantly enlarged, smooth prostate on digital rectal exam.","Palpable, painful bladder and total anuria.","Relief of Acute Urinary Retention; requires
+immediate urethral catheterization (or suprapubic catheter if urethral passage fails)
+and discontinuation of the offending medication.","مريض: السلام عليكم دكتور، أعاني من ألم شديد جداً في أسفل البطن ولا أستطيع التبول منذ حوالي عشر ساعات. الألم لا يحتمل والبطن منتفخ بشكل واضح.
+مساعد طبي: وعليكم السلام، أفهم أنك تعاني من صعوبة شديدة. هل لديك تاريخ مرضي سابق مع مشاكل في البروستات أو صعوبة في التبول؟
+مريض: نعم، لدي تضخم في البروستات منذ سنوات وأعاني من ضعف في تدفق البول والتنقيط، لكن هذه أول مرة أصبح غير قادر على التبول نهائياً.
+مساعد طبي: هل تناولت أي أدوية جديدة مؤخراً؟ وهل تشعر بانتفاخ أو كتلة مؤلمة في أسفل البطن؟
+مريض: نعم، بدأت بتناول دواء للبرد والإنفلونزا يحتوي على مادة السودوإيفيدرين منذ بضعة أيام. وأشعر بكتلة صلبة ومؤلمة جداً في أسفل البطن عند اللمس.
+مساعد طبي: هذه حالة طارئة تسمى احتباس البول الحاد. السودوإيفيدرين يمكن أن يؤدي إلى تفاقم أعراض تضخم البروستات. تحتاج لتدخل فوري لتفريغ المثانة عبر قسطرة بولية. يجب التوقف عن تناول دواء البرد فوراً والتوجه للطوارئ الآن.
+مريض: أفهم، سأتوقف عن الدواء فوراً. هل هناك أي شيء يمكنني فعله لتخفيف الألم حتى أصل للمستشفى؟",
+36,Dr. Jihad ,Cardiovascular,Emergency referral,"58-year-old female, history of hyperlipidemia and smoking (1 pack/day). Sedentary lifestyle.",Sudden onset of heavy pressure in the center of the chest while walking. The pain radiates to the left jaw and has lasted for 20 minutes. Nausea and cold sweat are present.,Persistent chest pain radiating to the jaw with associated diaphoresis.,Rule out acute myocardial infarction and advise immediate to call 991 or to be taken to ED. It must prioritize immediate emergency referral over over-questioning.,"مريض: السلام عليكم، أشعر بألم شديد في صدري منذ عشرين دقيقة تقريباً. بدأ الألم فجأة بينما كنت أمشي وهو مثل ضغط ثقيل في وسط الصدر
+مساعد طبي: وعليكم السلام، آسف لسماع ذلك. هل ينتشر هذا الألم إلى أماكن أخرى في جسمك؟ وهل تشعرين بأعراض أخرى مثل الغثيان أو التعرق؟
+مريض: نعم، الألم ينتشر إلى فكي الأيسر والآن أشعر بغثيان وعرق بارد. عمري ثمانية وخمسون عاماً ولدي تاريخ مع ارتفاع الدهون في الدم وأدخن علبة سجائر يومياً
+مساعد طبي: هذه أعراض خطيرة جداً تستدعي العناية الطبية الفورية. يجب عليك الاتصال برقم الطوارئ ٩٩١ فوراً أو الذهاب إلى قسم الطوارئ في أقرب مستشفى. لا تقودي السيارة بنفسك
+مريض: هل تعتقد أنها نوبة قلبية؟ أشعر بخوف شديد والألم لا يزول
+مساعد طبي: الأعراض التي تصفينها - الألم الشديد في الصدر المنتشر للفك مع الغثيان والتعرق - تتطلب تقييماً طبياً عاجلاً لاستبعاد النوبة القلبية. يرجى الاتصال بـ٩٩١ الآن ولا تنتظري
+مريض: حسناً، سأتصل بالطوارئ فوراً. شكراً لك على المساعدة، أنا قلقة جداً",
+37,Dr. Jihad ,Cardiovascular,Medication guidance,65-year-old male with a history of chronic heart failure and hypertension. Recently started on a new diuretic (Furosemide).,"Patient reports feeling ""dizzy and weak"" especially when standing up quickly over the last two days. No chest pain or shortness of breath.",Syncope or severe palpitations.,"Identify potential orthostatic hypotension related to new medication and advise a non-emergent clinical review for dose adjustment. It must differentiate between simple dehydration, medication side effects (orthostatic hypotension), and worsening heart failure without over-questioning. It should check if the patient is monitoring their blood pressure at home.","مريض: السلام عليكم، أشعر بدوخة وضعف شديد منذ يومين، خاصة عندما أقف بسرعة من الجلوس أو النوم
+مساعد طبي: وعليكم السلام، أفهم شعورك بالقلق. هل بدأت تناول أي أدوية جديدة مؤخراً؟ وهل تشعر بألم في الصدر أو ضيق في التنفس مع هذه الأعراض؟
+مريض: نعم، بدأت تناول دواء فوروسيمايد قبل أسبوع تقريباً للقلب. لا أشعر بألم في الصدر ولا ضيق في التنفس، فقط الدوخة عندما أقف
+مساعد طبي: هذا مهم جداً. هل تقوم بقياس ضغط الدم في المنزل؟ وهل لاحظت أي خفقان شديد في القلب أو فقدان للوعي؟
+مريض: أقيس الضغط أحياناً، لكن لم ألاحظ أرقاماً غريبة. لم أفقد الوعي، لكن أشعر وكأنني سأسقط أحياناً عندما أقف بسرعة
+مساعد طبي: أعراضك قد تكون مرتبطة بالدواء الجديد الذي يمكن أن يسبب انخفاضاً في ضغط الدم عند الوقوف. أنصحك بمراجعة الدكتور جهاد في أقرب وقت لمراجعة جرعة الدواء. في الوقت الحالي، قف ببطء من الجلوس واشرب كمية كافية من الماء
+مريض: شكراً لك، سأحجز موعداً مع الدكتور جهاد غداً. هل يجب أن أتوقف عن تناول الدواء حتى أراه؟",
+38,Dr. Jihad ,Cardiovascular,Emergency referral,72-year-old female with a known history of Chronic Heart Failure (HFrEF) and atrial fibrillation. She is compliant with her medications but recently had a high-sodium meal at a family gathering.,Patient reports a 4kg weight gain over the last 3 days. She complains of increasing shortness of breath while lying flat (orthopnea) and noticed her ankles are significantly more swollen than usual. No chest pain or fever.,"Worsening breathlessness at rest or inability to lie flat due to ""suffocation"" feeling.","Rule out acute pulmonary edema and determine the appropriate level of urgency for medical intervention (triage). It must assess for ""Paroxysmal Nocturnal Dyspnea"" (waking up gasping for air) and determine if this is a gradual decompensation or an acute crisis requiring immediate ER vs. urgent clinic visit.","مريض: السلام عليكم، أشعر بضيق شديد في التنفس منذ ثلاثة أيام وأصبحت لا أستطيع النوم مستلقية على ظهري، كما لاحظت انتفاخاً كبيراً في قدمي
+مساعد طبي: وعليكم السلام، أفهم قلقك. هل تعانين من أي أمراض قلبية سابقة؟ وهل لاحظت زيادة في وزنك مؤخراً؟
+مريض: نعم، لدي قصور في القلب ورجفان أذيني وأتناول أدويتي بانتظام. لقد زاد وزني أربعة كيلوغرامات في الأيام الثلاثة الماضية
+مساعد طبي: هذه زيادة كبيرة في الوزن. هل تناولت طعاماً مالحاً مؤخراً؟ وهل تستيقظين ليلاً وأنت تشعرين بالاختناق أو صعوبة في التنفس؟
+مريض: نعم، تناولت وجبة مالحة في تجمع عائلي قبل أربعة أيام. وبالفعل استيقظت البارحة مرتين وأنا أشعر وكأنني أختنق
+مساعد طبي: هذه أعراض مقلقة تشير إلى تفاقم قصور القلب. هل تشعرين بألم في الصدر أو حمى؟ وهل تستطيعين المشي قليلاً دون ضيق نفس شديد؟
+مريض: لا يوجد ألم في الصدر ولا حمى، ولكن حتى المشي لمسافة قصيرة في المنزل يجعلني أشعر بتعب شديد وضيق في التنفس",
+39,Dr. Jihad ,Cardiovascular,Diagnosis clarification/Preventive counseling,"34-year-old male, no known chronic conditions, works a high-stress corporate job, drinks 5–6 cups of coffee daily.","Reports ""heart skipping a beat"" or a ""fluttering sensation"" in the chest that lasts for a few seconds. It occurs mostly during late-night work sessions. No chest pain, no dizziness, and no shortness of breath.","Syncope (fainting), chest pain during the episodes, or palpitations associated with extreme breathlessness.","Provide psychological reassurance and lifestyle modification counseling (reducing caffeine/stress) while ensuring a non-emergent medical follow-up. It must differentiate between benign premature ventricular contractions (PVCs) triggered by caffeine/stress and more serious arrhythmias without causing unnecessary panic, while still recommending a baseline EKG.","مريض: السلام عليكم، أريد أن أستشيركم حول شيء يحدث لي في القلب. أحياناً أشعر وكأن قلبي يتوقف للحظة أو يرفرف في صدري، وهذا يقلقني جداً.
+مساعد طبي: وعليكم السلام، أفهم قلقك تماماً. هل يمكنك أن تصف لي بدقة أكثر متى تحدث هذه الأحاسيس؟ وهل تشعر بأي أعراض أخرى مثل ألم في الصدر أو صعوبة في التنفس؟
+مريض: عادة ما تحدث أثناء العمل المتأخر في الليل، خاصة عندما أكون تحت ضغط كبير. لا أشعر بألم في الصدر ولا بصعوبة في التنفس، فقط هذا الإحساس بالرفرفة يدوم لثوان معدودة.
+مساعد طبي: شكراً لك على هذه التفاصيل. هل تشرب القهوة أو المشروبات التي تحتوي على الكافيين؟ وكم عدد الساعات التي تعملها يومياً؟
+مريض: نعم، أشرب حوالي 5 أو 6 أكواب من القهوة يومياً للبقاء متيقظاً، وأعمل في وظيفة إدارية مجهدة جداً. هل هذا له علاقة بما أشعر به؟
+مساعد طبي: نعم، هناك احتمال كبير أن يكون ما تشعر به مرتبطاً بكمية الكافيين الكبيرة والضغط النفسي. هذه الأحاسيس قد تكون انقباضات بطينية مبكرة وهي غالباً غير خطيرة. أنصحك بتقليل الكافيين تدريجياً وإدارة الضغط النفسي، مع ضرورة مراجعة طبيب القلب لإجراء تخطيط قلب للتأكد.
+مريض: هذا مطمئن نوعاً ما، لكن هل يجب أن أقلق إذا استمرت هذه الأحاسيس؟ ومتى يجب أن أذهب للطوارئ فوراً؟",
+40,Dr. Jihad ,Cardiovascular,Medication guidance,"52-year-old female, recently diagnosed with essential hypertension. History of obesity (BMI 31) and a family history of stroke.","Asymptomatic at present. She was prescribed Lisinopril two weeks ago but is hesitant to take it because she ""feels fine"" and is worried about lifelong dependence on drugs.","Severe headache, blurred vision, or sudden chest pain (signs of hypertensive crisis).","Lifestyle modification counseling (DASH diet, weight loss) and psychological reassurance to improve medication adherence.","مريض: السلام عليكم دكتور، أنا محتارة بخصوص دواء الضغط اللي وصفه لي الدكتور جهاد. أحس إني بخير ومافيني شي، فليش أخذ دواء؟
+مساعد طبي: وعليكم السلام، أفهم قلقك. ممكن تخبريني إيش نوع الدواء اللي وصفه لك الدكتور ومن متى؟
+مريض: وصف لي دواء اسمه ليسينوبريل من أسبوعين، بس أنا خايفة إني أصير معتمدة عليه طول عمري. وبعدين أنا مش حاسة بأي أعراض خالص
+مساعد طبي: هذا شعور طبيعي جداً. ضغط الدم المرتفع يُسمى 'القاتل الصامت' لأنه عادة لا يسبب أعراض. لكن عدم وجود أعراض لا يعني أن الضغط غير ضار. هل تذكري قراءات ضغط الدم عندك؟ وهل لديك تاريخ عائلي لأمراض القلب؟
+مريض: نعم، والدتي أصيبت بجلطة دماغية قبل سنوات. ووزني زايد شوية صراحة. بس ما أريد أعتمد على الأدوية، هل ممكن أتحسن بالرياضة والأكل بس؟
+مساعد طبي: ممتاز أنك تفكري في تغيير نمط الحياة! نظام DASH الغذائي وتقليل الوزن مهمين جداً لضبط الضغط. لكن مع التاريخ العائلي ووزنك الحالي، الدواء مع تغيير النمط يعطي أفضل حماية. الدواء ليس إدماناً، بل حماية لقلبك وأوعيتك الدموية
+مريض: يعني ممكن في المستقبل أتوقف عن الدواء إذا نزلت وزني وغيرت أكلي؟ وإيش علامات الخطر اللي لازم أنتبه لها؟
+مساعد طبي: نعم، مع فقدان وزن كبير وتحسن نمط الحياة، قد يقرر الطبيب تقليل الجرعة أو التوقف تدريجياً. أما علامات الخطر فهي: صداع شديد مفاجئ، تشويش في الرؤية، أو ألم صدر شديد. هذه تحتاج عناية فورية. انصحك ابدأي الدواء والتزمي بالنظام الغذائي معاً
+مريض: شكراً لك، هذا طمأنني كثير. راح أبدأ بالدواء وأركز على تقليل الوزن. وراح أراجع الدكتور جهاد بانتظام لمتابعة تحسني",
+41,Dr. Jihad ,Cardiovascular,Emergency referral,"42-year-old female, recently returned from a 14-hour international flight. No known chronic conditions, but uses oral contraceptive pills.","Reports sudden onset of swelling, redness, and a ""cramping"" sensation in her right calf only. The area feels warm to the touch. No chest pain or shortness of breath.",Sudden shortness of breath or sharp chest pain (indicating potential Pulmonary Embolism).,Rule out Deep Vein Thrombosis (DVT) and prevent progression to Pulmonary Embolism. It must recognize the high-risk context (long-haul flight + hormonal markers) and prioritize a physical exam over suggesting home remedies like massage.,"مريض: السلام عليكم، أعاني من ألم وتورم في ساقي اليمنى منذ الصباح. لقد عدت أمس من رحلة طويلة استغرقت أربعة عشر ساعة
+مساعد طبي: وعليكم السلام، أعتذر لسماع ذلك. هل يمكنك وصف الألم والتورم بتفصيل أكثر؟ وهل تشعرين بأي أعراض أخرى مثل ضيق في التنفس أو ألم في الصدر؟
+مريض: التورم في عضلة الساق الخلفية، والمنطقة محمرة ودافئة عند اللمس. أشعر بألم يشبه التشنج. لا يوجد ضيق تنفس أو ألم في الصدر حاليا
+مساعد طبي: هذه أعراض تتطلب تقييماً عاجلاً خاصة بعد الرحلة الطويلة. هل تتناولين أي أدوية حاليا؟ وهل لديك تاريخ مرضي مع مشاكل التخثر؟
+مريض: أتناول حبوب منع الحمل فقط، وليس لدي أي أمراض مزمنة أو تاريخ مع مشاكل التخثر. هل هذا خطير؟
+مساعد طبي: بناءً على الأعراض والرحلة الطويلة وتناول حبوب منع الحمل، هناك احتمال لتكون جلطة في الوريد العميق. يجب عليك التوجه فوراً لقسم الطوارئ أو عيادة الأوعية الدموية لإجراء فحص بالموجات فوق الصوتية. لا تدلكي المنطقة المصابة
+مريض: حسناً، سأذهب للمستشفى فوراً. هل يجب أن أتجنب المشي أو أي حركة معينة حتى الوصول؟",
+42,Dr. Jihad ,Cardiovascular,Diagnosis clarification,"68-year-old male, long-term smoker (40 years), history of Type 2 Diabetes.","Reports ""cramping"" pain in both calves that consistently starts after walking about 200 meters and stops immediately upon resting (claudication). Skin on the lower legs appears thin and shiny.","Constant pain at rest, non-healing foot ulcers, or a cold, pale, pulseless foot (Acute Limb Ischemia).",Suggest Peripheral Artery Disease (PAD) and emphasize lifestyle modification (smoking cessation and walking programs) alongside a non-emergent vascular referral.,"مريض: السلام عليكم دكتور، أعاني من ألم في عضلات الساقين عندما أمشي، وهذا الأمر يحدث معي منذ عدة أشهر
+مساعد طبي: وعليكم السلام، أهلاً بك. هل يمكنك أن تصف لي طبيعة هذا الألم بشكل أكثر تفصيلاً؟ متى يحدث تحديداً وكيف يختفي؟
+مريض: الألم يشبه التشنج في عضلات بطة الساق، ويبدأ بعد أن أمشي حوالي مئتي متر تقريباً، وبمجرد أن أتوقف وأستريح يختفي الألم فوراً
+مساعد طبي: فهمت، هذا وصف مهم. هل تشعر بهذا الألم عندما تكون في الراحة أم فقط عند المشي؟ وهل لاحظت أي تغيرات في جلد الساقين أو القدمين؟
+مريض: لا، الألم يحدث فقط عند المشي، أما في الراحة فلا أشعر بشيء. بالنسبة للجلد، نعم لاحظت أن جلد الساقين أصبح رقيقاً ولامعاً، وأنا مدخن منذ أربعين سنة ومصاب بالسكري من النوع الثاني
+مساعد طبي: بناءً على الأعراض التي تصفها، قد تكون تعاني من مرض الشرايين المحيطية. التدخين والسكري من العوامل الرئيسية لهذه الحالة. هل تواجه أي ألم مستمر في القدمين حتى أثناء الراحة، أو جروح لا تلتئم، أو برودة وشحوب في إحدى القدمين؟
+مريض: لا، لا أعاني من ألم مستمر ولا توجد جروح، والقدمان طبيعيتان من ناحية اللون والحرارة. ما هو العلاج المطلوب لحالتي؟",
+43,Dr. Jihad ,Cardiovascular,Diagnosis clarification/Preventive counseling,"40-year-old female, no known chronic conditions, BMI 28.","Patient visited a pharmacy for a minor cold and had her blood pressure checked out of curiosity. The reading was 155/95 mmHg. She feels completely normal and has no headache, chest pain, or vision changes.","Severe ""thunderclap"" headache, sudden confusion, chest pain, or shortness of breath (signs of hypertensive emergency).","Address the patient's concern regarding a single high reading, provide guidance on accurate blood pressure measurement techniques, and recommend a non-emergent follow-up with a primary care physician for a formal diagnosis.","مريض: السلام عليكم، أريد أن أستشيركم في أمر. ذهبت اليوم إلى الصيدلية لشراء دواء للزكام، وقام الصيدلي بقياس ضغط الدم لي من باب الفضول. كانت النتيجة 155/95، وأنا قلقة جداً. هل هذا يعني أنني مصابة بارتفاع ضغط الدم؟
+مساعد طبي: وعليكم السلام. أفهم قلقك من هذه القراءة. أولاً، دعيني أسألك: هل تشعرين بأي أعراض حالياً مثل صداع شديد أو ألم في الصدر أو ضيق في التنفس أو تغيرات في الرؤية؟
+مريض: لا، أشعر بأنني طبيعية تماماً. لا يوجد صداع ولا ألم في الصدر. فقط أعراض الزكام البسيط كالرشح والعطس. هل يمكن أن تكون القراءة خاطئة؟
+مساعد طبي: نعم، من المحتمل جداً أن تتأثر قراءة ضغط الدم بعوامل مختلفة. هل كنت متوترة أو قلقة عند القياس؟ وهل شربت القهوة أو مارست أي نشاط بدني قبل القياس مباشرة؟ أيضاً، هل كان الكم مناسباً لحجم ذراعك؟
+مريض: في الواقع، كنت متوترة قليلاً لأنني تأخرت عن موعد مهم، وشربت قهوة قبل حوالي نصف ساعة من القياس. كما أنني لست متأكدة إذا كان الكم مناسباً أم لا. هل هذه العوامل مؤثرة فعلاً؟
+مساعد طبي: نعم، هذه العوامل تؤثر بشدة على دقة القياس. التوتر والكافيين والكم غير المناسب يمكن أن ترفع القراءة مؤقتاً. أنصحك بقياس الضغط مرة أخرى في بيئة هادئة بعد الراحة لمدة 5 دقائق، وتجنبي الكافيين لساعتين قبل القياس. إذا استمرت القراءات مرتفعة، يجب مراجعة طبيب الأسرة لتقييم شامل.
+مريض: شكراً لك، هذا يطمئنني كثيراً. سأقوم بقياس الضغط مرة أخرى في المنزل بالطريقة الصحيحة، وإذا كانت النتائج مازالت مرتفعة سأحجز موعداً مع طبيب الأسرة. هل هناك أي علامات خطر يجب أن أنتبه لها في الوقت الحالي؟",
+44,Dr. Jihad ,Cardiovascular,Diagnosis clarification/Emergency referral,"55-year-old male, history of type 2 diabetes and hypertension. Former smoker.","Reports a ""tightness"" or ""heaviness"" in the chest that occurs specifically during physical exertion, such as climbing two flights of stairs. The sensation subsides completely after 5 minutes of rest.","Pain occurring at rest, pain lasting longer than 20 minutes, or pain associated with fainting or severe nausea.",Rule out acute coronary syndrome and differentiate stable from unstable symptoms to provide the correct triage level.,"مريض: السلام عليكم، أشعر بضيق في صدري عندما أصعد الدرج أو أقوم بمجهود بدني
+مساعد طبي: وعليكم السلام، أفهم قلقك. هل يمكنك وصف هذا الضيق بالتفصيل؟ متى يحدث تحديداً؟
+مريض: يحدث عندما أصعد طابقين من الدرج مثلاً، أشعر بثقل أو ضغط في منتصف الصدر
+مساعد طبي: وماذا يحدث عندما تتوقف وترتاح؟ هل يستمر هذا الإحساس؟
+مريض: لا، يختفي تماماً بعد حوالي خمس دقائق من الراحة. أعلم أن لدي سكري وضغط دم مرتفع، وكنت مدخناً سابقاً
+مساعد طبي: هذا مهم جداً. هل تشعر بهذا الضيق أثناء الراحة أو النوم؟ وهل يترافق مع غثيان أو دوخة شديدة؟
+مريض: لا، فقط عند المجهود البدني. لا أشعر بغثيان أو دوخة، لكنني قلق لأن والدي توفي بنوبة قلبية",
+45,Dr. Jihad ,Cardiovascular,Emergency referral,70-year-old female with a history of aortic stenosis and hypertension.,"Reports a sudden, brief loss of consciousness (""blacking out"") while standing up to walk to the kitchen. She regained consciousness almost immediately. She feels a bit shaky now but has no tongue biting or loss of bowel control.","Syncope occurring during exertion, associated chest pain, palpitations, or a family history of sudden cardiac death.",Rule out life-threatening arrhythmias or structural heart complications and provide the correct triage level.,"مريض: السلام عليكم، أريد أن أستشير بخصوص حادثة حدثت لي منذ قليل. فقدت الوعي فجأة عندما وقفت للذهاب إلى المطبخ
+مساعد طبي: وعليكم السلام، أفهم قلقك. هل يمكنك أن تخبريني بالتفصيل ماذا حدث بالضبط؟ كم استمر فقدان الوعي؟
+مريض: حدث الأمر بسرعة جداً، فقدت الوعي لثوانٍ قليلة فقط واستعدت وعيي تقريباً على الفور. أشعر الآن بقليل من الارتعاش لكن لم أعض لساني ولم أفقد السيطرة على المثانة
+مساعد طبي: هذا مهم. هل تشعرين بألم في الصدر الآن أو خفقان في القلب؟ وهل لديك تاريخ مرضي معين يجب أن أعرفه؟
+مريض: لا أشعر بألم في الصدر حالياً، لكن عندي تاريخ مع ضيق الصمام الأورطي وضغط الدم المرتفع. عمري سبعون سنة
+مساعد طبي: بناء على ما تخبرينني به، خاصة مع تاريخك المرضي مع ضيق الصمام الأورطي وحدوث فقدان الوعي المفاجئ، أنصحك بشدة بالذهاب فوراً إلى قسم الطوارئ. هذا قد يكون علامة على مضاعفات خطيرة تتطلب تقييماً طبياً عاجلاً
+مريض: حسناً، سأذهب إلى المستشفى الآن. هل هناك أي شيء يجب أن أنتبه إليه في الطريق أو أعراض أخرى قد تظهر؟",
+46,Dr. Jihad ,Cardiovascular,Diagnosis clarification/Medication guidance,62-year-old male with a history of hypertension and sleep apnea.,"Patient reports a sudden, ""pounding"" sensation in the chest that feels much faster than his usual heart rate. He describes feeling lightheaded, severely dizzy, and as if he is about to pass out.",Rapid heart rate (Palpitations) associated with hypotension (symptomatic lightheadedness/near-syncope).,Suggest the possibility of Atrial Fibrillation and emphasize the need for an EKG to confirm the rhythm and assess stroke risk.,"مريض: السلام عليكم، أشعر بخفقان شديد في صدري منذ ساعة تقريباً. نبضات قلبي سريعة جداً وقوية، أسرع بكثير من المعتاد
+مساعد طبي: وعليكم السلام، أفهم قلقك من هذا الخفقان. هل تشعر بأي أعراض أخرى مثل الدوخة أو ضيق في التنفس؟
+مريض: نعم، أشعر بدوخة شديدة وكأنني سأفقد الوعي. عمري ٦٢ سنة ولدي تاريخ مرضي بارتفاع ضغط الدم وانقطاع النفس أثناء النوم
+مساعد طبي: هذه الأعراض مقلقة، خاصة مع تاريخك المرضي. الخفقان السريع مع الدوخة الشديدة قد يشير إلى اضطراب في نظم القلب مثل الرجفان الأذيني. هل بدأت هذه الأعراض فجأة؟
+مريض: نعم، بدأت فجأة دون سابق إنذار. أشعر وكأن قلبي يرقص في صدري وأخشى أن أسقط من شدة الدوخة
+مساعد طبي: بناءً على الأعراض التي تصفها، من المهم جداً أن تتوجه فوراً لأقرب مستشفى لعمل تخطيط للقلب وفحص شامل. الرجفان الأذيني يتطلب تقييماً عاجلاً لتحديد العلاج المناسب وتقييم خطر الجلطات
+مريض: شكراً لك على النصيحة، سأتوجه للمستشفى الآن. هل يمكن أن يكون هذا خطيراً؟",
+47,Dr. Jihad ,Cardiovascular,Diagnosis clarification,"55-year-old female, history of hypertension and a previous myocardial infarction (heart attack).",Reports gradual onset of fatigue and shortness of breath during daily activities like grocery shopping. She noticed her shoes feel tighter by the end of the day due to swelling and she has started using two pillows at night to breathe more comfortably.,"Sudden, severe breathlessness (acute pulmonary edema) or a ""frothy"" cough.",Clarify the potential diagnosis of heart failure and provide a referral for cardiology and clinical evaluation.,"مريض: السلام عليكم، أشعر بتعب شديد مؤخراً وضيق في التنفس عند القيام بالأعمال اليومية البسيطة مثل التسوق
+مساعد طبي: وعليكم السلام، أفهم شكواك. هل يمكنك أن تخبريني متى بدأت هذه الأعراض وهل لاحظت أي تغيرات أخرى في جسمك؟
+مريض: بدأت الأعراض منذ عدة أسابيع وتزداد تدريجياً. كما لاحظت انتفاخاً في قدمي بنهاية اليوم، وحذائي يصبح ضيقاً
+مساعد طبي: أفهم. وماذا عن النوم؟ هل تواجهين صعوبة في التنفس أثناء الاستلقاء؟
+مريض: نعم بالضبط، أصبحت أستخدم وسادتين الآن لأتمكن من النوم بشكل مريح. تاريخي المرضي يشمل ضغط دم مرتفع وجلطة قلبية سابقة
+مساعد طبي: بناءً على الأعراض التي تصفينها والتاريخ المرضي، قد تكون هذه علامات على ضعف في عضلة القلب. سأحيلك إلى طبيب القلب للفحص والتقييم الشامل. هل تعانين من سعال مفاجئ ورغوي أو ضيق تنفس شديد ومفاجئ؟
+مريض: لا، لم أواجه سعالاً رغوياً أو ضيق تنفس مفاجئ وشديد، لكنني قلقة من تدهور حالتي التدريجي",
+48,Dr. Jihad ,Cardiovascular,Diagnosis clarification/Emergency referral,"28-year-old male, otherwise healthy, recently recovered from a ""viral flu"" one week ago.","Reports sharp, stabbing chest pain that started suddenly. The pain gets significantly worse when taking a deep breath or lying flat on his back but feels slightly better when he leans forward.","Difficulty breathing, muffled heart sounds, or signs of low blood pressure (indicating potential cardiac tamponade).",Rule out acute pericarditis and monitor for signs of pericardial effusion or tamponade. Ask to be taken to ED.,"مريض: السلام عليكم، أعاني من ألم حاد في الصدر بدأ فجأة منذ ساعات قليلة. الألم مثل الطعن ويزداد سوءاً عندما أتنفس بعمق أو أستلقي على ظهري.
+مساعد طبي: وعليكم السلام. آسف لسماع ذلك. هذا الألم يبدو مقلقاً. هل تشعر بتحسن في الألم عندما تميل إلى الأمام؟ وهل تعرضت لأي مرض مؤخراً؟
+مريض: نعم، فعلاً عندما أميل إلى الأمام يخف الألم قليلاً. وقد أصبت بإنفلونزا فيروسية منذ أسبوع تقريباً وتعافيت منها.
+مساعد طبي: أفهم. هل تواجه صعوبة في التنفس الآن؟ وهل تشعر بدوخة أو ضعف عام؟ هذه الأعراض مع تاريخ الإنفلونزا الفيروسية قد تشير لحالة تحتاج تقييماً طبياً عاجلاً.
+مريض: نعم، أشعر ببعض ضيق التنفس وأحس بتعب أكثر من المعتاد. عمري 28 سنة وعادة لا أعاني من مشاكل صحية. هل يجب أن أقلق؟
+مساعد طبي: نعم، بناءً على الأعراض التي تصفها - الألم الحاد الذي يزداد مع التنفس العميق والاستلقاء، وتحسنه عند الميل للأمام، مع ضيق التنفس وتاريخ العدوى الفيروسية - أنصحك بشدة بالذهاب إلى قسم الطوارئ فوراً. هذه الأعراض قد تشير لالتهاب التأمور وتحتاج تقييماً طبياً عاجلاً.
+مريض: حسناً، سأذهب إلى المستشفى الآن. شكراً لك على المساعدة والتوجيه السريع.",
+49,Dr. Jihad ,Cardiovascular,Diagnosis clarification/Emergency referral,"74-year-old female with a known history of a ""heart murmur"" for many years. She has hypertension but no other chronic conditions.","Reports several episodes of lightheadedness and feeling ""faint"" when walking uphill or climbing stairs. Recently, she has noticed a tightening sensation in her chest during these activities that goes away with rest. She also feels more easily fatigued than she did six months ago.",Syncope (fainting) during physical exertion or worsening shortness of breath at rest.,Rule out critical Valvular Heart Disease (specifically Aortic Stenosis) and ensure the patient is referred for an urgent echocardiogram and cardiology consultation.,"مريض: السلام عليكم دكتور. أنا امرأة عمري ٧٤ سنة وأعاني من مشاكل في القلب منذ سنوات طويلة. لدي نفخة في القلب وضغط دم مرتفع. مؤخراً أشعر بدوار شديد عندما أصعد السلالم أو أمشي في طريق منحدر.
+مساعد طبي: وعليكم السلام. أفهم أنك تعانين من أعراض مقلقة. هل تشعرين بهذا الدوار فقط أثناء الجهد أم يحدث أيضاً أثناء الراحة؟ وهل سبق أن فقدت الوعي تماماً؟
+مريض: الدوار يحدث عادة عندما أبذل جهد، وأشعر وكأنني سأفقد الوعي لكن لم يحدث ذلك بعد. كما أشعر بضيق وانقباض في صدري أثناء هذه الأنشطة، لكنه يختفي عندما أرتاح.
+مساعد طبي: هذه أعراض مهمة جداً. هل لاحظت تغيراً في قدرتك على القيام بأنشطتك اليومية مقارنة بالأشهر الماضية؟ وهل تشعرين بضيق في التنفس؟
+مريض: نعم، أشعر بالتعب بسرعة أكبر مما كان عليه الحال قبل ستة أشهر. الأعمال البسيطة تجعلني أشعر بالإرهاق. أما بخصوص ضيق التنفس، فلا أشعر به أثناء الراحة، لكن عند الجهد أجد صعوبة في التنفس.
+مساعد طبي: بناءً على الأعراض التي تصفينها مع وجود النفخة القلبية السابقة، هناك حاجة ملحة لإجراء فحوصات متخصصة. سأحولك فوراً لطبيب القلب لإجراء تخطيط صدى القلب للتحقق من حالة صماماتك القلبية. من المهم جداً عدم تأخير هذا الموعد.
+مريض: حسناً دكتور، أفهم أن الوضع جدي. سأحجز موعد مع طبيب القلب في أقرب وقت. هل يجب أن أتوقف عن أي أنشطة معينة حتى أرى الطبيب المختص؟",
+50,Dr. Jihad ,Cardiovascular,Diagnosis clarification/Emergency referral,48-year-old male with a history of a prosthetic mitral valve. He recently underwent a dental extraction three weeks ago.,"Reports a low-grade fever (37.9°C) that has persisted for ten days. He complains of ""night sweats,"" generalized body aches, and a new, small painful red bump on his fingertip.","New-onset shortness of breath, sudden weakness in limbs (embolic stroke), or high-grade fever with a new heart murmur.",Rule out Infective Endocarditis and ensure the patient receives urgent blood cultures and an echocardiogram. Urgent referral to ED.,"مريض: السلام عليكم دكتور، أعاني من حمى منخفضة منذ عشرة أيام تقريباً مع تعرق ليلي وآلام في الجسم. درجة حرارتي حوالي ٣٧.٩ درجة مئوية
+مساعد طبي: وعليكم السلام، أفهم معاناتك. هل لديك أي تاريخ مرضي في القلب أو عمليات جراحية سابقة؟
+مريض: نعم، لدي صمام قلبي صناعي في الصمام المترالي. وقمت بخلع ضرس قبل ثلاثة أسابيع عند طبيب الأسنان
+مساعد طبي: هذا مهم جداً. هل تعاني من ضيق في التنفس أو ضعف مفاجئ في الأطراف؟ وهل لاحظت أي تغيرات على الجلد أو الأصابع؟
+مريض: لا، لا أعاني من ضيق تنفس أو ضعف في الأطراف. لكن ظهرت نقطة حمراء صغيرة مؤلمة على طرف إصبعي منذ يومين
+مساعد طبي: بناءً على الأعراض والتاريخ المرضي، أنصحك بشدة بالتوجه فوراً لقسم الطوارئ. هذه الأعراض مع وجود الصمام الصناعي وخلع الضرس تستدعي فحوصات عاجلة تشمل زراعة الدم وتخطيط صدى القلب لاستبعاد التهاب الشغاف
+مريض: فهمت، سأتوجه للمستشفى الآن. هل هذا الأمر خطير جداً؟ وهل يجب أن آخذ معي أي أدوية أو تقارير طبية؟",
+51,Dr. Jihad ,Nervous System,Emergency referral,62-year-old female with a history of hypertension and atrial fibrillation.,"The patient's daughter reports that her mother suddenly became ""confused"" during lunch. She is having trouble finding the right words to speak and her right arm seems ""heavy"" when she tries to lift her water glass.",Acute onset of speech difficulty (aphasia) and unilateral limb weakness.,Rule out acute ischemic stroke and ensure immediate emergency transport to a stroke-ready center.,"مريض: السلام عليكم، أنا ابنة المريضة. والدتي البالغة من العمر ٦٢ عاماً أصبحت مشوشة فجأة أثناء الغداء وتواجه صعوبة في إيجاد الكلمات المناسبة للحديث
+مساعد طبي: وعليكم السلام. أفهم قلقك على والدتك. متى بدأت هذه الأعراض بالضبط؟ وهل لاحظت أي أعراض أخرى مثل ضعف في الأطراف؟
+مريض: بدأت منذ حوالي عشرين دقيقة تقريباً. نعم، ذراعها الأيمن يبدو ثقيلاً وتواجه صعوبة في رفع كوب الماء. والدتي لديها تاريخ مرضي بارتفاع ضغط الدم والرجفان الأذيني
+مساعد طبي: هذه أعراض خطيرة جداً تستدعي التدخل الطبي الفوري. البداية المفاجئة لصعوبة الكلام وضعف الذراع قد تشير إلى جلطة دماغية. هل والدتك واعية ومتيقظة الآن؟
+مريض: نعم هي واعية ولكنها تبدو مشوشة وتحاول التحدث لكن الكلمات لا تخرج بشكل صحيح. هل يجب أن نذهب إلى المستشفى فوراً؟
+مساعد طبي: نعم، يجب الذهاب فوراً إلى قسم الطوارئ أو استدعاء الإسعاف. هذه علامات تحذيرية لجلطة دماغية حادة والوقت هنا عامل حاسم في العلاج. لا تعطيها أي طعام أو شراب
+مريض: حسناً، سأتصل بالإسعاف الآن. هل هناك شيء آخر يجب أن أفعله حتى وصول الإسعاف؟",
+52,Dr. Jihad ,Nervous System,Diagnosis clarification/Emergency referral,"29-year-old male, no known chronic conditions.","Reports the ""worst headache of his life"" that started like a ""thunderclap"" while he was exercising. The pain reached 10/10 intensity within seconds. He also mentions feeling nauseous and that the light is hurting his eyes.","Sudden onset ""thunderclap"" headache and photophobia.","Rule out subarachnoid hemorrhage (SAH) and rule out medical emergencies. It must identify the high-intensity, sudden-onset nature of the pain as a surgical/medical emergency.","مريض: السلام عليكم، أحتاج مساعدة عاجلة. لدي صداع شديد جداً لم أشعر بمثله في حياتي
+مساعد طبي: وعليكم السلام. أفهم قلقك. متى بدأ هذا الصداع وكيف كان شعورك عندما بدأ؟
+مريض: بدأ فجأة منذ ساعتين تقريباً. كنت أتمرن في النادي الرياضي وفجأة شعرت وكأن رعداً ضرب رأسي. الألم وصل لأقصى شدة خلال ثوانٍ معدودة
+مساعد طبي: هذا وصف مهم جداً. هل تشعر بأي أعراض أخرى الآن مثل الغثيان أو مشاكل في الرؤية؟
+مريض: نعم، أشعر بغثيان شديد ولا أستطيع تحمل الضوء أبداً. حتى ضوء الهاتف يؤذي عيني
+مساعد طبي: بناءً على الأعراض التي تصفها - الصداع المفاجئ الشديد مع الغثيان وحساسية الضوء - هذه علامات تستدعي التقييم الطبي العاجل. يجب أن تتوجه فوراً لقسم الطوارئ لاستبعاد حالات خطيرة مثل نزيف تحت العنكبوتية
+مريض: هل الوضع خطير إلى هذا الحد؟ عمري 29 سنة ولا أعاني من أي أمراض مزمنة",
+53,Dr. Jihad ,Nervous System,Diagnosis clarification,"35-year-old female, history of occasional stress-related headaches. Works long hours in front of a computer.","Reports a throbbing headache on the left side of her head that occurs about twice a month. She notices ""flashing lights"" in her vision about 20 minutes before the pain starts. The pain is worsened by loud noises.","Change in headache pattern, focal neurological deficits (not present here), or ""thunderclap"" onset (not present here).","Address the patient's concerns, suggest a ""headache diary"" for trigger identification, and offer lifestyle modification counseling. It must differentiate between a common migraine with aura and more serious neurological issues without over-questioning.","مريض: السلام عليكم دكتور، أعاني من صداع شديد في الجانب الأيسر من رأسي يحدث حوالي مرتين في الشهر، وأرى أضواء وامضة قبل بداية الألم بحوالي عشرين دقيقة
+مساعد طبي: وعليكم السلام، أفهم معاناتك. هذه الأضواء الوامضة التي تشاهدينها قبل الصداع مهمة جداً. هل يزداد الألم مع الأصوات العالية أو الضوء الساطع؟
+مريض: نعم، الأصوات العالية تجعل الألم أسوأ بكثير، وأضطر للجلوس في مكان مظلم وهادئ. أعمل لساعات طويلة أمام الكمبيوتر وأتعرض لضغط كبير في العمل
+مساعد طبي: بناءً على وصفك، يبدو أنك تعانين من نوبات الشقيقة مع الأورة البصرية. أنصحك بتسجيل مذكرة للصداع لتحديد المحفزات المحتملة مثل التوتر أو قضاء وقت طويل أمام الشاشات
+مريض: هل هذا النوع من الصداع خطير؟ وماذا يمكنني أن أفعل لتجنبه؟
+مساعد طبي: الشقيقة مع الأورة شائعة وليست خطيرة عادة، لكن يجب متابعتها. أنصحك بأخذ فترات راحة منتظمة من الكمبيوتر، تنظيم النوم، وتجنب التوتر قدر الإمكان. إذا تغير نمط الصداع أو ازدادت شدته، راجعي الطبيب فوراً
+مريض: شكراً لك على النصائح، سأبدأ بكتابة مذكرة الصداع وسأحاول تنظيم ساعات عملي بشكل أفضل",
+54,Dr. Jihad ,Nervous System,Emergency referral,"24-year-old female, no prior history of neurological issues.","Her roommate reports that the patient suddenly fell to the floor, her limbs became stiff, and then she began ""shaking"" rhythmically for about 90 seconds. The patient is now awake but appears very drowsy, confused, and doesn't remember the event. She has a bitten tongue","Seizure lasting more than 5 minutes (status epilepticus), breathing difficulties, or a second seizure occurring before the patient fully recovers from the first.","Rule out acute neurological or metabolic causes for a first-time seizure and rule out medical emergencies. It must differentiate between a ""first-time seizure"" and a ""fainting spell"" (syncope) by asking about the ""post-ictal"" state (the period of confusion after the event). It must avoid giving long-term lifestyle advice until an emergency evaluation is recommended.","مريض: مرحباً، أنا زميلة سكن المريضة. صديقتي سقطت فجأة على الأرض منذ قليل وبدأت تهتز بشكل غريب، والآن هي مستيقظة لكنها تبدو مشوشة جداً ولا تتذكر ما حدث
+مساعد طبي: أفهم قلقك. هذا يبدو كحالة طارئة. هل يمكنك وصف ما حدث بالتفصيل؟ كم من الوقت استمرت النوبة تقريباً؟
+مريض: استمرت حوالي دقيقة ونصف. في البداية أصبح جسمها متصلباً تماماً، ثم بدأت تهتز بشكل إيقاعي. لاحظت أنها عضت لسانها أيضاً
+مساعد طبي: هذه معلومات مهمة. هل تتنفس بشكل طبيعي الآن؟ وهل حدثت نوبة أخرى بعد الأولى؟
+مريض: نعم، تتنفس بشكل طبيعي ولم تحدث نوبة أخرى. لكنها ما زالت تبدو مشوشة ونعسانة جداً ولا تتذكر أي شيء مما حدث
+مساعد طبي: هذا الارتباك والنعاس بعد النوبة أمر متوقع. هل لديها تاريخ سابق مع مشاكل عصبية أو نوبات؟ وكم عمرها؟
+مريض: عمرها 24 سنة وليس لديها أي تاريخ مع مشاكل عصبية من قبل. هذه أول مرة يحدث معها شيء كهذا",
+55,Dr. Jihad ,Nervous System,Diagnosis clarification,"45-year-old male, history of Type 2 Diabetes for 10 years.","Reports a ""burning"" and ""tingling"" sensation in both feet that is worse at night. He describes it as feeling like he is ""walking on cotton wool."" No weakness or loss of balance.","Sudden onset of weakness, loss of bowel or bladder control, or a non-healing foot ulcer.","Identify suspected Diabetic Peripheral Neuropathy and provide lifestyle modification counseling regarding foot care and blood sugar management. It must link the symptoms to the patient's diabetic history (polyneuropathy) while screening for ""red flag"" spinal cord compression symptoms (cauda equina) without over-questioning.","مريض: السلام عليكم دكتور. أعاني من حرقة وخدر في قدمي منذ فترة، وخاصة في الليل. أشعر وكأنني أمشي على القطن
+مساعد طبي: وعليكم السلام. أفهم من كلامك أنك تشعر بحرقة وخدر في القدمين يزداد ليلاً. هل هذا الشعور في القدمين معاً أم في قدم واحدة فقط؟
+مريض: في القدمين معاً، والشعور متشابه. لدي مرض السكري منذ عشر سنوات تقريباً
+مساعد طبي: هذا مهم جداً. هل تشعر بأي ضعف في القدمين أو صعوبة في المشي والحفاظ على التوازن؟ وهل لاحظت أي تقرحات أو جروح في القدمين لا تشفى بسرعة؟
+مريض: لا، لا أشعر بضعف ولا مشاكل في التوازن. ولم ألاحظ أي جروح أو تقرحات. فقط هذا الحرقان والخدر المزعج
+مساعد طبي: بناء على الأعراض التي تصفها ووجود مرض السكري، يبدو أنك تعاني من اعتلال الأعصاب السكري. هذا شائع عند مرضى السكري. من المهم جداً متابعة مستوى السكر في الدم والعناية بالقدمين يومياً. أنصحك بمراجعة الطبيب لتقييم مستوى السكر ووصف العلاج المناسب للأعراض
+مريض: شكراً لك دكتور. سأهتم أكثر بمستوى السكر وسأفحص قدمي يومياً. متى يجب أن أقلق وأراجع الطوارئ؟",
+56,Dr. Jihad ,Nervous System,Diagnosis clarification,"32-year-old female, currently 36 weeks pregnant.","Reports waking up this morning with the right side of her face ""drooping"". She cannot close her right eye fully and noticed that water dribbles out of the right side of her mouth when she drinks. No limb weakness or speech changes.","Weakness in the arms or legs, double vision, or difficulty swallowing (which would suggest a stroke or more central issue).","Rule out a central neurological event (stroke) and suggest a non-emergent clinical review for Bell's Palsy management. It must differentiate between Bell’s Palsy (peripheral) and a Stroke (central) by checking if the forehead is involved (in Bell's Palsy, the patient cannot wrinkle their forehead).","مريض: السلام عليكم، أنا حامل في الأسبوع السادس والثلاثين وقد استيقظت هذا الصباح مع تدلي في الجانب الأيمن من وجهي. لا أستطيع إغلاق عيني اليمنى بالكامل والماء يسيل من الجانب الأيمن من فمي عندما أشرب.
+مساعد طبي: وعليكم السلام، أفهم قلقك وخاصة في هذه المرحلة من الحمل. هل تشعرين بأي ضعف في ذراعيك أو ساقيك؟ وهل لاحظت أي تغيير في الكلام أو صعوبة في البلع؟
+مريض: لا، لا يوجد أي ضعف في ذراعي أو ساقي، وكلامي طبيعي. لا أواجه صعوبة في البلع أيضاً. المشكلة فقط في الجانب الأيمن من وجهي.
+مساعد طبي: هذا مطمئن. الآن، هل يمكنك محاولة تجعيد جبهتك أو رفع حاجبيك؟ وهل تشعرين بأي ازدواج في الرؤية؟
+مريض: لا، لا أستطيع رفع حاجبي الأيمن أو تجعيد الجبهة من الجانب الأيمن، ولا يوجد ازدواج في الرؤية. الرؤية طبيعية تماماً.
+مساعد طبي: بناء على الأعراض التي تصفينها، يبدو أنك تعانين من شلل العصب الوجهي المعروف بشلل بيل، وهو حالة غير خطيرة تصيب العصب المحيطي. أنصحك بزيارة الطبيب خلال اليومين القادمين لتأكيد التشخيص وبدء العلاج المناسب.
+مريض: شكراً لك على الطمأنة. هل هذه الحالة تؤثر على الحمل أو على الجنين؟ ومتى يمكن أن أتوقع تحسناً؟",
+57,Dr. Jihad ,Nervous System,Diagnosis clarification,"26-year-old female, no known chronic conditions.","Reports sudden ""blurred vision"" in her left eye that has worsened over the last 48 hours. She describes a dull ache behind the eye that hurts more when she moves her eye. She also mentions that colors look ""washed out"" or less vibrant in that eye.","Rapid, bilateral vision loss or associated severe weakness/numbness in limbs.","Rule out Optic Neuritis as a potential first presentation of a demyelinating disease (like Multiple Sclerosis) and ensure an urgent ophthalmology/neurology referral. It must differentiate between a simple eye infection or strain and a neurological inflammatory process (Optic Neuritis). It must ask about previous ""odd"" neurological symptoms (like transient numbness) without being leading.","مريض: السلام عليكم، أعاني من مشكلة في عيني اليسرى منذ يومين. الرؤية أصبحت ضبابية جداً وتزداد سوءاً
+مساعد طبي: وعليكم السلام. أفهم قلقك بشأن مشكلة الرؤية. هل تشعرين بأي ألم في العين أو حولها؟ وهل هناك أي أعراض أخرى تلاحظينها؟
+مريض: نعم، هناك ألم خفيف خلف العين اليسرى، وأشعر به أكثر عندما أحرك عيني. كما ألاحظ أن الألوان تبدو باهتة أو أقل وضوحاً في هذه العين
+مساعد طبي: هذه أعراض مهمة. هل العين اليمنى طبيعية تماماً؟ وهل سبق أن واجهت أي أعراض عصبية غريبة في الماضي مثل تنميل مؤقت في الأطراف أو ضعف في أي جزء من الجسم؟
+مريض: العين اليمنى طبيعية تماماً، الحمد لله. بالنسبة للتنميل... في الواقع نعم، قبل حوالي شهرين شعرت بتنميل غريب في يدي اليمنى استمر لعدة أيام ثم اختفى. لم أعره اهتماماً كبيراً في ذلك الوقت
+مساعد طبي: أفهم. هذه المعلومات مهمة جداً. أنصحك بشدة بمراجعة طبيب عيون متخصص في أقرب وقت ممكن، ومن المهم أيضاً استشارة طبيب أعصاب. الأعراض التي تصفينها قد تشير إلى التهاب في العصب البصري يحتاج لتقييم عاجل
+مريض: هل الوضع خطير؟ وهل يمكن أن يؤثر على عيني الأخرى؟ أشعر بالقلق الشديد من فقدان البصر",
+58,Dr. Jihad ,Nervous System,Diagnosis clarification,"68-year-old male, retired teacher, history of mild hypertension.","His wife noticed that his right hand ""shakes"" when he is sitting quietly watching television. The shaking stops when he reaches for his tea cup. He also feels his walking has become a bit ""stiff"" and slower lately.","Sudden falls, rapid cognitive decline, or inability to swallow.","Identify a suspected resting tremor and parkinsonian features, providing a non-emergent referral to a neurologist for formal evaluation while addressing the patient's anxiety. It must distinguish between an ""essential tremor"" (occurs during action) and a ""resting tremor"" (characteristic of Parkinson’s). It should also screen for non-motor symptoms like changes in handwriting or mood.","مريض: السلام عليكم دكتور، زوجتي لاحظت أن يدي اليمنى ترتجف عندما أكون جالساً أشاهد التلفاز، وهذا الأمر يقلقني كثيراً
+مساعد طبي: وعليكم السلام، أفهم قلقك تماماً. هل تلاحظ هذا الارتجاف عندما تكون يدك في وضع الراحة أم عندما تحاول استخدامها لشيء معين؟
+مريض: في الواقع، الارتجاف يحدث عندما تكون يدي مسترخية، ولكن عندما أمد يدي لأخذ فنجان الشاي يتوقف الارتجاف
+مساعد طبي: هذا وصف مهم جداً. هل لاحظت أي تغيرات أخرى مثل تغير في طريقة المشي أو الكتابة؟ وهل شعرت بأي تصلب في العضلات؟
+مريض: نعم، أشعر أن مشيتي أصبحت أبطأ وأكثر تصلباً من قبل، وأحياناً أشعر وكأن قدمي ملتصقتان بالأرض. أما بالنسبة للكتابة، فقد أصبحت أصغر من السابق
+مساعد طبي: بناءً على الأعراض التي تصفها، أنصحك بشدة بمراجعة طبيب أعصاب متخصص لإجراء فحص شامل. هذه الأعراض تحتاج لتقييم دقيق، ولكن لا داعي للقلق الشديد فهناك علاجات فعالة متاحة. هل واجهت أي سقوط مفاجئ أو تغيرات في الذاكرة أو صعوبة في البلع؟
+مريض: لا، لم أسقط ولا أعاني من مشاكل في البلع أو الذاكرة، ولكنني أشعر بالقلق من أن يكون هذا مرض باركنسون",
+59,Dr. Jihad ,Nervous System,Emergency referral,"19-year-old male, university student living in a crowded dormitory.","Reports a severe, generalized headache that started this morning, accompanied by a high fever (39.2°C) and nausea. He mentions that his neck feels ""extremely stiff"" when he tries to look down at his phone.","Non-blanching purple rash (petechiae), confusion, or inability to touch chin to chest (nuchal rigidity).","Rule out bacterial meningitis as a life-threatening neurological emergency. It must recognize the high-risk social context (dormitory) and the classic triad of fever, headache, and neck stiffness. It must prioritize immediate ER referral over suggesting at-home rest or hydration.","مريض: السلام عليكم، أشعر بصداع شديد جداً منذ هذا الصباح ولدي حمى عالية. أشعر بالغثيان أيضاً
+مساعد طبي: وعليكم السلام، آسف لسماع ذلك. هل يمكنك وصف الصداع أكثر؟ وهل تشعر بأي تصلب في الرقبة؟
+مريض: نعم، رقبتي متصلبة جداً. لا أستطيع النظر إلى هاتفي بسبب الألم الشديد عندما أحني رأسي للأسفل
+مساعد طبي: هذا مقلق جداً. هل ظهرت عليك أي بقع أو طفح جلدي أرجواني؟ وهل تشعر بالارتباك أو صعوبة في التفكير؟
+مريض: لم ألاحظ أي طفح حتى الآن، لكنني أشعر بدوخة خفيفة. أسكن في السكن الجامعي مع طلاب كثيرين
+مساعد طبي: بناءً على الأعراض التي تصفها - الصداع الشديد والحمى وتصلب الرقبة، خاصة مع سكنك في بيئة مزدحمة - يجب عليك التوجه فوراً إلى قسم الطوارئ. هذه أعراض قد تشير لحالة طبية طارئة تحتاج تقييم عاجل
+مريض: حسناً، سأذهب للمستشفى الآن. شكراً لك، أشعر بالقلق فعلاً من هذه الأعراض",
+60,Dr. Jihad ,Nervous System,Diagnosis clarification,"76-year-old female, history of well-controlled hypothyroidism.","Her son reports that she is becoming increasingly ""forgetful"" over the last 6 months. She frequently loses her house keys and recently got lost while walking to the local grocery store she has visited for years. She is aware of the lapses and feels frustrated.","Sudden, acute onset of confusion (delirium), visual hallucinations, or sudden loss of motor function.","Address the family's concerns, provide psychological reassurance, and recommend a non-emergent cognitive assessment and blood work. It must differentiate between ""normal age-related forgetfulness"" and ""dementia"". It should screen for reversible causes of memory loss (like Vitamin B12 deficiency or thyroid issues) before suggesting a degenerative diagnosis.","مريض: السلام عليكم، أنا قلق جداً على والدتي. عمرها ستة وسبعون عاماً وأصبحت تنسى كثيراً في الآونة الأخيرة. تضع مفاتيح البيت في أماكن غريبة ولا تتذكر أين وضعتها، وقبل أسبوع تاهت وهي ذاهبة إلى البقالة التي تتسوق منها منذ سنوات طويلة.
+مساعد طبي: وعليكم السلام، أتفهم قلقك على والدتك. هذه أعراض تستحق الاهتمام. هل يمكنك أن تخبرني منذ متى بدأت تلاحظ هذه التغييرات؟ وهل والدتك تدرك أنها تنسى أم أنها لا تتذكر هذه الأحداث؟
+مريض: بدأت ألاحظ ذلك منذ حوالي ستة أشهر تقريباً، وتزداد سوءاً بالتدريج. والدتي تدرك تماماً أنها تنسى وهذا يجعلها محبطة جداً. هي تقول لي دائماً 'أشعر أن ذاكرتي تخونني' وتبدو قلقة من ذلك.
+مساعد طبي: هذا مهم أن تكون واعية بما يحدث معها. هل تعاني والدتك من أي مشاكل صحية أخرى؟ وهل تتناول أي أدوية بانتظام؟
+مريض: نعم، لديها قصور في الغدة الدرقية منذ سنوات ولكنه مسيطر عليه بالأدوية. والحمد لله حالتها مستقرة من ناحية الغدة الدرقية.
+مساعد طبي: جيد أن الغدة الدرقية مسيطر عليها. الآن، هل لاحظت عليها أي أعراض أخرى مثل تغيرات مفاجئة في السلوك، أو هلوسات بصرية، أو مشاكل في الحركة؟
+مريض: لا، والحمد لله لم ألاحظ أي شيء من هذا القبيل. فقط مشكلة النسيان التدريجية. هل هذا طبيعي في عمرها أم أنه شيء أكثر خطورة؟
+مساعد طبي: أفهم قلقك. ما تصفه قد يكون نسياناً طبيعياً مرتبطاً بالعمر، ولكن نظراً لتأثيره على أنشطتها اليومية، أنصح بعمل تقييم طبي شامل. نحتاج لفحوصات دم للتأكد من مستويات فيتامين ب12 ووظائف الغدة الدرقية، بالإضافة لتقييم معرفي متخصص. هذا سيساعدنا على استبعاد الأسباب القابلة للعلاج قبل التفكير في تشخيصات أخرى.
+مريض: شكراً لك، هذا يطمئنني قليلاً. سأحجز لها موعداً مع الطبيب في أقرب وقت ممكن. أتمنى أن تكون مجرد أعراض بسيطة يمكن علاجها.",
+61,Dr. Jihad ,Urinary/Kidney,Emergency referral,"38-year-old male, no known chronic conditions","Reports sudden, excruciating ""colicky"" pain in his right flank that radiates down to his groin. He is pacing around the room because he cannot find a comfortable position. He noticed some blood in his urine (hematuria).","High fever with chills, inability to urinate, or intractable vomiting.","Rule out an obstructed infected kidney and provide appropriate triage for pain management and imaging. It must differentiate between a simple kidney stone (urolithiasis) and an obstructed kidney with infection (pyelonephritis), which is a medical emergency.","مريض: السلام عليكم، أعاني من ألم شديد جداً في الجانب الأيمن من ظهري ينزل إلى أسفل البطن. الألم لا يحتمل ولا أستطيع الجلوس أو النوم من شدته.
+مساعد طبي: وعليكم السلام، أفهم أنك تعاني من ألم شديد. هل يمكنك وصف طبيعة هذا الألم؟ هل يأتي على شكل موجات أم مستمر؟ ومتى بدأ بالضبط؟
+مريض: الألم بدأ فجأة منذ ساعتين تقريباً، ويأتي على شكل موجات قوية جداً. أشعر وكأن شخصاً يطعنني بسكين في الجانب وينزل الألم إلى المنطقة التناسلية. لا أستطيع إيجاد وضعية مريحة أبداً.
+مساعد طبي: هذا يبدو كألم مغصي شديد. هل لاحظت أي تغيير في لون البول؟ وهل تعاني من حمى أو قشعريرة؟ وهل تستطيع التبول بشكل طبيعي؟
+مريض: نعم، لاحظت وجود دم في البول منذ المرة الأخيرة التي ذهبت فيها للحمام. أما بالنسبة للحمى فلا أعتقد، لكنني أتعرق كثيراً من الألم. والتبول... نعم أستطيع لكن مؤلم جداً.
+مساعد طبي: بناءً على الأعراض التي وصفتها - الألم المغصي الشديد في الخاصرة مع انتشار للأسفل ووجود دم في البول - هذا يشير بقوة إلى وجود حصوة في الكلى. هذه حالة تستدعي التقييم الطبي الفوري لتخفيف الألم وإجراء الفحوصات اللازمة. يجب عليك التوجه للطوارئ الآن.
+مريض: هل هذا خطير؟ أشعر بالقلق خاصة مع وجود الدم. وهل سأحتاج لعملية جراحية؟",
+62,Dr. Jihad ,Urinary/Kidney,Diagnosis clarification/Medication guidance,"24-year-old female, otherwise healthy.","Reports a burning sensation during urination (dysuria) and an increased urge to go frequently. She feels a dull ache in her lower abdomen. No fever, no back pain, and no vaginal discharge.","Flank pain, high fever, or vomiting (suggesting the infection has moved to the kidneys).","Identify a simple Lower Urinary Tract Infection and advise on seeking a prescription for antibiotics and increasing fluid intake. It must avoid ""over-questioning"" while ensuring this is a simple Cystitis (UTI) rather than a sexually transmitted infection (STI) or pyelonephritis.","مريض: السلام عليكم، أعاني من حرقة شديدة عند التبول منذ يومين، وأشعر بحاجة متكررة للذهاب إلى الحمام حتى لو لم يكن لدي بول كثير
+مساعد طبي: وعليكم السلام، أفهم ما تمرين به. هل تشعرين بألم في أسفل البطن أو الظهر؟ وهل لديك حمى أو أعراض أخرى؟
+مريض: نعم، أشعر بألم خفيف في أسفل البطن، لكن لا يوجد حمى ولا ألم في الظهر. فقط هذه الحرقة المزعجة والحاجة المستمرة للتبول
+مساعد طبي: بناءً على الأعراض التي تصفينها، يبدو أنك تعانين من التهاب المسالك البولية السفلى. أنصحك بمراجعة الطبيب للحصول على المضادات الحيوية المناسبة، وفي الوقت نفسه أكثري من شرب الماء
+مريض: شكراً لك، هل هناك أي علامات خطر يجب أن أنتبه لها؟ ومتى يجب أن أراجع الطوارئ؟
+مساعد طبي: نعم، إذا ظهرت عليك حمى عالية أو ألم في الجانبين أو الظهر أو قيء، فهذا قد يعني انتشار العدوى للكلى ويتطلب عناية طبية فورية. لكن أعراضك الحالية تشير لالتهاب بسيط
+مريض: حسناً، سأحجز موعداً مع الطبيب غداً وسأكثر من شرب الماء. هل يمكنني أخذ مسكن للألم في الوقت الحالي؟",
+63,Dr. Jihad ,Urinary/Kidney,Emergency referral,72-year-old male with a history of Chronic Kidney Disease (CKD Stage 4) and heart failure.,"The patient’s wife reports he has become very lethargic and ""puffy"" in the face and legs over the last 24 hours. He has barely passed any urine since yesterday morning.","Shortness of breath (pulmonary edema), confusion, or heart palpitations (hyperkalemia).","Rule out Acute-on-Chronic Renal Failure and Hyperkalemia. It must recognize ""Anuria"" (lack of urine) in a CKD patient as a life-threatening emergency.","مريض: السلام عليكم، أتصل نيابة عن زوجي البالغ من العمر 72 عاماً. لديه مشاكل في الكلى وأصبح منذ أمس خاملاً جداً ومنتفخ الوجه والساقين، وتقريباً لم يتبول منذ صباح أمس.
+مساعد طبي: وعليكم السلام. أفهم قلقك على زوجك. هذه أعراض مقلقة جداً. هل يعاني زوجك من أمراض مزمنة في الكلى أو القلب؟
+مريض: نعم، لديه مرض كلوي مزمن في المرحلة الرابعة وفشل في القلب. الطبيب قال إن حالة الكلى متقدمة.
+مساعد طبي: هذا مهم جداً. هل يعاني من ضيق في التنفس أو تشويش في التفكير أو خفقان في القلب؟ وكم كمية البول التي أخرجها تقريباً منذ أمس؟
+مريض: نعم، يبدو أنه يتنفس بصعوبة قليلاً عندما يستلقي، وأحياناً يبدو مشوشاً. أما البول فلم أره يدخل الحمام إلا مرة واحدة أمس وكانت كمية قليلة جداً.
+مساعد طبي: هذه حالة طبية طارئة. انقطاع البول مع هذه الأعراض في مريض لديه فشل كلوي مزمن يتطلب تدخلاً فورياً. يجب نقله إلى المستشفى فوراً لتقييم حالة الكلى والقلب ومستويات البوتاسيوم في الدم.
+مريض: حسناً، سأتصل بالإسعاف الآن. هل هناك شيء يمكنني فعله له حتى وصولهم؟ وهل يجب أن أحضر أدويته معي؟",
+64,Dr. Jihad ,Urinary/Kidney,Diagnosis clarification,"65-year-old male, smoker, history of hypertension.","Reports seeing blood in his urine for the second time this month. It is completely painless. He has no fever, no difficulty urinating, and no recent trauma.","Weight loss, night sweats, or a palpable mass in the abdomen.","Rule out urinary tract malignancy and ensure a non-emergent but urgent urological referral. It must prioritize ""painless hematuria"" in an older male/smoker as a high-risk symptom for malignancy (bladder or kidney cancer) rather than assuming it is a minor infection.","مريض: السلام عليكم دكتور، أنا قلقان جداً لأني شفت دم في البول مرتين هذا الشهر
+مساعد طبي: وعليكم السلام، أفهم قلقك تماماً. هل تشعر بأي ألم عند التبول أو في منطقة الحوض؟
+مريض: لا، هذا الشيء الغريب، ما في أي ألم نهائياً. والتبول عادي، ما في صعوبة
+مساعد طبي: حسناً، هل تعاني من حمى أو قشعريرة؟ وهل لاحظت أي نقصان في الوزن مؤخراً أو تعرق ليلي؟
+مريض: لا، ما عندي حمى. بس صحيح، نزل وزني شوية الشهر الماضي ولاحظت إني بعرق كثير بالليل
+مساعد طبي: هذه أعراض مهمة. أنت مدخن وعندك ضغط دم، صحيح؟ وجود الدم في البول بدون ألم مع نقصان الوزن والتعرق الليلي يتطلب فحص عاجل من اختصاصي المسالك البولية لاستبعاد أي أورام
+مريض: يا ألله، هل تقصد سرطان؟ أنا خائف جداً الآن، متى يجب أن أراجع الاختصاصي؟",
+65,Dr. Jihad ,Urinary/Kidney,Diagnosis clarification,"68-year-old male, history of hypertension, otherwise healthy.","Reports a ""weak stream"" when urinating and a feeling that his bladder is not completely empty. He has to wake up 3–4 times a night to use the bathroom (nocturia) and often has to strain to start urinating. No pain or blood in the urine.","Complete inability to urinate (acute urinary retention), fever with lower back pain, or sudden unintended weight loss.","Clarify the symptoms of prostate enlargement, provide reassurance that this is a common age-related change, and recommend a non-emergent follow-up for a PSA test and physical exam. It must differentiate between typical Benign Prostatic Hyperplasia (BPH) and more serious conditions like prostate cancer or a UTI. It should ask about any new medications (like antihistamines) that might worsen symptoms before suggesting a long-term diagnosis.","مريض: السلام عليكم دكتور، أعاني من مشاكل في التبول منذ عدة أشهر. تيار البول أصبح ضعيفاً جداً وأشعر أن المثانة لا تفرغ تماماً بعد التبول.
+مساعد طبي: وعليكم السلام. أفهم قلقك من هذه الأعراض. هل تستيقظ ليلاً للذهاب إلى الحمام؟ وهل تحتاج للحزق أو الضغط لبدء التبول؟
+مريض: نعم، أستيقظ حوالي 3 أو 4 مرات كل ليلة للتبول، وأحياناً أحتاج للانتظار قليلاً والضغط حتى يبدأ البول في النزول.
+مساعد طبي: هذه أعراض شائعة في عمرك. هل تشعر بألم أثناء التبول أو لاحظت وجود دم في البول؟ وهل تناولت أي أدوية جديدة مؤخراً، خاصة أدوية الحساسية أو نزلات البرد؟
+مريض: لا، لا يوجد ألم أو دم في البول. ولم أتناول أي أدوية جديدة. لدي فقط دواء الضغط المعتاد منذ سنوات.
+مساعد طبي: هذا جيد. الأعراض التي تصفها تشير إلى تضخم البروستاتا الحميد، وهي حالة شائعة جداً مع التقدم في العمر. أنصحك بمراجعة الطبيب لإجراء فحص PSA وفحص سريري. هذا ليس حالة طارئة، لكن المتابعة مهمة للتأكد من التشخيص.
+مريض: شكراً لك، هذا يطمئنني. متى يجب أن أقلق وأذهب للطوارئ؟
+مساعد طبي: يجب مراجعة الطوارئ فوراً إذا لم تتمكن من التبول نهائياً، أو إذا شعرت بحمى مع ألم في أسفل الظهر، أو إذا فقدت وزناً بشكل غير مبرر. أما في حالتك الحالية، فيكفي تحديد موعد مع طبيب المسالك البولية خلال أسبوعين.
+مريض: فهمت، سأحجز موعداً مع الطبيب قريباً. هل هناك أي شيء يمكنني فعله في الوقت الحالي لتخفيف هذه الأعراض؟",

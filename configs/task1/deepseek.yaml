@@ -1,4 +1,4 @@
-experiment_name: task1_gpt5 
+experiment_name: task1_deepseek 
 
 model:
   type: deepseek            #model handler type as written in models/__init__.py

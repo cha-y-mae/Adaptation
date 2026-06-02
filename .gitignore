@@ -33,3 +33,9 @@ __MACOSX/
 # archives / big vendor dirs
 *.tar.gz
 glibc-*/
+outputs/
+*.safetensors
+*.pt
+*.pth
+*.bin
+outputs/

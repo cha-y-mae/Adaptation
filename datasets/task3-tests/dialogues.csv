@@ -1,0 +1,31 @@
+﻿case_id,clinician_name,organ_system,problem_type,patient_profile,symptoms_and_history,red_flag_symptoms,primary_reasoning_objective,dialogue,ideal_response
+1,Dr. Khaled ,Endocrinology,Clinic non emergency,"A 64-year-old postmenopausal female with a history of osteopenia.
+She has no previous history of neck surgery or radiation exposure.","The patient reports vague &quot;aching in her bones&quot; and
+recurrent bouts of constipation over several months. She has experienced two
+episodes of painful kidney stones in the last three years. Physical exam is
+unremarkable, but she mentions feeling increasingly &quot;foggy&quot; and fatigued.
+Laboratory tests reveal a persistently elevated serum calcium of 10.8 mg/dL. Her
+vitamin D levels are within the normal range.",Chronic hypercalcemia.,"Diagnosis of Primary Hyperparathyroidism;
+elevated calcium with inappropriately normal or high PTH suggests a parathyroid
+adenoma.","مريض: دكتور، أشعر بألم مستمر في عظامي منذ عدة أشهر، وأعاني من إمساك متكرر. كما أنني أشعر بالتعب والضبابية الذهنية باستمرار
+مساعد طبي: أفهم شكواك. هل يمكنك وصف ألم العظام بشكل أكثر تفصيلاً؟ وهل عانيت من أي مشاكل في الكلى مؤخراً؟
+مريض: الألم يشبه الوجع العميق في العظام، وليس في مكان محدد. وبخصوص الكلى، نعم لقد أصبت بحصوات الكلى مرتين خلال الثلاث سنوات الماضية، وكانت مؤلمة جداً
+مساعد طبي: هذه المعلومات مهمة. أرى من نتائج فحوصاتك أن مستوى الكالسيوم في الدم مرتفع عن المعدل الطبيعي. هذا قد يفسر الأعراض التي تعانين منها. هل تتناولين أي مكملات كالسيوم أو فيتامين د؟
+مريض: لا أتناول أي مكملات حالياً. هل هذا الارتفاع في الكالسيوم خطير؟ وما علاقته بالأعراض التي أشعر بها؟
+مساعد طبي: الكالسيوم المرتفع يمكن أن يسبب جميع الأعراض التي ذكرتيها: ألم العظام، الإمساك، التعب، وحتى حصوات الكلى. نحتاج لإجراء فحص إضافي لهرمون الغدة الدرقية (PTH) لتحديد السبب وراء هذا الارتفاع
+مريض: متى يمكنني إجراء هذا الفحص؟ وهل هناك علاج لهذه الحالة؟",
+2,Dr. Khaled ,Endocrinology,Clinic non emergency,"A 32-year-old female who recently returned to work after maternity
+leave. She has a family history of autoimmune disorders, specifically Type 1
+Diabetes.","She complains of significant weight gain despite a decreased
+appetite and persistent &quot;cold intolerance.&quot; Her skin has become noticeably dry, and
+her hair is thinning at the temples. She describes a feeling of fullness in her neck but
+denies any difficulty swallowing. Her menstrual cycles have become heavier and
+more frequent over the last three months. Heart rate is 58 beats per minute on
+examination.","Firm, painless goiter.","Diagnosis of Hashimoto’s Thyroiditis; requires TPO
+antibody testing and TSH/Free T4 correlation.","مريض: السلام عليكم دكتور، أشعر بتعب شديد مؤخراً وزاد وزني كثيراً رغم أنني لا آكل كما كنت من قبل. كما أنني أشعر بالبرد باستمرار حتى في الطقس الدافئ.
+مساعد طبي: وعليكم السلام، أفهم شكواك. متى بدأت هذه الأعراض؟ وهل لاحظت أي تغييرات أخرى في جسمك مثل الجلد أو الشعر؟
+مريض: بدأت الأعراض منذ حوالي ثلاثة أشهر بعد عودتي من إجازة الأمومة. جلدي أصبح جافاً جداً، وشعري يتساقط خاصة من الجانبين. كما أن دورتي الشهرية أصبحت أثقل وأكثر تكراراً.
+مساعد طبي: هل تشعرين بأي انتفاخ أو امتلاء في منطقة الرقبة؟ وهل لديك تاريخ عائلي لأي أمراض مناعية أو مشاكل في الغدة الدرقية؟
+مريض: نعم، أشعر بامتلاء في رقبتي لكن دون صعوبة في البلع. أما بالنسبة للتاريخ العائلي، فوالدتي مصابة بداء السكري النوع الأول منذ سنوات.
+مساعد طبي: بناءً على الأعراض التي تصفينها والتاريخ العائلي، قد تكون هناك مشكلة في الغدة الدرقية. سأحتاج لفحصك سريرياً وطلب بعض التحاليل مثل TSH وT4 الحر وأجسام مضادة للغدة الدرقية لتأكيد التشخيص.
+مريض: حسناً دكتور، أشعر بالقلق قليلاً. هل هذا شيء خطير؟ ومتى يمكنني إجراء هذه التحاليل؟",

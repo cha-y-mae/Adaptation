@@ -1,0 +1,10 @@
+id,input,ground_truth,reason
+36,الفازوبريسين:,ADH,Ground truth is entirely non-Arabic: 'ADH'
+40,نسبة خلايا كوبفر للخلايا الكبدية :,0.15,Ground truth is entirely non-Arabic: '0.15'
+46,. ترتكز العضلة ذات الرأسين الفخذية على,Head of fibula,Ground truth is entirely non-Arabic: 'Head of fibula'
+59,يتواجد في المناطق المعرضة لقوى السحب والشد,Fibrocartilage,Ground truth is entirely non-Arabic: 'Fibrocartilage'
+89,يعبر من الشق الحجاجي العلوي الأعصاب القحفية :,كل ما سبق صحيح,MCQ artifact ground truth (all/none of the above)
+206,أي عصب هو المحرك لعضلات اللسان:,12,Ground truth is entirely non-Arabic: '12'
+228,عدد القطع العصعصية في النخاع الشوكي هو :,1,Ground truth is entirely non-Arabic: '1'
+244,يقع الغضروف الحلقي مقابل الفقرة :,C6,Ground truth is entirely non-Arabic: 'C6'
+1361,ما هي الزاوية التقريبة للرابطة في جزيء الإيثين:,120,Ground truth is entirely non-Arabic: '120'

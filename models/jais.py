@@ -1,6 +1,8 @@
 import os
 import re
 import torch
+from typing import List
+
 from transformers import AutoTokenizer, AutoModelForCausalLM
 
 HF_CACHE = "/scratch/ca2627/huggingface"
@@ -14,18 +16,24 @@ os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 class Jais2ChatMCQHandler:
     """
-    MCQ-only handler for inceptionai/Jais-2-8B-Chat.
+    Unified handler for inceptionai/Jais-2-8B-Chat supporting:
+      - MCQ                (task_type="mcq")           -> returns 'A'..'F' or None
+      - Answer generation  (task_type="answer_generation") -> returns str (one line) or ""
 
     Contract (matches your eval harness):
       - __init__(model_name, cache_dir, offline)
-      - prompt(sample: dict, instruction: str, max_tokens: int=12) -> str|None
-        where return is a single letter A-F.
+      - prompt(sample: dict, instruction: str, max_tokens: int, task_type: str) -> str|None
+      - prompt_batch(samples: List[dict], instruction: str, max_tokens: int, task_type: str)
 
     Notes:
       - Prefers tokenizer.apply_chat_template(..., add_generation_prompt=True)
-      - Drops token_type_ids (as per model card example)
-      - Works with options opa/opb/opc/opd/(ope/opf optional)
+      - Drops token_type_ids (as per Jais model card example)
+      - Works with options opa/opb/opc/opd/(ope/opf optional) for MCQ
+      - For answer_generation, options are intentionally NOT included in the prompt
     """
+
+    # Back-compat alias: old code that imported Jais2ChatMCQHandler still works
+    # (see alias defined at bottom of file)
 
     def __init__(
         self,
@@ -35,10 +43,10 @@ class Jais2ChatMCQHandler:
         torch_dtype=torch.bfloat16,
         use_fast: bool = True,
     ):
-        print(f"[Jais2ChatMCQ] Handler file: {__file__}")
-        print(f"[Jais2ChatMCQ] HF_HOME={os.environ.get('HF_HOME')}")
-        print(f"[Jais2ChatMCQ] cache_dir={cache_dir}")
-        print(f"[Jais2ChatMCQ] offline={offline}")
+        print(f"[Jais2Chat] Handler file: {__file__}")
+        print(f"[Jais2Chat] HF_HOME={os.environ.get('HF_HOME')}")
+        print(f"[Jais2Chat] cache_dir={cache_dir}")
+        print(f"[Jais2Chat] offline={offline}")
 
         self.model_name = model_name
         self.cache_dir = cache_dir or HF_CACHE
@@ -56,11 +64,17 @@ class Jais2ChatMCQHandler:
             os.environ.pop("HF_HUB_OFFLINE", None)
 
         num_gpus = torch.cuda.device_count()
-        print(f"[Jais2ChatMCQ] Available GPUs: {num_gpus}")
+        print(f"[Jais2Chat] Available GPUs: {num_gpus}")
         if num_gpus == 0:
             raise RuntimeError("No CUDA GPUs available for Jais-2-8B-Chat.")
 
-        print("[Jais2ChatMCQ] Loading tokenizer...")
+        for i in range(num_gpus):
+            print(
+                f"  GPU {i}: {torch.cuda.get_device_name(i)} - "
+                f"{torch.cuda.memory_allocated(i) / 1024**3:.2f} GB allocated"
+            )
+
+        print("[Jais2Chat] Loading tokenizer...")
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_name,
             cache_dir=self.cache_dir,
@@ -73,9 +87,9 @@ class Jais2ChatMCQHandler:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
         self.has_chat_template = bool(getattr(self.tokenizer, "chat_template", None))
-        print(f"[Jais2ChatMCQ] tokenizer.chat_template available? {self.has_chat_template}")
+        print(f"[Jais2Chat] tokenizer.chat_template available? {self.has_chat_template}")
 
-        print("[Jais2ChatMCQ] Loading model...")
+        print("[Jais2Chat] Loading model...")
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_name,
             torch_dtype=self.torch_dtype,
@@ -83,13 +97,24 @@ class Jais2ChatMCQHandler:
             cache_dir=self.cache_dir,
             local_files_only=self.local_files_only,
         )
-        print("[Jais2ChatMCQ] Model loaded.")
+        print("[Jais2Chat] Model loaded.")
+
+        if hasattr(self.model, "hf_device_map"):
+            print("[Jais2Chat] Model device distribution:")
+            for layer, dev in self.model.hf_device_map.items():
+                print(f"  {layer}: {dev}")
+
+        for i in range(num_gpus):
+            alloc = torch.cuda.memory_allocated(i) / 1024**3
+            reserv = torch.cuda.memory_reserved(i) / 1024**3
+            print(f"  GPU {i} after load: {alloc:.2f}GB allocated, {reserv:.2f}GB reserved")
 
     # -----------------------------
-    # Prompt building (MCQ)
+    # Prompt text builders
     # -----------------------------
     @staticmethod
     def _build_mcq_text(sample: dict) -> str:
+        """Build an MCQ block with stem + lettered options."""
         stem = (sample.get("question") or "").strip()
         if not stem:
             return ""
@@ -114,11 +139,21 @@ class Jais2ChatMCQHandler:
 
         if not lines:
             return stem
-
         return stem + "\n\n" + "\n".join(lines)
 
     @staticmethod
-    def _system_text(instruction: str) -> str:
+    def _build_ansgen_text(sample: dict) -> str:
+        """Answer-generation prompt: question only, no options."""
+        q = (sample.get("question") or "").strip()
+        if not q:
+            return ""
+        return q  # IMPORTANT: no options
+
+    # -----------------------------
+    # System prompts
+    # -----------------------------
+    @staticmethod
+    def _mcq_system_text(instruction: str) -> str:
         instruction = (instruction or "").strip()
         base = (
             "You are a medical assistant. Answer the multiple-choice question.\n"
@@ -128,94 +163,185 @@ class Jais2ChatMCQHandler:
             base += f"\n\nINSTRUCTION: {instruction}"
         return base
 
-    def _plain_prompt(self, instruction: str, user_text: str) -> str:
+    @staticmethod
+    def _ansgen_system_text(instruction: str) -> str:
+        instruction = (instruction or "").strip()
+        base = (
+            "You are a medical assistant. Answer the question concisely in a single line. "
+            "Do not include options, explanations, or additional formatting."
+        )
+        if instruction:
+            base += f"\n\nINSTRUCTION: {instruction}"
+        return base
+
+    def _plain_prompt(self, system_prompt: str, user_text: str, suffix: str = "Answer:") -> str:
         # Fallback for tokenizers without chat_template
         return (
-            f"{self._system_text(instruction)}\n\n"
+            f"{system_prompt}\n\n"
             f"QUESTION:\n{user_text}\n\n"
-            "Answer:"
+            f"{suffix}"
         )
+
+    # -----------------------------
+    # Core generation helper
+    # -----------------------------
+    def _generate(self, system_prompt: str, user_text: str, max_tokens: int,
+                  plain_suffix: str = "Answer:") -> str:
+        """Shared generation path for MCQ and answer-generation. Returns decoded text."""
+        torch.cuda.empty_cache()
+
+        if self.has_chat_template:
+            messages = [
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_text},
+            ]
+            inputs = self.tokenizer.apply_chat_template(
+                messages,
+                tokenize=True,
+                add_generation_prompt=True,
+                return_dict=True,
+                return_tensors="pt",
+            )
+        else:
+            prompt_str = self._plain_prompt(system_prompt, user_text, suffix=plain_suffix)
+            inputs = self.tokenizer(
+                prompt_str,
+                return_tensors="pt",
+                add_special_tokens=True,
+            )
+
+        # Model card example removes token_type_ids
+        if isinstance(inputs, dict) and "token_type_ids" in inputs:
+            inputs.pop("token_type_ids", None)
+        elif hasattr(inputs, "pop") and "token_type_ids" in getattr(inputs, "keys", lambda: [])():
+            inputs.pop("token_type_ids", None)
+
+        # Move tensors to model device
+        inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
+        input_len = inputs["input_ids"].shape[-1]
+
+        with torch.inference_mode():
+            generation = self.model.generate(
+                **inputs,
+                max_new_tokens=max_tokens,
+                do_sample=False,
+                pad_token_id=self.tokenizer.pad_token_id,
+                eos_token_id=self.tokenizer.eos_token_id,
+            )
+
+        gen_ids = generation[0][input_len:]
+        return self.tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
 
     # -----------------------------
     # Main API for eval harness
     # -----------------------------
-    def prompt(self, sample: dict, instruction: str, max_tokens: int = 12):
-        user_text = self._build_mcq_text(sample)
-        if not user_text:
-            print("[Jais2ChatMCQ] Empty stem/options; cannot build prompt.")
+    def prompt(
+        self,
+        sample: dict,
+        instruction: str,
+        max_tokens: int = 12,
+        task_type: str = "mcq",
+    ):
+        """
+        Unified interface:
+          - task_type="mcq": returns 'A'..'F' or None        (max_tokens default 12 is fine)
+          - task_type="answer_generation": returns str (one line) or ""
+                                           (bump max_tokens, e.g. 128)
+        """
+        task_type = (task_type or "mcq").strip().lower()
+
+        # ---------- MCQ ----------
+        if task_type == "mcq":
+            user_text = self._build_mcq_text(sample)
+            if not user_text:
+                print("[Jais2Chat] Empty stem/options; cannot build MCQ prompt.")
+                return None
+
+            system_prompt = self._mcq_system_text(instruction)
+
+            try:
+                raw_text = self._generate(
+                    system_prompt=system_prompt,
+                    user_text=user_text,
+                    max_tokens=max_tokens,
+                    plain_suffix="Answer:",
+                )
+            except Exception as e:
+                print("[Jais2Chat] Error during MCQ generation:", e)
+                return None
+            finally:
+                torch.cuda.empty_cache()
+
+            if not raw_text:
+                return None
+
+            print(f"[Jais2Chat] MCQ raw generated: {repr(raw_text)}")
+            upper = raw_text.upper()
+
+            # Prefer strict format: ANSWER: X
+            m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
+            if m:
+                return m.group(1)
+
+            # Common Arabic equivalent sometimes shows up
+            m = re.search(r"(?:الإجابة|الاجابة)\s*[:=]\s*([A-F])", raw_text)
+            if m:
+                return m.group(1).upper()
+
+            # Fallback: first standalone A-F
+            m = re.search(r"\b([A-F])\b", upper)
+            if m:
+                return m.group(1)
+
+            print("[Jais2Chat] Could not extract a clean letter.")
             return None
 
-        system_prompt = self._system_text(instruction)
+        # ---------- Answer generation ----------
+        if task_type == "answer_generation":
+            user_text = self._build_ansgen_text(sample)
+            if not user_text:
+                print("[Jais2Chat] Empty question; cannot build answer-generation prompt.")
+                return ""
 
-        try:
-            torch.cuda.empty_cache()
+            system_prompt = self._ansgen_system_text(instruction)
 
-            if self.has_chat_template:
-                messages = [
-                    {"role": "system", "content": system_prompt},
-                    {"role": "user", "content": user_text},
-                ]
-                inputs = self.tokenizer.apply_chat_template(
-                    messages,
-                    tokenize=True,
-                    add_generation_prompt=True,
-                    return_dict=True,
-                    return_tensors="pt",
+            try:
+                raw_text = self._generate(
+                    system_prompt=system_prompt,
+                    user_text=user_text,
+                    max_tokens=max_tokens,
+                    plain_suffix="Answer:",
                 )
-            else:
-                prompt_str = self._plain_prompt(instruction, user_text)
-                inputs = self.tokenizer(
-                    prompt_str,
-                    return_tensors="pt",
-                    add_special_tokens=True,
-                )
+            except Exception as e:
+                print("[Jais2Chat] Error during answer-generation:", e)
+                return ""
+            finally:
+                torch.cuda.empty_cache()
 
-            # Model card example removes token_type_ids
-            if isinstance(inputs, dict) and "token_type_ids" in inputs:
-                inputs.pop("token_type_ids", None)
+            if not raw_text:
+                return ""
 
-            # Move tensors to model device
-            inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
-            input_len = inputs["input_ids"].shape[-1]
+            # Strip an optional "Answer:" prefix the model sometimes emits
+            cleaned = re.sub(r"^\s*(?:answer|الإجابة|الاجابة)\s*[:=]\s*", "", raw_text, flags=re.IGNORECASE)
 
-            with torch.inference_mode():
-                generation = self.model.generate(
-                    **inputs,
-                    max_new_tokens=max_tokens,
-                    do_sample=False,
-                    pad_token_id=self.tokenizer.pad_token_id,
-                    eos_token_id=self.tokenizer.eos_token_id,
-                )
+            # keep only ONE line
+            one_line = cleaned.split("\n")[0].strip()
+            print(f"[Jais2Chat] Answer-gen raw (one line): {repr(one_line[:200])}")
+            return one_line
 
-            gen_ids = generation[0][input_len:]
-            raw_text = self.tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
+        raise ValueError(
+            f"Unsupported task_type={task_type!r}. Expected 'mcq' or 'answer_generation'."
+        )
 
-        except Exception as e:
-            print("[Jais2ChatMCQ] Error during generation:", e)
-            return None
-        finally:
-            torch.cuda.empty_cache()
+    def prompt_batch(
+        self,
+        samples: List[dict],
+        instruction: str,
+        max_tokens: int = 128,
+        task_type: str = "mcq",
+    ):
+        return [
+            self.prompt(s, instruction=instruction, max_tokens=max_tokens, task_type=task_type)
+            for s in samples
+        ]
 
-        if not raw_text:
-            return None
-
-        print(f"[Jais2ChatMCQ] MCQ raw generated: {repr(raw_text)}")
-        upper = raw_text.upper()
-
-        # Prefer strict format: ANSWER: X
-        m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
-        if m:
-            return m.group(1)
-
-        # Common Arabic equivalent sometimes shows up
-        m = re.search(r"\b(?:الإجابة|الاجابة)\s*[:=]\s*([A-F])\b", raw_text)
-        if m:
-            return m.group(1).upper()
-
-        # Fallback: first standalone A-F
-        m = re.search(r"\b([A-F])\b", upper)
-        if m:
-            return m.group(1)
-
-        print("[Jais2ChatMCQ] Could not extract a clean letter.")
-        return None

@@ -1,0 +1,130 @@
+{
+  "dataset_info": {
+    "description": "Arabic medical patient–assistant dialogues",
+    "language": "Modern Standard Arabic",
+    "model_used": "claude-sonnet-4-20250514",
+    "total_cases": 2
+  },
+  "cases": [
+    {
+      "case_id": 1,
+      "metadata": {
+        "clinician_name": "Dr. Khaled ",
+        "organ_system": "Endocrinology",
+        "problem_type": "Clinic non emergency",
+        "patient_profile": "A 64-year-old postmenopausal female with a history of osteopenia.\nShe has no previous history of neck surgery or radiation exposure.",
+        "symptoms_and_history": "The patient reports vague &quot;aching in her bones&quot; and\nrecurrent bouts of constipation over several months. She has experienced two\nepisodes of painful kidney stones in the last three years. Physical exam is\nunremarkable, but she mentions feeling increasingly &quot;foggy&quot; and fatigued.\nLaboratory tests reveal a persistently elevated serum calcium of 10.8 mg/dL. Her\nvitamin D levels are within the normal range.",
+        "red_flag_symptoms": "Chronic hypercalcemia.",
+        "primary_reasoning_objective": "Diagnosis of Primary Hyperparathyroidism;\nelevated calcium with inappropriately normal or high PTH suggests a parathyroid\nadenoma."
+      },
+      "dialogue": {
+        "language": "Arabic (Modern Standard)",
+        "turn_count": 7,
+        "turns": [
+          {
+            "turn_index": 1,
+            "speaker": "مريض",
+            "speaker_role": "patient",
+            "text": "دكتور، أشعر بألم مستمر في عظامي منذ عدة أشهر، وأعاني من إمساك متكرر. كما أنني أشعر بالتعب والضبابية الذهنية باستمرار"
+          },
+          {
+            "turn_index": 2,
+            "speaker": "مساعد طبي",
+            "speaker_role": "assistant",
+            "text": "أفهم شكواك. هل يمكنك وصف ألم العظام بشكل أكثر تفصيلاً؟ وهل عانيت من أي مشاكل في الكلى مؤخراً؟"
+          },
+          {
+            "turn_index": 3,
+            "speaker": "مريض",
+            "speaker_role": "patient",
+            "text": "الألم يشبه الوجع العميق في العظام، وليس في مكان محدد. وبخصوص الكلى، نعم لقد أصبت بحصوات الكلى مرتين خلال الثلاث سنوات الماضية، وكانت مؤلمة جداً"
+          },
+          {
+            "turn_index": 4,
+            "speaker": "مساعد طبي",
+            "speaker_role": "assistant",
+            "text": "هذه المعلومات مهمة. أرى من نتائج فحوصاتك أن مستوى الكالسيوم في الدم مرتفع عن المعدل الطبيعي. هذا قد يفسر الأعراض التي تعانين منها. هل تتناولين أي مكملات كالسيوم أو فيتامين د؟"
+          },
+          {
+            "turn_index": 5,
+            "speaker": "مريض",
+            "speaker_role": "patient",
+            "text": "لا أتناول أي مكملات حالياً. هل هذا الارتفاع في الكالسيوم خطير؟ وما علاقته بالأعراض التي أشعر بها؟"
+          },
+          {
+            "turn_index": 6,
+            "speaker": "مساعد طبي",
+            "speaker_role": "assistant",
+            "text": "الكالسيوم المرتفع يمكن أن يسبب جميع الأعراض التي ذكرتيها: ألم العظام، الإمساك، التعب، وحتى حصوات الكلى. نحتاج لإجراء فحص إضافي لهرمون الغدة الدرقية (PTH) لتحديد السبب وراء هذا الارتفاع"
+          },
+          {
+            "turn_index": 7,
+            "speaker": "مريض",
+            "speaker_role": "patient",
+            "text": "متى يمكنني إجراء هذا الفحص؟ وهل هناك علاج لهذه الحالة؟"
+          }
+        ]
+      }
+    },
+    {
+      "case_id": 2,
+      "metadata": {
+        "clinician_name": "Dr. Khaled ",
+        "organ_system": "Endocrinology",
+        "problem_type": "Clinic non emergency",
+        "patient_profile": "A 32-year-old female who recently returned to work after maternity\nleave. She has a family history of autoimmune disorders, specifically Type 1\nDiabetes.",
+        "symptoms_and_history": "She complains of significant weight gain despite a decreased\nappetite and persistent &quot;cold intolerance.&quot; Her skin has become noticeably dry, and\nher hair is thinning at the temples. She describes a feeling of fullness in her neck but\ndenies any difficulty swallowing. Her menstrual cycles have become heavier and\nmore frequent over the last three months. Heart rate is 58 beats per minute on\nexamination.",
+        "red_flag_symptoms": "Firm, painless goiter.",
+        "primary_reasoning_objective": "Diagnosis of Hashimoto’s Thyroiditis; requires TPO\nantibody testing and TSH/Free T4 correlation."
+      },
+      "dialogue": {
+        "language": "Arabic (Modern Standard)",
+        "turn_count": 7,
+        "turns": [
+          {
+            "turn_index": 1,
+            "speaker": "مريض",
+            "speaker_role": "patient",
+            "text": "السلام عليكم دكتور، أشعر بتعب شديد مؤخراً وزاد وزني كثيراً رغم أنني لا آكل كما كنت من قبل. كما أنني أشعر بالبرد باستمرار حتى في الطقس الدافئ."
+          },
+          {
+            "turn_index": 2,
+            "speaker": "مساعد طبي",
+            "speaker_role": "assistant",
+            "text": "وعليكم السلام، أفهم شكواك. متى بدأت هذه الأعراض؟ وهل لاحظت أي تغييرات أخرى في جسمك مثل الجلد أو الشعر؟"
+          },
+          {
+            "turn_index": 3,
+            "speaker": "مريض",
+            "speaker_role": "patient",
+            "text": "بدأت الأعراض منذ حوالي ثلاثة أشهر بعد عودتي من إجازة الأمومة. جلدي أصبح جافاً جداً، وشعري يتساقط خاصة من الجانبين. كما أن دورتي الشهرية أصبحت أثقل وأكثر تكراراً."
+          },
+          {
+            "turn_index": 4,
+            "speaker": "مساعد طبي",
+            "speaker_role": "assistant",
+            "text": "هل تشعرين بأي انتفاخ أو امتلاء في منطقة الرقبة؟ وهل لديك تاريخ عائلي لأي أمراض مناعية أو مشاكل في الغدة الدرقية؟"
+          },
+          {
+            "turn_index": 5,
+            "speaker": "مريض",
+            "speaker_role": "patient",
+            "text": "نعم، أشعر بامتلاء في رقبتي لكن دون صعوبة في البلع. أما بالنسبة للتاريخ العائلي، فوالدتي مصابة بداء السكري النوع الأول منذ سنوات."
+          },
+          {
+            "turn_index": 6,
+            "speaker": "مساعد طبي",
+            "speaker_role": "assistant",
+            "text": "بناءً على الأعراض التي تصفينها والتاريخ العائلي، قد تكون هناك مشكلة في الغدة الدرقية. سأحتاج لفحصك سريرياً وطلب بعض التحاليل مثل TSH وT4 الحر وأجسام مضادة للغدة الدرقية لتأكيد التشخيص."
+          },
+          {
+            "turn_index": 7,
+            "speaker": "مريض",
+            "speaker_role": "patient",
+            "text": "حسناً دكتور، أشعر بالقلق قليلاً. هل هذا شيء خطير؟ ومتى يمكنني إجراء هذه التحاليل؟"
+          }
+        ]
+      }
+    }
+  ]
+}

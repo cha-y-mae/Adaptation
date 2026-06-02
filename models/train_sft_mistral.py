@@ -184,8 +184,9 @@ def load_model(model_name: str):
     """
     model = Mistral3ForConditionalGeneration.from_pretrained(
         model_name,
-        torch_dtype=torch.bfloat16,
+        dtype=torch.bfloat16,
         cache_dir=HF_CACHE,
+        low_cpu_mem_usage=True,
     )
     return model
 

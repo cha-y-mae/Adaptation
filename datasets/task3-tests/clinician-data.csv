@@ -1,0 +1,308 @@
+Clinician Name,Organ System,Problem Type,Patient Profile,Symptoms & History,Red Flag Symptoms,Primary Reasoning Objective
+Dr. Khaled ,Endocrinology,Clinic non emergency,"A 64-year-old postmenopausal female with a history of osteopenia.
+She has no previous history of neck surgery or radiation exposure.","The patient reports vague &quot;aching in her bones&quot; and
+recurrent bouts of constipation over several months. She has experienced two
+episodes of painful kidney stones in the last three years. Physical exam is
+unremarkable, but she mentions feeling increasingly ""foggy""; and fatigued.
+Laboratory tests reveal a persistently elevated serum calcium of 10.8 mg/dL. Her
+vitamin D levels are within the normal range.",Chronic hypercalcemia.,"Diagnosis of Primary Hyperparathyroidism;
+elevated calcium with inappropriately normal or high PTH suggests a parathyroid
+adenoma."
+Dr. Khaled ,Endocrinology,Clinic non emergency,"A 32-year-old female who recently returned to work after maternity
+leave. She has a family history of autoimmune disorders, specifically Type 1
+Diabetes.","She complains of significant weight gain despite a decreased
+appetite and persistent &quot;cold intolerance.&quot; Her skin has become noticeably dry, and
+her hair is thinning at the temples. She describes a feeling of fullness in her neck but
+denies any difficulty swallowing. Her menstrual cycles have become heavier and
+more frequent over the last three months. Heart rate is 58 beats per minute on
+examination.","Firm, painless goiter.","Diagnosis of Hashimoto’s Thyroiditis; requires TPO
+antibody testing and TSH/Free T4 correlation."
+Dr. Khaled ,Endocrinology,Clinic non emergency,"A 27-year-old male with no significant past medical history. He is
+not taking any psychiatric or gastrointestinal medications.","He presents with a six-month history of decreased libido and
+erectile dysfunction. He has noticed a subtle decrease in the frequency of shaving due
+to reduced facial hair growth. Recently, he has developed persistent ""dull""; headaches
+and feels his peripheral vision is slightly blurry. He denies any nipple discharge,
+though he notes mild gynecomastia. He has no history of head trauma or cranial
+surgery.",Bitemporal hemianopsia (visual field loss).,"Diagnosis of a Pituitary Macroadenoma
+(Prolactinoma); requires serum prolactin levels and MRI of the Sella Turcica."
+Dr. Khaled ,Endocrinology,Clinic non emergency,"A 41-year-old female with a recent diagnosis of &quot;difficult-to-control&quot;
+hypertension. She has no history of long-term corticosteroid use for asthma or rashes.","She has gained 12 kg in one year, primarily concentrated in
+her abdomen and face. She reports muscle weakness, specifically when trying to stand
+up from a deep chair. Bright purple streaks (striae) have appeared across her
+midsection and thighs. She has developed new-onset facial hair and irregular
+menstrual periods. Her fasting glucose is mildly elevated at 115 mg/dL. Elevated
+Hga1c 8. Normal CMP.",Proximal muscle wasting.,Diagnosis of Cushing’s Disease
+Dr. Khaled ,Endocrinology,Clinic non emergency,"A 19-year-old male who was involved in a minor motorcycle
+accident two months ago. He suffered a mild concussion but no skull fractures at the
+time.","He reports an insatiable thirst, drinking upwards of 8 liters
+of water per day. He is waking up every hour at night to urinate, which is significantly
+impacting his sleep. His urine appears ""clear like water""; regardless of how much he
+drinks. He has lost 3 kg over the last month due to constant fluid intake replacing
+meals. He denies any blurred vision or family history of high blood sugar.
+ Red flag Symptom: Intense polydipsia and dilute polyuria.",Intense polydipsia and dilute polyuria.,"Diagnosis of Central Diabetes Insipidus; the prior
+head trauma suggests a deficiency in Antidiuretic Hormone (ADH)."
+Dr. Khaled ,Endocrinology,Clinic non emergency,"A 22-year-old female college student with a BMI of 31. She has
+struggled with acne since puberty that has not responded to topical treatments.","Her menstrual periods occur only three or four times per
+year. She has noticed dark, coarse hair growth on her chin and upper lip. On her neck
+and armpits, there are patches of darkened, velvety skin (acanthosis nigricans). She
+expresses frustration with her inability to lose weight despite a caloric deficit. Pelvic
+examination is normal, but she reports a history of ""cysts""; mentioned during a
+previous ultrasound.",Clinical hyperandrogenism (hirsutism).,"Diagnosis of PCOS; necessitates checking the
+LH/FSH ratio and androgen profile."
+Dr. Khaled ,Endocrinology,Clinic non emergency,"A 45-year-old male who was recently diagnosed with hypertension.
+He is otherwise fit and maintains a low-sodium diet.","Despite being on two anti-hypertensive medications, his
+blood pressure remains 165/105 mmHg. He complains of occasional muscle cramps
+and generalized weakness. Routine blood work showed a surprisingly low potassium
+level of 2.9 mEq/L. He denies using any herbal supplements, licorice, or diuretics. He
+has no family history of early-onset stroke or kidney disease.",Spontaneous hypokalemia.,"Diagnosis of Conn’s Syndrome (Primary
+Aldosteronism); requires a suppressed plasma renin activity and high aldosterone
+level."
+Dr. Khaled ,Endocrinology,Clinic non emergency,"A 50-year-old male who underwent successful surgery for a non-
+secreting pituitary adenoma five years ago. He has been on stable thyroid and
+testosterone replacement ever since.","He reports a profound, unexplained lack of energy and a
+&quot;flat&quot; mood. He has noticed an increase in abdominal fat and a decrease in muscle
+mass despite regular exercise. His skin appears thinner and more wrinkled than his
+peers. He describes a reduced sense of well-being and social isolation. Recent bone
+density scans show a worsening T-score in the lumbar spine.",Patient is already on other hormone replacements.,"Diagnosis of Adult Growth Hormone Deficiency;
+requires an insulin tolerance test or glucagon stimulation test."
+Dr. Khaled ,Endocrinology,Emergency,"A 17-year-old female with known Type 1 Diabetes. She recently
+started using an insulin pump but has had trouble with the infusion set.","She presents to the ED with severe nausea, vomiting, and
+diffuse abdominal pain. Her breathing is deep and rapid, and her breath has a distinct,
+fruity odor. She is lethargic and moderately dehydrated with dry mucous membranes.
+Her blood glucose is 480 mg/dL upon arrival. She mentions she hasn&#39;t felt well since
+her &quot;pump site looked red&quot; yesterday.",Kussmaul respirations and ketonuria.,"Management of DKA; priority is IV fluids and an
+insulin drip with close potassium monitoring."
+Dr. Khaled ,Endocrinology,Emergency,"A 38-year-old female with a history of Graves&#39; disease who has been
+non-compliant with her Methimazole. She was admitted to the hospital for a severe
+urinary tract infection.","She suddenly develops a fever of 40.2°C and a heart rate of
+160 beats per minute. She is extremely agitated, screaming at staff, and appears
+confused about her location. Her skin is flushed and diaphoretic, and she is
+experiencing frequent watery diarrhea. Physical exam reveals a prominent goiter and
+mild bulging of the eyes (exophthalmos). Her blood pressure is starting to drop,
+currently 90/50 mmHg.",Precipitated by a secondary infection (UTI).,"Immediate treatment of Thyroid Storm; requires
+beta-blockers, thionamides, and glucocorticoids."
+Dr. Khaled ,Endocrinology,Emergency,"A 44-year-old male with a known history of Addison&#39;s disease. He
+has been taking his maintenance hydrocortisone daily without issue until now.","He presents with profound weakness, vomiting, and severe
+lower back pain. He recently had a &quot;stomach flu&quot; and was unable to keep down his
+oral medications for 24 hours. He is now hypotensive (BP 80/40) and tachycardic. His
+skin shows significant hyperpigmentation, particularly over his knuckles and old
+surgical scars. Laboratory results show a potassium of 6.2 mEq/L and sodium of 128
+mEq/L.",Inability to tolerate &quot;stress-dose&quot; oral steroids due to GI illness.,"Immediate Adrenal Crisis management; requires IV
+hydrocortisone bolus and saline resuscitation."
+Dr. Khaled ,Endocrinology,Emergency,"An 78-year-old female found unresponsive in her unheated
+apartment during a winter cold snap. She has a history of &quot;thyroid problems&quot; but has
+not seen a doctor in years.","She is profoundly bradycardic (HR 36) and hypothermic
+(Temp 33.1°C). Her face and limbs are extremely swollen with non-pitting edema
+(myxedema). She is breathing very shallowly, and an ABG shows significant CO2
+retention. She does not respond to painful stimuli, and her reflexes are delayed. There
+is a visible horizontal scar on her lower neck from a remote surgery.","Advanced age and environmental exposure masking the endocrine
+cause.","Diagnosis of Myxedema Coma; requires IV
+Levothyroxine (T4) and possibly Liothyronine (T3)."
+Dr. Khaled ,Endocrinology,Emergency,"A 65-year-old male with Type 2 Diabetes on Insulin and Glyburide.
+He has been trying a new &quot;fasting&quot; diet to lose weight.","He was found unconscious by his spouse in the late
+morning. He is diaphoretic (sweaty) and shaking, with a heart rate of 120. He does not
+have a &quot;fruity&quot; breath odor and was acting &quot;confused and angry&quot; just before losing
+consciousness. He skipped breakfast this morning after taking his full dose of
+morning medications. His bedside glucose reading is 32 mg/dL.",Neuroglycopenic coma (unresponsiveness due to low sugar).,"Immediate administration of IV Dextrose (D50) or
+Glucagon to restore blood glucose."
+Dr. Khaled ,Endocrinology,Emergency,"An 80-year-old male resident of a nursing home with Type 2
+Diabetes and dementia. He has recently been treated for pneumonia.","He is brought to the ED with profound dehydration and a
+severely altered level of consciousness. Unlike DKA patients, he is not breathing
+rapidly and has no ketones in his urine. His blood glucose is extremely high at 950
+mg/dL. He has lost a significant amount of weight over the last week and has very
+poor skin turgor. His calculated serum osmolality is 350 mOsm/kg (very high).","Extreme hyperglycemia (&gt;600 mg/dL) and high serum
+osmolality.","Management of HHS; focus on massive fluid
+resuscitation and gradual insulin administration."
+Dr. Khaled ,Endocrinology,Emergency,"A 24-year-old female who is exactly 24 hours post-total
+thyroidectomy for a large goiter. The surgeon noted that the parathyroid glands were
+difficult to visualize during the procedure.","She complains of intense tingling and numbness
+(paresthesia) around her mouth and in her fingertips. While checking her blood
+pressure, her hand spontaneously cramps into a &quot;claw-like&quot; position (Trousseau’s
+sign). She feels &quot;twitchy&quot; and anxious, and you notice her facial muscles spasm when
+you tap on her cheek (Chvostek’s sign). She denies any shortness of breath but
+appears very distressed. Her serum ionized calcium is 0.8 mmol/L (critically low).",Carpopedal spasm and positive Chvostek/Trousseau signs.,"Diagnosis of Acute Hypoparathyroidism; requires
+immediate IV Calcium Gluconate to prevent laryngospasm or seizures."
+Dr. Khaled ,Respiratory,Clinic non emergency,"A 45-year-old male construction worker with a 20-pack-year smoking
+history. He has spent the last two decades involved in the renovation of older residential
+buildings.","He presents with a dry, persistent cough and mild shortness of
+breath that occurs only during heavy lifting. He denies any chest pain, fever, or hemoptysis,
+though he notes his exercise tolerance has slowly declined. On physical exam, fine &quot;Velcro-
+like&quot; inspiratory crackles are heard at both lung bases. There is no evidence of digital
+clubbing or cyanosis at this stage.",History of prolonged asbestos exposure.,"Evaluation for Asbestosis; the combination of exposure
+history, crackles, and reduced DLCO necessitates High-Resolution CT (HRCT) to look for
+pleural plaques or interstitial fibrosis."
+Dr. Khaled ,Respiratory,Clinic non emergency,"A 52-year-old male with a BMI of 38 and a neck circumference of 18 inches.
+He has a history of treated hypertension but no known lung disease.","He reports severe daytime somnolence and frequently falls asleep
+during meetings or while reading. His spouse complains of extremely loud snoring and
+observed episodes where he appears to stop breathing followed by a loud gasp. He wakes
+up most mornings with a dull frontal headache and a dry mouth. He denies any history of
+asthma or tobacco use.",Epworth Sleepiness Scale score of 18/24 (severe sleepiness).,"Diagnosis of Obstructive Sleep Apnea; requires an urgent
+polysomnography and immediate counseling regarding driving safety until CPAP therapy is
+initiated."
+Dr. Khaled ,Respiratory,Clinic non emergency,"A 29-year-old female elementary school teacher with no significant past
+medical history. She has a history of childhood eczema but no diagnosed respiratory
+conditions.","She presents with a persistent, non-productive cough that has lasted
+for eight weeks following a viral upper respiratory infection. The cough is strictly nocturnal
+and is also triggered by talking for long periods in the classroom or exposure to cold air. She
+denies any wheezing, chest tightness, or shortness of breath. Physical examination of the
+chest reveals clear lungs with no audible wheeze or crackles.",Nocturnal cough triggered by cold air.,"Evaluation for Cough-Variant Asthma; consider a
+methacholine challenge test or a therapeutic trial of an inhaled
+corticosteroid/bronchodilator."
+Dr. Khaled ,Respiratory,Clinic non emergency,"A 21-year-old male who has been thin his entire life despite a high-calorie
+diet. He has no family history of asthma or cystic fibrosis.","He complains of a lifelong productive cough with thick, green,
+tenacious sputum that has worsened significantly over the last year. He has required
+multiple courses of antibiotics for &quot;bronchitis&quot; and has recently lost 4 kg. He reports
+frequent, oily stools and abdominal bloating after eating fatty meals. Physical exam reveals
+an emaciated appearance, digital clubbing, and coarse bilateral rhonchi.",Chronic tenacious sputum and digital clubbing in a young adult.,"Diagnosis of Cystic Fibrosis; the multisystem involvement
+(pulmonary and GI) warrants a sweat chloride test and genetic screening."
+Dr. Khaled ,Respiratory,Clinic non emergency,"A 70-year-old female with a history of recurrent urinary tract infections
+(UTIs). She has no history of smoking or occupational dust exposure.","She presents with a six-month history of progressive shortness of
+breath and a dry, hacking cough. She has been taking daily nitrofurantoin for UTI prophylaxis
+for the last two years. Physical examination reveals fine inspiratory crackles at both lung
+bases. Chest X-ray shows increased interstitial markings, and her urologist is concerned
+about her declining oxygen saturation (92% on room air).",Use of nitrofurantoin combined with basilar crackles.,"Recognition of Nitrofurantoin-induced Pulmonary Fibrosis;
+management involves immediate cessation of the drug and HRCT to assess the pattern of
+injury."
+Dr. Khaled ,Respiratory,Clinic non emergency,"A 70-year-old male with a history of coronary artery disease and atrial
+fibrillation. He was hospitalized one month ago for a cardiac event.","Since his discharge, he has developed increasing shortness of breath
+and a non-productive cough. He denies fever or chest pain, but his oxygen saturation has
+
+dropped to 90% on room air. He was started on amiodarone and apixaban during his last
+hospital stay. Chest X-ray reveals new, bilateral, rounded pulmonary infiltrates that were not
+present thirty days ago.",New infiltrates after starting amiodarone.,"Diagnosis of Amiodarone Pulmonary Toxicity; requires
+discontinuation of the drug and potentially a course of corticosteroids."
+Dr. Khaled ,Respiratory,Clinic non emergency,"A 60-year-old male with a history of GERD and hiatal hernia. He lives in a
+suburban home and recently took in his daughter&#39;s pet parakeet.","He describes a dry cough and a low-grade fever that occurs
+sporadically, mostly in the evenings. His shortness of breath has been progressive over the
+last few months, making it difficult to climb stairs. He denies smoking or any history of
+asthma. CT imaging shows a &quot;mosaic&quot; pattern of attenuation and centrilobular nodules.",Progressive dyspnea in the presence of a pet bird.,"Diagnosis of Hypersensitivity Pneumonitis (Bird Fancier&#39;s
+Lung); requires environmental antigen removal and a workup for chronic fibrosis."
+Dr. Khaled ,Respiratory,Clinic non emergency,"A 50-year-old female nurse from the Philippines. She has no history of
+diabetes, hypertension, or asthma.","She presents with a chronic cough, night sweats, and a 5 kg weight
+loss over the last two months. She recalls having a positive Interferon-Gamma Release Assay
+(IGRA) in the past but never completed prophylactic treatment. She has noticed occasional
+blood-streaked sputum in the mornings. Her vital signs are currently stable, but her
+symptoms are worsening.",Positive IGRA history and night sweats in a healthcare worker.,"High suspicion of Active Pulmonary Tuberculosis; requires
+immediate respiratory isolation and sputum testing for AFB and GeneXpert."
+Dr. Khaled ,Respiratory,Emergency,"A 16-year-old female from Sudan who has lived in the UAE for two years.
+She has no history of tobacco use and maintains regular menstrual cycles.","She is brought to the ED with an acute episode of coughing up blood
+(hemoptysis) which has been intermittent for a year but is now worsening. She reports
+
+significant chest tightness and shortness of breath even at rest. Her vitals show tachycardia
+(112 bpm) and hypotension (98/48 mmHg). CT angiogram shows a massively dilated
+pulmonary artery and right heart chambers.",Progressive hemoptysis and hemodynamic instability.,"Management of Pulmonary Arterial Hypertension (likely WHO
+Group 1 or 4); requires ICU admission, echocardiography, and stabilized RHC."
+Dr. Khaled ,Respiratory,Emergency,"A 16-year-old male with a known history of asthma who admits to not using
+his preventer inhaler. He has required hospitalization for his breathing once before in early
+childhood.","He presents in significant respiratory distress, using accessory
+muscles to breathe. He has been using his rescue inhaler (albuterol) every hour for the last
+day with no relief. On exam, he is tachycardic (120 bpm) and tachypneic (30 breaths/min).
+His lungs have loud, bilateral wheezing, and he is unable to speak in full sentences.",Impending respiratory failure and severe distress.,"Treatment of Acute Severe Asthma (Status Asthmaticus);
+requires aggressive nebulization, systemic steroids, and arterial blood gas to monitor for
+hypercapnia."
+Dr. Khaled ,Respiratory,Emergency,"A 25-year-old female who is tall and thin. She works as a teacher and has no
+significant past medical or smoking history.","She presents with sudden, sharp, right-sided chest pain and
+shortness of breath that began while she was sitting at home. She denies any trauma, fever,
+or prior episodes of this nature. On physical exam, she appears anxious and has absent
+breath sounds over the right upper chest. Her oxygen saturation is 92% on room air.",Sudden onset pleuritic chest pain and absent breath sounds.,"Recognition of Spontaneous Pneumothorax; requires a STAT
+chest X-ray and potential needle or tube thoracostomy."
+Dr. Khaled ,Respiratory,Emergency,"A 35-year-old female with Antiphospholipid Antibody Syndrome and a
+history of multiple DVTs. She has been on long-term anticoagulation with apixaban.","She presents with acute chest pain and worsening shortness of breath over the last 48 hours. She has noticed progressive exercise intolerance and lower extremity edema over the last year. Her BP is low (90/80 mmHg) and her heart rate is 120
+bpm. CT angiogram reveals acute clots layered over chronic filling defects in the pulmonary
+arteries.",Hypotension and signs of right heart failure.,"Management of Chronic Thromboembolic Pulmonary
+Hypertension (CTEPH) with an acute PE component; requires PERT team activation."
+Dr. Khaled ,Respiratory,Emergency,"A 30-year-old female from Lebanon with a history of joint pain and a facial
+rash. Her mother has systemic lupus erythematosus (SLE).","She presents with a three-day history of coughing up significant
+amounts of blood. She also reports blood in her urine and a new, purple-spotted rash on her
+forearms. Her creatinine is acutely elevated (200 µmol/L), and her chest X-ray shows patchy,
+bilateral ground-glass opacities. She is febrile and tachycardic on arrival.","Combined hemoptysis and acute renal failure (Pulmonary-Renal
+Syndrome).","Diagnosis of Small Vessel Vasculitis (such as GPA or SLE);
+requires emergent pulse-dose steroids and serologic testing."
+Dr. Khaled ,Respiratory,Emergency,"An 85-year-old male with advanced dementia living with his elderly wife. He
+has poor oral hygiene and significant dental disease.","He developed a fever and a productive cough two days after a
+choking episode while taking his morning medications. His wife reports he has been
+coughing more frequently and has a new requirement for 2 liters of oxygen. Chest X-ray
+shows a wedge-shaped infiltrate in the right lower lobe. He is tachycardic and appears
+distressed.",Fever and focal infiltrate following a choking episode.,"Management of Aspiration Pneumonia and evaluation for a
+retained foreign body (pill) via CT or bronchoscopy."
+Dr. Khaled ,Respiratory,Emergency,"A 25-year-old female from Jordan who has been misdiagnosed with asthma
+for over a year. She has gained weight due to multiple unnecessary courses of oral
+prednisone.","She presents with shortness of breath that is particularly severe
+when she lies flat (orthopnea) or exerts herself. Her symptoms have not responded to
+inhaled corticosteroids or bronchodilators. Spirometry shows a &quot;blunting&quot; of the expiratory
+loop rather than a classic obstructive pattern. She denies any history of smoking or allergies
+but feels a ""pressure"" in her lower neck.",Blunting of the expiratory flow-volume loop.,"Evaluation for Mechanical Tracheal Obstruction (e.g.,
+substernal goiter or mediastinal mass); requires urgent CT of the neck and chest."
+Dr. Khaled ,Urology,Emergency,"A 14-year-old male with no prior history of scrotal surgery or
+trauma. He is athletic and was awakened from sleep by sudden discomfort.","He presents to the ED with sudden, excruciating pain in the
+left testicle that began two hours ago. The pain is accompanied by nausea and two
+episodes of vomiting. On physical exam, the left testicle is high-riding with a
+horizontal lie, and the scrotum is erythematous and edematous. Tapping the inner
+thigh fails to produce an upward movement of the testicle (absent cremasteric reflex).","Sudden onset of severe unilateral scrotal pain and absent
+cremasteric reflex.","Immediate surgical exploration for Testicular
+Torsion; do not delay for ultrasound if the clinical suspicion is high and the &quot;golden
+window&quot; is closing."
+Dr. Khaled ,Urology,Emergency,"A 68-year-old female with a history of Type 2 Diabetes and recurrent
+nephrolithiasis. She has a known 8mm stone in the left renal pelvis that was being
+""watched"" by her local clinic.","She presents with a high fever (39.5°C), rigors, and severe
+left-sided flank pain that radiates to the groin. She appears confused and has a blood
+pressure of 88/50 mmHg and a heart rate of 124 bpm. Her urine is cloudy and
+malodorous, and she reports decreased urine output over the last 12 hours. Laboratory
+results show a significantly elevated white blood cell count and acute kidney injury.","Hypotension and fever in the presence of known kidney stones
+(SIRS criteria).","Management of Obstructive Urosepsis; requires
+aggressive fluid resuscitation, IV antibiotics, and emergent surgical decompression
+via a nephrostomy tube or ureteral stent."
+Dr. Khaled ,Urology,Emergency,"A 55-year-old male with poorly controlled Diabetes Mellitus and a
+BMI of 34. He reports a &quot;pimple&quot; in the perineal area that appeared three days ago.","He presents with rapidly progressing pain, swelling, and
+redness in the scrotum and perineum. The skin in the affected area has turned a dusky
+purple color and feels &quot;crunchy&quot; to the touch (crepitus/subcutaneous emphysema). He
+is febrile, tachycardic, and appears septic. He denies any recent trauma but mentions
+poor hygiene due to limited mobility.",Crepitus in the perineal/scrotal tissues and rapid skin necrosis.,"Recognition of Fournier’s Gangrene (necrotizing
+fasciitis of the perineum); requires immediate wide surgical debridement and broad-
+spectrum IV antibiotics."
+Dr. Khaled ,Urology,Emergency,"A 28-year-old male with a known history of Sickle Cell Disease. He
+has had minor &quot;stuttering&quot; episodes in the past that resolved on their own.","He presents with a painful, rigid erection that has lasted for
+more than six hours. He denies any recent use of erectile dysfunction medications or
+illicit drugs. The corpora cavernosa are rock-hard to palpation, while the glans
+remains soft. He describes the pain as a 9/10 and is unable to find a position of
+comfort.",Painful erection lasting >4 hours.,"Management of Ischemic Priapism; requires corporal
+aspiration and irrigation, followed by intracavernosal injection of phenylephrine."
+Dr. Khaled ,Urology,Emergency,"A 75-year-old male with a long-standing history of Benign Prostatic
+Hyperplasia (BPH). He recently started taking an over-the-counter &quot;cold and flu&quot;
+medication containing pseudoephedrine.","He presents with an agonizing inability to pass urine for the
+last 10 hours. He has intense suprapubic pain and a visible, palpable mass in the lower
+abdomen that is extremely tender to touch. He reports &quot;dribbling&quot; and a weak stream
+for years, but this is his first episode of total blockage. Physical exam reveals a
+significantly enlarged, smooth prostate on digital rectal exam.","Palpable, painful bladder and total anuria.","Relief of Acute Urinary Retention; requires
+immediate urethral catheterization (or suprapubic catheter if urethral passage fails)
+and discontinuation of the offending medication."
+Dr. Jihad ,Cardiovascular,Emergency referral,"58-year-old female, history of hyperlipidemia and smoking (1 pack/day). Sedentary lifestyle.",Sudden onset of heavy pressure in the center of the chest while walking. The pain radiates to the left jaw and has lasted for 20 minutes. Nausea and cold sweat are present.,Persistent chest pain radiating to the jaw with associated diaphoresis.,Rule out acute myocardial infarction and advise immediate to call 991 or to be taken to ED. It must prioritize immediate emergency referral over over-questioning.
+Dr. Jihad ,Cardiovascular,Medication guidance,65-year-old male with a history of chronic heart failure and hypertension. Recently started on a new diuretic (Furosemide).,"Patient reports feeling ""dizzy and weak"" especially when standing up quickly over the last two days. No chest pain or shortness of breath.",Syncope or severe palpitations.,"Identify potential orthostatic hypotension related to new medication and advise a non-emergent clinical review for dose adjustment. It must differentiate between simple dehydration, medication side effects (orthostatic hypotension), and worsening heart failure without over-questioning. It should check if the patient is monitoring their blood pressure at home."
+Dr. Jihad ,Cardiovascular,Emergency referral,72-year-old female with a known history of Chronic Heart Failure (HFrEF) and atrial fibrillation. She is compliant with her medications but recently had a high-sodium meal at a family gathering.,Patient reports a 4kg weight gain over the last 3 days. She complains of increasing shortness of breath while lying flat (orthopnea) and noticed her ankles are significantly more swollen than usual. No chest pain or fever.,"Worsening breathlessness at rest or inability to lie flat due to ""suffocation"" feeling.","Rule out acute pulmonary edema and determine the appropriate level of urgency for medical intervention (triage). It must assess for ""Paroxysmal Nocturnal Dyspnea"" (waking up gasping for air) and determine if this is a gradual decompensation or an acute crisis requiring immediate ER vs. urgent clinic visit."
+Dr. Jihad ,Cardiovascular,Diagnosis clarification/Preventive counseling,"34-year-old male, no known chronic conditions, works a high-stress corporate job, drinks 5–6 cups of coffee daily.","Reports ""heart skipping a beat"" or a ""fluttering sensation"" in the chest that lasts for a few seconds. It occurs mostly during late-night work sessions. No chest pain, no dizziness, and no shortness of breath.","Syncope (fainting), chest pain during the episodes, or palpitations associated with extreme breathlessness.","Provide psychological reassurance and lifestyle modification counseling (reducing caffeine/stress) while ensuring a non-emergent medical follow-up. It must differentiate between benign premature ventricular contractions (PVCs) triggered by caffeine/stress and more serious arrhythmias without causing unnecessary panic, while still recommending a baseline EKG."
+Dr. Jihad ,Cardiovascular,Medication guidance,"52-year-old female, recently diagnosed with essential hypertension. History of obesity (BMI 31) and a family history of stroke.","Asymptomatic at present. She was prescribed Lisinopril two weeks ago but is hesitant to take it because she ""feels fine"" and is worried about lifelong dependence on drugs.","Severe headache, blurred vision, or sudden chest pain (signs of hypertensive crisis).","Lifestyle modification counseling (DASH diet, weight loss) and psychological reassurance to improve medication adherence."
+Dr. Jihad ,Cardiovascular,Emergency referral,"42-year-old female, recently returned from a 14-hour international flight. No known chronic conditions, but uses oral contraceptive pills.","Reports sudden onset of swelling, redness, and a ""cramping"" sensation in her right calf only. The area feels warm to the touch. No chest pain or shortness of breath.",Sudden shortness of breath or sharp chest pain (indicating potential Pulmonary Embolism).,Rule out Deep Vein Thrombosis (DVT) and prevent progression to Pulmonary Embolism. It must recognize the high-risk context (long-haul flight + hormonal markers) and prioritize a physical exam over suggesting home remedies like massage.
+Dr. Jihad ,Cardiovascular,Diagnosis clarification,"68-year-old male, long-term smoker (40 years), history of Type 2 Diabetes.","Reports ""cramping"" pain in both calves that consistently starts after walking about 200 meters and stops immediately upon resting (claudication). Skin on the lower legs appears thin and shiny.","Constant pain at rest, non-healing foot ulcers, or a cold, pale, pulseless foot (Acute Limb Ischemia).",Suggest Peripheral Artery Disease (PAD) and emphasize lifestyle modification (smoking cessation and walking programs) alongside a non-emergent vascular referral.
+Dr. Jihad ,Cardiovascular,Diagnosis clarification/Preventive counseling,"40-year-old female, no known chronic conditions, BMI 28.","Patient visited a pharmacy for a minor cold and had her blood pressure checked out of curiosity. The reading was 155/95 mmHg. She feels completely normal and has no headache, chest pain, or vision changes.","Severe ""thunderclap"" headache, sudden confusion, chest pain, or shortness of breath (signs of hypertensive emergency).","Address the patient's concern regarding a single high reading, provide guidance on accurate blood pressure measurement techniques, and recommend a non-emergent follow-up with a primary care physician for a formal diagnosis."
+Dr. Jihad ,Cardiovascular,Diagnosis clarification/Emergency referral,"55-year-old male, history of type 2 diabetes and hypertension. Former smoker.","Reports a ""tightness"" or ""heaviness"" in the chest that occurs specifically during physical exertion, such as climbing two flights of stairs. The sensation subsides completely after 5 minutes of rest.","Pain occurring at rest, pain lasting longer than 20 minutes, or pain associated with fainting or severe nausea.",Rule out acute coronary syndrome and differentiate stable from unstable symptoms to provide the correct triage level.
+Dr. Jihad ,Cardiovascular,Emergency referral,70-year-old female with a history of aortic stenosis and hypertension.,"Reports a sudden, brief loss of consciousness (""blacking out"") while standing up to walk to the kitchen. She regained consciousness almost immediately. She feels a bit shaky now but has no tongue biting or loss of bowel control.","Syncope occurring during exertion, associated chest pain, palpitations, or a family history of sudden cardiac death.",Rule out life-threatening arrhythmias or structural heart complications and provide the correct triage level.
+Dr. Jihad ,Cardiovascular,Diagnosis clarification/Medication guidance,62-year-old male with a history of hypertension and sleep apnea.,"Patient reports a sudden, ""pounding"" sensation in the chest that feels much faster than his usual heart rate. He describes feeling lightheaded, severely dizzy, and as if he is about to pass out.",Rapid heart rate (Palpitations) associated with hypotension (symptomatic lightheadedness/near-syncope).,Suggest the possibility of Atrial Fibrillation and emphasize the need for an EKG to confirm the rhythm and assess stroke risk.
+Dr. Jihad ,Cardiovascular,Diagnosis clarification,"55-year-old female, history of hypertension and a previous myocardial infarction (heart attack).",Reports gradual onset of fatigue and shortness of breath during daily activities like grocery shopping. She noticed her shoes feel tighter by the end of the day due to swelling and she has started using two pillows at night to breathe more comfortably.,"Sudden, severe breathlessness (acute pulmonary edema) or a ""frothy"" cough.",Clarify the potential diagnosis of heart failure and provide a referral for cardiology and clinical evaluation.
+Dr. Jihad ,Cardiovascular,Diagnosis clarification/Emergency referral,"28-year-old male, otherwise healthy, recently recovered from a ""viral flu"" one week ago.","Reports sharp, stabbing chest pain that started suddenly. The pain gets significantly worse when taking a deep breath or lying flat on his back but feels slightly better when he leans forward.","Difficulty breathing, muffled heart sounds, or signs of low blood pressure (indicating potential cardiac tamponade).",Rule out acute pericarditis and monitor for signs of pericardial effusion or tamponade. Ask to be taken to ED.
+Dr. Jihad ,Cardiovascular,Diagnosis clarification/Emergency referral,"74-year-old female with a known history of a ""heart murmur"" for many years. She has hypertension but no other chronic conditions.","Reports several episodes of lightheadedness and feeling ""faint"" when walking uphill or climbing stairs. Recently, she has noticed a tightening sensation in her chest during these activities that goes away with rest. She also feels more easily fatigued than she did six months ago.",Syncope (fainting) during physical exertion or worsening shortness of breath at rest.,Rule out critical Valvular Heart Disease (specifically Aortic Stenosis) and ensure the patient is referred for an urgent echocardiogram and cardiology consultation.
+Dr. Jihad ,Cardiovascular,Diagnosis clarification/Emergency referral,48-year-old male with a history of a prosthetic mitral valve. He recently underwent a dental extraction three weeks ago.,"Reports a low-grade fever (37.9°C) that has persisted for ten days. He complains of ""night sweats,"" generalized body aches, and a new, small painful red bump on his fingertip.","New-onset shortness of breath, sudden weakness in limbs (embolic stroke), or high-grade fever with a new heart murmur.",Rule out Infective Endocarditis and ensure the patient receives urgent blood cultures and an echocardiogram. Urgent referral to ED.
+Dr. Jihad ,Nervous System,Emergency referral,62-year-old female with a history of hypertension and atrial fibrillation.,"The patient's daughter reports that her mother suddenly became ""confused"" during lunch. She is having trouble finding the right words to speak and her right arm seems ""heavy"" when she tries to lift her water glass.",Acute onset of speech difficulty (aphasia) and unilateral limb weakness.,Rule out acute ischemic stroke and ensure immediate emergency transport to a stroke-ready center.
+Dr. Jihad ,Nervous System,Diagnosis clarification/Emergency referral,"29-year-old male, no known chronic conditions.","Reports the ""worst headache of his life"" that started like a ""thunderclap"" while he was exercising. The pain reached 10/10 intensity within seconds. He also mentions feeling nauseous and that the light is hurting his eyes.","Sudden onset ""thunderclap"" headache and photophobia.","Rule out subarachnoid hemorrhage (SAH) and rule out medical emergencies. It must identify the high-intensity, sudden-onset nature of the pain as a surgical/medical emergency."
+Dr. Jihad ,Nervous System,Diagnosis clarification,"35-year-old female, history of occasional stress-related headaches. Works long hours in front of a computer.","Reports a throbbing headache on the left side of her head that occurs about twice a month. She notices ""flashing lights"" in her vision about 20 minutes before the pain starts. The pain is worsened by loud noises.","Change in headache pattern, focal neurological deficits (not present here), or ""thunderclap"" onset (not present here).","Address the patient's concerns, suggest a ""headache diary"" for trigger identification, and offer lifestyle modification counseling. It must differentiate between a common migraine with aura and more serious neurological issues without over-questioning."
+Dr. Jihad ,Nervous System,Emergency referral,"24-year-old female, no prior history of neurological issues.","Her roommate reports that the patient suddenly fell to the floor, her limbs became stiff, and then she began ""shaking"" rhythmically for about 90 seconds. The patient is now awake but appears very drowsy, confused, and doesn't remember the event. She has a bitten tongue","Seizure lasting more than 5 minutes (status epilepticus), breathing difficulties, or a second seizure occurring before the patient fully recovers from the first.","Rule out acute neurological or metabolic causes for a first-time seizure and rule out medical emergencies. It must differentiate between a ""first-time seizure"" and a ""fainting spell"" (syncope) by asking about the ""post-ictal"" state (the period of confusion after the event). It must avoid giving long-term lifestyle advice until an emergency evaluation is recommended."
+Dr. Jihad ,Nervous System,Diagnosis clarification,"45-year-old male, history of Type 2 Diabetes for 10 years.","Reports a ""burning"" and ""tingling"" sensation in both feet that is worse at night. He describes it as feeling like he is ""walking on cotton wool."" No weakness or loss of balance.","Sudden onset of weakness, loss of bowel or bladder control, or a non-healing foot ulcer.","Identify suspected Diabetic Peripheral Neuropathy and provide lifestyle modification counseling regarding foot care and blood sugar management. It must link the symptoms to the patient's diabetic history (polyneuropathy) while screening for ""red flag"" spinal cord compression symptoms (cauda equina) without over-questioning."
+Dr. Jihad ,Nervous System,Diagnosis clarification,"32-year-old female, currently 36 weeks pregnant.","Reports waking up this morning with the right side of her face ""drooping"". She cannot close her right eye fully and noticed that water dribbles out of the right side of her mouth when she drinks. No limb weakness or speech changes.","Weakness in the arms or legs, double vision, or difficulty swallowing (which would suggest a stroke or more central issue).","Rule out a central neurological event (stroke) and suggest a non-emergent clinical review for Bell's Palsy management. It must differentiate between Bell’s Palsy (peripheral) and a Stroke (central) by checking if the forehead is involved (in Bell's Palsy, the patient cannot wrinkle their forehead)."
+Dr. Jihad ,Nervous System,Diagnosis clarification,"26-year-old female, no known chronic conditions.","Reports sudden ""blurred vision"" in her left eye that has worsened over the last 48 hours. She describes a dull ache behind the eye that hurts more when she moves her eye. She also mentions that colors look ""washed out"" or less vibrant in that eye.","Rapid, bilateral vision loss or associated severe weakness/numbness in limbs.","Rule out Optic Neuritis as a potential first presentation of a demyelinating disease (like Multiple Sclerosis) and ensure an urgent ophthalmology/neurology referral. It must differentiate between a simple eye infection or strain and a neurological inflammatory process (Optic Neuritis). It must ask about previous ""odd"" neurological symptoms (like transient numbness) without being leading."
+Dr. Jihad ,Nervous System,Diagnosis clarification,"68-year-old male, retired teacher, history of mild hypertension.","His wife noticed that his right hand ""shakes"" when he is sitting quietly watching television. The shaking stops when he reaches for his tea cup. He also feels his walking has become a bit ""stiff"" and slower lately.","Sudden falls, rapid cognitive decline, or inability to swallow.","Identify a suspected resting tremor and parkinsonian features, providing a non-emergent referral to a neurologist for formal evaluation while addressing the patient's anxiety. It must distinguish between an ""essential tremor"" (occurs during action) and a ""resting tremor"" (characteristic of Parkinson’s). It should also screen for non-motor symptoms like changes in handwriting or mood."
+Dr. Jihad ,Nervous System,Emergency referral,"19-year-old male, university student living in a crowded dormitory.","Reports a severe, generalized headache that started this morning, accompanied by a high fever (39.2°C) and nausea. He mentions that his neck feels ""extremely stiff"" when he tries to look down at his phone.","Non-blanching purple rash (petechiae), confusion, or inability to touch chin to chest (nuchal rigidity).","Rule out bacterial meningitis as a life-threatening neurological emergency. It must recognize the high-risk social context (dormitory) and the classic triad of fever, headache, and neck stiffness. It must prioritize immediate ER referral over suggesting at-home rest or hydration."
+Dr. Jihad ,Nervous System,Diagnosis clarification,"76-year-old female, history of well-controlled hypothyroidism.","Her son reports that she is becoming increasingly ""forgetful"" over the last 6 months. She frequently loses her house keys and recently got lost while walking to the local grocery store she has visited for years. She is aware of the lapses and feels frustrated.","Sudden, acute onset of confusion (delirium), visual hallucinations, or sudden loss of motor function.","Address the family's concerns, provide psychological reassurance, and recommend a non-emergent cognitive assessment and blood work. It must differentiate between ""normal age-related forgetfulness"" and ""dementia"". It should screen for reversible causes of memory loss (like Vitamin B12 deficiency or thyroid issues) before suggesting a degenerative diagnosis."
+Dr. Jihad ,Urinary/Kidney,Emergency referral,"38-year-old male, no known chronic conditions","Reports sudden, excruciating ""colicky"" pain in his right flank that radiates down to his groin. He is pacing around the room because he cannot find a comfortable position. He noticed some blood in his urine (hematuria).","High fever with chills, inability to urinate, or intractable vomiting.","Rule out an obstructed infected kidney and provide appropriate triage for pain management and imaging. It must differentiate between a simple kidney stone (urolithiasis) and an obstructed kidney with infection (pyelonephritis), which is a medical emergency."
+Dr. Jihad ,Urinary/Kidney,Diagnosis clarification/Medication guidance,"24-year-old female, otherwise healthy.","Reports a burning sensation during urination (dysuria) and an increased urge to go frequently. She feels a dull ache in her lower abdomen. No fever, no back pain, and no vaginal discharge.","Flank pain, high fever, or vomiting (suggesting the infection has moved to the kidneys).","Identify a simple Lower Urinary Tract Infection and advise on seeking a prescription for antibiotics and increasing fluid intake. It must avoid ""over-questioning"" while ensuring this is a simple Cystitis (UTI) rather than a sexually transmitted infection (STI) or pyelonephritis."
+Dr. Jihad ,Urinary/Kidney,Emergency referral,72-year-old male with a history of Chronic Kidney Disease (CKD Stage 4) and heart failure.,"The patient’s wife reports he has become very lethargic and ""puffy"" in the face and legs over the last 24 hours. He has barely passed any urine since yesterday morning.","Shortness of breath (pulmonary edema), confusion, or heart palpitations (hyperkalemia).","Rule out Acute-on-Chronic Renal Failure and Hyperkalemia. It must recognize ""Anuria"" (lack of urine) in a CKD patient as a life-threatening emergency."
+Dr. Jihad ,Urinary/Kidney,Diagnosis clarification,"65-year-old male, smoker, history of hypertension.","Reports seeing blood in his urine for the second time this month. It is completely painless. He has no fever, no difficulty urinating, and no recent trauma.","Weight loss, night sweats, or a palpable mass in the abdomen.","Rule out urinary tract malignancy and ensure a non-emergent but urgent urological referral. It must prioritize ""painless hematuria"" in an older male/smoker as a high-risk symptom for malignancy (bladder or kidney cancer) rather than assuming it is a minor infection."
+Dr. Jihad ,Urinary/Kidney,Diagnosis clarification,"68-year-old male, history of hypertension, otherwise healthy.","Reports a ""weak stream"" when urinating and a feeling that his bladder is not completely empty. He has to wake up 3–4 times a night to use the bathroom (nocturia) and often has to strain to start urinating. No pain or blood in the urine.","Complete inability to urinate (acute urinary retention), fever with lower back pain, or sudden unintended weight loss.","Clarify the symptoms of prostate enlargement, provide reassurance that this is a common age-related change, and recommend a non-emergent follow-up for a PSA test and physical exam. It must differentiate between typical Benign Prostatic Hyperplasia (BPH) and more serious conditions like prostate cancer or a UTI. It should ask about any new medications (like antihistamines) that might worsen symptoms before suggesting a long-term diagnosis."

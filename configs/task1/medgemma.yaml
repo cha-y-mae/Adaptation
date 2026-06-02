@@ -7,13 +7,13 @@ model:
 cache_dir: /scratch/ca2627/huggingface #modify to your own cache directory
 
 dataset:
-  path: datasets/qa/medarabiq.json   #path to dataset JSON filexww
+  path: datasets/qa/medarabench.json   #path to dataset JSON filexww
   instruction_path: prompts/task1.txt  #path to instruction file (default.txt)
 
 task:
   type: mcq                #task 1: mcq or task 2: answer_generation
 
 output:
-  predictions_path: results/predictions/task1/medarabiq/medgemma.csv #specify output pred file
-  metrics_path: results/metrics/task1/medarabiq/medgemma.json  #specift output pred file
+  predictions_path: results/predictions/task1/test/medgemma.csv #specify output pred file
+  metrics_path: results/metrics/task1/test/medgemma.json  #specift output pred file
 

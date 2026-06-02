@@ -1,0 +1,6 @@
+deepspeed --num_gpus=4 train_sft_mistral.py \
+    --train_file ../datasets/train/train.json \
+    --val_file ../datasets/train/val.json \
+    --output_dir ../outputs/mistral_sft \
+    --deepspeed ds_zero3.json \
+    --learning_rate 1e-5 2>&1 | tee training_log.txt
