@@ -21,7 +21,6 @@ cache*/
 
 # outputs / logs
 results/
-figures/
 evaluations/
 *.log
 *.tmp
