@@ -1,0 +1,18 @@
+{
+    "judge_model": "gpt-5.2",
+    "judge_task_type": "dialogue_completion",
+    "judge_total": 100,
+    "judge_label__valid": 100,
+    "judge_label__empty": 0,
+    "judge_label__correct": 65,
+    "judge_label__correct_pct": 65.0,
+    "judge_label__incorrect": 35,
+    "judge_label__incorrect_pct": 35.0,
+    "judge_label__score": 0.65,
+    "judge_label__score_raw": 0.65,
+    "judge_label__score_n": 100,
+    "judge_composite_mean": 0.65,
+    "judge_composite_n_complete": 100,
+    "judge_composite_n_partial": 0,
+    "judge_composite_formula": "fraction labeled 'Correct' (final response vs. ground truth)"
+}

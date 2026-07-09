@@ -1,0 +1,101 @@
+id,input,prediction,ground_truth
+0,كل ما هو آت صحيح عن محفظة بومان ما عدا:,ANSWER: Bowman's capsule is part of the nephron.,D
+1,كل ما يلي صحيح عن السفلس ماعدا:,ANSWER: Treponema pallidum is a virus.,B
+2,من العلاجات التلطيفية للحبن الخبيث:,ANSWER: Palliative care for malignant acne.,D
+3,أي مما يلي تستبعد إصابته في الجحوظ الورمي:,ANSWER: العصب المبهم,D
+4,كل ما يلي صحيح عن المساريقا ما عدا:,ANSWER: Mesenteric ischemia is not always caused by atherosclerosis.,A
+5,من مكونات الجريبات المبيضية وتفرز ال androstenadione:,ANSWER: الخلايا الحبيبية (Granulosa cells),C
+6,الدانترولين يملك تأثير:,ANSWER: Muscle relaxant,B
+7,يتحرر الأستيل كولين من الأماكن التالية عدا:,ANSWER: الخلايا العصبية الحركية السفلية,D
+8,ما يلي حول التهاب الكبد المزمن المرتقي الفعال صحيح ما عدا:,ANSWER: Chronic hepatitis B is not typically associated with cryoglobulinemia.,B
+9,كل العوامل التالية تزيد امتصاص الحديد عدا:,ANSWER: Phytates and tannins,D
+10,التبادل المتبادل بين الكروموسوم 8 و 14 يسبب:,ANSWER: Burkitt lymphoma,B
+11,في حال حدوث خلل اثناء التشكل الجنيني اي من البنى التالية تشكل ناسور مع الرغامى:,ANSWER: القصبة الهوائية المتفرعة (Tracheoesophageal fistula),C
+12,تتصف العصيدة الشريانية بما يلي عدا:,ANSWER: لا يوجد خيار صحيح.,A
+13,يتصف تقلص العضالت الملس بما يلي عدا:,ANSWER: Voluntary contraction,B
+14,اشر الاحتمال المقبول:,ANSWER: Acceptable probability,B
+15,في تطور القلب:,ANSWER: Cardiac development,A
+16,في الربو القصبي كل ما يلي صحيح ما عدا:,ANSWER: Airway obstruction is reversible.,E
+17,في الاصابة بداء وحيدات النوى الخمجي كل ما يلي صحيح عدا:,ANSWER: لا يوجد أي من الخيارات المذكورة صحيح.,B
+18,يختلف كامن فعل الليف العضلي القلبي عن كامن فعل الليف العقدي القلبي بما يلي عدا:,ANSWER: Longer duration and plateau phase.,B
+19,اختر الاجابة الصحيحة:,"Okay, I understand the rules. Please provide the medical exam question. I am ready.",D
+20,مادة السورفاكتانت تنتج من:,ANSWER: Type II pneumocytes,B
+21,في النفث الدموي الحاد كل ما يلي صحيح ما عدا:,ANSWER: Increased pulmonary vascular resistance.,A
+22,من الأدوية التي تزيد من صنع الغلوبيولين الرابط للتريوكسين:,ANSWER: Phenytoin,C
+23,هذا الجزء من الكظر تشتق خلاياه من العرف العصبي انه:,ANSWER: قشر الكظر,D
+24,في مراحل نضج الرئتين تتشكل الاسناخ الاولية خلال:,ANSWER: القناة التنفسية (respiratory canal),C
+25,كل ما يلي من الملحقات الجلدية ما عدا:,ANSWER: Hair follicles,A
+26,كل مما يلي حول التهاب الكبد الخاطف صحيح ما عدا:,ANSWER: Fulminant hepatitis is always fatal.,D
+27,كل ما يلي صحيح عن التسمم الوشيقي:,ANSWER: All of the following are true about botulism:,B
+28,ما هي العيارات الصحيحة حول الوسيط نيتريك أوكسيد؟,ANSWER: Nitric oxide is a vasodilator.,B
+29,واحدة من العبارات التالية فيما يخص دور المهاد خاطئة:,ANSWER: Thalamus is not involved in memory.,A
+30,يشاهد التهاب البلغم مع توضع أغشية عليه وعلى اللوزتين في الإصابة بالأمراض التالية عدا:,ANSWER: التهاب الشعب الهوائية الحاد,A
+31,من طرق الوقاية من الجمرة الخبيثة:,ANSWER: Anthrax vaccine and antibiotics.,D
+32,سرطان البروستات:,ANSWER: Prostate cancer,A
+33,المريطاء هي البقايا الجنينية ل:,ANSWER: Thyroglossal duct cyst,A
+34,مريض عمره 60 سنة كان يعمل بمنجم للفحم لمدة 20 سنة، راجع بسعال وزلة تنفسية، صورة الصدر أظهرت ارتشاحات خلالية، فحص القشع كان إيجابيًا لعصية كوخ، أي من العوامل الآتية قد يكون عاملًا مؤهبًا لإصابته بالتدرن:,ANSWER: التعرض للغبار السيليسي (Silicosis),D
+35,ارتفاع التوتر الشرياني الحملي Gestational Hypertension:,ANSWER: Blood pressure elevation after 20 weeks gestation.,B
+36,المركب المستخدم في تدريب الاكتئاب والوسواس القهري هو:,ANSWER: Fluoxetine (Prozac),E
+37,اختر الاجابة الخاطئة عن البوريليا:,ANSWER: Borrelia does not cause Lyme disease.,A
+38,في متلازمة WAGER نجد كل ما يلي ما عدا:,ANSWER: WAGR syndrome features,C
+39,قد يحدث التثدي لدى الذكر المصاب بـ:,ANSWER: Klinefelter syndrome,D
+40,كل ما يلي صحيح عن اسواط الجراثيم ماعدا:,ANSWER: Flagella are not involved in conjugation.,C
+41,يؤدي تفعيل المكون الودي للجهاز العصبي المستقل إلى ما يلي عدا:,ANSWER: زيادة إفراز اللعاب,B
+42,تمنع الهرمونات التالية تقويض البروتينات في الجسم عدا:,ANSWER: الكورتيزول (Cortisol),A
+43,ما يلي حول التهاب الكبد الفريوسي B صحيح ما عدا:,ANSWER: Hepatitis B is transmitted through blood.,B
+44,تنشأ ظهارة المبطنة للمثانة البولية:,ANSWER: من بطانة الرحم المهاجرة,B
+45,من الإجرائات التي يجب اتخاذها في تدبير مريضة الارتجاع الحملي:,ANSWER: وضع المريضة في وضعية الاستلقاء على الجانب الأيسر.,E
+46,وجد التفاغرات الشريانية الوريدية بغزارة في:,ANSWER: الرئتين (Pulmonary Arteriovenous Malformations),D
+47,تؤدي العوامل التالية إلى نقص خروج السوائل من الشعيرات عدا:,ANSWER: زيادة الضغط الأسموزي للدم,C
+48,كل ما هو آت خاطئ في البنكرياس ما عدا:,ANSWER: Islet cell hyperplasia,A
+49,الصادات الحيوية التي تمنع تشكل الحموض النووية:,ANSWER: Fluoroquinolones and Rifampin.,D
+50,في بداية تشكل الجنس الاقنية المفرغة للجهاز البولي والتناسلي تفرغ في:,ANSWER: Cloaca,C
+51,تؤدي الحالت اآلتية إلى ارتفاع الضغط النخماصي لألسناخ الرئوية ما عدا:,ANSWER: انخفاض حجم الدم (Decreased blood volume),C
+52,أشيع اختلاط لتشمع الكبد غير المعاوض هو:,ANSWER: Variceal bleeding,D
+53,الامراض التالية وبائية ماعدا:,ANSWER: السل (Tuberculosis),A
+54,كل ما هو آت في بنية الانبوب الهضمي صحيح ما عدا:,ANSWER: Duodenum is retroperitoneal.,B
+55,ما يلي حول التهاب الكبد الفريوسي,ANSWER: Viral hepatitis inflammation,A
+56,في اصابات الجنب القيحية كل مما يلي صحيح في فحص سائل الجنب ما عدا:,ANSWER: Low glucose level,E
+57,المنشأ الجنيني للصفن من:,ANSWER: النتوءات التناسلية (genital tubercles),E
+58,من علامات آذية العصب الناصف:,ANSWER: Wrist drop,A
+59,ما هو صحيح في حالة انسداد الأمعاء المرافق للحمل:,ANSWER: Surgical intervention is required.,A
+60,تقوم الكلية بالوظائف الغدية التالية عدا:,ANSWER: Protein synthesis,B
+61,كل ما هو آت في بنية الشفاه خاطئ ماعدا:,ANSWER: الشفة السفلى,C
+62,سبب طول مدة كامن الفعل في الليف العضلي القلبي هو:,ANSWER: Calcium-induced calcium release,C
+63,كل ما يلي صحيح عن السبيل البصري ما عدا:,ANSWER: Optic chiasm is not located at the optic canal.,A
+64,من أسباب الانصباب الرشح transudate:,ANSWER: Low serum albumin.,D
+65,لتشخيص ضمور العصب البصري كل مما يلي صحيح ما عدا:,ANSWER: Optic nerve atrophy is not a diagnosis.,C
+66,يتصف حماق الوليد بكل ما يلي عدا :,ANSWER: ارتفاع ضغط الدم الشرياني,E
+67,من المظاهر السريرية ملرض ضخامة النهايات ما عدا:,ANSWER: انخفاض ضغط الدم,B
+68,كسور قاعدة الجمجمة:,ANSWER: Skull base fractures,E
+69,العضو الذي ينمو في الحاجز المستعرض:,ANSWER: العظم الغضروفي,B
+70,أحد هذه المفاهيم خاطئة فيما يتعلق بالعضالت الهيكلية:,ANSWER: Skeletal muscle is involuntary.,C
+71,يؤدي فقر الدم بنقص الحديد المرافق للحمل إلى الإختلاطات التالية ما عدا:,ANSWER: زيادة خطر الولادة المبكرة,C
+72,الحجز المريئي الرغامي يفصل بين:,ANSWER: الرغامى والمريء,B
+73,الصادات الحيوية التي تمنع تشكل الحموض النووية:,ANSWER: Fluoroquinolones and Rifampin.,D
+74,يؤدي الداء السكري خلال الحمل إلى الاختلاطات الجنينية التالية ما عدا:,ANSWER: Hypoglycemia in the newborn,D
+75,فيما يتعلق بزمن التضاعف (Doubling Time):,ANSWER: The time it takes for a quantity to double.,C
+76,المنشأ الجنيني لعضات الوجه الأرادية:,ANSWER: Second pharyngeal arch,A
+77,في دبقوم العصب البصري كل مما يلي صحيح ما عدا:,ANSWER: Optic nerve sheath meninges are continuous with subarachnoid space.,C
+78,نجد في المسافات البابية ما عدا:,ANSWER: Peyer's patches,C
+79,تستطب الجراحة التلطيفية عند مرضى الأورام في حالات:,ANSWER: تخفيف الأعراض وتحسين جودة الحياة.,E
+80,كل الفيروسات التالية يمكن أن تسبب التهاب سحايا عقيم عدا:,ANSWER: الفيروس المضخم للخلايا,C
+81,:الجلد في Merocrine Type Sweat Glands,ANSWER: Epidermis and dermis,E
+82,في تركيب الحصيات:,ANSWER: Calcium oxalate stones,A
+83,كل مما يلي حول تشمع الكبد الالمُعاوض صحيح ما عدا:,ANSWER: Cirrhosis is reversible.,A
+84,كل الصادات التالية تمنع تشكل جدار الخلية الجرثومية ماعدا:,ANSWER: Vancomycin,D
+85,تفيد الجراحة الوقائية من السرطان في حالات:,ANSWER: Familial adenomatous polyposis.,E
+86,أنزيم تفرزه العنقودية المذهبة ويعاكس في عمله عمل Coagulase:,ANSWER: Staphylokinase,C
+87,تتميز منطقة البواب بأن:,ANSWER: وجود عضلات دائرية وطولية,C
+88,ارتفاع تركيز مادة ما في البول إلى 125 ضعف تركيزها في البلازما يشير إلى أن العمليات التي خضعت لها هذه المادة هي:,ANSWER: Tubular secretion,A
+89,المعيار الذهبي لتشخيص أمراض الرئة الخلالية:,ANSWER: High-resolution computed tomography (HRCT),A
+90,يمكف لالريترومايسين أن يفيد في واحد من مسببات التهاب الأمعاء التالية:,ANSWER: Clostridioides difficile infection,D
+91,كل من المشاركات التالية صحيحة ما عدا:,ANSWER: Vitamin D deficiency is not associated with rickets.,B
+92,واحد من العبارات التالية فيما يخص التهوية السنخية في الحالات السوية خاطئة:,ANSWER: Ventilation-perfusion mismatch is absent.,A
+93,بعمر 4 اسابيع يظهر الرتج التنفسي من:,ANSWER: Bronchopulmonary sequestration,C
+94,كل مما يلي صحيحة ما عدا:,ANSWER: Vitamin D deficiency,E
+95,تعطي الاقواس البلعومية مشتقات منها:,ANSWER: Pharyngeal arches,D
+96,يشمل مصطلح الخلايا المتقرنة في الجلد كل ما يلي ما عدا:,ANSWER: Melanocytes,B
+97,في الجهاز التناسلي الذكري:,"ANSWER: Testes, epididymis, vas deferens, seminal vesicles, prostate gland, bulbourethral glands, penis, scrotum.",A
+98,عند فحص الساحة البصرية في ضمور ليبر كل مما يلي صحيح ما عدا:,ANSWER: Enlarged blind spot,D
+99,في حالة قصور الغدة الدرقية، كل ما يلي صحيح ما عدا:,ANSWER: زيادة معدل الأيض الأساسي,C

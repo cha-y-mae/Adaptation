@@ -1,0 +1,44 @@
+{
+    "base_ar_accuracy": 0.5076,
+    "oracle_routing_accuracy": 0.6267,
+    "gain_pp": 11.92,
+    "n_total": 4959,
+    "quadrant_counts": {
+        "En✓Ar✓": 2016,
+        "En✗Ar✗": 1594,
+        "En✓Ar✗": 848,
+        "En✗Ar✓": 501
+    },
+    "quadrant_metrics": {
+        "En✓Ar✓": {
+            "accuracy": 1.0,
+            "n": 2016,
+            "sources": {
+                "base": 2016
+            }
+        },
+        "En✓Ar✗": {
+            "accuracy": 0.2736,
+            "n": 848,
+            "sources": {
+                "adapted": 848
+            }
+        },
+        "En✗Ar✓": {
+            "accuracy": 1.0,
+            "n": 501,
+            "sources": {
+                "base": 501
+            }
+        },
+        "En✗Ar✗": {
+            "accuracy": 0.2252,
+            "n": 1594,
+            "sources": {
+                "adapted": 1592,
+                "base_fallback": 2
+            }
+        }
+    },
+    "routing_rule": "En✓Ar✗ + En✗Ar✗ → adapted model; En✓Ar✓ + En✗Ar✓ → base model"
+}

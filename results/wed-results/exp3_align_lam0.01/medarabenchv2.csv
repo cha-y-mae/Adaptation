@@ -1,0 +1,941 @@
+id,input,prediction,ground_truth,judge_label
+,ما هو العصب الذي ينقل إحساس الذوق من ثلث اللسان الخلفي؟,ANSWER: glossopharyngeal,B,Correct
+,ما هي القوس البيضاء عند حدود جسم الظفر مع جذره؟,ANSWER: lunula,A,Correct
+,أين يقع الخط الالوي السفلي؟,ANSWER: near the lower end of the sternum,A,Incorrect
+,ما هي الحافة من الفرع التي تشكل زاوية الفك السفلي؟,ANSWER: branch of the mandible,B,Incorrect
+,ما هي البنية التشريحية التي تتعصب بالعصب الشظوي السطحي؟,ANSWER: extensor digitorum,E,Incorrect
+,أين تشاهد الجسور بين الخلوية؟,ANSWER: under the ependyma,B,Incorrect
+,ما الذي يحول الثلمتين الاسكيتين إلى ثقبتين؟,ANSWER: canalis pterygoideus,B,Incorrect
+,ما هو الهرمون الذي يفرز PTH؟,ANSWER: The parathyroid glands,A,Incorrect
+,ما الذي يقع بين جسم الفقرة والقوس الفقرية؟,ANSWER: opening,C,Incorrect
+,أين تقع المنطقة الشمية؟,ANSWER: near the top of the nasal cavity,A,Correct
+,ما الذي يتصل به المدورين بالأمام في الفخذ؟,ANSWER: nerve,A,Incorrect
+,أين يوجد التلم الكعبري في جسم العضد؟,ANSWER: near the deltoid tuberosity,A,Incorrect
+,ما الذي تتشكل منه ضفيرة راشكوف في لب السن؟,ANSWER: processes of hutchinson,C,Incorrect
+,أين يقع المستقيم؟,ANSWER: retroperitoneal,B,Incorrect
+,إلى أي صنف من أصناف الغدد تنتمي حديثات المونتغمري؟,ANSWER: غدد sudoriferous,A,Incorrect
+,ما هو العصب المحرك لعضلات اللسان؟,ANSWER: العصب hypoglossal,C,Correct
+,ما هي الضفيرة التي يتفرع منها العصب الحجابي؟,ANSWER: الضفيرة vagal,C,Incorrect
+,من أين يفرز الأدرينالين؟,ANSWER: gland,B,Incorrect
+,ما هو الوريد الذي يتشكل منه الوريد الأجوف السفلي؟,ANSWER: The common iliac vein,B,Correct
+,ما هي الطبقة الأكثر تمايزاً وكثافة في الشرايين؟,ANSWER: Tunica media,B,Correct
+,مما ينتج هرمون T4؟,ANSWER: gland,C,Incorrect
+,ما هي العضلة التي ترتكز بشكل أساسي على العظم الزورقي؟,ANSWER: muscle palmaris longus,B,Incorrect
+,أين تقع المنطقة الشمية؟,ANSWER: near the top of the nasal cavity,A,Correct
+,ما هو اسم الوسادة من النسيج الدهني فوق الارتفاق العاني؟,ANSWER: fat pad,A,Incorrect
+,أين يتوضع الكولون السيني؟,ANSWER: The left iliac fossa,B,Correct
+,ما هو القسم من العظم الجبهي الذي يفصل بين القسمين الحجاجيين من الخلف؟,ANSWER: the lesser wing,B,Incorrect
+,ما هي الفروع الانتهائية للسبات الظاهر؟,ANSWER: branches,B,Incorrect
+,أين يمر عصب الفك العلوي؟,ANSWER: fissura rotunda,A,Incorrect
+,ما هي النقطة التشريحية على الوجه السفلي لجسم العظم الوتدي؟,ANSWER: fovea navicularis,C,Incorrect
+,ما اسم العظم الذي يتوضع كيس الدمع عليه؟,ANSWER: bone of the lacrimal,A,Incorrect
+,من أين ينشأ الشريان السباتي المشترك الأيسر؟,ANSWER: aorta,A,Correct
+,ما طول الأسهر؟,ANSWER: 10-12 cm,A,Incorrect
+,ما هو المكان الذي يعبر من خلاله الشريان السحائي الأوسط؟,ANSWER: fissura sylvii,C,Incorrect
+,ما هي الطية الجلدية التي تغطي رأس القضيب؟,ANSWER: hood,C,Correct
+,ما هي البنية التشريحية التي ترتكز على الحفرة المدورية؟,ANSWER: muscle,A,Incorrect
+,أين يتوضع الدرز الأكليلي؟,ANSWER: near the apex,A,Incorrect
+,ماذا يفعل الرباط المتصالب الأمامي؟,ANSWER: limits internal rotation,c,Incorrect
+,ما العصب القحفي الذي يعبر الثقبة البيضية؟,ANSWER: V,C,Correct
+,إلى أي قصبات تتفرع القصبات الفصية؟,ANSWER: bronchus,C,Incorrect
+,أين توجد نوى الأعصاب القحفية من الثالث حتى الثاني عشر؟,ANSWER: brainstem,C,Correct
+,على ماذا يحتوي البلعوم الفموي من اللوزتين؟,ANSWER: tonsils,C,Incorrect
+,على أي من وجوه الكبد يوجد مسكن المرارة؟,ANSWER: The face,C,Incorrect
+,ما هو العصب القحفي الثاني؟,ANSWER: The optic nerve,A,Correct
+,ما وظيفة العضلة تحت الكتفية؟,ANSWER: rotation,b,Incorrect
+,أين تتوضع المشيمة في ارتكاز المشيمة المعيب؟,ANSWER: outside the uterus,C,Incorrect
+,ما اسم الطبقة من السحايا التي تغطي الجيوب الوريدية؟,ANSWER: Arachnoid,A,Incorrect
+,ما هي الألياف التي تربط المراكز القشرية بالمحيط؟,ANSWER: fibers of projection,A,Correct
+,ما الذي تشكله البصلة عندما تتمادى في الأمام في جسم القضيب؟,ANSWER: gland,B,Incorrect
+,ما هي أكبر غدد الجسم؟,ANSWER: The liver,A,Correct
+,ما هي الشرايين الخمسة التي يتفرع إليها الشريان الكلوي؟,ANSWER: segmental arteries,A,Incorrect
+,بماذا ينتهي الشريان الوجهي؟,ANSWER: الشريان angular,C,Correct
+,ما هي طبقة لب السن الأكثر عمقا والأقرب لجوهر اللب؟,ANSWER: dentin,B,Incorrect
+,أين تقع فوهة مصب الجيب الأكليلي؟,ANSWER: near the major duodenal papilla,C,Incorrect
+,ما هي الزاوية الأمامية السفلية للعظم الجداري؟,ANSWER: angle of the mandible,B,Incorrect
+,أي عصب هو المحرك لعضلات اللسان؟,ANSWER: hypoglossal,C,Correct
+,ما هو البروز العظمي الذي يحتوي عليه الوجه الداخلي لفرع الفك السفلي؟,ANSWER: the lingula,C,Correct
+,ما هي المواد التي تفرزها الغدد استجابة للتنبيه وترحل عبر الدم؟,ANSWER: Hormones,B,Correct
+,ما هي الزاوية بين قبضة وجسم القص؟,ANSWER: 90,A,Incorrect
+,من أين يخرج العصب الفكي العلوي من الجمجمة؟,ANSWER: fissura rotunda,C,Incorrect
+,ما الذي يحدد المنصف العلوي جانبياً؟,ANSWER: wall,A,Incorrect
+,ما هما الممران اللذان يمر عبرهما الهواء إلى جوف الأنف؟,ANSWER: choanae,B,Incorrect
+,أين ترتكز العضلة العريضة الظهرية؟,ANSWER: near the spine,A,Incorrect
+,ما هو القولون الذي يمتد بشكل أفقي؟,ANSWER: colon transversum,C,Correct
+,كم عدد القطع العصعصية في النخاع الشوكي؟,ANSWER: 8,D,Incorrect
+,ما الطبقة التي تمثلها العضلة الدافعة في المثانة؟,ANSWER: Detrusor,B,Incorrect
+,ما هي الخلايا التي توجد في الجلد وتعمل كمستقبلات آلية حسية؟,ANSWER: corpuscles,B,Incorrect
+,ما اسم الكرة الصغيرة فوق قمة الغضروف؟,ANSWER: the epiglottic,B,Incorrect
+,أين لا توجد الغدد الزهمية؟,ANSWER: The lips,A,Incorrect
+,ما هو العصب المسؤول عن حركات عضلات الوجه التعبيرية؟,ANSWER: facialis,A,Correct
+,ما هي الزاوية الخلفية السفلية في العظم الجداري؟,ANSWER: angle mastoid,A,Correct
+,ما هو الاسم الآخر لفرع الفك السفلي؟,ANSWER: lingual,C,Incorrect
+,ماذا يفعل الرباط المتصالب الأمامي؟,ANSWER: limits internal rotation,C,Incorrect
+,ما هي الثقبة التي يعبر من خلالها العصب الوجهي؟,ANSWER: canaliculus,A,Incorrect
+,ماذا تفرز خلايا بيتا في البنكرياس؟,ANSWER: Insulin,B,Correct
+,ما هو التامور الخارجي الذي لا يرتبط بالقلب؟,ANSWER: tamponade,A,Incorrect
+,ما هو القسم من الضلع الواقع بين الرأس والحديبة؟,ANSWER: The body,C,Incorrect
+,مع أي عظم يتمفصل الظنبوب في الأسفل؟,ANSWER: navicular,C,Incorrect
+,أي من العضلات العميقة التالية للمثلث الخلفي للعنق ترتبط بحدبة الأطلس الخلفية؟,ANSWER: rectus capitis posterior major,A,Incorrect
+,ما هو التركيب الذي يتصل بالخلف مع البلعوم الفموي عبر برزخ الحلق؟,ANSWER: opening,C,Incorrect
+,ما هي البنية التي تغطي السطوح الأمامي والإنسي والوحشي للخصية؟,ANSWER: Tunica vaginalis,C,Correct
+,أين يقع موقع الغدة الدرقية؟,ANSWER: neck,A,Correct
+,أين تتوضع مستقبلات الشم؟,ANSWER: epithelium,C,Incorrect
+,ما هي طبيعة هرمونات الغدة النخامية؟,ANSWER: Peptide,B,Correct
+,ما هو مفصل المرفق؟,ANSWER: مفصل,A,Incorrect
+,ما هو المكان الذي تنشأ منه العضلة المدورة الكبيرة بشكل أساسي؟,ANSWER: tuberosity,A,Incorrect
+,أين يتوضع الأبهر النازل البطني؟,ANSWER: retroperitoneal,A,Correct
+,ما الذي يجاور السطح العلوي لمثانة الرجل؟,ANSWER: peritoneum,A,Correct
+,ما هي عضلة الشهيق الرئيسية؟,ANSWER: diaphragm,A,Correct
+,ما هو ترتيب دخول التراكيب إلى سرة الكلية من الخلف للأمام؟,"ANSWER: fat, fascia, muscle, peritoneum",C,Incorrect
+,أين تشاهد التلمة الكعبرية للزند؟,ANSWER: near the olecranon,C,Incorrect
+,أين تتوضع الثقبة العوراء في اللسان؟,ANSWER: near the base,A,Incorrect
+,ما هو أطول أجزاء الأنبوب الهضمي؟,ANSWER: small intestine,A,Correct
+,ما هو ترتيب العضلات من الأعلى للأسفل على الناحية الخلفية للألية؟,"ANSWER: splenius, semispinalis, multifidus",A,Incorrect
+,ما هي الطبقة المبطنة للتامور الليفي؟,ANSWER: layer,B,Incorrect
+,ما هو أطول أجزاء أنبوب الهضم؟,ANSWER: small intestine,B,Correct
+,ما هو الهرمون الذي يسرع عملية تصنيع الأحماض الدهنية من الغلوكوز في الخلايا الشحمية؟,ANSWER: insulin,B,Correct
+,ما هو الرباط الذي يربط الرحم بجدران الحوض الجانبية؟,ANSWER: ligamentum transversum,C,Correct
+,ما هو لون لب الكظر؟,ANSWER: Yellow,A,Correct
+,ما الذي يشكل معظم الكتلة العضلية للسان؟,ANSWER: Intrinsic muscles,A,Correct
+,ما هي أصغر الحليمات الذوقية وأكثرها عدداً؟,ANSWER: leaf-like,A,Incorrect
+,ما هي العضلات الطويلة التي تربط الفقرات مع بعضها؟,ANSWER: Longus colli,B,Incorrect
+,ما هو أضيق قسم في جذع الدماغ؟,ANSWER: opening medulla,C,Incorrect
+,أين يقع التلفيف خلف المركزي؟,ANSWER: on the parietal lobe,B,Correct
+,ما هي الباحة التي يحويها التلفيف خلف المركزي؟,ANSWER: b5,A,Incorrect
+,ما هي أصغر الحليمات الذوقية وأكثرها عدداً؟,ANSWER: leaf-like,A,Incorrect
+,ما هي المجموعة العضلية التي تنتمي إليها العضلة الحرقفية؟,ANSWER: عضلات pelvis,A,Incorrect
+,ما هو القسم المسؤول عن تنظيم الفعالية الحياتية الذاتية؟,ANSWER: The hypothalamus,A,Incorrect
+,ما هي المادة شبيهة بالهلام التي تشغل أربعة أخماس المقلة؟,ANSWER: vitreous humor,B,Correct
+,أين تقع أجسام العصبونات التي تفرز الهرمون المضاد للإدرار ADH؟,ANSWER: nucleus supraopticus,B,Correct
+,ما هي العضلات التي لها منشأ عظمي وترتكز على باطن جلد الوجه؟,ANSWER: عضلات expression,B,Incorrect
+,ما هو مصدر التروية الرئيسية للمعدة؟,ANSWER: artery celiac,B,Correct
+,ما هي أطول أجزاء أنبوب الهضم؟,ANSWER: small intestine,B,Correct
+,من أين ينشأ الجذع الرئوي؟,ANSWER: from the right ventricle,A,Correct
+,ما هو اسم المنعكس الذي يحدث عند رفع الخصية والصفن للأعلى؟,ANSWER: منعكس cremasteric,B,Correct
+,ما هو العظم الذي يحتوي على تلم في وجهه السفلي لمرور وتر الشظية الطويلة؟,ANSWER: radius,A,Incorrect
+,ما هي المنطقة المتوسطة من نواحي البطن؟,ANSWER: mesogastrium,C,Correct
+,ما الذي يصل بين الأذينة اليسرى والبطين الأيسر؟,ANSWER: valve,B,Incorrect
+,ما الذي يعطي الرباط الحرقفي القطني منشأ له؟,ANSWER: processus costiformis,A,Correct
+,ماذا يحفز ACTH إفرازه؟,CRH,B,Incorrect
+,ما هو أكثر أقسام الإحليل قابلية للتمدد وأعرضها؟,ANSWER: The bulbous part,A,Correct
+,مما يتكون الزنار الحوضي؟,ANSWER: ligaments,A,Incorrect
+,أين تقع الباحة الحركية الأولية؟,ANSWER: area 4,B,Correct
+,ما هي العضلة المسؤولة عن قبض الفخذ وقبض الساق؟,ANSWER: rectus femoris,A,Correct
+,أين تتوضع الغدة تحت الطية اللسانية؟,ANSWER: near the base,C,Incorrect
+,أين يتوضع السرج التركي؟,ANSWER: near the sella turcica,B,Incorrect
+,ما هو القسم مع الضلع الواقع بين الرأس والحدبية؟,ANSWER: neck,C,Incorrect
+,كم عدد شدف النخاع الشوكي؟,ANSWER: 3,A,Incorrect
+,ما هي العضلة الموسعة المسؤولة عن فتح الحنجرة؟,ANSWER: عضلة posterior cricoarytenoid,B,Correct
+,ما يُدعى القسم العلوي المتسع من الحالب؟,ANSWER: ampulla,A,Correct
+,أين توجد نقطة التعظم البدئية في لوح الكتف؟,ANSWER: near the suprascapular notch,B,Incorrect
+,ما هو الشريان الذي يستمر به الشريان تحت الترقوة؟,ANSWER: الشريان axillary,A,Correct
+,ما هو الشريان الذي يمكن الشعور بنبضه عند الحافة السفلية للفك السفلي أمام العضلة الماضغة؟,ANSWER: الشريان facial,B,Correct
+,ما هو الشريان الذي يعتبر الشريان المخي الخلفي فرعاً منه؟,ANSWER: شريان basil,A,Incorrect
+,ما هو أكبر أعضاء الجسم وزناً ومساحة؟,ANSWER: The skin,B,Correct
+,ما الذي يشكله نصفا الكرة المخية مع الدماغ البيني؟,ANSWER: diencephalon,A,Incorrect
+,ما هو اسم الحافة اليسرى للمعدة التي تمتد من الفؤاد إلى البواب؟,ANSWER: الحافة greater,C,Incorrect
+,ما هو مصدر نشأة الشريان الشوكي الأمامي؟,ANSWER: the vertebral artery,A,Correct
+,أين يقع الثرب الصغير؟,ANSWER: near the heart,A,Incorrect
+,أين تقع صفيحة الأكيمات؟,ANSWER: near the base,A,Incorrect
+,ما هي الباحة التي يحويها التلفيف خلف المركزي؟,ANSWER: b5,A,Incorrect
+,ما هي الألياف التي تربط المراكز القشرية بالمحيط؟,ANSWER: fibers of projection,A,Correct
+,ما نوع المفصل الحلقي الطرجهالي؟,ANSWER: مفصل,B,Incorrect
+,ما هو رقم العصب الحركي للعضلات الماضغة؟,ANSWER: V,B,Incorrect
+,كم عدد فصيصات الخصية؟,ANSWER: 250,A,Incorrect
+,أين ترتكز العضلة الأخمعية الخلفية بوتر رقيق؟,ANSWER: near the hyoid,A,Incorrect
+,أين يتوضع الثلم المهمازي؟,ANSWER: near the apex,A,Incorrect
+,ما هي المنطقة التي يقع بينها القسيم العضلي (sarcomere)؟,ANSWER: Z lines,D,Correct
+,ما الذي تنتجه الخلايا المجاورة للجريبات في الدرق؟,ANSWER: colloid,C,Incorrect
+,ما الذي تتحول إليه الوحيدات Monocytes بعد مغادرتها الدوران؟,ANSWER: macrophages,A,Correct
+,ما هو الشريان الذي ينتهي به الشريان الوجهي؟,ANSWER: الشريان angular,C,Correct
+,أين يتوضع الثلم المهمازي؟,ANSWER: near the apex,A,Incorrect
+,ما هو العصب القحفي الذي يحمل التعصيب نظير الودي للقلب؟,ANSWER: vagus,C,Correct
+,ما هي العضلة التي يمر العصب تحت اللساني في الناحية تحت الفك عميقاً منها؟,ANSWER: muscle hyoglossus,E,Correct
+,تحت أي قسم من أقسام التشريح يندرج التنبيب الرغامي؟,ANSWER: تشريح,C,Incorrect
+,ما هي العظام التي يتشكل منها مفصل الركبة؟,"ANSWER: femur, tibia, patella",A,Correct
+,ما هي الحركة الخاصة بالساعد؟,ANSWER: pronation,A,Incorrect
+,ما الذي يحويه القسم الأمامي للثلم الأمامي الخلفي الأيسر للكبد؟,ANSWER: the ligamentum teres,B,Incorrect
+,ماذا تشكل الصفيحتان السفليتان للشفرين الصغيرين عند اتحادهما؟,ANSWER: frenulum,A,Correct
+,ما هي الانطباعات التي توجد على العظم الجداري؟,ANSWER: depressio suprameatica,B,Incorrect
+,ما هو العصب الحركي للعضلات الماضغة؟,ANSWER: masseter,B,Incorrect
+,أين يقع الشق الحجاجي السفلي؟,ANSWER: near the jugular foramen,A,Incorrect
+,ما هو العضو المتخصص بتشكيل الصوت والتدخل بالدور في الكلام؟,ANSWER: vocal cords,B,Correct
+,ما هي حركة الركبة للخلف بمستوى سهمي؟,ANSWER: Extension,A,Correct
+,ما هو العصب القحفي المتواسط بإفراز الغدد الدمعية واللعابية؟,ANSWER: VII,A,Correct
+,أين تتوضع الصفيحة الأفقية للعظم الغربالي؟,ANSWER: under the brain,C,Incorrect
+,ما هو لون لب الكظر؟,ANSWER: Yellow,A,Correct
+,ما هو وجه العظم الجبهي الذي ينتمي للقحف العصبي؟,ANSWER: squama,B,Incorrect
+,ما هو لون لب الكظر؟,ANSWER: Yellow,A,Correct
+,ما هي اللفافة التي تحيط بجسم القضيب؟,ANSWER: leaflet,A,Incorrect
+,ما هي العضلة التي تعد من العضلات الوحشية للساق وقد تعد من العضلات الأمامية للساق؟,ANSWER: Tibialis anterior,C,Incorrect
+,ما هو أول ما يتأثر من الخلايا الكبدية في حالة الإصابة بنقص الأكسجة؟,ANSWER: The hepatocytes,B,Incorrect
+,ما هي العضلات الطويلة التي تربط الفقرات مع بعضها؟,ANSWER: Longus colli,B,Incorrect
+,ما هي الطية الجلدية التي تغطي رأس القضيب؟,ANSWER: hood,C,Correct
+,من أين يتفرع الشريان الأكليلي الأيمن والأيسر؟,ANSWER: قوس aorta,A,Incorrect
+,متى ينشأ برزخ الأبهر؟,ANSWER: during embryogenesis,C,Incorrect
+,ما هو أصغر الفروع الأمامية للأبهر البطني؟,ANSWER: artery epigastric inferior,C,Incorrect
+,ما هي الألياف التي تربط التلافيف والفصوص في نصف كرة مخية واحد؟,ANSWER: fibers of the corpus callosum,B,Incorrect
+,ما هي ميزابة النبض بين أوتار العضلات؟,ANSWER: tendinous,A,Incorrect
+,ما هو الوريد السطحي الذي يشكل الابطي؟,ANSWER: great saphenous vein,A,Incorrect
+,ماذا تفرز الخلايا ألفا في البنكرياس؟,ANSWER: glucagon,A,Correct
+,ما هو اسم أعمق الانخفاضات في الصيوان؟,ANSWER: fissura palatoglossa,A,Incorrect
+,ما هي وظيفة هرمون الغدة جار الدرقية PTH؟,ANSWER: regulation of calcium,A,Correct
+,ما الذي يمتد من المنخر حتى المنعر؟,ANSWER: canal nasolacrimal,C,Incorrect
+,ما الذي يقع بين جسم الفقرة والقوس الفقرية؟,ANSWER: opening,C,Incorrect
+,أين تتوضع الطية المخملة؟,ANSWER: near the ileocecal valve,B,Correct
+,ما هو الهرمون الذي يفرز PTH؟,ANSWER: The parathyroid glands,A,Incorrect
+,ما هو الهرمون الذي يسرع عملية تصنيع الأحماض الدهنية من الغلوكوز في الخلايا الشحمية؟,ANSWER: insulin,B,Correct
+,ما هي العضلات التي تعمل على توازن الرأس على الجذع؟,ANSWER: complexus,C,Incorrect
+,من أين يخرج العصب الوجهي من الجمجمة؟,ANSWER: fissura stylomastoidea,A,Correct
+,ما الذي يتصل به المدورين بالخلف في الفخذ؟,ANSWER: sacrum,B,Incorrect
+,أين يدخل الحالبان المثانة؟,ANSWER: wall,A,Incorrect
+,ما هي الباحة المسؤولة عن حركات العين؟,ANSWER: b1,D,Incorrect
+,ما هو الشريان الذي ينشأ منه الجذع المشترك للشريان بين العظمين؟,ANSWER: الشريان subclavian,A,Incorrect
+,ما هو وجه عظم الترقوة الذي عليه ميزابة طولانية؟,ANSWER: The facet,B,Incorrect
+,من أين يفرز الغلوكاغون؟,A cells,B,Correct
+,ما هي الطبقة المبطنة للتامور الليفي؟,ANSWER: layer,B,Incorrect
+,ما هو معنى التوسع في نهاية الأسهر؟,ANSWER: ballooning,A,Correct
+,كم عدد فقرات الجزء الصدري من العمود الفقري؟,ANSWER: 12,B,Correct
+,من أين ينتج هرمون الأستروجين؟,ANSWER: Theca cells,B,Incorrect
+,ما هي الفروع الانتهائية للسباني الخارجي؟,ANSWER: branches of the external carotid artery,C,Incorrect
+,ما هو مصدر التعصيب الحركي لعضلات الظهر العميقة؟,ANSWER: branches of cervical and thoracic nerves,B,Incorrect
+,ما هو الجيب الوريدي الذي يصب في الوريد الوداجي الباطن؟,ANSWER: Thebesius,C,Incorrect
+,أين يتوضع العظم الكتفي؟,ANSWER: near the shoulder,A,Incorrect
+,ما هي المنطقة الأعمق في الغدة الكظرية؟,ANSWER: medulla,A,Correct
+,ما الذي يقع بين النواة العدسية من جهة والنواة والمهاد من الجهة الأخرى؟,ANSWER: capsule,C,Correct
+,ما الذي ينفتح على القرين الأنفي العلوي؟,ANSWER: sinus sphenoid,A,Incorrect
+,أين يمكن إجراء الحقن العضلي في القسم العلوي؟,ANSWER: shoulder,B,Correct
+,أين تتوضع الاحدوبة الدالية في العضد؟,ANSWER: near the deltoid tuberosity,B,Correct
+,ما هو أكبر الجيوب جانب الأنف؟,ANSWER: sinus maxillaris,A,Correct
+,ما هو العصب المحرك لعضلات اللسان؟,ANSWER: العصب hypoglossal,C,Correct
+,ما الذي يتوضع تحت الخط الضرسي اللامي؟,ANSWER: the linea semilunaris,C,Incorrect
+,ما هي الطبقة المحيطة بالقلب والمرتبطة به؟,ANSWER: pericardium,C,Correct
+,ما هو الشريان الذي ينشأ منه الشريان الزاوي؟,ANSWER: الشريان brachiocephalic,A,Incorrect
+,ما هو تشكل الوريد المأبضي؟,ANSWER: vein,A,Incorrect
+,ما هي المنطقة الأعمق في قشر الكظر؟,ANSWER: medulla,C,Incorrect
+,أين يقع التلم الوحشي؟,ANSWER: near the midline,A,Incorrect
+,أين يصب الوريد الكلوي؟,ANSWER: vena cava,C,Correct
+,أين ترتكز العضلة المدورة الصغيرة؟,ANSWER: near the shoulder,e,Incorrect
+,ما هو الجزء من البلعوم الذي يتبعه الردب الكمثري؟,ANSWER: The nasopharynx,C,Incorrect
+,كم عدد الأعصاب القحفية؟,ANSWER: 12,B,Correct
+,أين تتوضع نواة العصب العاشر؟,ANSWER: Bulbus,B,Correct
+,ما هو العنصر الذي يجاور الرغامي من الخلف؟,ANSWER: pharyngeal,C,Incorrect
+,ما هو العصب القحفي الذي يجتاز النفق الصدري؟,ANSWER: العصب vagus,B,Incorrect
+,ما هو العظم الأضخم في هيكل القدم؟,ANSWER: calcaneus,B,Correct
+,أين يوجد النفير البلعومي السمعي؟,ANSWER: near the opening of the eustachian tube,C,Correct
+,ما الذي يحد فتحة وينسلو من الأسفل؟,ANSWER: vein,B,Incorrect
+,ما يُسمى الوجه الأمامي للوح الكتف؟,ANSWER:,C,Incorrect
+,ما هو الشريان الذي يروي القولون الصاعد؟,ANSWER: الشريان mesenteric,C,Incorrect
+,ما هي الطية الجلدية التي تغطي رأس القضيب؟,ANSWER: hood,C,Correct
+,ما يُدعى القسم العلوي المتسع من الحالب؟,ANSWER: ampulla,C,Incorrect
+,ما هي المنطقة الفاصلة بين الطيتين الصوتيين؟,ANSWER: fissura glottidis,C,Correct
+,ما هي الطبقة من الكظر التي تتألف من حبال مقوسة من خلايا عمودية متقاربة؟,ANSWER: zona glomerulosa,A,Correct
+,ما هي الخلايا التي تتوضع في اللحمة بين النبيبات؟,ANSWER: cells of can,B,Incorrect
+,ما هو السطح الخلفي للفخذ تحت المدور الكبير؟,ANSWER: fossa poplitea,B,Incorrect
+,ما الذي يحويه القسم الأمامي للثلم الأمامي الخلفي الأيسر للكبد؟,ANSWER: the ligamentum teres,B,Incorrect
+,ما هو الشريان الذي يروي معظم الوجه الوحشي للمخ؟,ANSWER: artery middle,B,Correct
+,ما هي المنطقة الفاصلة بين الطيتين الصوتيين؟,ANSWER: fissura glottidis,C,Correct
+,ما هو العصب القحفي الذي يعبر الثقبة البيضية؟,ANSWER: V,C,Correct
+,ما هو الهرمون الذي يسبب دفقه الشديد حدوث عملية الإباضة؟,ANSWER: LH,A,Correct
+,ما هو الهرمون الذي يستهدف الدرق ويحفز إفراز الهرمون الدرقي؟,ANSWER: TSH,C,Correct
+,ما هي أكبر عقدة مفردة من النسيج اللمفاوي؟,ANSWER: the lymph,B,Incorrect
+,ما هي العضلة الرئيسية المسؤولة عن قبض المرفق؟,ANSWER: brachialis,A,Correct
+,ما هي التراكيب التي توجد على حافتي اللسان وتحوي براعم ذوقية كثيرة؟,ANSWER: papillae circumvallate,C,Incorrect
+,ما هي الشعيرات الدموية التي تغلفها محفظة بومان؟,ANSWER: network,B,Incorrect
+,ما هي الحافة من الفرع التي تشكل زاوية الفك السفلي؟,ANSWER: branch of the mandible,B,Incorrect
+,ما الذي تغلفه العضلة البصلية الإسفنجية؟,ANSWER: The vessels,C,Incorrect
+,من أين يخرج العصب الشوكي؟,ANSWER: foramina intervertebral,A,Correct
+,ما هي الألياف التي تعصب العضلة مصرة الحدقة؟,ANSWER: fibers of the oculomotor nerve,B,Correct
+,ما هو البطين الذي يحويه الدماغ البيني داخله؟,ANSWER: third ventricle,C,Correct
+,ما الذي يشغل الجزء العلوي من قبة القحف؟,ANSWER: brain,A,Correct
+,ما هو العصب الذي يعصب الغدة النكفية؟,ANSWER: IX,C,Correct
+,من أين يخرج العصب تحت اللساني؟,ANSWER: canal under tongue,A,Incorrect
+,ما هي الخلايا البالعة الكبدية؟,ANSWER: Kupffer,C,Correct
+,أين يصب الوريد الصافن الكبير (الأنسي)؟,ANSWER: into the femoral vein,A,Correct
+,ما هو الشريان الذي يستمر به الريان تحت الترقوة؟,ANSWER: الشريان axillary,A,Correct
+,ما تُدعى الردب بين عنق الرحم والمهبل؟,ANSWER: fornix,C,Correct
+,في أي مستوى من الفقرات الصدرية يتم التمفصل بين قبضة وجسم القص؟,ANSWER: T4,C,Incorrect
+,ما هو الرباط الذي يربط الرحم بجدران الحوض الجانبية؟,ANSWER: ligamentum transversum,C,Correct
+,ما هي العضلة التي تنشأ من الشوكة الحرقفية الأمامية العلوية وترتكز انسي الظنبوب؟,ANSWER: rectus femoris,C,Incorrect
+,ما هي الطبقة البطانية الرحمية التي تتعرض إلى تغيرات ملحوظة أثناء الدورة الشهرية؟,ANSWER: layer endometrium,A,Incorrect
+,ما هو موقع مستقبلات الضغط المسؤولة عن المنعكس القلبي التثبيطي؟,ANSWER: sinus carotid,B,Correct
+,ما هو أكبر أعضاء الجسم وزناً ومساحة؟,ANSWER: The skin,B,Correct
+,ما هي البنية الأكثر علواً في جذر الرئة اليسرى؟,ANSWER: hilum,A,Incorrect
+,ما هو المكان الذي يعبر من خلاله الشريان السحاني الأوسط؟,ANSWER: fissura lateralis,C,Incorrect
+,ما هو الجوف الهوائي الذي يحوي عظيمات السمع؟,ANSWER: cavity tympanic,C,Correct
+,ما هي وظيفة النهايات العصبية الحرة الواردة ضمن ألياف العضلة القلبية؟,ANSWER: perception,C,Incorrect
+,ما هي الخلايا التي تخزن فيتامين A في الكبد؟,ANSWER: cells of Ito,B,Correct
+,من أين يحمل الشريان الرئوي الدم غير المؤكسج؟,ANSWER: ventricle,C,Incorrect
+,ما هو العصب القحفي الثاني؟,ANSWER: The optic nerve,A,Correct
+,ما هو العظم الذي تنتمي إليه الثلمة الاسكية الصغيرة؟,ANSWER: temporal,B,Incorrect
+,ما هو الغضروف المرتبط مع الحلقة الرغامية الأولى؟,ANSWER: غضروف thyroid,A,Incorrect
+,ما هو المفصل الذي يتألف من سطحين كل منهما محدب في اتجاه ومقعر في اتجاه آخر؟,ANSWER: مفصل ball-and-socket,A,Incorrect
+,ما هو أكبر أعصاب الجسم؟,ANSWER: sciatic nerve,D,Correct
+,كم عدد العضلات بين العظمية الأخمصية؟,ANSWER: 3,A,Incorrect
+,أين ينتهي الأبهر النازل؟,ANSWER: near the fifth lumbar vertebra,C,Incorrect
+,ما هي المراكز المسؤولة عن تنسيق الفعالية الحركية وضمان الثباتية؟,ANSWER: centers of the cerebellum,A,Incorrect
+,ما هو وجه العظم الجبهي الذي ينتمي للقحف العصبي؟,ANSWER: squama,B,Incorrect
+,أين ينفتح الجيب الفكي؟,ANSWER: تحت the fossa,C,Incorrect
+,ما هو أكبر أقسام المعثكلة؟,ANSWER: The lobus,A,Incorrect
+,ما هي الحدود التشريحية للحجرة الخلفية للعين؟,ANSWER: bone,A,Incorrect
+,أين ترتكز العضلة الشظوية القصيرة؟,ANSWER: near the wrist,A,Incorrect
+,ما هي المنطقة في الحنجرة التي تشمل الطيتين الصوتيتين والمسافة بينهما؟,ANSWER: glottis,A,Correct
+,أين تقع الوهدة في البلعوم؟,ANSWER: the posterior wall,B,Incorrect
+,ما هي الغدة التي تتوضع تحت الطية اللسانية؟,ANSWER: The glandula sublingual,C,Correct
+,ما هو العصب الذي ينتقل عبره الحس غير العام (حس الذوق) من الثلث الأمامي للسان؟,ANSWER: facial,A,Correct
+,ماذا يروي المساريقي العلوي؟,ANSWER: jugular vein,A,Incorrect
+,ما هي المنطقة الأعمق من قشر الكظر؟,ANSWER: medulla,C,Correct
+,ما هي الفقرة التي تحتوي على ثقبة فقرية كبيرة ومثلثية الشكل؟,ANSWER: C2,A,Incorrect
+,ما هو لون قشر الكظر؟,ANSWER: yellow,C,Incorrect
+,ما هو النسيج الضام الليفي الذي يرتكز حول السطوح المفصلية؟,ANSWER: capsule,A,Correct
+,كم عدد شدف النخاع الشوكي؟,ANSWER: 3,A,Incorrect
+,ما هو التصريف اللمفاوي للثلث الخلفي للسان؟,ANSWER: العقد jugulodigastric,E,Correct
+,ما هي الغدة التي تقوم بإفراز الميلاتونين؟,ANSWER: pineal,C,Correct
+,ما هو الشريان الذي له انطباعات على الوجه الداخلي للعظم الصدغي وهو فرع من أي شريان؟,ANSWER: ShA,A,Incorrect
+,ما هو التصنيف الذي يمكننا من معرفة العضلات التي تشارك في كل مرحلة مفصلية وتطبيق ذلك أثناء الفحص؟,ANSWER: muscles,A,Incorrect
+,ما هي الشرايين التي تسير بين الفصوص بإتجاه القشرة على كل جانب من جانبي الهرم الكلوي؟,ANSWER: A,B,Incorrect
+,ما هو الدواء الأمثل لبدء التخدير لمريض مصاب بنزف حاد؟,ANSWER: Ketamine,E,Incorrect
+,ما هو المخدر الذي يتميز بالمباشرة والصحو السريعين؟,ANSWER: بروبوفول,E,Correct
+,ما هو الدواء الأمثل لبدء التخدير لمريض مصاب بنزف رضي حاد؟,ANSWER: Ketamine,C,Correct
+,ما هو المرخي العضلي الأمثل لتسهيل تنبيب مريض ذي خطورة عالية للاستنشاق؟,ANSWER: Rocuronium,A,Incorrect
+,ما هو الترياق المناسب للتسمم بالمورفين؟,ANSWER: Naloxone,A,Correct
+,ما الذي يشير إليه بقاء عيني المريض مفتوحتين مع رأرأة خفيفة وحركات غير هادفة بعد إعطائه جرعة من الكيتامين؟,ANSWER: Emergency Dissociative Induction,E,Incorrect
+,ما هو الدواء المنتخب للإرخاء العضلي والتنبيب لمريض يعاني من قصور كلوي ويحتاج لعملية إسعافية؟,ANSWER: Rocuronium,C,Incorrect
+,ما هو المرخي العضلي المفضل استعماله لمريض سيخضع لجراحة إسعافية ويعاني من قصور كلوي؟,ANSWER: Rocuronium,B,Incorrect
+,ماذا يفكك الببسين؟,ANSWER: proteins,B,Correct
+,ما التعبير الصحيح لوصف جزيئات الإيثين في تفاعل تشكيل البولي إيثين؟,ANSWER: Monomers,A,Correct
+,ماذا يسبب عوز إنزيم البيروفات كيناز؟,ANSWER: anemia,A,Correct
+,ماذا ندعو آلية تفاعل الكلور مع البروبان في ضوء الشمس لإنتاج 1-كلورو بروبان؟,ANSWER: substitution,B,Incorrect
+,ما هي الاسطوانات المنحنية التي تكون سهلة التمييز لمحتواها الكاسر للضوء؟,ANSWER: A,B,Incorrect
+,ما هي الحموض الأمينية المشحونة سلبياً؟,حموض amino,B,Incorrect
+,ما هي أعراض عوز فيتامين البيوتين؟,ANSWER: hair loss,D,Incorrect
+,ما هي مفرزات الصفراء؟,ANSWER: Bilirubin,C,Incorrect
+,ما هي خصائص الشجرة الوراثية لخلة متنحية جسدية فيها الأبوين مصابين؟,ANSWER: 100%,B,Incorrect
+,ما هي النواتج المتشكلة عند تفاعل معدن الصوديوم مع الإيثانول؟,ANSWER: ethanolate,A,Incorrect
+,ما هي خصائص أنزيم RNA Polymerase؟,ANSWER: DNA-dependent,A,Incorrect
+,ما هو النكليوتيد في جزيء DNA؟,ANSWER: building block,A,Correct
+,ما هو فيتامين البيوتين؟,ANSWER: فيتامين B7,B,Correct
+,ما هي حالة عدم تحمل اللاكتوز؟,ANSWER: intolerance lactose,B,Incorrect
+,ما هو اسم الاستر المتشكل عندما يتفاعل الميتانول مع حمض البوتانوئيك بوجود بضع قطرات من حمض الكبريت المركز؟,ANSWER: Ester,B,Incorrect
+,ما هو سبب الوفاة لدى مرض التلاسيميا؟,ANSWER: قصور in the heart,C,Correct
+,ما هي الصبغيات التي يوجد فيها الكروماتين المغاير؟,ANSWER: X and Y,A,Incorrect
+,ما المركب الذي ينقص منه نتيجة التأخر في فصل البلازما أو المصل من الكريات في الدم؟,ANSWER: Factor V,D,Incorrect
+,ما هو المركب الذي يستخدم كزمرة ملحقة لجميع الإنزيمات الناقلة الزمرة الأمين؟,ANSWER: Coenzyme A,C,Incorrect
+,ما هو العلاج الثاني لمرض الثلاسيميا بيتا؟,ANSWER: Transfusion,D,Incorrect
+,ما هو الاضطراب الذي يتميز بفرط شديد في بيليروبين المصل غير المرتبط وعوز جزئي في UDPGT؟,ANSWER: Crigler-Najjar syndrome,C,Incorrect
+,ما هو سبب الوفاة لدى مرضى التلاسيميا؟,ANSWER: قصور in the heart,C,Correct
+,ماذا يسبب عوز الثيامين الشديد؟,ANSWER: Beriberi,D,Correct
+,كم يبلغ عدد الجينات التي تشفر لجزيئات الرنا الأصغري miRNAs في مجين الإنسان؟,ANSWER: 1043,C,Incorrect
+,أين يتم اصطناع الدقائق الكيلوسية؟,ANSWER: in the small intestine,D,Incorrect
+,ما هو الإنزيم الذي يتم بوساطته ربط شدف أوكازاكي؟,ANSWER: DNA ligase,B,Correct
+,ما هو أكثر الأنزيمات فعالية تحفيزية في جسم الإنسان؟,ANSWER: Catalase,B,Incorrect
+,ما هو الشكل الفعال لفيتامين B6؟,ANSWER: Pyridoxal phosphate,C,Correct
+,ما هو الموقع الطبيعي للجين الورمي ABL؟,ANSWER: chromosome 9,B,Correct
+,كم عدد طبقات الفوسفولبيد في المذيلة؟,ANSWER: Two,C,Incorrect
+,ما هو التركيب الذي يدخل فيه الكولاجين 4؟,ANSWER: layer,B,Incorrect
+,ما الذي تؤدي إليه استلة الهيستونات؟,ANSWER: Transcription,A,Correct
+,ما هي الخصائص التي تتميز بها شجرة النسب الحاوية على حالة وراثة متعلقة بالمتقدرات والأم فقط فيها مصابة؟,ANSWER: maternal,C,Incorrect
+,ما هو الحمض الأميني الذي تتم أستلة الهستونات له؟,ANSWER: Lysine,C,Correct
+,ما هي المكونات التي تتألف منها الفوسفولبيدات بالإضافة إلى حمضين دسمين والفوسفات؟,ANSWER: glycerol,D,Correct
+,ما هي الوظيفة الوحيدة لسيغما في إنزيم بوليمراز RNA البكتيري؟,ANSWER: Factor,D,Incorrect
+,ما هي الأجزاء التي تتبادل بينها الإشارات الجزيئية التي يعتمد عليها ضبط النظام الخلوي الجذعي؟,ANSWER: The stem cell niche,C,Incorrect
+,ما تدعى البروتينات المشكلة لمعقدات الثقوب النووية؟,ANSWER: nucleoporins,D,Correct
+,كيف تتم إزالة المتقدرات الحاوية على طفرات بالية؟,ANSWER: Autophagy,B,Correct
+,ما هو عامل الإطلاق في حقيقيات النوى؟,ANSWER: RNA polymerase,C,Incorrect
+,ما هي الروابط التي تربط سلسلتي عديدي النكليوتيد مع بعضهما البعض؟,ANSWER: روابط hydrogen,C,Incorrect
+,ما هي خصائص الشجرة الوراثية لخلة متنحية فيها الأبوين مصابين؟,ANSWER: 100%,D,Incorrect
+,ما هو أكبر مستوى من المستويات التراتبية للحياة؟,ANSWER: Biosphere,B,Correct
+,ما هو الحمض الأميني الذي تبدأ به جميع عديدات الببتيد في بدائيات النوى؟,ANSWER: formylmethionine,B,Correct
+,ما الذي يدل عليه تقدير نسبة تنوع النمط الظاهري لخلة ما بسبب الاختلافات الجينية؟,ANSWER: polymorphism,A,Incorrect
+,ما هي الآلية التي تضمن للخلية الجذعية استمرارها إلى ما لا نهاية؟,ANSWER: Telomerase,C,Correct
+,ما هو الحمض الأميني الذي نتج عن ترجمة أول جزيء رنا مرسال صنعي؟,ANSWER: formylmethionine,C,Incorrect
+,ما هي الإنزيمات التي تقوم القلنسوة بحماية سلسلة الرنا من التدرك بها؟,ANSWER: Enzymes,C,Incorrect
+,ما هو مقدار المادة الوراثية التي يتشاركها أقرباء من الدرجة الثانية مع المستلفت؟,ANSWER: 12.5%,D,Correct
+,أين يلتحم الغشاءان النوويان؟,ANSWER: near the nuclear pores,B,Incorrect
+,ما هي النتائج المتوقعة في حال إصابة أب بصفة تخضع لوراثة متنحية مرتبطة بالصبغي X؟,ANSWER: 100%,D,Incorrect
+,ما هي النظرية التي تفسر ظهور المتقدرات والصانعات بإدخال جراثيم داخل الخلايا تقوم بالفسفرة والتركيب الضوئي؟,ANSWER: Endosymbiotic,A,Correct
+,ماذا يسبب وجود الألائل السائد في الأنماط الجينية المختلفة التالية RRYY و RrYy و RRYy و RrYY؟,ANSWER: A,A,Correct
+,ما هو المكان الذي توجد فيه أكبر نسبة للبروتينات في أغشية خلايا الجسم؟,ANSWER: layer,B,Incorrect
+,ما هو المسؤول عن إزالة مشراع الرنا قرب انتهاء تنسخ الدنا واستبدالها بنكليوتيدات الدنا؟,ANSWER: DNA polymerase I,A,Correct
+,ما الذي ترتبط به الصبيغيات الشقيقة على أنيبيبات مغزل الانقسام؟,ANSWER: centromere,C,Correct
+,ما المميز بشجرة النسب الحاوية على حالة وراثة متعلقة بالمتقدرات والتي تكون فيها الأم فقط مصابة؟,ANSWER: maternal inheritance,C,Correct
+,ما هو الاختلاف بين الانترونات والاكسونات؟,ANSWER: DNA,D,Incorrect
+,ما الذي تمثله الخطوط الأفقية التي ترسم أعلى الدوائر والمربعات في شجرة النسب؟,ANSWER: lines of consanguinity,C,Incorrect
+,علام تحتوي الخلايا التي يعبر عنها مصطلح الهيولي المتغايرة؟,ANSWER: multiple types,A,Incorrect
+,ما هي الطرق التي يمكن من خلالها تمييز الصبغيات بعضها عن بعض؟,ANSWER: through banding,C,Correct
+,ما هو التعبير الذي يُستخدم للطاقة الكامنة المختزنة في مدروج للشحنات الكهربائية؟,ANSWER: potential energy,A,Incorrect
+,ما الذي تتشكل منه الأرجل الصفائحية؟,ANSWER: from the mesoderm,A,Incorrect
+,ما هي الرابطة في البنية الثانوية للحمض النووي؟,ANSWER: Linkage,B,Incorrect
+,ما نوع الجينات التي تعد جينات الرنا الريباسي منها؟,ANSWER: rRNA,A,Correct
+,ما هو عدد الصبغيات المأشوبة إذا حدث تأشيب في 80 انقسام؟,ANSWER: 160,A,Incorrect
+,ما هي العملية التي يتم بها تكوين متعضية تشبه الأبوين من بيضة مخصبة؟,ANSWER: development,A,Incorrect
+,على من يظهر الاحلال الوراثي في الوراثة الجنسية المناحية؟,ANSWER: The mother,C,Incorrect
+,ما هو المجهر الذي يدرس السطح الطبوغرافي؟,ANSWER: مجهر electron,A,Incorrect
+,ما هي البنى السيتوبلازمية المغلفة بغشاء واحد على الأقل؟,ANSWER: vacuoles,B,Incorrect
+,ما هي خصائص شجرة النسب الحاوية على حالة وراثة متعلقة بالمتقدرات والوالدين فيها مصابين؟,ANSWER: Autosomal dominant,C,Incorrect
+,ما الذي تختلف به الأحماض الأمينية عن بعضها؟,ANSWER: side chain,B,Correct
+,ما الذي يشير إليه المربع الصغير المملوء في شجرة الوراثة؟,ANSWER: person affected,C,Correct
+,ما هو سبب حدوث التلاسيميا بيتا؟,ANSWER: mutation,B,Correct
+,ماذا يؤدي وجود التربتوفان في مشغل التيربتوفان؟,ANSWER: feedback inhibition,A,Incorrect
+,ما الذي تساعد عليه حلقة الأكتين المتقلصة؟,ANSWER: انقباض,B,Incorrect
+,ما الذي يدل عليه المعين في شجرة النسب؟,ANSWER: Autosomal recessive,A,Incorrect
+,كم عدد الجينات المسؤولة عن الاصطناع الحيوي للحمض الأميني التربتوفان في جينوم بكتيريا E.Coli؟,ANSWER: 5,D,Incorrect
+,ما هي وظيفة حويصلات كوب ٢؟,ANSWER: Secretion,B,Incorrect
+,ما هو معدل الحاملين في مجتمع إذا كان انتشار مرض التالاسيميا معروفاً في ذلك المجتمع؟,ANSWER: Rate of carriers,C,Incorrect
+,أين تجري عملية التمثيل الضوئي؟,ANSWER: in the chloroplasts,B,Correct
+,ماذا يحدث عند انخفاض نسبة الكوليسترول في الغشاء الخلوي؟,ANSWER: loss of membrane fluidity,C,Incorrect
+,أين يتحد الغشاءان النوويان الداخلي والخارجي؟,ANSWER: near the nuclear pores,A,Correct
+,كم عدد القواعد الآزوتية اللازمة لإنتاج بروتين الأنسولين المكوّن من 51 حمض أميني إنتاجاً كاملاً؟,ANSWER: 3,D,Incorrect
+,ما هي الترسبات الصباغية التي تحوي بروتين الفيرتين؟,ANSWER: Melanin,D,Incorrect
+,ما هو أول عنصر من عناصر الدراسة العلمية المنهجية؟,ANSWER: The problem,D,Incorrect
+,ماذا تشير النجمة بعد رمز الجين؟,ANSWER: mutation,B,Incorrect
+,ما يُعرف بامتصاص بعض المواد الضوء بطول موجة ومن ثم إصداره بطول موجة أطول؟,ANSWER: Fluorescence,B,Correct
+,ما يُدعى نوع وترتيب الأحماض الأمينية في البروتين؟,ANSWER: Primary structure,A,Correct
+,ماذا ينتج عند حدوث خلل في تنظيم السبيل الإشاري WNT؟,ANSWER: Neoplasia,B,Incorrect
+,ما هي الشعبة التي ينتمي إليها الإنسان؟,ANSWER: Chordata,B,Correct
+,ما هي نتيجة التطور التي تؤدي إلى التكيف؟,ANSWER: Natural selection,B,Correct
+,أين تكثر جزر CpG؟,ANSWER: near promoters,C,Incorrect
+,ما هو الأساس الأزوتي المتمم للتايمين في الرنا؟,ANSWER: Uracil,B,Incorrect
+,ما هو الموقع الذي يبدأ فيه انتساخ الجينات المرمزة للبروتينات بارتباط انزيم الرنا بوليميراز؟,ANSWER: site,B,Incorrect
+,أين تقع الجينات المسؤولة عن الزمر الدموية عند البشر؟,ANSWER: Chromosome 9,B,Correct
+,ما هو الدور الرئيسي في تعرف جسيم التضفير مواقع التضفير؟,ANSWER: RecA,D,Incorrect
+,ما هي الصبغيات التي يحدث بينها إزفاء متبادل في حالة ابيضاض الدم النقوي المزمن CML؟,ANSWER: 9 and 22,D,Correct
+,ما هو عدد الأنماط الظاهرية المختلفة في الجيل الثاني في حال التفارز المستقل بين المورثتين A و B؟,ANSWER: 9,D,Incorrect
+,ما هو عدد الأنماط الجينية في أعراس فرد متغاير الأليلات AB/ab إذا كان الارتباط بين المورثتين A و B كاملاً؟,A,B,Incorrect
+,ما نوع الوراثة التي يكون فيها والدا الطفل المصاب حاملين متغايري الألائل عديمين الأمراض؟,ANSWER: Autosomal recessive,A,Correct
+,ما هو نمط هذا المرض إذا عانى فرد متخالف الألائل من أعراض مرض وكان موضع الجين على الصبغي 5؟,ANSWER: autosomally recessive,B,Incorrect
+,ما هو خطر إصابة الطفل بالورم التليفي العصبي في الحمل التالي لأم مصابة أنجبت ذكرًا مصابًا بالمرض علمًا أن زوجها سليم؟,ANSWER: 50%,C,Correct
+,ما هو الاحتمال الأول لطراز انتقال هذا المرض الوراثي عندما ينجب أبوان سليمان طفلين (ذكر وأنثى) مصابين بمرض استقلابي بدأت تظاهراته مبكراً؟,ANSWER: 25%,B,Incorrect
+,ما هو القانون الذي ينص على أن زاوية الورود تساوي زاوية الانعكاس؟,ANSWER: قانون Snell,A,Incorrect
+,ما هي الصيغة التي تعطينا التفاصيل الأقل والنسبة الأبسط للذرات الموجودة في الجزيء؟,ANSWER: chemical formula,B,Incorrect
+,ما هو الذي يعطي لأشعة جاما مصدرا آخر للأشعة السينية التي يمكن أن تكون مفيدة وطاقتها قريبة من طاقة أشعة جاما الأصلية بحيث يمكن عدهما أشعة واحدة؟,ANSWER: أشعة X,B,Incorrect
+,ما هو التواتر المناسب للأمواج التي يمكن استخدامها للكشف عن المواد غير المرئية بالنسبة للتواتر 500GHz؟,ANSWER: 3 THz,A,Incorrect
+,ما هو المجال الذي تكون فيه الأمواج تحت الصوتية أصغر منه؟,ANSWER: field of ultrasound,A,Incorrect
+,ما هو المقدار الذي يتزايد لدى انتثار فوتون عن الكترون بمفعول كومتون؟,ANSWER: The wavelength,B,Correct
+,ما الذي يعبر عن شدة الموجة الصوتية؟,ANSWER: Amplitude,C,Correct
+,ما هي خصائص الأشعة السينية؟,ANSWER: اختراق,A,Incorrect
+,ما هي القوة التي تحدث تشوهاً في الجسم وتكون مطبقة على وحدة السطح؟,ANSWER: pressure,B,Correct
+,ماذا تعتبر درجة حرارة النواة والغلاف في جسم الإنسان؟,ANSWER: 37,B,Incorrect
+,ما هو ثابت التناسب بين تدرج السرعة؟,ANSWER: ثابت,B,Incorrect
+,ما هو الناتج عندما تتفاعل الألدهيدات مع NaBH5؟,ANSWER: Alcohols,C,Correct
+,ما هي الطريقة التي يجري بها التبادل الحراري بين الجسم والوسط المحيط؟,ANSWER: exchange,A,Incorrect
+,ما هو المعيار الذي يستخدمه العلماء لحساب الكتل الذرية النسبية؟,ANSWER: The Carbon-12 Standard,C,Correct
+,ما هي الوحدة التي يقاس بها الضغط في إطار السيارة في الولايات المتحدة؟,ANSWER: psi,A,Correct
+,ما هو القانون الذي ينص على أن تغير الحقل المغنطيسي يولد حقلا كهربائيا؟,ANSWER: قانون فاراد,D,Correct
+,ما هو وصف جريان المائع المستقر من ناحية سرعته في أي نقطة منه مع الزمن؟,ANSWER: laminar,D,Incorrect
+,ما هي المادة التي تتخذ شكل أسفل الوعاء الذي يحتويها ولها حجم خاص بها؟,ANSWER: Meniscus,A,Incorrect
+,ما تسمى القوى عندما يكون عمر الحالة المثارة طويلا؟,ANSWER: forces,C,Incorrect
+,ما هو الذي يعطى لأشعة غاما مصدراً آخر للأشعة السينية التي يمكن أن تكون مفيدة وطاقتها قريبة من طاقة أشعة غاما الأصلية بحيث يمكن الحصول على أشعة واحدة؟,ANSWER: sources,B,Incorrect
+,ما نوع الكثافة التي تعتبر منها العظام ومستحضرات التباين العائمة مثل اليود والباريوم؟,ANSWER: Radiopaque,C,Incorrect
+,ما هي طبيعة الأشعة السينية؟,ANSWER: Electromagnetic radiation,D,Correct
+,ما هو مجموع الكتل الذرية النسبية في مركب أيوني؟,ANSWER: mass number,B,Incorrect
+,أين يقع مجال التيراهرتز؟,ANSWER: between microwave and infrared,A,Correct
+,لماذا يُستخدم الماء في درجة معينة كمادة مرجعية للوزن النوعي؟,ANSWER: because it is a pure substance,B,Incorrect
+,ما هي مكونات صمام الأشعة السينية؟,ANSWER: leaflets,D,Incorrect
+,ما الذي تتعلق به الطاقة التي يصدرها الجسم الأسود وفقاً لدراسة تغير تابع إشعاع الجسم الأسود؟,ANSWER: The fourth power of temperature,C,Correct
+,ما هي قوة اللزوجة بالنسبة لاتجاه جريان المائع؟,ANSWER: Force,A,Incorrect
+,ما هي الطاقة التي يمكن بها تفكيك رابطة في خلايا النسج؟,ANSWER: Activation energy,C,Incorrect
+,ما يجب أن يكون عليه ضغط الهواء داخل القاعة في حالة الثوران بالنسبة لضغط الماء خارجها حيث تتوازن قوة الضغط نحو الخارج مع قوة التوتر السطحي نحو الداخل؟,ANSWER: 2.3 mmHg,B,Incorrect
+,ما هو المجال الموجي لأشعة UVC؟,ANSWER: 100-280 nm,C,Correct
+,ما هي طبيعة الارتباط بين قرينة الانكسار لوسط مادي معين وسرعة الأمواج في ذلك الوسط؟,ANSWER: relationship,C,Incorrect
+,ما هي الخاصية التي يميزها التواتر والطول الموجي؟,ANSWER: sound,A,Incorrect
+,ما هي الطاقة التي تحملها الموجة في وحدة الزمن؟,ANSWER:,D,Incorrect
+,ما هي قابلية العين التي تسمح بالمطابقة لكل أبعاد الجسم عن العين مع الاستمرار بتشكيل خيال على بعد ثابت من العدسة يتحدد بالفاصل بين العدسة والشبكية؟,ANSWER: ability,C,Incorrect
+,كيف يؤثر الضغط على توازن التفاعلات التي تكون متفاعلاتها ومنتجاتها؟,ANSWER: Principle of Le Chatelier,C,Incorrect
+,ما هو التواتر في حالة الأمواج الصوتية؟,ANSWER: The frequency,A,Correct
+,ما هو شكل الطاقة التي تصدرها أجسامنا حتى في درجات الحرارة العادية؟,ANSWER: Infrared,B,Correct
+,ما هي التحولات التي تحافظ على العدد الكتلي؟,ANSWER: Isotopes,B,Incorrect
+,ما هو القانون الذي يربط بين معدل الجريان الحجمي في وعاء دموي من جهة وفارق الضغط بين طرفي الوعاء ونصف قطره الداخلي وطوله ولزوجة الدم؟,ANSWER: قانون بوازي,A,Correct
+,ما نوع الجريان عندما تكون سرعة المائع في أي نقطة منه ثابتة مع مرور الزمن؟,ANSWER: laminar,B,Incorrect
+,ما هي آلية انتقال الحرارة في الموائع؟,ANSWER:,B,Incorrect
+,ما هي صفات الخيال في المصورات ذات الثقب؟,ANSWER: round,C,Incorrect
+,ما هي العلاقة التناسبية لقرينة الانكسار لأي وسط معين؟,ANSWER: n = c/v,A,Correct
+,ما هي الأشعة التي حققت حلم الإنسان القديم في رؤية داخل الجسم من دون بضع؟,ANSWER: الأشعة,D,Incorrect
+,ما هو المركب الذي يتشكل من تفاعل حمض الآزوت المركز بوجود حمض الكبريت المركز مع نترو البنزين؟,"ANSWER: 2,4,6-trinitrotoluene",B,Incorrect
+,ما هي التبادلات التي تجري بين الجسم الصلب والمانع المتحرك الذي يختلف عنه في درجة الحرارة؟,ANSWER: exchange of heat,B,Incorrect
+,ما هي وظيفة الحقل الكهربائي في الأفران الكروية؟,ANSWER: sterilization,A,Incorrect
+,ما هي طبيعة الإشعاعات الكهرومغناطيسية؟,ANSWER: ionizing,C,Incorrect
+,ما هو التفاعل الذي تخضع له هالوجينات الألكانات بالقلويات؟,ANSWER: Elimination,A,Correct
+,ما هي استخدامات الليزر الصباغي؟,ANSWER: removal of tattoos,B,Incorrect
+,ماذا تصدر النظائر المشعة في التصوير بالأصدر البوزتروني؟,ANSWER: positrons,D,Correct
+,ما هي الأشعة التي ساهمت في تقدم علم البلورات؟,ANSWER: X,D,Incorrect
+,ما الذي يتم التحكم في ارتفاع النهاية المدببة للحفاظ عليه عندما نمسح سطح المعدن في مجهر STM؟,ANSWER: distance,B,Correct
+,ما هو معدل الإشعاع من سطح إلى معدل الإشعاع من مساحة مساوية من سطح مشع مثالي في درجة الحرارة نفسها؟,ANSWER: emissivity,A,Correct
+,ما هي الجزئيات التي يمكن الاستفادة من تفاعلها في التصوير؟,ANSWER: positrons,A,Incorrect
+,ما هو الوسط الذي تكون فيه كثافة الأيونات الموجبة والسالبة أكبر من كثافة الأيونات المعتدلة؟,ANSWER: near the membrane,B,Incorrect
+,ما هو الإجراء المستخدم للاطمئنان على صحة الجنين عند المرأة الحامل؟,ANSWER: Triple test,A,Incorrect
+,ما يُدعى الضغط الذي يسببه عمود من الزئبق ارتفاعه 1 مم؟,ANSWER: Torr,A,Correct
+,ما هي الظاهرة التي تنقسم فيها نواة ذات عدد كتلي كبير إلى نواتين أو أكثر لكل منهما عدد كتلي متوسط؟,ANSWER: fission,B,Correct
+,ما هو مجال الأشعة الذي يشع فيه جسم الإنسان بشكل قريب جداً من إشعاع الجسم الأسود؟,ANSWER: الأشعة تحت,A,Incorrect
+,ما هي الأشعة التي اشتهرت بانتزاع جزيئات الماء لدى تفاعلها مع النسج؟,ANSWER: أشعة alpha,A,Correct
+,ما هي الظاهرة التي تنقسم فيها نواة ذات عدد كتلي كبير إلى نواتين أو أكثر لكل منهما عدد كتلي متوسط؟,ANSWER: fission,B,Correct
+,ما هي طريقة العلاج الفيزيائي التي تستعمل فيها تيارات كهربائية عالية التردد لإحداث الحرارة في الأنسجة العميقة؟,ANSWER: Diathermy,B,Correct
+,كيف تتولد الأشعة السينية؟,ANSWER: when electrons hit a metal,C,Correct
+,ما هو الأساس الذي تترتب وفقه العناصر في الجدول الدوري حالياً؟,ANSWER: number of protons,B,Correct
+,ما هو الشرط الذي يجب أن تحققه النقطتان لتطبيق معادلة برنولي على جريان أي مائع مثالي؟,ANSWER: along the same streamline,A,Correct
+,ما هي الأمواج التي تستخدم في تفتيت الحصى؟,ANSWER: Shock waves,A,Correct
+,ما هو المجهر الذي يمسح العينة نقطة فنقطة ولكنه يكشف عن الالكترونات النافذة؟,ANSWER: Microscope,D,Incorrect
+,من أين تشتق قوة المقاومة من اللزوجة عندما تكون السرعة النسبية بين الجسم والمائع كافية لأن يكون الجريان حول الجسم رقائقياً؟,ANSWER: layer boundary,B,Incorrect
+,ما هي الرابطة التي تبقى صلبة دائماً؟,ANSWER: ligamentum flavum,A,Incorrect
+,كم عدد العدسات في مجهر SEM؟,ANSWER: two,B,Incorrect
+,ما هي الحالة التي تتولد فيها الأمواج الصادمة بالنسبة لسرعة منبع الأمواج الصوتية؟,ANSWER: Shock wave,B,Incorrect
+,ما هو العدد النيوكلوني في نواة ذرة ما؟,ANSWER: A,D,Incorrect
+,ما هو سبب تخامد الأشعة السينية في الجسم المدروس؟,ANSWER: obstruction,B,Incorrect
+,ما يُستخدم لقياس درجة التشوه؟,ANSWER: Indices,B,Incorrect
+,ما هي الوحدة التي يقيسها الروتنجن؟,ANSWER: exposure,B,Correct
+,ما تتألف منه الحلقة البنزنية؟,ANSWER: 6 carbon,D,Correct
+,ماذا يشير انزياح الضوء من المجرات البعيدة نحو الترددات الأخفض؟,ANSWER: effect doppler,B,Incorrect
+,ما هي الوحدة التي يقيسها الرونتجن؟,ANSWER: exposure,B,Correct
+,ما هي النظائر؟,ANSWER: نظائر,D,Incorrect
+,ما هي زاوية الورود التي يكون الضوء المنعكس عندها مستقطبا كليا؟,ANSWER: 90 degrees,B,Incorrect
+,كيف يمكن توليد الأمواج فوق الصوتية؟,ANSWER: piece,D,Incorrect
+,أين تشكل العين مديدة البصر (العين الطامسة) خيال الجسم القريب؟,ANSWER: before the retina,B,Correct
+,ما هو الاضطراب الذي يمثل هذه الحالة؟,ANSWER: Diabetes,B,Incorrect
+,متى يأخذ احتمال وجود الالكترون قيمة عظمى في الحالة الأساسية في ذرة هيدروجين؟,ANSWER: when the electron is at the nucleus,B,Incorrect
+,ما ينص عليه قانون الانعكاس الأول؟,ANSWER: The law of reflection,C,Incorrect
+,ما هو الانفعال في حالة التشوه التحددي أو الانضغاطي؟,ANSWER: Ischemia,A,Incorrect
+,ما هو وزن الحجم المنغمس من الجسم عندما يكون الجسم مغموساً وليس مغموراً كلياً نتيجة كون كثافة المائع أكبر من كثافة الجسم؟,ANSWER: less than the weight of the displaced fluid,B,Incorrect
+,ما اسم الجهاز الذي يصور مقاطع في الجسم البشري بالأشعة السينية والاستعانة بالحاسب؟,ANSWER: CT,B,Correct
+,ما هو العنصر الأكثر استخداماً في التصوير بالتجاوب المغناطيسي؟,ANSWER: Hydrogen,B,Correct
+,ما هو سبب تخامد الأشعة السينية في الجسم المدروس؟,ANSWER: obstruction,B,Incorrect
+,ما هي الخطوة الأولى في التفاعلات؟,ANSWER: complex,A,Incorrect
+,ماذا يزداد عندما ترتد الفوتونات التي تعبر الثقب في الحجرة عن الجدران مرات عديدة قبل أن تغادر؟,ANSWER: Time,D,Correct
+,كيف تعمل الحزم الإلكترونية على معالجة الأورام؟,ANSWER: Ablation,A,Incorrect
+,ما هو السبب وراء تكرار الطراز (الدورية في الجدول الدوري) الناجم عن ترتيب العناصر؟,ANSWER: Configuration of electrons,B,Correct
+,ما هو المركب الذي يتشكل عند أكسدة الكيلات البنزن (مثل ميتيل البنزن) ببرمنغنات البوتاسيوم (VII) القلوية أو بأي مؤكسد قوي آخر؟,ANSWER: حمض benzoic,D,Correct
+,ما هي النوى التي لها عدد N ثابت حيث تحوي العدد نفسه من النترونات؟,ANSWER: Isotopes,A,Incorrect
+,ماذا يحدث إذا كانت الحقول الكهربائية لمنبع الأمواج الكهرطيسية لها اتجاهات عشوائية عند انتشاره؟,ANSWER: polarization,B,Incorrect
+,ما هو التفاعل الذي تخضع له الألكانات مع الهالوجينات في ضوء الشمس؟,ANSWER: substitution,A,Correct
+,ما هو الشيء الذي تهتز حوله الذرتان في الجزيء ثنائي الذرة؟,ANSWER:,B,Incorrect
+,ما هي البنية لأكسيد المغنزيوم؟,ANSWER: MgO,B,Incorrect
+,ماذا يزداد عندما ترتد الفوتونات التي تعبر الثقب في الحجرة عن الجدران مرات عديدة قبل أن تغادر؟,ANSWER: Time,D,Incorrect
+,ما هي وحدة قياس الجرعة المكافئة للإشعاع؟,ANSWER: Gray,B,Incorrect
+,ما هي طريقة التصوير التي يمكن اعتبارها الأقل ضرراً على الجسم؟,ANSWER: Ultrasound,A,Correct
+,ما هي أعمار النصف للنظائر المشعة المستخدمة في تقنية الـ PET؟,ANSWER: 2-110 minutes,B,Incorrect
+,ما هي المماكبات (الإيزوميرات)؟,ANSWER: Enzymes,D,Incorrect
+,ما هو القانون الذي تمثل معادلة برنولي المطبقة على جريان المائع أحد أشكال انحفاظه؟,ANSWER: law of conservation of energy,A,Correct
+,ماذا يستخدم قانون ستوكس لقياسه؟,ANSWER: flow rate,A,Incorrect
+,ما هو العلم الذي يقوم بحساب البعد بين الذرات عند معرفة الطول الموجي للأشعة السينية وقياس الزاوية؟,ANSWER: crystallography,B,Correct
+,ما هي الأوساط التي تنتشر فيها الأمواج العرضانية؟,ANSWER: The medium,B,Incorrect
+,ما هي الخصائص التي تتمتع بها حزمة الفوتونات من أشعة X عالية الطاقة والتي تجعلها تستخدم في الطب النووي عند المعالجة عن بعد؟,ANSWER: low attenuation,A,Incorrect
+,ما هو القانون الذي ينص على أن تشوه مادة يتناسب طرديا مع القوى التي تحدث التشوه؟,ANSWER: قانون هوك,B,Correct
+,علام نعتمد لتفسير لثنائية الإصدار في طيف بخار الصوديوم؟,ANSWER: rule of doubling,A,Incorrect
+,ما هي المعادلة التي تعبر عن انخفاض الطاقة في الموائع؟,ANSWER: معادلة برنولي,A,Incorrect
+,متى يحدث تفاعل اشعاع الليزر مع النسج؟,ANSWER: during exposure,A,Correct
+,ما هي البنية التي تأخذها الشبكات الأيونية لكلوريد الصوديوم وأكسيد المغنزيوم؟,ANSWER: network covalent,B,Incorrect
+,ما هو العمل الذي يقوم به المائع على المائع الذي يتقدمه في وحدة الجريان؟,ANSWER: work,B,Incorrect
+,ما هي الكمية الوسطية للأوزون في الغلاف الجوي؟,ANSWER: 300,C,Incorrect
+,ما هو النكليد الإشعاعي المماكب الذي يشيع استخدامه في التشخيص الطبي؟,ANSWER: Tc-99m,A,Correct
+,كيف يتغير نصف القطر الذري عبر الدور الثالث من اليسار إلى اليمين؟,ANSWER: decreases,A,Correct
+,إذا كان الإشعاع وحيد الطول الموجي فمن أي نوع من الفوتونات يكون مؤلفاً؟,ANSWER: gamma,A,Incorrect
+,ما هي الأمواج الميكانيكية التي تنشأ عن الوحدات المحركة في الألياف ولا تدركها الأذن؟,ANSWER: sound,C,Incorrect
+,ما هو مصدر العنصر المشع الذي يعطى للمريض عند استخدام تقنية التصوير SPECT؟,ANSWER: Radionuclide,B,Incorrect
+,ما نوع الصورة التي نحصل عليها في التصوير الومضاني للجزء المصور من جسم المريض؟,ANSWER: section,A,Incorrect
+,إذا تضيق قطر الشريان إلى ثلث قيمته الأصلية عند مريض مصاب بمرض وعائي وقلبي وبقي هبوط الضغط فيه على حاله، إلى كم ينخفض معدل جريان الدم؟,ANSWER: 8/9,B,Incorrect
+,ما هي السكريات التي لا تحتاج أثناء امتصاصها من الأمعاء الدقيقة لوجود الصوديوم؟,ANSWER: Monosaccharides,B,Incorrect
+,ما هو الأنزيم المعوي الذي يحول مولد التربسين إلى تربسين؟,ANSWER: enterokinase,A,Correct
+,ما هو العامل الهرموني الذي يحرض إفراز عصارة بنكرياسية غنية بالإنزيمات الهاضمة؟,ANSWER: Secretin,A,Incorrect
+,ما هو الإنزيم الذي يفكك سكر اللبن (اللاكتوز) إلى غلوكوز وغالاكتوز؟,ANSWER: lactase,D,Correct
+,ما هو مستودع الصفراء خارج أوقات الهضم والذي يعمل على تكثيفها؟,ANSWER:,D,Incorrect
+,ما هي الشوارد التي يكون تركيزها أقل في اللعاب منه في البلازما؟,ANSWER: HCO3,B,Incorrect
+,ما هو الهرمون الذي يحفز إفراز عصارة بنكرياسية غنية بالأنزيمات الهاضمة؟,ANSWER: Secretin,B,Incorrect
+,ما هو السكر الذي لا يحتاج للصوديوم من أجل عملية امتصاصه؟,ANSWER: Glucose,C,Incorrect
+,ما هو الناقل العصبي الذي يتحرر من العصبونات بعد العقدة في القسم الودي؟,ANSWER: Acetylcholine,D,Incorrect
+,ما الذي يحدد نمط استجابة العضو المعصب بواسطة الجهاز العصبي المستقل (استثارة أو تثبيط)؟,ANSWER: The type of receptor,D,Correct
+,ما هو الناقل الكيميائي الذي تحرره جميع العصبونات قبل العقدة؟,ANSWER: Acetylcholine,A,Correct
+,ما هو الناقل العصبي الذي يتحرر من طرفيات جميع الألياف اللاودية بعد العقدية؟,ANSWER: Acetylcholine,A,Incorrect
+,ما هي الميزة التي تتمتع بها قنوات IF في النسيج العقدي القلبي التي تمكنها من توليد التنبيه عفوياً؟,ANSWER: automaticity,A,Correct
+,ما هي الفائدة الوظيفية من التأخير الزمني في كمون الفعل لمدة 0.1 ثانية عند مروره في العقدة الأذينية البطينية؟,ANSWER: allows atrial contraction,A,Correct
+,ماذا يحدث للبطينات في حال توقف العقدة الجيبية الأذينية عن العمل؟,ANSWER: Fibrillation,B,Incorrect
+,ما هو سبب ظهور طور الهضبة في كامن فعل العضلة القلبية؟,ANSWER: potential plateau,A,Incorrect
+,ما هو سبب طور الهضبة في كمون عمل الليف العضلي القلبي؟,ANSWER: period,B,Incorrect
+,ما هي المناطق التي تطبق عليها المعالجة الإشعاعية في علاج أورام الخصية من النمط المنوي؟,ANSWER: retroperitoneal and pelvic,B,Correct
+,ما هي الأورام التي لا تعتبر المعالجة الشعاعية معالجة شافية لها إذا استخدمت لوحدها في المراحل المبكرة؟,ANSWER: Glioblastoma,C,Incorrect
+,ما هي الجرعة الكلية الموصى بها في حال تقرر إجراء تشعيع وقائي للقحف بجرعة ٢ غري في كل جلسة؟,ANSWER: 40 غري,C,Incorrect
+,ما هو الزمن الأقل الفاصل بين كل جلستين عند إجراء المعالجة الشعاعية بطريق التجزئة المفرطة؟,ANSWER: 4 to 6 hours,E,Correct
+,ما الذي يحول مولد الببسين إلى ببسين؟,ANSWER: HCl,A,Correct
+,ما هو سبب حدوث عمى ربعي علوي أيمن مماثل؟,ANSWER: Aneurysm,A,Incorrect
+,ما هي المدة الزمنية التي يتطور خلالها الصداع المزمن؟,ANSWER: 3 months,C,Correct
+,ما هو نوع الصداع غير النابض ثنائي الجانب الذي قد يرتبط بتشنج عضلات الرقبة؟,ANSWER: صداع tension,C,Correct
+,أين يحدث التكيس للجيارديا اللمبلية؟,ANSWER: small intestine,D,Incorrect
+,ما هي الذبابة ذهبية العيون Chrysop ثوي ناقل له؟,ANSWER: Aphid,C,Incorrect
+,ما هي الفترة الزمنية الذي تظهر فيها إيجابية اختبار سابين فيلدمان بعد العدوى به؟,ANSWER: 2-3 weeks,B,Correct
+,ما الذي تنتهي به المرحلة الخارج خلوية للمتصورات؟,ANSWER: release,A,Incorrect
+,أين تتكاثر خبيطيات الفخرية البنكروفتية؟,ANSWER: in the liver,C,Incorrect
+,ما هو المرض الذي يستخدم عقار melarsporol في علاجه؟,ANSWER: Leishmaniasis,D,Incorrect
+,ما هو الخمج الطفيلي الذي يمكن أن ينتقل من شخص لآخر؟,ANSWER: Giardiasis,D,Incorrect
+,ما هي أفضل أماكن الخزع التشخيصية القندية في جسم الإنسان؟,ANSWER: sites of lymphatic drainage,B,Incorrect
+,ما هو المسبب لداء هجرة اليرقات الجلدي؟,ANSWER: Hookworm,B,Correct
+,ما هو العلاج المناسب للمتحولة العصبية naegleria fowleri؟,ANSWER: amphotericin B,C,Correct
+,أين تتوضع يرقات الأسطوانية الوعائية عند الإنسان؟,ANSWER: near the cecum,D,Incorrect
+,ما هو الشكل المعدي للإنسان من متفرعة الخصية الصينية؟,ANSWER: Brucella abortus,B,Incorrect
+,أين تتوضع الأسطوانية البرازية عند الإنسان؟,ANSWER: colon,B,Incorrect
+,ما هو العصب الذي يصاب في متلازمة قاع الحجاج؟,ANSWER: العصب infraorbital,C,Correct
+,ما هو تعريف الحول المتقارب؟,ANSWER: deviation of the eyes toward each other,D,Correct
+,ما هي أسباب حدوث فيض الدمع Epiphora؟,ANSWER: obstruction of the nasolacrimal duct,D,Incorrect
+,أين تقع حفيرة البكرة في الجدار العلوي للحجاج؟,ANSWER: near the optic canal,B,Incorrect
+,ما هي النسبة التي تشكلها القرنية من سطح غلاف كرة العين الليفي؟,ANSWER: 1/6,E,Incorrect
+,ما هو أكثر تنكسات القرنية شيوعاً؟,ANSWER: keratoconus,B,Incorrect
+,ما هي الحالات التي تشاهد فيها الرؤية المزدوجة الأحادية الجانب؟,ANSWER: شلل in the cranial nerves,B,Incorrect
+,ما هو المرض الذي يشاهد فيه حلقة كاي زر- فليشر عند المرضى؟,ANSWER: داء Addison,C,Incorrect
+,ما الذي يجب فعله في الحالات المعندة وغير المستجيبة للعلاج في الورم الكاذب للحجاج؟,ANSWER: استئصال,D,Incorrect
+,ما هي النتائج التي تؤدي إليها إصابة الشعبة العينية من العصب الخامس في متلازمة الشق الحجاجي العلوي؟,ANSWER: loss of sensation,A,Incorrect
+,ما هو التشخيص الأقرب لمريض عمره 65 سنة لديه فقد رؤية في النصف العلوي من الساحة البصرية مع بدء مفاجئ؟,ANSWER: occlusion of the posterior cerebral artery,C,Incorrect
+,ما الذي يدل عليه ظهور تقبب على شكل حويصل أسود في قعر القرحة القرنية الجرثومية؟,ANSWER: Necrotic tissue,D,Incorrect
+,ما هي الطريقة التالية لتقدير حدة البصر لدى المريض إذا لم يتمكن من قراءة أكبر أحرف اللوحة؟,ANSWER: using tumbling E chart,A,Incorrect
+,ما الذي يشكو منه المريض في الحول الشللي عند البالغين؟,ANSWER: diplopia,B,Correct
+,متى ينعدم يوروبيلينوجين البول؟,ANSWER: when there is no hemolysis,C,Incorrect
+,في الاحتباس الصفراوي ما هو الانزيم الأفضل للوصول للتشخيص؟,ANSWER: γ-GT,A,Correct
+,ما هي نتيجة رحلان البروتينات في الالتهابات الحادة؟,ANSWER: elevation,B,Incorrect
+,ما هو المركب الذي يتم اصطناعه بدءا من الحموض الأمينية؟,ANSWER: peptides,B,Incorrect
+,ما هي أعراض فقر الدم بعوز الحديد عند المريض؟,ANSWER: fatigue,B,Incorrect
+,ما هي الحالة التي تعاني منها مريضة عمرها 44 سنة تشكو من تعب عام وكانت قيمة البولة الدموية 140 ملغ/دل وقيمة الكرياتنين 6 ملغ/دل وحمض البول 4 ملغ/دل؟,ANSWER: failure,B,Incorrect
+,ما هو سبب تشمع الكبد عند مريض عمره 12 سنة؟,ANSWER: A,B,Incorrect
+,ما هو الاحتمال الأكثر ترجيحاً لسبب تشمع الكبد عند مريض عمره 12 سنة؟,ANSWER: A,C,Incorrect
+,ما هو تصنيف مريض عنده الغلوكوز 210 ملغ / دل؟,ANSWER: hyperglycemia,B,Incorrect
+,ما هو تصنيف مريض تم تحليل الغلوكوز الصيامي له فكانت النتيجة 128 ملغ/دل؟,ANSWER: prediabetes,B,Incorrect
+,ما هو المركب الذي يعتبر ايتلين ديامين تترا استات مركباً لاقطاً له؟,EDTA,C,Incorrect
+,ما هو المركب الذي يستخدم في تدبير حمى البحر الأبيض المتوسط؟,ANSWER: Colchicine,B,Correct
+,ما هو النمط التحسسي الذي يعود إليه داء الفقاع المحرض دوائياً؟,ANSWER: pattern,B,Incorrect
+,ما هي آلية تأثير المركب دابيريدامول؟,ANSWER: Antiplatelet,A,Incorrect
+,"ما هي جرعة الدواء عند طفل وزنه 17,5 كغ إذا كانت جرعة البالغ 100 ملغ؟",ANSWER: 17.5 ملغ,C,Incorrect
+,ما هو معدل التصفية الكلوية للكرياتينين عند رجل عمره 40 سنة ومستوى كرياتينين الدم 1 ملغ/دل ووزنه 72 كغ؟,ANSWER: 110,B,Correct
+,ما هي الخلايا التي تقوم بإفراز بروتين برفورين الذي يفتح ثقوب في غشاء الخلية الهدف؟,ANSWER:,B,Incorrect
+,كيف يتأثر الغاز كلما زاد وزنه الجزيئي؟,ANSWER: solubility,B,Incorrect
+,ما هو المبدأ الأساسي للتشتت؟,ANSWER: transfer,B,Incorrect
+,ما هو العامل الذي يسرع العامل السابع تشكله؟,ANSWER: Factor X,B,Incorrect
+,ما هو السائل الموجود داخل الخلايا؟,ANSWER:,C,Incorrect
+,ما هي مقدرة شخص على إدراك منبهين لمسيين مطبقين على منطقة من سطح الجسم على أنهما منفصلان؟,ANSWER: discrimination,B,Incorrect
+,ما هو سبب عدم قدرة ألياف الجهاز العصبي المركزي على التجدد؟,ANSWER: absence of neurogenesis,C,Incorrect
+,ما هو المجال الذي تكون فيه النسخ السيتولوجية شفافة نسبياً؟,ANSWER: The field of cytology,B,Incorrect
+,ما هو العامل الرئيسي الذي يحدد ارتباط الأكسجين بخضاب الدم؟,ANSWER: Partial pressure of oxygen,A,Correct
+,ما الذي يؤدي إليه العامل ٣ مع الكالسيوم؟,ANSWER: Hypercalcemia,B,Incorrect
+,متى يزداد الانحلال في التلاسيميا؟,ANSWER: during hemolysis,A,Incorrect
+,ما هو الفيتامين الأساسي في عملية تشكيل عوامل التخثر؟,ANSWER: فيتامين K,D,Correct
+,ما هو المستوى من الفيزيولوجيا الذي تنتمي إليه دراسة آلية وتوليد ونقل كوامن الفعل في القلب؟,ANSWER: The electrophysiology,B,Incorrect
+,أين توجد المستقبلات النيكوتينية؟,ANSWER: postsynaptic membrane,D,Incorrect
+,ما الذي تعتمد عليه سرعة انتشار الأوكسجين عبر غشاء الخلية؟,ANSWER: gradient,B,Incorrect
+,ماذا يحدث عندما يصل التيروكسين إلى المستوى الدوراني المطلوب؟,ANSWER: feedback inhibition,C,Correct
+,ما هي الوظيفة الرئيسية للعقدة الأذينية البطينية في الحالات السوية؟,ANSWER: transfer of electrical impulses,A,Correct
+,ما هي العوامل التي تحرض إفراز عصارة بنكرياسية غنية بالإنزيمات؟,ANSWER: Secretin,A,Incorrect
+,أين يتم إعادة امتصاص القسم الأعظم من الماء المرتشح؟,ANSWER: The proximal convoluted tubule,A,Correct
+,ما هو سبب الصوت الأول للقلب؟,ANSWER: closure of the mitral and tricuspid valves,C,Correct
+,ما هي الخلايا التي تمتلك أسرع معدل لزوال الاستقطاب؟,ANSWER: Fibers,A,Incorrect
+,ما هو الذي وظيفته تسريع عملية تشكل الترومبوبلاستين الصفيحي؟,ANSWER: Factor V,C,Incorrect
+,ما الذي يعمل على تسهيل الانتقال بين الشهيق والزفير؟,ANSWER: area postrema,D,Incorrect
+,ما الذي يزداد في الأسناخ الرئوية؟,ANSWER: Exchange of gases,B,Incorrect
+,ما يعرف بالموجهة الجسدية؟,ANSWER: The body's physical orientation,C,Incorrect
+,ما هي العقدة الرأسية للجهاز العصبي المستقل؟,ANSWER: ganglion cervicale,C,Incorrect
+,ما هي المحطة الرئيسية الدماغية التي تتكامل فيها وظائف الجهاز العصبي المستقل مع وظائف البنى العصبية الأخرى؟,ANSWER: Hypothalamus,D,Correct
+,ما هو الناقل العصبي المحرر من طرفيات الألياف بعد العقدية في القسم الودي؟,ANSWER: Acetylcholine,C,Incorrect
+,ما هو الدور المهم الذي تؤديه خلايا سيرتولي في الخصية؟,ANSWER: Support,B,Correct
+,ما هو الذي يروي النسيج الضام للرئة؟,ANSWER: supply,C,Incorrect
+,ما هي البوابات التي تتحكم بنفوذية القنوات للشوارد التي تسهم في تشكيل كامن الفعل؟,ANSWER: Voltage-gated,D,Incorrect
+,ما هي أجهزة التحكم والضبط والمراقبة في الجسم؟,ANSWER: The hypothalamus,C,Incorrect
+,ما هي المواد التي تحررها نهايات المحاوير العصبية في المشابك والموصلات المشبكية؟,ANSWER: neurotransmitters,A,Correct
+,ماذا ينقل الترانسفيرين؟,ANSWER:,B,Incorrect
+,ما هو الإحساس الذي يمكن أن يُدرك كلياً في المهاد؟,ANSWER: الألم,A,Incorrect
+,أين توجد المستقبلات المسكارينية؟,ANSWER: postganglionic,C,Incorrect
+,ما هي الزمرة الدموية إذا كانت الكرية الحمراء لا تحوي مولد ارتصاص؟,ANSWER: A,D,Incorrect
+,ما هو ناظم القلب؟,ANSWER: pacemaker,C,Correct
+,ما الذي يشكله الجهاز الانزيمي في الخلايا البطانية السليمة اعتباراً من حمض الاراشيدونيك؟,ANSWER: Prostacyclin,A,Correct
+,ما الذي تتناسب معه سرعة النقل في الألياف العصبية اللانخاعينية؟,ANSWER: قطر,A,Correct
+,أين تقع أجسام عصبونات المرتبة الثانية للإحساسات المنقولة بمسلك العمود الظهري؟,ANSWER: nucleus gracilis,C,Correct
+,ما هي العوامل التي تتناسب معها سرعة الانتشار البسيط؟,ANSWER: Conductivity,B,Incorrect
+,ما هي آلية تحرر شوارد الكالسيوم من الشبكة الهيولية في العضلات الهيكلية؟,ANSWER: through ryanodine receptors,A,Correct
+,ما الذي يؤكد الدور الأهم للمراكز الشوكية والبصلية في وظيفة الجهاز العصبي المستقل؟,ANSWER: experiment of langley,A,Incorrect
+,ما هو الهدف الأساسي للنقل الفاعل عبر الغشاء؟,ANSWER: Active transport,B,Incorrect
+,ما الذي يتأثر بتغير كمية الأوكسجين في الأسناخ؟,ANSWER: pH,A,Incorrect
+,ما هي أقصى مدة لحفظ الدم؟,ANSWER: 42 day,C,Correct
+,ماذا يحدث عندما تكون تهوية السنخ أعلى من ترويته الدموية؟,ANSWER: Necrosis,B,Incorrect
+,ما هي الحالات التي تزداد فيها كمية الماء الموجودة في الأحياز الخاصة؟,ANSWER: قصور,D,Incorrect
+,ما هو الهرمون المطلق للموجهة القشرية؟,ANSWER: CRH,B,Correct
+,ما هي الشاردة الإيجابية الأساسية في السائل داخل الخلوي؟,ANSWER: Potassium,B,Correct
+,ما هو نوع المصل الذي يحمله شخص من الزمرة الدموية B؟,B,A,Incorrect
+,ما هي الحالة التي يكون فيها انقلاب الصيغة أكثر شيوعاً؟,ANSWER: breech,A,Incorrect
+,ما هو حجم الضربة (Stroke Volume)؟,ANSWER: 70 ml,A,Incorrect
+,ما هي أقصى كمية هواء يمكن استنشاقها زيادة على كمية الحجم الجاري السوية؟,ANSWER: reserve volume,C,Correct
+,ما هي الآلية التي يتم من خلالها التنظيم المديد للجريان الموضعي؟,ANSWER: autoregulation,B,Incorrect
+,ما هي الشوارد التي تسبب قوى الجذب بين خيوط الاكتين والميوزين مما يؤدي إلى انزلاق بعضها على بعض؟,ANSWER: Cross bridges,B,Incorrect
+,ما هو الهدف من آلية المزلاج في العضلات الملساء؟,ANSWER: regulation,C,Incorrect
+,ما هي الخلايا الدبقية التي تشكل جزء من الحاجز الوعائي الدموي؟,ANSWER: Astrocytes,C,Correct
+,ما هي الآلية التي يتم من خلالها التنظيم المديد للضغط الشرياني؟,ANSWER: feedback,B,Incorrect
+,ما هي المستقبلة الأسرع تلاؤماً؟,ANSWER: Afferent,D,Incorrect
+,لماذا لا تتمكن الألياف العصبية المركزية من التجديد؟,ANSWER: environment,C,Incorrect
+,ما هي كمية الهواء الموجودة في الرئتين في نهاية شهيق سوي؟,ANSWER: 500,C,Incorrect
+,ما هي الفائدة الوظيفية من التأخير الزمني لكامن الفعل لمدة 0.1 ثانية عند مروره في العقدة الأذينية البطينية؟,ANSWER: allows atrial contraction,A,Correct
+,ما هي المواد التي يقتصر عليها الامتصاص المعدي؟,ANSWER: water and electrolytes,C,Incorrect
+,ما هو المركب الذي يتشكل من تفاعل الهيموغلوبين مع حمض أو قلوي؟,ANSWER: methemoglobin,C,Incorrect
+,ما الذي يتناسب إفراغه عكسياً مع إفراغ الهيدروجين؟,ANSWER: CO2,B,Incorrect
+,ما هو الغشاء الكبيبي نفوذ له؟,ANSWER: The glomerular membrane,B,Incorrect
+,ما هو المسؤول عن إرسال السيالات في العصبونات؟,ANSWER: Axon,B,Correct
+,ما هو المستوى الذي يعتبر ضخ الدم مثالاً على دراسته؟,ANSWER: physiology,B,Correct
+,ما هي العملية التي يتم بها تحويل النورادرينالين إلى أدرينالين؟,ANSWER: N-methylation,C,Correct
+,ما الذي يشكل جسراً بين ألياف الكولاجين والصفيحات الدموية؟,ANSWER: von Willebrand factor,A,Correct
+,ما هي الفائدة الوظيفية من وجود الكليونات المجاورة للّب؟,ANSWER: release of digestive enzymes,B,Incorrect
+,ما هو السبب الذي يحمي العضلة القلبية من التكزز؟,ANSWER: automaticity,B,Correct
+,ما هو الهرمون الذي يخضع لتأثير مزدوج منبه ومثبط من الوطاء؟,ANSWER: Thyrotropin,A,Incorrect
+,أين تقع المساحة الصغرى في ساحة الحس الأولية عند الإنسان؟,ANSWER: near the central sulcus,A,Incorrect
+,ما هو مصدر الATP الذي تحتاجه الليفات العضلية بشدة؟,ANSWER: Glycolysis,C,Incorrect
+,ما هو الذي يفعل السبيل الخارجي للتخثر؟,ANSWER: Factor VII,D,Correct
+,ما الذي تتناسب معه سرعة انتشار الغاز عبر الغشاء التنفسي عكسياً؟,ANSWER: coefficient of solubility,B,Incorrect
+,ما هي القيمة العظمى لضغط الأوكسجين في الأسناخ عند زيادة التهوية السنخية في الحالات السوية؟,ANSWER: 150 mmHg,C,Incorrect
+,أين يحدث الامتصاص بشكل أساسي؟,ANSWER: small intestine,B,Correct
+,ما هو الهرمون الذي يتم إفرازه نتيجة الشدة (الكروب)؟,ANSWER: Adrenaline,B,Incorrect
+,ما هي آلية تحرر شوارد الكالسيوم من الشبكة الهيولية في العضلات الهيكلية؟,ANSWER: through ryanodine receptors,A,Correct
+,ماذا يسبب التنبيه اللاودي على القلب؟,ANSWER: Bradycardia,B,Correct
+,ما هو المسؤول عن زوال الاستقطاب؟,ANSWER: Na+,A,Correct
+,ما هو الرقم الهيدروجيني الطبيعي للبول؟,ANSWER: 4.5 to 8,D,Correct
+,ماذا يحدث عند وصول كمية كبيرة من NaCl إلى اللطخة الكثيفة؟,ANSWER: hypernatremia,C,Incorrect
+,ما هي كمية الدم التي تمر في نقطة معينة من الدوران خلال فترة محددة من الزمن؟,ANSWER: flow,B,Incorrect
+,ما هو الانزيم المعوي الذي يقوم بهضم الدسم في الأمعاء؟,ANSWER: ليباز,D,Correct
+,ماذا يسبب نقص فيتامين B12 وحمض الفوليك؟,ANSWER: Anemia,C,Correct
+,ما هي وظيفة الصمامات القلبية؟,ANSWER: Control of blood flow,A,Correct
+,ما هو المستوى الذي يعد عليه تنظيم الضغط الشرياني؟,ANSWER: Bulb,D,Incorrect
+,ما هو نوع العضلات الذي يمتاز بخاصية الارتخاء بعد الكرب؟,ANSWER: عضلات heart,C,Incorrect
+,ما هو أسرع أجزاء الجهاز الناقل في القلب في توصيل السيالة؟,ANSWER: bundle of His,D,Incorrect
+,ما هو اسم الأسناخ التي يصلها دم ولا يصلها هواء؟,ANSWER: Asnakh,B,Incorrect
+,ما هي الطريقة التي يمكن بها تحرير النص الفعال حيوياً بتقنية الأسر الصوتي؟,ANSWER: CRISPR,C,Incorrect
+,ما هي الشاردة ذات التركيز الأكبر داخل العصبون؟,ANSWER: Potassium,C,Correct
+,ما هو العظم الذي يتمفصل معه الغضروف الطرجهالي؟,ANSWER: عظم key,A,Incorrect
+,ماذا يحدث في طور الانقباض الأذيني؟,ANSWER: depolarization,A,Incorrect
+,ما هو الحجم الرئوي الذي يزداد مع التقدم بالعمر؟,ANSWER: Total lung capacity,C,Incorrect
+,ما الذي يحرض إفراز عصارة غنية بالإنزيمات الهاضمة من البنكرياس؟,ANSWER: Secretin,B,Incorrect
+,ما الذي يتمثل به زوال استقطاب البطينات على مخطط القلب؟,ANSWER: QRS,B,Correct
+,ما هو العامل المحرض على زيادة إفراز الألدوستيرون؟,ANSWER: Renin,A,Correct
+,ما هي الطريقة المستخدمة لحل الخثرة إذا تشكلت في أوعية القلب والرئتين؟,ANSWER: thrombolysis,A,Correct
+,ما الذي تسمح به خاصية الارتخاء بعد الكرب للأعضاء الجوفاء التي تحوي عضلات ملساء؟,ANSWER: return to resting length,C,Incorrect
+,ما هو معدل التهوية السنخية؟,ANSWER: 400 ml/min,B,Incorrect
+,متى يتوقف التقلص العضلي؟,ANSWER: when action potential ends,D,Incorrect
+,ما هي عصبونات المرتبة الثانية في المسلك الظهري؟,ANSWER: neurons of the dorsal root ganglion,B,Incorrect
+,ما هو القشراني المعدني الرئيسي؟,ANSWER: Fe,B,Incorrect
+,ما هي أقل أنسجة الجسم البشري احتواءً على الماء؟,ANSWER: cartilage,D,Incorrect
+,ما هو طليعة الانزيم الذي يتحول إلى شكله الفعال تحت تأثير الخنثرين؟,ANSWER: prothrombin,B,Incorrect
+,ما هي الآلية التي يستطيع من خلالها الجهاز التنفسي تأمين كميات كبيرة من الأكسجين أثناء التمارين المجهدة؟,ANSWER: hyperventilation,A,Correct
+,ما الذي يحول الببسين إلى مولد ببسين؟,ANSWER: HCl,B,Correct
+,ما هي الوظائف التي يتآزر فيها الجهازان الودي واللاودي؟,ANSWER: Homeostasis,A,Incorrect
+,من أين يتم إفراز الإريثروبويتين؟,ANSWER: The kidneys,A,Correct
+,ما الجزء من الأجسام الضدية من IgG التي يتم قطعها وأخذها في المراكز الحديثة؟,ANSWER: Fc,A,Incorrect
+,ما الذي يؤدي إلى نقصان حجم الدفقة بزيادته؟,ANSWER: regurgitation,B,Incorrect
+,ما تدعى الترنجات العشوائية لشدة الإشعاع المترابط المنتشرة انتشاراً متعدداً؟,ANSWER: Lichenoid,C,Incorrect
+,ما هو المسؤول عن إعادة الاستقطاب؟,ANSWER: Na+/K+ ATPase,D,Incorrect
+,ما هي المادة التي تشتق منها الهرمونات الأمينية؟,ANSWER: Tyrosine,D,Correct
+,كيف يؤدي التأثير الحاصر غير المباشر تأثيره على الجهاز العصبي المستقل؟,ANSWER: through the spinal cord,B,Incorrect
+,ما هو الطريق الهندسي الذي يمكن للضوء أن يقطعه في الخلاء مضروبا بقرينة انكسار الوسط؟,ANSWER: length,B,Incorrect
+,ما هي الألياف العصبية التي تتميز بالنقل القفزي؟,ANSWER: A fibers,A,Correct
+,ما هو الكمون تقريباً عندما يتكون الليف نفوذ لشوارد البوتاسيوم فقط؟,ANSWER: 90 milliseconds,D,Incorrect
+,ماذا ينقص في حال نقص المتناول من الماء؟,ANSWER: نقص,D,Incorrect
+,ما هو الجزء الذي يملك فعالية ATPase؟,ANSWER: F1,A,Correct
+,أين يوجد مركز العطش؟,ANSWER: hypothalamus,B,Correct
+,أين يحدث الامتصاص بشكل رئيسي؟,ANSWER: small intestine,B,Correct
+,ما هو الناقل العصبي الذي تحرره الألياف قبل العقدية في القسمين الودي ونظير الودي؟,ANSWER: Acetylcholine,B,Correct
+,ما هو الصوت الذي يسمع عند بدء الانبساط البطيني؟,ANSWER: sound of S4,B,Incorrect
+,ما الذي يُنقص الإفراز المعدي؟,ANSWER: Hypochlorhydria,B,Incorrect
+,كيف يتم إلغاء التأثير التثبيطي للتروبونين؟,ANSWER: Calcium,C,Incorrect
+,ما هي الوظائف التي يتآزر فيها القسمين الودّي ونظير الودّي للجهاز العصبي المستقل؟,ANSWER: functions of the enteric nervous system,C,Incorrect
+,ماذا يؤدي نقص تركيز الأوكسجين في الأسناخ؟,ANSWER: Hypoxia,C,Incorrect
+,ما هي الظاهرة التي تحدث عندما تتجمع المراكز المثارة ويستطيع الإشعاع أن ينتشر مرات كثيرة؟,ANSWER: reverberation,A,Correct
+,ما هو المسؤول عن تحفيز تحرر الكالسيوم من الشبكة الهيولية؟,ANSWER: IP3,B,Correct
+,ما هي آلية عمل الحاصرات الغير مباشرة في الجهاز العصبي المستقل؟,ANSWER: inhibition of neurotransmitter release,B,Incorrect
+,ما هو نمط المستقبلات الموجودة في العضو؟,ANSWER: مستقبلات,D,Incorrect
+,ما الذي يؤدي إلى انخفاض ضغط الدم عند زيادته؟,ANSWER: reflex vagal,D,Incorrect
+,ما هي الحالات التي تنقص فيها سرعة موجة النبض؟,ANSWER: Hypothyroidism,B,Incorrect
+,ما هي الخلايا التي تستجيب للعصبونات بعد العقد اللاودية؟,ANSWER: cells of cajal,A,Incorrect
+,ما هو الجزء من النفرون الكتيم تماماً للماء؟,ANSWER: part of the nephron,C,Incorrect
+,أين يتم تخرب الكريات الحمر بشكل رئيسي؟,ANSWER: the liver,C,Incorrect
+,ما هو العامل الأساسي الذي يحدد ارتباط الخضاب بالأوكسجين؟,ANSWER: pH,A,Incorrect
+,ما هو العامل الذي تفرزه الكلية ويؤثر في تشكيل الكريات الحمر؟,ANSWER: erythropoietin,C,Correct
+,إلام يؤدي زيحان منحنى تفارق الأكسجين الخضاب نحو اليمين؟,ANSWER: reduced oxygen affinity,A,Correct
+,ما الذي يشكل غمد النخاعين في الجهاز العصبي المركزي؟,ANSWER: oligodendrocytes,A,Correct
+,ما الذي يثبط إفراز الـ FSH؟,ANSWER: Estradiol,B,Correct
+,ماذا تمثل الموجة QRS؟,ANSWER: depolarization,B,Correct
+,ما الذي يعتمد عليه هرمون النمو في تأثيره على الخلية الهدف؟,ANSWER: IGF-1,D,Incorrect
+,ما الذي يضمن سرعة توصيل كامن الفعل إلى جميع أنحاء الليف العضلي؟,ANSWER: branches of the axon,D,Incorrect
+,ما الذي يسمع بوضوح في الحالة الطبيعية للإنسان؟,ANSWER: heart sounds,B,Incorrect
+,ماذا يحدث لمعدل الترشيح الكبيبي عندما يصبح ضغط الدم 100 ممز؟,ANSWER: It decreases,C,Incorrect
+,ما هو المستوى الذي يعد عليه تنظيم الضغط الشرياني؟,ANSWER: Bulb,B,Incorrect
+,ما الذي يثبط فعالية جهاز الهضم؟,ANSWER: stress,D,Incorrect
+,ما هي الأسباب التي تُعزى إليها ظاهرة الانتشار الخلفي المترابط؟,ANSWER: خلل in the neural tube,B,Incorrect
+,ما الذي يحدث مباشرة قبل صوت القلب الثاني؟,ANSWER: closure of aortic valve,C,Correct
+,ما هو الأنزيم المعوي الذي يحول مولد التربسين إلى تربسين؟,ANSWER: enterokinase,A,Correct
+,ما هي أهمية التأخير الذي يحدث أثناء مرور كامن الفعل في العقدة الأذينية البطينية؟,ANSWER: allows ventricular filling,D,Correct
+,ما هو سبب ظهور طور الهضبة في كامن فعل العضلة القلبية؟,ANSWER: potential plateau,A,Incorrect
+,ما الأقنية التي يسبب انتفاحها بطور الهضبة في كمون عمل الليف العضلي القلبي؟,ANSWER: Thebesian veins,B,Incorrect
+,ما هو المخطط الذي عبارة عن صندوق ذو قرنين ممتدين بشكل موازي للمحور الشاقولي الذي تتوزع عليه القياسات؟,ANSWER: مخطط box plot,A,Incorrect
+,ما هو المقياس الذي يسمح بترتيب السمات دون اعتبار لتساوي الفروق بين أي رتبتين؟,ANSWER: Rank,A,Correct
+,ماذا يعني أن تكون قيمة معامل الارتباط تساوي −0.92؟,ANSWER: ارتباط invers,B,Correct
+,ما هي مصادر البيانات السكانية؟,ANSWER: censuses and surveys,C,Incorrect
+,ماذا نحصل عليه بعد تحديد مجتمع الدراسة والعينة وقياس قيم المتغير على أفراد العينة؟,ANSWER: Data,A,Correct
+,ما هو نوع المتغير الذي يمثله عدد الكريات الحمر؟,ANSWER: Continuous,C,Correct
+,ما هو المقياس الذي تكون فيه قيمة الصفر نسبية وليست مطلقة؟,ANSWER: مقياس interval,A,Correct
+,ما هو مخطط تنظيم البيانات الذي يشبه أسلوب الجداول التكرارية والأعمدة؟,ANSWER: مخطط box plot,B,Incorrect
+,ما هو التوقع الرياضي للعدد الثابت؟,ANSWER: 1,B,Incorrect
+,ما هو التوزيع المستخدم من أجل اختبار الفروض حول معامل الارتباط الخطي؟,ANSWER: t,C,Correct
+,ما هو الإحصاء الذي يسعى لعرض وتوضيح سلوك الظاهرة؟,ANSWER: الإحصاء,A,Incorrect
+,ما هو الغرض الرئيسي من حساب معامل الارتباط الخطي؟,ANSWER: Quantifying linear association,B,Correct
+,ما هو الخط المنكسر الذي يصل النقاط التي فواصلها مراكز الفئات وترتيبها تكرارات الفئات؟,ANSWER: Polygon,B,Correct
+,من أين نحصل على المصادر الداخلية لجمع البيانات؟,ANSWER: The patient,A,Incorrect
+,ما هو الإحصاء؟,ANSWER: rate,B,Incorrect
+,ماذا يحتسب اليوم إذا قُبل المريض في يوم وتخرج في نفس اليوم؟,ANSWER: stay,C,Incorrect
+,ما هي طريقة جمع البيانات التي تتناسب مع الأطفال؟,ANSWER: method of observation,D,Incorrect
+,ما هي الدراسات التي بحكم الميدان تنفيذ العمل وجمع البيانات؟,ANSWER: Studies,B,Incorrect
+,ما هو الغرض من استخدام الجداول التكرارية؟,ANSWER: تتبع,C,Incorrect
+,ما هما نوعا البيانات الموجودان؟,ANSWER:,A,Incorrect
+,ما الذي تعطينا إياه دالة التوزيع الاحتمالي المتجمع؟,ANSWER: The probability,C,Incorrect
+,كل متى يتكرر التعداد السكاني عادة؟,ANSWER: every 10 years,B,Correct
+,ما هو الفارق في عدد السكان بين تعدادين متعاقبين تفصلهما فترة معينة كعشر سنوات؟,ANSWER: Natural increase,A,Incorrect
+,ما هو المسجل الذي يهدف إلى تجميع المعلومات عن المرضى؟,ANSWER: medical record,D,Incorrect
+,ما هي من أقدم الطرق المستخدمة لجمع البيانات لمراقبة الكثير من الظواهر لا سيما التي يصعب السؤال عنها؟,ANSWER: method of observation,A,Correct
+,ما هو المقياس المستخدم لوصف حالة التدخين (مدخن - غير مدخن)؟,ANSWER: Pack-years,A,Incorrect
+,ما هي الطريقة التي يتم بها الحصول على بيانات تتعلق بضغط الدم وسرعة نبضات القلب ونسبة الكوليسترول في الدم لعينة من المرضى خلال فترة أسبوع؟,ANSWER: Data collection,B,Incorrect
+,ما هي وظائف السجلات الطبية؟,ANSWER: documentation,C,Incorrect
+,ما هو المقياس الذي يمكن استخدام الطرق الإحصائية الوسيطية فيه؟,ANSWER: Ordinal,B,Correct
+,ما هو التوزيع الذي يتبعه مربع المتغير العشوائي Z² إذا كان للمتغير العشوائي Z توزيع طبيعي معياري؟,ANSWER: distribution of chi-square,A,Correct
+,ما هي المنظمة التي وضعت التصنيف الدولي للأمراض؟,ANSWER: WHO,C,Correct
+,ما هي الجهة المسؤولة عن السجلات الطبية؟,ANSWER: Office of Medical Records,C,Incorrect
+,ما هو التوقع الرياضي لمتحول عشوائي يخضع لتوزيع برنولي؟,ANSWER: p,C,Correct
+,ما هو التصنيف الدولي للأمراض؟,ANSWER: ICD,A,Correct
+,ما هو المستقيم الذي يكون منحنى التوزيع الطبيعي المعياري مناظراً حوله؟,ANSWER: The mean,A,Correct
+,ما هي أيام الخدمة الإجمالية للمرضى الداخليين؟,ANSWER: 10,B,Incorrect
+,ما هي قيمة معامل التجديد؟,ANSWER: 0.7,A,Incorrect
+,ما هي وحدة المعاينة؟,ANSWER: Field of view,C,Incorrect
+,ما هو الجدول التكراري الذي يضم عدد البيانات في فئة معينة وكل الفئات التي تسبقها؟,ANSWER: جدول frequencies,B,Incorrect
+,ما هو معدل الوفيات في المشفى؟,ANSWER: Mortality rate,C,Incorrect
+,ما هو متوسط التوزيع الاحتمالي في تجربة رمي قطعة نقود 3 مرات متتالية حيث x تدل على عدد ظهور H؟,ANSWER: 1.5,A,Correct
+,ما هو المجتمع الإحصائي (الجمهرة)؟,ANSWER: The population,C,Correct
+,ما هو الرسم البياني الذي يتكون من مجموعة من الأعمدة المتجاورة المقامة على المحور الأفقي الذي تمثل عليه حالات الصفة المدروسة عندما تكون البيانات وصفية وفترات الفئات عندما تكون البيانات كمية ويساوي ارتفاع كل عمود تكرارات الفئة المقام عليها؟,ANSWER: مخطط شريط,B,Incorrect
+,ما هي طريقة جمع البيانات التي من أمثلتها قياس شدة تأثير نوع من الهرمونات في مجموعة من الفئران؟,ANSWER: experiment,A,Correct
+,ما نوع المتغير الذي يمثله طول شخص بالغ وقياس السكر في الدم؟,ANSWER: Continuous,C,Correct
+,متى يكون المجتمع غير متجانس في العينة غير العشوائية؟,ANSWER: when the sample is not representative,C,Incorrect
+,ما الذي يعتمد عليه توزيع ستيودنت؟,ANSWER: The distribution of the sample,D,Incorrect
+,ما هي محتويات السجل الطبي؟,"ANSWER: history, physical examination, investigations, diagnosis, treatment",B,Correct
+,ما هو التصنيف الدولي للأمراض وما الغرض من الرموز والأرقام المستخدمة فيه؟,ANSWER: ICD,B,Incorrect
+,ما نوع العينة التي نسحبها إذا كنا أمام مجتمع غير متجانس؟,ANSWER: عينة layer,C,Incorrect
+,ما هو الغرض من استخدام الجداول التكرارية في عرض البيانات؟,ANSWER: Data visualization,C,Incorrect
+,ما هي الطريقة التي يتم بها الحصول على بيانات تتعلق بضغط الدم ونسبة الكوليسترول بالدم لعينة من المرضى خلال فترة زمنية معينة؟,ANSWER: electronic health records,D,Incorrect
+,ما هي أعلى مستويات القياس؟,ANSWER: Theta,C,Incorrect
+,ما هو الهدف من تغيير الطرائق في الدراسات بالنسبة للبيانات؟,ANSWER: تقليل bias,D,Incorrect
+,ما هي طريقة جمع البيانات التي تمتاز بالتكلفة العالية؟,ANSWER: Interview,C,Correct
+,ما هو الفارق في عدد السكان بين تعدادين متعاقبين تفصلهما فترة معينة كعشر سنوات؟,ANSWER: Natural increase,B,Incorrect
+,ما هو الجزء من الإحصاء الذي يعنى بوصف طبيعة وسلوك الظاهرة المدروسة وعرضها؟,ANSWER: Description,B,Incorrect
+,ما هي الفئة التي تشكل قاعدة الهرم السكاني؟,ANSWER: 0-14,A,Correct
+,ما هي فرضية العدم لاختبار الفرضيات حول معامل الارتباط الخطي لبيرسون؟,ANSWER: There is no linear relationship,A,Correct
+,ما هو التكرار المتجمع الهابط لفئة معينة؟,ANSWER: The cumulative incidence,B,Incorrect
+,ما هو التوزيع الذي تتبعه التجربة الثنائية الوحيدة؟,ANSWER: 50%,A,Incorrect
+,ما هو نتاج العوامل المؤثرة في النمو السكاني من مواليد ووفيات وهجرة؟,ANSWER: rate of population growth,C,Correct
+,ما هو المقياس المستخدم لقياس خضاب الدم؟,ANSWER: hemoglobin,D,Incorrect
+,ما هو نوع المصدر الذي تمثله البيانات التي نحصل عليها من الشركة أو المؤسسة من واقع مستنداتها وسجلاتها وفواتيرها وتقاريرها الدورية؟,ANSWER: Data Source,A,Incorrect
+,ما هي الجهة المسؤولة عن السجلات الطبية؟,ANSWER: Office of Medical Records,C,Incorrect
+,ما هو نوع الإحصاء الذي يتضمن جمع البيانات وتنظيمها وتوصيفها وتبويبها وتلخيصها؟,ANSWER: statistics,A,Incorrect
+,ما نوع العينة التي تمثلها مجموعة من المرضى الذين يراجعون طبيباً معيناً عندما يجري عليهم دراسة؟,ANSWER: عينة convenient,B,Correct
+,ما نوع العلاقة إذا كانت قيمة بيرسون R=0.92؟,ANSWER: Strong,A,Correct
+,ما هي وحدة المعاينة؟,ANSWER: Field of view,C,Incorrect
+,ما هي الطريقة التي يتم بها الحصول على بيانات تتعلق بضغط الدم وسرعة نبضات القلب ونسبة الكولسترول في الدم لعينة من المرضى خلال فترة أسبوع؟,ANSWER: Data collection,D,Incorrect
+,ما نوع الارتباط بين المتغير العشوائي X والمتغير التابع Y إذا كان تزايد X يؤدي إلى تزايد Y؟,ANSWER: ارتباط,C,Incorrect
+,"ماذا تعبر عنه العبارة ""احتمال أي حدث لا يزيد عن الواحد""؟",ANSWER: event probability,B,Incorrect
+,ما تسمى الظاهرة التي يحدث فيها انحدار معدل أطوال الأبناء من معامل المجتمع؟,ANSWER: Regression,A,Correct
+,ما هي التقديرات التي تستخدم لتقدير نسبة النجاح لمجتمع؟,ANSWER: A1c,C,Incorrect
+,ما نوع المتغير العشوائي الذي يدل على عدد القذفات عند قذف قطعة نقود حتى يظهر الوجه H للمرة الأولى؟,ANSWER: geometric,A,Correct
+,ما هو متوسط عدد الأطفال الذي يمكن أن تنجبهم المرأة أحياء إذا أمضت حياتها منذ ميلادها بما يتماشى مع معدلات الخصوبة العمرية في سنة معينة؟,ANSWER: 2.1,C,Incorrect
+,ما هي الطريقة التي تمكننا من مراقبة رد الفعل على بعض الأسئلة والحصول على إجابات دقيقة؟,ANSWER: method of limited information,B,Incorrect
+,ما هو نوع البيانات المستخدمة لإنشاء الجدول التكراري؟,ANSWER: Data,D,Incorrect
+,ما هي طبيعة الأفراد أو العناصر التي تشكل المجتمع الإحصائي؟,ANSWER: individuals,A,Correct
+,ما هو عدد الكريات الحمر في الجسم؟,ANSWER: 20-30 trillion,B,Incorrect
+,ما هو معدل وفيات الأمهات الذي يحسب بقسمة عدد الوفيات لدى النساء الحوامل التي حدثت أثناء الحمل أو الولادة أو النفاس على عدد المواليد الأحياء خلال نفس السنة مضروباً في 100000؟,ANSWER: maternal mortality ratio,D,Correct
+,ما هي المعدلات التي يكون تركيزها على معدلات الخصوبة لفئة معينة من العمر لغرض المقارنة على امتداد زمن ما ودراسة الفروق في ظاهرة الخصوبة بمختلف الأعمار؟,ANSWER: Age-specific fertility rates,A,Correct
+,ما هي العلاقة بين المتغيرين عندما يؤدي تزايد المتغير العشوائي x إلى تناقص المتغير التابع y؟,ANSWER: Relationship,A,Incorrect
+,ما هو المقياس المستخدم لوصف حالة التدخين (مدخن / غير مدخن)؟,ANSWER: units,A,Incorrect
+,ما هي الشروط التي يجب توفرها في مجموعة من المتغيرات العشوائية لتشكل عينة عشوائية؟,ANSWER: independence and identically distributed,B,Correct
+,ما هو المستوى الذي يمكن حساب فيه المتوسطات والانحرافات المعيارية ومقاييس العلاقة الخطية؟,ANSWER: The raw score,C,Incorrect
+,كم يتراوح عدد الفئات غالباً؟,ANSWER: 12,A,Incorrect
+,ما هي فرضية العدم لاختبار الفرضيات حول معامل الارتباط الخطي لبيرسون؟,ANSWER: There is no linear relationship,B,Correct
+,ما هو معدل الوفيات الخام؟,ANSWER: Rate of crude mortality,B,Incorrect
+,ما هي الجهة المسؤولة عن السجلات الطبية؟,ANSWER: Office of Medical Records,C,Incorrect
+,ما هو الغرض من استخدام مخطط الانتشار في الدراسة الإحصائية بين خاصتين؟,ANSWER: Relationship,A,Correct
+,ما هو التوقع الرياضي لمجموع متغيرين عشوائيين؟,ANSWER: Linearity of Expectation,B,Correct
+,ما هو التكرار المتجمع الصاعد لفئة معينة؟,ANSWER: منحنى survival,A,Incorrect
+,ما هي المنطقة التي تتألف من قيم دالة الاختبار قليلة الاحتمال عندما Ho صحيحة؟,ANSWER: region of rejection,B,Correct
+,ما هو المجتمع الإحصائي؟,ANSWER: The population,A,Correct
+,ما الذي يقوم عليه الإحصاء الاستنتاجي؟,ANSWER: samples,B,Incorrect
+,ما هي الجهة التي تصدر التصنيف الدولي للأمراض؟,ANSWER: منظمة الصحة,A,Correct
+,ما الذي تختلف تبعاً له دلالات قيم المتغيرات العشوائية؟,ANSWER: The distribution,C,Correct
+,ما هي الطريقة التي تستخدم فيها بعض التقنيات الإلكترونية للمراقبة والعد وتسجيل الملاحظات؟,ANSWER: Telemetry,A,Incorrect
+,ما الذي يحدد زمن حفظ السجلات الطبية؟,ANSWER: laws,C,Correct
+,ما هو التوزيع الذي يتبعه مجموع متغيرات عينة عشوائية حجمها n من توزيع برنولي بالوسيط P؟,ANSWER: Binomial,B,Correct
+,ما هي مجموعة قيم المتغير العشوائي x الذي يدل على عدد أخوات طالب ما؟,"ANSWER: 0, 1, 2, 3, ...",B,Incorrect
+,ما هو معدل المواليد الخام؟,"ANSWER: number of births per 1,000 population",B,Correct
+,ما هي الفئة العمرية المهمة جداً من الناحية الصحية والتنموية؟,ANSWER: first 1000 days,B,Correct
+,ما هي الطريقة التي تمتاز بوصول الإجابات خلال وقت قصير وتتميز ببساطتها وقلة تكاليفها وسرعتها؟,ANSWER: ELISA,B,Incorrect
+,ما هو المخطط الذي يساعد بدراسة العلاقة بين متغيرين وطبيعتها؟,ANSWER: مخطط scatter,D,Correct
+,ما الذي يحدد زمن حفظ السجلات الطبية في المشفى؟,ANSWER: laws,C,Correct
+,ما هو التوزيع الذي يستخدم في اختبار الفرضيات حول ميل خط الانحدار؟,ANSWER: t,A,Correct
+,ما هي أسباب تفضيل أسلوب العينة على أسلوب الحصر الشامل؟,ANSWER: Cost-effectiveness,A,Correct
+,ما هو السجل الذي يهدف إلى تجميع المعلومات عن المريض؟,ANSWER: سجل病,D,Incorrect
+,ما هو نوع التوزيع الإحصائي إذا علمت أن احتمال شفاء مريض مصاب بالزكام خلال أسبوع دون اللجوء للطبيب هو 0.6 وكان لدينا 10 مرضى بالزكام ولم يراجعوا الطبيب؟,ANSWER: Bernoulli,B,Incorrect
+,ما هو الشريان الذي ينزف غالباً من قرحة اثني عشرية؟,ANSWER: الشريان gastroduodenal,B,Correct
+,ما هي الأورام التي تعالج في القسم البعيد للمعدة؟,ANSWER: أورام,D,Incorrect
+,ما هو التشخيص للآفة التي قد تسبب فقراً دموياً والنزف الحاد منها غير شائع والتي تم اكتشافها بالتنظير الهضمي العلوي لرجل عمره 55 سنة؟,ANSWER: Ulcer,B,Incorrect
+,ما هي الخطوة الأولى الأهم في تدبير مريض يبلغ من العمر 32 سنة أتى لقسم الطوارئ بقصة إقياء لكميات كبيرة من الدم الأحمر القاني؟,ANSWER: Stabilization,C,Incorrect
+,ما هو التشخيص المحتمل لمريضة تبلغ من العمر 45 سنة تشكو من ألم في ثديها الأيسر لمدة أسبوعين مع وجود خيط يشبه الحبل مؤلم وأودة بارزة فوقه بالفحص السريري؟,ANSWER: inflammation of the mammary gland,D,Incorrect
+,ما هو التشخيص المحتمل لمريضة تبلغ من العمر 40 عاماً من أصول آسيوية وصلت إلى بريطانيا تشكو من كتلة غير مؤلمة في ثديها الأيمن منذ عدة أشهر مع نز الخراج في إبطها الأيمن الذي يشفى ويعاود من جديد؟,ANSWER: Cancer,B,Incorrect
+,ما هو التشخيص المحتمل لمريضة تبلغ من العمر 25 سنة راجعت بكتلة شاهدتها صدفة منذ 3 أسابيع في ثديها الأيسر ويمكن تحريك الكتلة من قبل المريضة ضمن نسيج الثدي؟,ANSWER: Fibroadenoma,D,Correct
+,ما هو التشخيص المحتمل لمريضة تبلغ من العمر 50 عاماً تعاني من ألم واحمرار في الثدي الأيمن منذ شهر وقد عولجت بالصادات لمدة أسبوعين دون تحسن وازدادت الحالة سوءاً؟,ANSWER: Cancer,C,Correct
+,ما هو التشخيص المحتمل لمريضة مسنة مشخص لديها سابقاً داء هاشيموتو وتراجع بعقدة قاسية غير منتظمة في الفص الدرقي الأيمن؟,ANSWER: carcinoma,C,Correct
+,ما هو التشخيص المحتمل لطفل يبلغ من العمر 12 سنة يراجع بعقدة درقية مع ضخامة عقد لمفية ناحية؟,ANSWER: Hodgkin's lymphoma,D,Incorrect
+,ما هو التشخيص المحتمل لمريضة في منتصف العمر تعاني من سلعة درقية لفترة طويلة مع تضخم الفص الأيمن أكبر من الأيسر وهي سريرياً في حالة سواء درقي؟,ANSWER: disease of graves,C,Incorrect
+,ما هو التشخيص الأكثر احتمالاً لفتاة في الربيع الخامس تشكو من عسرة تنفس مع وجود كتلة في جوف الفم بقطر 3 سم على الخط الناصف وعلى مؤخرة اللسان؟,ANSWER: Lumps,B,Incorrect
+,ما هو العلاج غير المرغوب به في حالة شابة في ربيعها الأربعين تشكو من نقص وزن مع خفقان وجحوظ في العينين مع وجود سلعة درقية متوسطة الحجم منتشرة ومتجانسة وفرط نشاط درق بدني؟,ANSWER: Betablockers,C,Incorrect
+,ما هو الإجراء الأول الذي يجب إجراؤه قبل عملية sleeve gastrectomy لمريض البدانة الذي لديه BMI يساوي 40؟,ANSWER: Evaluation,B,Incorrect
+,ما هو الإجراء الأول الذي يجب إجراؤه قبل عملية Sleeve gastrectomy لمريض البدانة الذي لديه BMI يساوي 40؟,ANSWER: Assess,C,Incorrect
+,ما هو التشخيص المحتمل لمريض عمره 25 سنة يعاني من عدم ارتياح عام ونقصان في الوزن وترفع حروري وبراز ملطخ بالدم على نحو متقطع خلال الست أسابيع الأخيرة بعد عودته من شبه القارة الهندية حيث عمل هناك لمدة ستة أشهر، مع وجود كبدية ومضض في الربع العلوي الأيمن وإيكو يظهر جوفا ناقص الصدى في الفص الكبدي الأيمن ذو حوا,ANSWER: Amoebic liver abscess,B,Correct
+,ما هو التشخيص المحتمل لمريض عمره 50 سنة يعاني من أصمية حديثة وألم في الربع العلوي الأيمن لمدة 3-4 أشهر مع فحص سريري سلبي ووظائف كبد طبيعية وتنظير هضمي علوي طبيعي بينما أظهر الإيكو وجود آفة كيسية وحيدة تبلغ 6 سم؟,ANSWER: Neoplasm,D,Incorrect
+,ما هو التشخيص المحتمل لمريضة تبلغ من العمر 30 سنة تعاني من ألم مستمر في الربع العلوي الأيمن من البطن مع إقياء وارتفاع حرارة وإيجابية علامة مورفي؟,ANSWER: inflammation of the gallbladder,B,Correct
+,ما هو التشخيص المحتمل لمريض يبلغ من العمر 60 سنة لديه سابقة حصيات مرارية يراجع بقصة ألم بطني شديد ومستمر لمدة 6 ساعات وبالفحص السريري كان المريض غير مرتاح ومصدوم مع انتفاخ البطن ومضض راجع معممين؟,ANSWER: inflammation of the pancreas,D,Incorrect
+,ما هو التشخيص المحتمل لمريض يبلغ من العمر 56 سنة يعاني من ألم شديد في أعلى البطن منذ أسبوع مع حمى متقطعة وعدم راحة شديدة مع وجود علامات لتخريش بريتواني في الربع العلوي الأيمن مع جس كتلة؟,ANSWER: Appendicitis,A,Incorrect
+,ما هو التشخيص المحتمل لمريض يبلغ من العمر 60 سنة يراجع بقصة ألم بطني ويرقان وحرارة مع عروءات؟,ANSWER: obstruction of the common bile duct,D,Incorrect
+,ما هو التشخيص المحتمل لمريضة تبلغ من العمر 40 سنة عولجت لالتهاب مرارة حاد حيث لوحظ وجود مرارة مجسوسة غير ممضة، لم يكن هناك ترفع حروري وكانت المريضة بشكل عام بصحة جيدة؟,ANSWER: مرارة without gallstones,C,Incorrect
+,ما هو التشخيص المحتمل لمريض عمره 80 سنة لديه تصبغ جلدي ملحوظ ونسيج ندبي ولديه ندبات بطنية لاستئصال كظر ثنائي الجانب؟,ANSWER: Addison,C,Correct
+,ما هو التشخيص المحتمل لمريض عمره 48 سنة يعاني من اضطراب رئوي وصداع وارتفاع ضغط؟,ANSWER: HBP,C,Incorrect
+,ما هو التشخيص المحتمل لمريض ربو مع تفاقم متكرر لحالته تطور لديه بشكل تدريجي شعرانية مع بدانة جذعية وكدمات؟,ANSWER: متلازمة Cushing,A,Correct
+,ما هو التشخيص المحتمل لسيدة حامل تبلغ من العمر 30 سنة تبين أثناء إجراء ايكو بطن لها وجود كتلة متكلسة في الشرسوف يبلغ قطرها 1 سم مع سماع لغط في منطقة الشرسوف دون وجود أي أعراض؟,ANSWER: Fibroadenoma,C,Incorrect
+,ما هو التشخيص الأكثر احتمالاً لطفل عمره 7 سنوات يعاني من فقر دم منجلي ويشكو منذ ساعتين من ألم بطني حاد في الربع العلوي الأيسر مع ضغط 60/100 ملم زئبقي ونبض 110 ن/د وحرارة 37 درجة ومضض في الربع العلوي الأيسر للبطن بدون إيلام مرتد مع صعوبة جس الطحال وخضاب 6.1 غ/دل؟,ANSWER: sequestration,A,Correct
+,ما هي نسبة الاستفادة من استئصال الطحال في حالة سيدة عمرها 40 سنة تعاني من فرفرية مناعية مزمنة معندة على العلاج بالستيروئيدات؟,ANSWER: 60-70%,A,Correct
+,ما هي الخطوة التالية في تدبير مريض بعمر 70 سنة دون سوابق جراحية يعاني من ألم بطني متقطع منذ أسبوع وتوسع بطني وإقياء مستمر منذ يوم، مع عدم وجود فتوق بالفحص وتعداد 3000 كرية بيضاء / مم؟,ANSWER: CT scan,D,Incorrect
+,ما هي الخطوة التالية في تدبير مريض بعمر 70 سنة دون سوابق جراحية يعاني من ألم بطني متقطع منذ أسبوع وتوسع بطني وإقياء مستمر منذ يوم، مع عدم وجود فتوق بالفحص وتعداد 3000 كرية بيضاء / مم؟,ANSWER: CT scan,D,Incorrect
+,ما هي الخطوة التالية في تدبير شاب عمره 20 سنة راجع الإسعاف بعد 20 يوماً من استئصال زائدة ملتهبة ويعاني من إقياء مع تمدد بطن وإيلام خفيف، وتعداد WBC كان 14000 كرية/مم3 والكهارل طبيعية؟,ANSWER: CT abdomen,A,Incorrect
+,ما هي العلامات الأكثر توافقاً مع بالغ عمره 45 سنة لديه ألم بطني حاد وتم تشخيصه بالتهاب مرارة حاد؟,ANSWER: Murphy,B,Incorrect
+,ما هي الخطوة الأولى الأهم في تدبير مريض يبلغ من العمر 32 سنة أتى لقسم الطوارئ بقصة إقياء لكميات كبيرة من الدم الأحمر القاني؟,ANSWER: Stabilization,C,Incorrect
+,ما هو التشخيص المحتمل لمريض عمره 70 سنة تطور لديه بعد 3 أيام من احتشاء قلبي ألم بطني مع تعدد البطن وخفوت في أصوات الأمعاء وتحليل غازات الدم يشير إلى احمضاض استقلابي؟,ANSWER: Ischemia,B,Correct
+,ما هي القاعدة الجراحية الأصح حالياً في مراقبة المريض أثناء تدبير مريض الانسداد المعوي ووضع القرار الجراحي المناسب في المراكز الجراحية المتطورة؟,ANSWER: monitoring,D,Incorrect
+,ما هو التشخيص المحتمل للمريضة إذا كانت الصورة البسيطة تدل على سويات معوية دقيقة وغياب لارتسام الكولونات وكانت مقاطع التصوير الطبقي المحوري تشير لتوسع عرى المعي؟,ANSWER: obstruction,D,Incorrect
+,ما هو التشخيص الأقوى لمريض عمره 65 سنة تطور لديه ألم بطني حاد مفاجئ مستمر في الربع العلوي الأيمن منذ ساعة، تلاه آلام مغصية سرية مع غثيان، والفحص السريري يبدي سحنة سمية مع فحص بطني سوي تقريباً؟,ANSWER: calculus of the common bile duct,D,Incorrect
+,ما هو التشخيص المحتمل في المريضة التي تظهر صورتها البسيطة سويات معوية دقيقة وغياب الارتسام الكولوني، وتشير مقاطع التصوير الطبقي المحوري لتوسع عرى المعي الدقيق وزيادة في شحم المساريقا مع عدم ارتسام الكولون بالكامل؟,ANSWER: obstruction,D,Incorrect
+,ما هو التشخيص لمريض عمره 60 سنة مصاب بداء كرون منذ عشر سنوات راجع المشفى بقصة حمى وعرواءات تلاها خروج هواء ومفرزات معوية عند التبول؟,ANSWER: fistula,A,Correct
+,ما هي الحالة التي لا تدخل في التشخيص التفريقي لطفلة عمرها 10 سنوات تعاني منذ ساعتين من ألم حفرة حرقفية يمنى دون إيلام مرتد؟,ANSWER: Appendicitis,C,Incorrect
+,ما هو التشخيص المحتمل لمريضة عمرها 50 سنة تعرضت لألم بطني حاد طاعن منذ نصف ساعة في الشرسوف تعمم في أنحاء البطن مع إقياءات بنية اللون وفحص البطن لين؟,ANSWER: perforation,B,Incorrect
+,ما هو الفحص الذي يجب إجراؤه أولاً لمريض يشتكي من ألم بطني حاد ومفاجئ؟,ANSWER: FAB,C,Incorrect
+,ما هو التشخيص الأقوى لمريض عمره 65 سنة تطور لديه ألم بطني حاد مفاجئ ومستمر في الربع السفلي الأيمن منذ ساعة، تلاه آلام مغصة سرية مع غثيان، والفحص السريري يبدي سحنة سمية مع فحص بطن سوي تقريباً؟,ANSWER: appendicitis,D,Incorrect
+,ما هي الخطوة الأولى الأهم في تدبير شاب عمره 32 سنة يراجع قسم الطوارئ بقصة إقياء كميات كبيرة من الدم الأحمر القاني؟,ANSWER: Stabilization,C,Incorrect
+,ما هو التشخيص للآفة التي قد تسبب فقراً دموياً والنزف الحاد منها غير شائع والتي تم اكتشافها بالتنظير الهضمي العلوي لرجل عمره 55 سنة؟,ANSWER: Ulcer,B,Incorrect
+,ما هي الخطوة الأولى الأهم في تدبير مريض يبلغ من العمر 32 سنة أتى لقسم الطوارئ بقصة إقياء لكميات كبيرة من الدم الأحمر القاني؟,ANSWER: Stabilization,C,Incorrect
+,ما هو العلاج الأمثل لمريض عمره 40 سنة وجد لديه بالتنظير الهضمي العلوي لمفوما معدية؟,ANSWER: Chemotherapy,D,Incorrect
+,ما هو التشخيص المحتمل لطفل يبلغ من العمر 12 سنة يراجع بعقدة درقية مع ضخامة عقد لمفية ناحية؟,ANSWER: Hodgkin's lymphoma,D,Incorrect
+,ما هو التشخيص المحتمل لمريضة في منتصف العمر تعاني من سلعة درقية لفترة طويلة مع تضخم الفص الأيمن أكبر من الأيسر وهي سريرياً في حالة سواء درقي؟,ANSWER: disease of graves,C,Incorrect
+,ما هو التشخيص الأكثر احتمالاً لفتاة في الربيع الخامس تشكو من عسرة تنفس مع وجود كتلة في جوف الفم بقطر 3 سم على الخط الناصف وعلى مؤخرة اللسان؟,ANSWER: Lumps,B,Incorrect
+,ما هو العلاج غير المرغوب به في حالة شابة في ربيعها الأربعين تشكو من نقص وزن مع خفقان وجحوظ في العينين مع وجود سلعة درقية متوسطة الحجم منتشرة ومتجانسة وفرط نشاط درق بدني؟,ANSWER: Betablockers,C,Incorrect
+,ما هو الإجراء الأول الذي يجب إجراؤه قبل عملية Sleeve gastrectomy لمريض البدانة الذي لديه BMI يساوي 40؟,ANSWER: Assess,C,Incorrect
+,ما هو التشخيص المحتمل لمريض عمره 50 سنة يعاني من أصمية حديثة وألم في الربع العلوي الأيمن لمدة 3-4 أشهر مع فحص سريري سلبي ووظائف كبد طبيعية وتنظير هضمي علوي طبيعي بينما أظهر الإيكو وجود آفة كيسية وحيدة تبلغ 6 سم؟,ANSWER: Neoplasm,D,Incorrect
+,ما هو التشخيص المحتمل لمريض يبلغ من العمر 60 سنة لديه سابقة حصيات مرارية يراجع بقصة ألم بطني شديد ومستمر لمدة 6 ساعات وبالفحص السريري كان المريض غير مرتاح ومصدوم مع انتفاخ البطن ومضض راجع معممين؟,ANSWER: inflammation of the pancreas,D,Incorrect
+,ما هو التشخيص المحتمل لمريض يبلغ من العمر 56 سنة يعاني من ألم شديد في أعلى البطن منذ أسبوع مع حمى متقطعة وعدم راحة شديدة مع وجود علامات لتخريش بريتواني في الربع العلوي الأيمن مع جس كتلة؟,ANSWER: Appendicitis,A,Incorrect
+,ما هو التشخيص المحتمل لمريض يبلغ من العمر 60 سنة يعاني من ألم بطني ويرقان وحرارة مع عروءات؟,ANSWER: obstruction of the common bile duct,D,Incorrect
+,ما هو التشخيص المحتمل لمريضة تبلغ من العمر 40 سنة عولجت لالتهاب مرارة حاد حيث لوحظ وجود مرارة مجسوسة غير ممضة، لم يكن هناك ترفع حروري وكانت المريضة بشكل عام بصحة جيدة؟,ANSWER: مرارة without gallstones,C,Incorrect
+,ما هو التشخيص المحتمل لمريض عمره 48 سنة يعاني من اضطراب رئوي وصداع وارتفاع ضغط؟,ANSWER: HBP,C,Incorrect
+,ما هو التشخيص المحتمل لمريض ربو مع تفاقم متكرر لحالته تطور لديه بشكل تدريجي شعرانية مع بدانة جذعية وكدمات؟,ANSWER: متلازمة Cushing,A,Correct
+,ما هو التشخيص المحتمل لسيدة حامل تبلغ من العمر 30 سنة تبين أثناء إجراء ايكو بطن لها وجود كتلة متكلسة في الشرسوف يبلغ قطرها 1 سم مع سماع لغط في منطقة الشرسوف دون وجود أي أعراض؟,ANSWER: Fibroadenoma,C,Incorrect
+,ما هي نسبة الاستفادة من استئصال الطحال في حالة سيدة عمرها 40 سنة تعاني من فرفرية مناعية مزمنة معندة على العلاج بالستيروئيدات؟,ANSWER: 60-70%,A,Correct
+,ما هي الخطوة التالية في تدبير مريض بعمر 70 سنة دون سوابق جراحية يعاني من ألم بطني متقطع منذ أسبوع وتوسع بطني وإقياء مستمر منذ يوم، مع عدم وجود فتوق بالفحص وتعداد 3000 كرية بيضاء / مم؟,ANSWER: CT scan,D,Incorrect
+,ما هي الخطوة التالية في تدبير مريض بعمر 70 سنة دون سوابق جراحية يعاني من ألم بطني متقطع منذ أسبوع وتوسع بطني وإقياء مستمر منذ يوم، مع عدم وجود فتوق بالفحص وتعداد 3000 كرية بيضاء / مم؟,ANSWER: CT scan,D,Incorrect
+,ما هي الخطوة التالية في تدبير شاب عمره 20 سنة راجع الإسعاف بعد 20 يوماً من استئصال زائدة ملتهبة ويعاني من إقياء مع تمدد بطن وإيلام خفيف وتعداد WBC 14000 كرية/مم2 والكهارل طبيعية؟,ANSWER: CT abdomen,A,Incorrect
+,ما هي الخطوة الأولى الأهم في تدبير مريض يبلغ من العمر 32 سنة يعاني من إقياء كميات كبيرة من الدم الأحمر القاني؟,ANSWER: Stabilization,C,Incorrect
+,ما هو التشخيص المحتمل لمريض عمره 70 سنة تطور لديه بعد 3 أيام من احتشاء قلبي ألم بطني مع تطبل البطن وخفوت في أصوات الأمعاء وتحليل غازات الدم يشير إلى حماض استقلابي؟,ANSWER: Ischemia,B,Correct

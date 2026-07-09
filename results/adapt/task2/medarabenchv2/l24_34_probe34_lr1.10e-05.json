@@ -1,0 +1,8 @@
+{
+    "bert_precision": 0.46401089429855347,
+    "bert_recall": 0.5848192572593689,
+    "bert_f1": 0.5154005885124207,
+    "bert_model": "aubmindlab/bert-large-arabertv02",
+    "bert_num_layers": 18,
+    "bert_rescaled": false
+}

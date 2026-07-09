@@ -1,0 +1,26 @@
+id,input,prediction,ground_truth,prediction_clean,ground_truth_clean,bert_precision_example,bert_recall_example,bert_f1_example
+4,ما هو العصب الذي ينقل إحساس الذوق من ثلث اللسان الخلفي؟,ANSWER: Glossopharyngeal nerve,التاسع,Glossopharyngeal nerve,التاسع,0.0,0.0,0.0
+8,ما هي القوس البيضاء عند حدود جسم الظفر مع جذره؟,ANSWER: Lunula,هليل الظفر,Lunula,هليل الظفر,0.0,0.0,0.0
+12,أين يقع الخط الالوي السفلي؟,ANSWER: Inferior vena cava,السطح الخارجي للحرقفة,Inferior vena cava,السطح الخارجي للحرقفة,0.0,0.0,0.0
+16,ما هي الحافة من الفرع التي تشكل زاوية الفك السفلي؟,ANSWER: Mandibular angle,الخلفية,Mandibular angle,الخلفية,0.0,0.0,0.0
+17,ما هي البنية التشريحية التي تتعصب بالعصب الشظوي السطحي؟,ANSWER: Superficial peroneal nerve innervation,العضله الشظويه الطويله,Superficial peroneal nerve innervation,العضله الشظويه الطويله,0.0,0.0,0.0
+19,أين تشاهد الجسور بين الخلوية؟,ANSWER: Desmosomes,الطبقة الشائكة من النسيج الظهاري المطبق,Desmosomes,الطبقة الشائكة من النسيج الظهاري المطبق,0.0,0.0,0.0
+21,ما الذي يحول الثلمتين الاسكيتين إلى ثقبتين؟,ANSWER: Septal defect,الرباط العجزي الشوكي العجزي الحدبي,Septal defect,الرباط العجزي الشوكي العجزي الحدبي,0.0,0.0,0.0
+28,ما هو الهرمون الذي يفرز PTH؟,ANSWER: Parathyroid gland,الغدد جارات الدرق,Parathyroid gland,الغدد جارات الدرق,0.0,0.0,0.0
+35,ما الذي يقع بين جسم الفقرة والقوس الفقرية؟,ANSWER: Vertebral foramen,الثقبة الفقرية,Vertebral foramen,الثقبة الفقرية,0.0,0.0,0.0
+49,أين تقع المنطقة الشمية؟,ANSWER: Olfactory epithelium,سقف الأنف,Olfactory epithelium,سقف الأنف,0.0,0.0,0.0
+50,ما الذي يتصل به المدورين بالأمام في الفخذ؟,ANSWER: Iliopsoas muscle,الخط بين المدورين,Iliopsoas muscle,الخط بين المدورين,0.0,0.0,0.0
+51,أين يوجد التلم الكعبري في جسم العضد؟,ANSWER: Olecranon fossa,على الوجه الخلفي.,Olecranon fossa,على الوجه الخلفي.,0.0,0.0,0.0
+54,ما الذي تتشكل منه ضفيرة راشكوف في لب السن؟,ANSWER: Odontoblastic plexus,ألياف حسية.,Odontoblastic plexus,ألياف حسية.,0.0,0.0,0.0
+55,أين يقع المستقيم؟,ANSWER: Rectum,القولون السيني والقناة الشرجية,Rectum,القولون السيني والقناة الشرجية,0.0,0.0,0.0
+56,ما هي حديبات مونتغومري؟,ANSWER: Apocrine sweat glands,دهنية,Apocrine sweat glands,دهنية,0.0,0.0,0.0
+64,ما هو العصب المحرك لعضلات اللسان؟,ANSWER: Hypoglossal nerve,12,Hypoglossal nerve,12,0.0,0.0,0.0
+73,ما هي الضفيرة التي يتفرع منها العصب الحجابي؟,ANSWER: Phrenic nerve plexus,الرقبية,Phrenic nerve plexus,الرقبية,0.0,0.0,0.0
+74,من أين يفرز الأدرينالين؟,ANSWER: Adrenal medulla,لب الكظر,Adrenal medulla,لب الكظر,0.0,0.0,0.0
+75,ما هو الوريد الذي يتشكل منه الوريد الأجوف السفلي؟,ANSWER: Vena cava inferior,الوريدين الحرقفيين المشتركين الأيمن والأيسر,Vena cava inferior,الوريدين الحرقفيين المشتركين الأيمن والأيسر,0.0,0.0,0.0
+78,ما هي الطبقة الأكثر تمايزاً وكثافة في الشرايين؟,ANSWER: Tunica media,المتوسطة,Tunica media,المتوسطة,0.0,0.0,0.0
+79,مما ينتج هرمون T4؟,ANSWER: Thyroid gland,الدرق,Thyroid gland,الدرق,0.0,0.0,0.0
+85,ما هي العضلة التي ترتكز بشكل أساسي على العظم الزورقي؟,ANSWER: Flexor pollicis longus,الظنبوبي الخلفي,Flexor pollicis longus,الظنبوبي الخلفي,0.0,0.0,0.0
+87,أين تقع المنطقة الشمية؟,ANSWER: Olfactory epithelium,سقف الأنف,Olfactory epithelium,سقف الأنف,0.0,0.0,0.0
+88,ما هو اسم الوسادة من النسيج الدهني فوق الارتفاق العاني؟,ANSWER: Fat pad of Canalis pudendi,جبل العانة,Fat pad of Canalis pudendi,جبل العانة,0.0,0.0,0.0
+98,أين يتوضع الكولون السيني؟,ANSWER: Sigmoid colon,الناحية المغبنية اليسرى,Sigmoid colon,الناحية المغبنية اليسرى,0.0,0.0,0.0
