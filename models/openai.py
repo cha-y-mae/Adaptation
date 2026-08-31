@@ -6,53 +6,30 @@ from typing import Optional, Dict, Any
 
 
 def extract_letter_from_text_en(text: str) -> Optional[str]:
-    """
-    Extract a single MCQ letter A–F from model output.
-    Returns 'A'..'F' or None.
-    """
     if not text:
         return None
     t = str(text).strip().upper()
 
-    # Prefer strict "ANSWER: X"
     m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", t)
     if m:
         return m.group(1)
-
-    # Then any standalone letter
     m = re.search(r"\b([A-F])\b", t)
     if m:
         return m.group(1)
-
-    # Then letter followed by punctuation/end
     m = re.search(r"\b([A-F])(?=[\.\)\]:;\s]|$)", t)
     return m.group(1) if m else None
 
 
 class OpenAIHandler:
-    """
-    Handler for OpenAI models:
-      - task_type="mcq" -> returns a single letter A–F (or None)
-      - task_type="answer_generation" -> returns generated text (one line) or ""
-
-    Routing:
-      - gpt-5*, o1*, o3* → Responses API
-      - gpt-4*, gpt-3.5* → Chat Completions API
-    """
-
     def __init__(self, api_key: str, model: str, max_retries: int = 3):
         print("[OpenAIHandler] model:", model)
         self.client = OpenAI(api_key=api_key)
         self.model = model
         self.max_retries = max_retries
 
-    # ----------- routing helpers -----------
-
     def _is_responses_model(self) -> bool:
         ml = (self.model or "").lower()
         return ml.startswith("gpt-5") or ml.startswith("o1") or ml.startswith("o3")
-
-    # ----------- build MCQ text (matches Meditron) -----------
 
     @staticmethod
     def _build_mcq_text(sample: Dict[str, Any]) -> str:
@@ -87,13 +64,7 @@ class OpenAIHandler:
             return ""
         return q
 
-    # ----------- prompt style (keep pipeline, align with Meditron anchors) -----------
-
     def _build_user_block(self, instruction: str, user_text: str) -> str:
-        """
-        Keep your pipeline style (instruction + question), but add the same strong
-        anchor Meditron uses ("Answer:") to reduce verbose outputs.
-        """
         instruction = (instruction or "").strip()
 
         base = []
@@ -106,8 +77,6 @@ class OpenAIHandler:
         base.append("")
         base.append("Answer:")
         return "\n".join(base).strip()
-
-    # ----------- parsing helpers -----------
 
     def _parse_responses_text(self, resp) -> str:
         """
@@ -126,8 +95,6 @@ class OpenAIHandler:
                         parts.append(getattr(c, "text", ""))
         return "".join(parts).strip()
 
-    # ----------- retry wrapper -----------
-
     def _with_retries(self, fn, *args, **kwargs):
         last_err = None
         for i in range(self.max_retries):
@@ -138,8 +105,6 @@ class OpenAIHandler:
                 # simple backoff
                 time.sleep(min(2 ** i, 8))
         raise last_err
-
-    # ----------- main entrypoint -----------
 
     def prompt(
         self,
@@ -152,11 +117,6 @@ class OpenAIHandler:
         reasoning_effort: str = "low",
         **kwargs,
     ):
-        """
-        Returns:
-          - mcq -> extracted letter A–F, or None
-          - answer_generation -> generated one-line text, or ""
-        """
 
         task_type = (task_type or "mcq").strip().lower()
 
@@ -168,7 +128,6 @@ class OpenAIHandler:
 
             user_block = self._build_user_block(instruction, user_text)
 
-            # -------- Chat Completions path --------
             if not self._is_responses_model():
                 resp = self._with_retries(
                     self.client.chat.completions.create,
@@ -187,7 +146,6 @@ class OpenAIHandler:
                     print(f"[OpenAIHandler] Could not extract a clean letter. Raw: {repr(raw)}")
                 return letter
 
-            # -------- Responses API path --------
             payload = dict(
                 model=self.model,
                 instructions="Follow instructions strictly.",
@@ -220,11 +178,9 @@ class OpenAIHandler:
                 print("[OpenAIHandler] Empty question; cannot build answer-generation prompt.")
                 return ""
 
-            # keep the same style, just without options and without forcing Answer: X format
             instruction = (instruction or "").strip()
             user_block = f"{instruction}\n\nQUESTION:\n{user_text}".strip()
 
-            # -------- Chat Completions path --------
             if not self._is_responses_model():
                 resp = self._with_retries(
                     self.client.chat.completions.create,
@@ -244,7 +200,6 @@ class OpenAIHandler:
                 print(f"[OpenAIHandler] Answer-gen raw (one line): {repr(one_line[:200])}")
                 return one_line
 
-            # -------- Responses API path --------
             payload = dict(
                 model=self.model,
                 instructions="Follow instructions strictly.",
