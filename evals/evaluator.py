@@ -3,17 +3,6 @@ import sys
 import pandas as pd
 import torch
 
-'''from evals.metrics import (
-    calculate_accuracy,
-    calculate_bleu,
-    calculate_bleu_per_example,
-    calculate_rouge,
-    calculate_rouge_per_example,
-    calculate_bert_score,
-    calculate_bert_score_per_example,
-    extract_letter,
-)'''
-
 from evals.metrics import (
     calculate_accuracy,
     calculate_bert_score,
@@ -22,18 +11,8 @@ from evals.metrics import (
 )
 
 import re
-'''import inspect
-assert "lang" in str(inspect.signature(calculate_bleu)), (
-    f"Wrong calculate_bleu loaded from {inspect.getsourcefile(calculate_bleu)} "
-    f"sig={inspect.signature(calculate_bleu)}"
-)'''
 
 print(f"[DEBUG evaluator] imported evaluator from: {__file__}")
-
-
-# Task types that use the same free-text BERTScore eval pipeline.
-# Task 3 (dialogue_completion) generates the missing final doctor turn and
-# is scored against the gold turn, exactly like Task 2 free-form answers.
 GENERATIVE_TASK_TYPES = {"answer_generation", "dialogue_completion"}
 
 
@@ -46,10 +25,6 @@ def strip_answer_prefix(text):
 
 
 def split_prediction(prediction, task_type):
-    """
-    For MCQ: extract letter A-F from model output.
-    For answer_generation / dialogue_completion: return raw text.
-    """
     if prediction is None:
         return None, None
 
@@ -58,12 +33,9 @@ def split_prediction(prediction, task_type):
     if task_type == "mcq":
         upper = text.upper()
 
-        # First try strict format: ANSWER: X
         m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
         if m:
             return m.group(1), text
-
-        # Fallback: any standalone letter
         m = re.search(r"\b([A-F])\b", upper)
         if m:
             return m.group(1), text
@@ -72,7 +44,6 @@ def split_prediction(prediction, task_type):
 
     # For free-text generation tasks, just return text
     return text, text
-
 
 def evaluate(predictions_path: str, metrics_path: str, task_type: str, lang: str = "ar"):
     df = pd.read_csv(predictions_path)
@@ -121,7 +92,6 @@ def evaluate(predictions_path: str, metrics_path: str, task_type: str, lang: str
         json.dump(metrics, f, indent=4, ensure_ascii=False)
 
     return metrics
-
 
 if __name__ == "__main__":
     if len(sys.argv) not in {4, 5}:
