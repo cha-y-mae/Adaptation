@@ -1,21 +1,9 @@
 """
-diagnose.py
------------
-Generic diagnostic for any HuggingFace causal LM.
-Prints:
+prints model info incl:
   1. Config class + architecture + hidden size + n_layers
   2. Token IDs for A/B/C/D/E/F under all common prefix forms
   3. Architecture paths (norm, lm_head, layers)
   4. Top-10 predicted tokens on a few access_gap examples
-
-Works for: Llama, Mistral, Gemma, ALLaM, MedGemma, and any other model
-loadable via AutoModelForCausalLM or a specific class.
-
-Usage:
-  python diagnose.py \\
-      --csv     <sampled_quadrants.csv> \\
-      --model_path /path/to/model/snapshot \\
-      --n_examples 3
 """
 
 import csv, re, os, argparse
@@ -44,7 +32,6 @@ def extract_letter(val):
     m = re.search(r'\b([A-F])\b', s)
     return m.group(1) if m else ""
 
-# ── 1. Config ──────────────────────────────────────────────────────────────────
 print("=" * 60)
 print("STEP 1: Config")
 print("=" * 60)
@@ -63,7 +50,6 @@ print(f"  hidden_size   : {hidden}")
 print(f"  num_heads     : {n_heads}")
 print()
 
-# ── 2. Tokenizer ───────────────────────────────────────────────────────────────
 print("=" * 60)
 print("STEP 2: Tokenizer + A/B/C/D/E/F token IDs")
 print("=" * 60)
@@ -127,7 +113,6 @@ print(f"  vocab_size : {getattr(tokenizer, 'vocab_size', '?')}")
 print(f"  pad_token_id: {pad_id}")
 print()
 
-# Token IDs for A–F
 print("  Token encodings for A/B/C/D/E/F:")
 for prefix in ["", " ", "\n"]:
     for letter in "ABCDEF":
@@ -162,19 +147,13 @@ for letter in "ABCDEF":
             print(f"    '{letter}' → ERROR: {e}")
 print()
 
-# ── 3. Model loading + architecture paths ──────────────────────────────────────
 print("=" * 60)
 print("STEP 3: Model loading + architecture paths")
 print("=" * 60)
 
 model = None
 
-# Try model-specific classes first
 loaders = []
-
-# Gemma3 text-only (medgemma-27b-text-it, any Gemma3ForCausalLM checkpoint).
-# MUST come before Gemma3ForConditionalGeneration: loading a text-only model
-# via the multimodal wrapper re-inits the lm_head to the wrong shape.
 try:
     from transformers import Gemma3ForCausalLM
     loaders.append(("Gemma3ForCausalLM",
@@ -184,7 +163,6 @@ try:
 except ImportError:
     pass
 
-# Mistral3 multimodal
 try:
     from transformers import Mistral3ForConditionalGeneration
     loaders.append(("Mistral3ForConditionalGeneration",
@@ -194,7 +172,6 @@ try:
 except ImportError:
     pass
 
-# Gemma3 multimodal (MedGemma 4B multimodal)
 try:
     from transformers import Gemma3ForConditionalGeneration
     loaders.append(("Gemma3ForConditionalGeneration",
@@ -204,7 +181,6 @@ try:
 except ImportError:
     pass
 
-# Generic fallback
 loaders.append(("AutoModelForCausalLM",
                 lambda p: AutoModelForCausalLM.from_pretrained(
                     p, torch_dtype=torch.bfloat16, device_map="auto",
@@ -246,7 +222,6 @@ def walk(module, prefix="model", depth=0, max_depth=4):
 walk(model)
 print()
 
-# ── 4. Forward pass ────────────────────────────────────────────────────────────
 print("=" * 60)
 print("STEP 4: Token prediction on access_gap examples")
 print("=" * 60)
@@ -315,7 +290,6 @@ print(f"  num_hidden_layers : {n_layers}")
 print(f"  hidden_size       : {hidden}")
 print(f"  answer_ids (A–F)  : {answer_ids}")
 
-# ── Sanity checks ─────────────────────────────────────────────────────────────
 print()
 print("SANITY CHECKS:")
 # Find actual lm_head by direct attribute access (more reliable than tree walk)
