@@ -1,8 +1,5 @@
 """
 plot_patching.py  —  regenerate activation patching figure from saved .npz
-Usage:
-  python plot_patching.py --npz ./activation_patching_llama_out/patching_results.npz \
-                          --out ./activation_patching_llama_out
 """
 import argparse, os
 import numpy as np
