@@ -8,7 +8,7 @@ from mistral_common.protocol.instruct.request import ChatCompletionRequest
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 from transformers import Mistral3ForConditionalGeneration
 
-HF_CACHE = "/scratch/ca2627/huggingface"
+HF_CACHE = "ADD PATH"
 os.environ["HF_HOME"] = HF_CACHE
 
 os.environ.setdefault("CUDA_LAUNCH_BLOCKING", "1")
@@ -18,19 +18,12 @@ os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 class AutoCAPMCQHandler:
     """
-    AutoCAP-style prompt-based baseline for Arabic medical MCQ.
-
-    Pipeline per sample:
+    For each sample:
       1. Select top-K reasoning languages from candidate pool
       2. Assign weights to selected languages
       3. Reason in each selected language
       4. Aggregate with weighted vote over option letters
-
-    Returns:
-      - prompt(...): single letter A-F or None
-      - prompt_batch(...): list of letters / None
     """
-
     def __init__(
         self,
         model_name: str = "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
@@ -77,9 +70,7 @@ class AutoCAPMCQHandler:
         else:
             os.environ.pop("HF_HUB_OFFLINE", None)
 
-        # -------------------------
-        # Inspect GPUs
-        # -------------------------
+        #inspect gpus
         num_gpus = torch.cuda.device_count()
         print(f"[AutoCAPMCQ] Available GPUs: {num_gpus}")
         if num_gpus == 0:
@@ -91,18 +82,12 @@ class AutoCAPMCQHandler:
                 f"{torch.cuda.memory_allocated(i) / 1024**3:.2f} GB allocated"
             )
 
-        # -------------------------
-        # Tokenizer
-        # -------------------------
         print("[AutoCAPMCQ] Loading tokenizer...")
         if os.path.isdir(self.model_name):
             self.tokenizer = MistralTokenizer.from_file(os.path.join(self.model_name, "tekken.json"))
         else:
             self.tokenizer = MistralTokenizer.from_hf_hub(self.model_name)
 
-        # -------------------------
-        # Model
-        # -------------------------
         print("[AutoCAPMCQ] Loading model...")
         self.model = Mistral3ForConditionalGeneration.from_pretrained(
             self.model_name,
@@ -123,9 +108,6 @@ class AutoCAPMCQHandler:
             reserv = torch.cuda.memory_reserved(i) / 1024**3
             print(f"  GPU {i} after load: {alloc:.2f}GB allocated, {reserv:.2f}GB reserved")
 
-    # -------------------------
-    # Builders
-    # -------------------------
     @staticmethod
     def _build_mcq_text(sample: dict) -> str:
         stem = (sample.get("question") or "").strip()
@@ -232,9 +214,6 @@ class AutoCAPMCQHandler:
 
         return {lang: cleaned[lang] / total for lang in selected_languages}
 
-    # -------------------------
-    # Core generation
-    # -------------------------
     def _generate(self, system_prompt: str, user_text: str, max_tokens: int) -> str:
         messages = [
             {"role": "system", "content": (system_prompt or "").strip()},
@@ -269,9 +248,6 @@ class AutoCAPMCQHandler:
         finally:
             torch.cuda.empty_cache()
 
-    # -------------------------
-    # Prompt builders
-    # -------------------------
     def _build_language_selection_prompts(self, mcq_text: str) -> Tuple[str, str]:
         system_prompt = (
             "You are an expert planner for multilingual medical reasoning.\n"
@@ -368,9 +344,6 @@ Question:
 
         return system_prompt, user_prompt
 
-    # -------------------------
-    # Stage helpers
-    # -------------------------
     def _select_languages(self, mcq_text: str) -> List[str]:
         system_prompt, user_prompt = self._build_language_selection_prompts(mcq_text)
         raw = self._generate(system_prompt, user_prompt, self.selection_max_tokens)
@@ -417,10 +390,6 @@ Question:
 
     @staticmethod
     def _weighted_vote(predictions: Dict[str, str], weights: Dict[str, float]) -> Optional[str]:
-        """
-        predictions: {language: letter}
-        weights: {language: normalized weight}
-        """
         score_by_letter: Dict[str, float] = {}
 
         for lang, pred in predictions.items():
@@ -435,9 +404,6 @@ Question:
         ranked = sorted(score_by_letter.items(), key=lambda x: (-x[1], x[0]))
         return ranked[0][0]
 
-    # -------------------------
-    # Public API
-    # -------------------------
     def prompt(
         self,
         sample: dict,
@@ -446,22 +412,7 @@ Question:
         task_type: str = "mcq",
         return_debug: bool = False,
     ):
-        """
-        For compatibility with your existing eval pipeline:
-          - task_type must be 'mcq'
-          - returns final option letter or None
-
-        `instruction` is ignored here because AutoCAP has its own internal staged prompts.
-        `max_tokens` is ignored; handler-specific generation limits are used instead.
-
-        If return_debug=True, returns:
-          {
-            "final_prediction": ...,
-            "selected_languages": [...],
-            "weights": {...},
-            "language_predictions": {...}
-          }
-        """
+        
         task_type = (task_type or "mcq").strip().lower()
         if task_type != "mcq":
             raise ValueError("AutoCAPMCQHandler only supports task_type='mcq'.")
