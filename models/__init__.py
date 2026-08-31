@@ -1,4 +1,4 @@
-# do same here to import other model handlers !!!!!!!
+#import other model handlers here 
 from .mistral import MistralSmallHandler #first name is name of python file and second name is that of the class from mistral.py 
 from .medgemma import MedGemma27BMCQHandler
 from .meditron import Meditron3MCqHandler
@@ -15,11 +15,9 @@ from .autocap import AutoCAPMCQHandler
 
 import os
 
-
 def load_model_handler(config):
     """
-    Load the appropriate model handler based on config.
-    MCQ-only setup.
+    Load the appropriate model handler based on config
     """
 
     model_cfg = config["model"]
