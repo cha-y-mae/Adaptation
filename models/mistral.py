@@ -16,16 +16,6 @@ os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 
 class MistralSmallHandler:
-    """
-    Unified handler for:
-      - task_type="mcq"               -> returns a single letter A–F (or None)
-      - task_type="answer_generation" -> returns generated text (or "")
-
-    Input sample (dict):
-      - MCQ: question + opa/opb/opc/opd (+ optional ope/opf)
-      - Answer generation: question only
-    """
-
     def __init__(
         self,
         model_name: str = "mistralai/Mistral-Small-3.2-24B-Instruct-2506",
@@ -50,9 +40,6 @@ class MistralSmallHandler:
         else:
             os.environ.pop("HF_HUB_OFFLINE", None)
 
-        # -------------------------
-        # Inspect GPUs
-        # -------------------------
         num_gpus = torch.cuda.device_count()
         print(f"[MistralSmall] Available GPUs: {num_gpus}")
         if num_gpus == 0:
@@ -63,10 +50,6 @@ class MistralSmallHandler:
                 f"  GPU {i}: {torch.cuda.get_device_name(i)} - "
                 f"{torch.cuda.memory_allocated(i) / 1024**3:.2f} GB allocated"
             )
-
-        # -------------------------
-        # Tokenizer
-        # -------------------------
         print("[MistralSmall] Loading tokenizer...")
         if os.path.isdir(self.model_name):
             tok_path = os.path.join(self.model_name, "tekken.json")
@@ -78,9 +61,6 @@ class MistralSmallHandler:
                 )
             self.tokenizer = MistralTokenizer.from_hf_hub(self.model_name)
 
-        # -------------------------
-        # Model
-        # -------------------------
         print("[MistralSmall] Loading model...")
         self.model = Mistral3ForConditionalGeneration.from_pretrained(
             self.model_name,
@@ -101,15 +81,8 @@ class MistralSmallHandler:
             reserv = torch.cuda.memory_reserved(i) / 1024**3
             print(f"  GPU {i} after load: {alloc:.2f}GB allocated, {reserv:.2f}GB reserved")
 
-    # -------------------------
-    # Builders
-    # -------------------------
     @staticmethod
     def _build_mcq_text(sample: dict) -> str:
-        """
-        Build MCQ prompt text from:
-          question, opa/opb/opc/opd, optional ope/opf
-        """
         stem = (sample.get("question") or "").strip()
         if not stem:
             return ""
@@ -137,14 +110,10 @@ class MistralSmallHandler:
 
     @staticmethod
     def _build_ansgen_text(sample: dict) -> str:
-        """
-        For answer_generation:
-        expose the question + available answer options.
-        """
         stem = (sample.get("question") or "").strip()
         if not stem:
             return ""
-    
+
         option_map = {
             "A": sample.get("opa"),
             "B": sample.get("opb"),
@@ -153,7 +122,7 @@ class MistralSmallHandler:
             "E": sample.get("ope"),
             "F": sample.get("opf"),
         }
-    
+
         lines = []
         for letter in ["A", "B", "C", "D", "E", "F"]:
             txt = option_map.get(letter)
@@ -163,14 +132,11 @@ class MistralSmallHandler:
             if txt == "":
                 continue
             lines.append(f"{letter}) {txt}")
-    
+
         if lines:
             return stem + "\n\n" + "\n".join(lines)
         return stem
 
-    # -------------------------
-    # Core generation
-    # -------------------------
     def _generate(
         self,
         system_prompt: str,
@@ -219,21 +185,13 @@ class MistralSmallHandler:
         finally:
             torch.cuda.empty_cache()
 
-    # -------------------------
-    # Public API
-    # -------------------------
     def prompt(
         self,
         sample: dict,
         instruction: str,
-        max_tokens: int = 128,
+        max_tokens: int = 8,
         task_type: str = "mcq",
     ):
-        """
-        Unified interface:
-          - task_type="mcq": returns 'A'..'F' or None
-          - task_type="answer_generation": returns generated text (one line) or ""
-        """
         task_type = (task_type or "mcq").strip().lower()
 
         if task_type == "mcq":
@@ -254,12 +212,14 @@ class MistralSmallHandler:
                 return None
 
             print(f"[MistralSmall] MCQ raw generated: {repr(raw_text)}")
-            upper = raw_text.upper()
+            upper = raw_text.strip().upper()
+
+            if upper in ("A", "B", "C", "D", "E", "F"):
+                return upper
 
             m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
             if m:
                 return m.group(1)
-
             m = re.search(r"\b([A-F])\b", upper)
             if m:
                 return m.group(1)
@@ -284,7 +244,6 @@ class MistralSmallHandler:
             if not raw_text:
                 return ""
 
-            # Match MedGemma behavior: keep only one line
             one_line = raw_text.split("\n")[0].strip()
             print(f"[MistralSmall] Answer-gen raw (one line): {repr(one_line[:200])}")
             return one_line
@@ -297,7 +256,7 @@ class MistralSmallHandler:
         self,
         samples: List[dict],
         instruction: str,
-        max_tokens: int = 128,
+        max_tokens: int = 8,
         task_type: str = "mcq",
     ):
         return [
