@@ -1,17 +1,5 @@
 """
-plot_patching_panel_lines.py
------------------------
 2×2 panel figure from activation patching results — LINE PLOT VERSION.
-Recovery % (y-axis) vs patch layer (x-axis), with Arabic/English baselines
-as horizontal reference lines.
-
-Usage:
-  python plot_patching_panel_lines.py \
-      --llama_dir    ./activation_patching_llama_out \
-      --mistral_dir  ./activation_patching_mistral_out \
-      --allam_dir    ./activation_patching_allam_out \
-      --medgemma_dir ./activation_patching_medgemma_out \
-      --out_dir      ./activation_patching_panel_out
 """
 
 import os
@@ -29,7 +17,6 @@ parser.add_argument("--out_dir",      default="./activation_patching_panel_out")
 args = parser.parse_args()
 os.makedirs(args.out_dir, exist_ok=True)
 
-# ── Palette (consistent with tuned-lens panel) ─────────────────────────────────
 PALETTE = {
     'Base': '#0D3349',   # sky blue  — Arabic baseline
     'CoT':  '#2A9D8F',   # teal      — English baseline
@@ -41,7 +28,6 @@ EN_COLOR   = PALETTE['CoT']
 LINE_COLOR = PALETTE['line']
 ZERO_COLOR = '#888888'
 
-# ── Model registry ─────────────────────────────────────────────────────────────
 MODELS = [
     ("Llama-3.3-70B",          args.llama_dir),
     ("Mistral-Small-3.2-24B",  args.mistral_dir),
@@ -49,7 +35,6 @@ MODELS = [
     ("MedGemma-27B",           args.medgemma_dir),
 ]
 
-# ── Load helper ────────────────────────────────────────────────────────────────
 def load_npz(out_dir):
     path = os.path.join(out_dir, "patching_results.npz")
     if not os.path.exists(path):
@@ -63,16 +48,13 @@ def load_npz(out_dir):
     patch_data = {k: d[k] for k in patch_keys}
     return dict(en_base=en_base, ar_base=ar_base, N=N, patch_data=patch_data)
 
-# ── Recovery helper ────────────────────────────────────────────────────────────
 def recovery(val, ar_mean, en_mean):
     gap = en_mean - ar_mean
     return 100 * (val - ar_mean) / gap if gap > 0 else 0.0
 
-# ── Shared y-axis range (computed across all models after loading) ─────────────
 SHARED_Y_MIN = -60
 SHARED_Y_MAX = 130  # fixed ceiling; Mistral over-recovery annotated, not scaled to
 
-# ── Draw one subplot ───────────────────────────────────────────────────────────
 def draw_panel(ax, data, model_name, show_ylabel, show_xlabel):
     if data is None:
         ax.set_facecolor("#f5f5f5")
@@ -104,26 +86,21 @@ def draw_panel(ax, data, model_name, show_ylabel, show_xlabel):
     x_labels = [k.replace("patch_", "") for k in single_keys]
     xs = np.arange(len(single_keys))
 
-    # ── Clip SE band to shared y range to avoid dominating panels ──
     gap = abs(en_mean - ar_mean)
     se_rec = [100 * s / gap for s in single_sems]
     band_lo = [max(r - s, SHARED_Y_MIN) for r, s in zip(single_recs, se_rec)]
     band_hi = [min(r + s, SHARED_Y_MAX) for r, s in zip(single_recs, se_rec)]
 
-    # ── Main recovery line ──
     ax.plot(xs, single_recs, color=LINE_COLOR, linewidth=2.2,
             marker="o", markersize=6, zorder=3, label="Single-layer recovery %")
     ax.fill_between(xs, band_lo, band_hi,
                     color=LINE_COLOR, alpha=0.10, zorder=2)  # reduced alpha
 
-    # ── Reference lines ──
     ax.axhline(100, color=EN_COLOR, linewidth=1.8, linestyle="--",
                alpha=0.85, label="English baseline (100%)")
     ax.axhline(0,   color=AR_COLOR, linewidth=1.8, linestyle="--",
                alpha=0.85, label="Arabic baseline (0%)")
 
-    # ── Span patch annotations: only show ones with recovery != ~100%
-    #    (skip uninformative 100% spans like Llama L68_79) ──
     if span_keys:
         span_means, span_sems, span_recs = get_rec_sem(span_keys)
         for k, r in zip(span_keys, span_recs):
@@ -141,7 +118,6 @@ def draw_panel(ax, data, model_name, show_ylabel, show_xlabel):
                 arrowprops=dict(arrowstyle="->", color="#aaaaaa", lw=0.8),
             )
 
-    # ── Over-recovery annotation (values clipped by shared y-axis) ──
     peak_rec = max(single_recs)
     if peak_rec > SHARED_Y_MAX:
         peak_idx = single_recs.index(peak_rec)
@@ -153,7 +129,6 @@ def draw_panel(ax, data, model_name, show_ylabel, show_xlabel):
             arrowprops=dict(arrowstyle="->", color=LINE_COLOR, lw=1.0),
         )
 
-    # ── Threshold annotation: first layer ≥ 80%, placed inside plot ──
     thresh_idx = next((i for i, r in enumerate(single_recs) if r >= 80), None)
     if thresh_idx is not None:
         ax.axvline(thresh_idx, color="#999999", linewidth=1.0,
@@ -163,7 +138,6 @@ def draw_panel(ax, data, model_name, show_ylabel, show_xlabel):
                 f"{x_labels[thresh_idx]}\n≥80%",
                 fontsize=9, color="#555555", va="top")
 
-    # ── X-axis ticks: thin out if more than 10 labels ──
     if len(xs) > 10:
         step = 2
         tick_positions = xs[::step]
@@ -177,7 +151,6 @@ def draw_panel(ax, data, model_name, show_ylabel, show_xlabel):
     ax.tick_params(axis="y", labelsize=11)
     ax.set_title(model_name, fontsize=15, fontweight="bold", pad=8)
 
-    # ── Shared y-axis range ──
     ax.set_ylim(SHARED_Y_MIN, SHARED_Y_MAX)
 
     if show_ylabel:
@@ -188,7 +161,6 @@ def draw_panel(ax, data, model_name, show_ylabel, show_xlabel):
     ax.grid(axis="y", alpha=0.18)
     ax.spines[["top", "right"]].set_visible(False)
 
-# ── Build 2×2 panel ────────────────────────────────────────────────────────────
 loaded = [(name, load_npz(d)) for name, d in MODELS]
 
 fig = plt.figure(figsize=(28, 7))
@@ -203,7 +175,6 @@ for idx, ((model_name, data), (row, col)) in enumerate(zip(loaded, positions)):
     show_xlabel = True
     draw_panel(ax, data, model_name, show_ylabel, show_xlabel)
 
-# ── Shared legend ──────────────────────────────────────────────────────────────
 from matplotlib.lines import Line2D
 from matplotlib.patches import Patch
 
