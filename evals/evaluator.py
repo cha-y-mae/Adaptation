@@ -2,7 +2,7 @@ import json
 import sys
 import pandas as pd
 import torch
-
+import re
 from evals.metrics import (
     calculate_accuracy,
     calculate_bert_score,
@@ -10,7 +10,6 @@ from evals.metrics import (
     extract_letter,
 )
 
-import re
 
 print(f"[DEBUG evaluator] imported evaluator from: {__file__}")
 GENERATIVE_TASK_TYPES = {"answer_generation", "dialogue_completion"}
