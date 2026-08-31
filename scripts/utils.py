@@ -1,12 +1,9 @@
 '''
-
-This file contains utility helpers for experiment scripts: handles config loading and prediction serialization
-
+This file contains utility helpers for experiment scripts, handles config loading and prediction serialization
 '''
 
 import yaml
 import pandas as pd
-
 
 def load_config(config_path):
     try:
@@ -18,7 +15,6 @@ def load_config(config_path):
         raise ValueError(f"error parsing yaml config file:{e}")
     except Exception as e:
         raise ValueError(f"unexpected error while loading config:{e}")
-
 
 def save_predictions(predictions, output_path):
     try:
