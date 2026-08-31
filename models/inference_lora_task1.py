@@ -56,7 +56,6 @@ def build_mcq_text(item: dict) -> str:
         return stem + "\n\n" + "\n".join(lines)
     return stem or ""
 
-
 class MistralLoRAMCQInference:
     def __init__(
         self,
