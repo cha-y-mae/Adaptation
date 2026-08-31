@@ -59,11 +59,7 @@ python evals/<eval_script>.py --config configs/<eval_config>.yaml --task {mcqa,g
 
 ## Reproducing results
 
-All headline numbers reported in the paper (Tables 1–3 and appendix Tables S18–S24) can be reproduced by running the relevant config.
-
-## AraClinicDialog
-
-AraClinicDialog is our clinician-constructed Arabic medical dialogue benchmark, released in `datasets/`. <!-- TODO: confirm exact path/access instructions, and add license/usage terms for the dataset itself if different from the code license. -->
+All headline numbers reported in the paper can be reproduced by adding and running the relevant config.
 
 ## Citing this work
 
