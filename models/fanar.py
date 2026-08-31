@@ -12,12 +12,6 @@ os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 
 class Fanar19BMCQHandler:
-    """
-    MCQ-only handler for QCRI/Fanar-1-9B (base model).
-    - Input is ONE dict with keys: question, opa/opb/opc/opd/(ope/opf optional)
-    - Output is a single letter A–F (or None).
-    """
-
     def __init__(
         self,
         model_name: str = "QCRI/Fanar-1-9B",
@@ -43,9 +37,6 @@ class Fanar19BMCQHandler:
         else:
             os.environ.pop("HF_HUB_OFFLINE", None)
 
-        # -------------------------
-        # Inspect GPUs (debug)
-        # -------------------------
         num_gpus = torch.cuda.device_count()
         print(f"[Fanar19BMCQ] Available GPUs: {num_gpus}")
         if num_gpus == 0:
@@ -57,9 +48,6 @@ class Fanar19BMCQHandler:
                 f"{torch.cuda.memory_allocated(i) / 1024**3:.2f} GB allocated"
             )
 
-        # -------------------------
-        # Load tokenizer
-        # -------------------------
         print("[Fanar19BMCQ] Loading tokenizer...")
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_name,
@@ -68,13 +56,9 @@ class Fanar19BMCQHandler:
             use_fast=True,
         )
 
-        # Ensure pad_token exists for batching/generation
         if self.tokenizer.pad_token_id is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
-        # --------------------------
-        # Load model
-        # --------------------------
         print("[Fanar19BMCQ] Loading model...")
         self.model = AutoModelForCausalLM.from_pretrained(
             self.model_name,
@@ -97,12 +81,6 @@ class Fanar19BMCQHandler:
 
     @staticmethod
     def _build_mcq_text(sample: dict) -> str:
-        """
-        Expected:
-          sample["question"]
-          sample["opa"], sample["opb"], sample["opc"], sample["opd"]
-          optional: sample["ope"], sample["opf"]
-        """
         stem = (sample.get("question") or "").strip()
         if not stem:
             return ""
@@ -135,24 +113,12 @@ class Fanar19BMCQHandler:
         max_tokens: int = 12,
         temperature: float = 0.0,
     ):
-        """
-        MCQ-only interface:
-        - sample: ONE JSON record (dict)
-        - returns: 'A'..'F' or None
-
-        Behavior:
-        - If temperature <= 0: greedy decode (like your MedGemma do_sample=False)
-        - Else: sampling with temperature
-        """
         user_text = self._build_mcq_text(sample)
         if not user_text:
             print("[Fanar19BMCQ] Empty stem/options; cannot build prompt.")
             return None
 
         system_prompt = (instruction or "").strip()
-
-        # Fanar is a *base* model, not chat-tuned. So: plain text prompt.
-        # Keep it strict so extraction is easy.
         full_prompt = (
             f"{system_prompt}\n\n"
             f"{user_text}\n\n"
@@ -165,15 +131,12 @@ class Fanar19BMCQHandler:
 
         try:
             torch.cuda.empty_cache()
-
-            # Fanar model card suggests return_token_type_ids=False
             inputs = self.tokenizer(
                 full_prompt,
                 return_tensors="pt",
                 return_token_type_ids=False,
             )
 
-            # Put inputs on the "main" device (works in most device_map="auto" cases)
             inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
             input_len = inputs["input_ids"].shape[-1]
 
@@ -204,13 +167,9 @@ class Fanar19BMCQHandler:
         print(f"[Fanar19BMCQ] MCQ raw generated: {repr(raw_text)}")
 
         upper = raw_text.upper()
-
-        # Prefer strict format: ANSWER: X
         m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
         if m:
             return m.group(1)
-
-        # Fallback: first standalone A-F
         m = re.search(r"\b([A-F])\b", upper)
         if m:
             return m.group(1)
