@@ -11,13 +11,6 @@ os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 
 class Silma9BMCQHandler:
-    """
-    MCQ-only handler for silma-ai/SILMA-9B-Instruct-v1.0.
-
-    Uses SILMA's chat template (Gemma-style) when available/required.
-    Returns a single letter (A-F).
-    """
-
     def __init__(
         self,
         model_name: str = "silma-ai/SILMA-9B-Instruct-v1.0",
@@ -116,18 +109,13 @@ class Silma9BMCQHandler:
         if not raw_text:
             return None
         upper = raw_text.strip().upper()
-
-        # Strict format first
         m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
         if m:
             return m.group(1)
-
-        # Arabic "الإجابة" variants (optional fallback)
         m = re.search(r"(?:الإجابة|الاجابة)\s*[:=]\s*([A-F])", upper)
         if m:
             return m.group(1)
 
-        # Fallback: first standalone A-F
         m = re.search(r"\b([A-F])\b", upper)
         if m:
             return m.group(1)
@@ -142,7 +130,6 @@ class Silma9BMCQHandler:
 
         sys_text = self._build_instruction(instruction)
 
-        # Strong anchor to force letter-only output (keeps eval comparable)
         user_msg = (
             f"{user_text}\n\n"
             "أجب بحرف واحد فقط (A-F) وبالصيغة التالية تمامًا:\n"
@@ -165,7 +152,6 @@ class Silma9BMCQHandler:
                     return_tensors="pt",
                 )
             else:
-                # Fallback: manual prompt in case template is missing
                 prompt_str = (
                     f"{sys_text}\n\n"
                     f"QUESTION:\n{user_text}\n\n"
