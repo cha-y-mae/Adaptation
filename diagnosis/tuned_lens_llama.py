@@ -1,66 +1,5 @@
 """
-tuned_lens_llama.py
--------------------
-Tuned-lens analysis for Llama 3.3 70B Instruct on MedAraBench.
-Directly adapted from logit_lens_llama.py — all architecture paths are
-the same; this script adds learned per-layer translators that correct
-the geometry-mismatch problem of plain logit lens.
-
-Why the geometry correction matters here
-─────────────────────────────────────────
-model.model.norm was trained to receive output of layer 79 only.
-Applying it to h_l (l < 79) introduces a systematic bias that makes
-early-layer probability curves less reliable.  At L38–L40, where we
-claim the commitment collapse occurs, the layers are late enough that
-logit lens is mostly fine — but tuned lens gives reviewers no reason
-to doubt the finding.  Nie et al. (EMNLP 2025) used tuned lens for
-the same reason in a closely related multilingual analysis.
-
-Architecture (confirmed from logit_lens_llama.py)
-──────────────────────────────────────────────────
-  model.model.layers  — 80 × LlamaDecoderLayer
-  model.model.norm    — LlamaRMSNorm  (final norm)
-  model.lm_head       — Linear (vocab × 8192, no bias)
-  hidden_states[0]    = embedding output
-  hidden_states[L]    = output of transformer layer L-1
-  hidden_states[80]   = output of layer 79  ← what final_norm receives
-
-Translator architecture
-───────────────────────
-Low-rank affine (necessary for d=8192 — full 8192×8192 W is 67M params):
-  T_l(h) = h + U_l @ (V_l^T @ h) + b_l
-  U_l, V_l ∈ R^{d × r},  b_l ∈ R^d
-  All initialised to 0  →  T_l = identity at start
-  r=64 by default  →  2 × 8192 × 64 = 1M params per layer (manageable)
-
-Memory note (80 GB GPU)
-───────────────────────
-70B in 8-bit ≈ 70 GB on GPU.  We collect hidden states on CPU during
-forward passes, then train translators purely on CPU (or a second GPU
-if available).  The model stays frozen in 8-bit throughout.
-
-Usage
-─────
-  # Phase 1 – train translators  (≈ 30–60 min on CPU after forward passes)
-  python tuned_lens_llama.py \\
-      --mode       train \\
-      --train_csv  llama_sampled_quadrants.csv \\
-      --model_path /scratch/ca2627/huggingface/models--meta-llama--Llama-3.3-70B-Instruct/snapshots/<hash> \\
-      --lens_dir   ./tuned_lens_llama \\
-      --train_n    800 \\
-      --rank       64 \\
-      --epochs     15
-
-  # Phase 2 – eval
-  python tuned_lens_llama.py \\
-      --mode       eval \\
-      --csv        llama_sampled_quadrants.csv \\
-      --model_path /scratch/ca2627/huggingface/models--meta-llama--Llama-3.3-70B-Instruct/snapshots/<hash> \\
-      --lens_dir   ./tuned_lens_llama \\
-      --out_dir    ./tuned_lens_llama_out
-
-CSV columns required:
-  id, quadrant, ground_truth, input_english, input_arabic
+Tuned-lens analysis for Llama 3.3 70B Instruct on MedAraBench!
 """
 
 import os, csv, re, argparse, math
@@ -73,7 +12,6 @@ import matplotlib.lines as mlines
 from collections import defaultdict
 from tqdm import tqdm
 
-# ── CLI ───────────────────────────────────────────────────────────────────────
 parser = argparse.ArgumentParser()
 parser.add_argument("--mode",        required=True, choices=["train", "eval"])
 parser.add_argument("--model_path",  required=True)
@@ -105,7 +43,6 @@ os.makedirs(args.lens_dir, exist_ok=True)
 if args.mode == "eval":
     os.makedirs(args.out_dir, exist_ok=True)
 
-# ── Probe layers (80-layer Llama 3.3 70B) ────────────────────────────────────
 # Denser around the critical L32–L40 window identified in the Mistral analysis.
 # hidden_states[80] = output of final layer 79 (what final_norm receives).
 PROBE_LAYERS = [0, 8, 16, 24, 28, 32, 34, 36, 38, 40, 48, 56, 64, 72, 80]
@@ -135,7 +72,6 @@ SYSTEM_PROMPT = (
 # Confirmed from diagnose_tokens.py on Llama 3.3 70B
 ANSWER_TOKEN_IDS = {"A": 32, "B": 33, "C": 34, "D": 35, "E": 36, "F": 37}
 
-# ── Utilities ─────────────────────────────────────────────────────────────────
 def extract_letter(val):
     if not val or not isinstance(val, str): return ""
     s = val.strip().upper()
@@ -228,25 +164,7 @@ def tokenize_batch(texts, tokenizer, max_len, device):
     seq_lens = mask.sum(dim=1) - 1
     return inp.to(device), mask.to(device), seq_lens.to(device)
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  Low-Rank Affine Translator
-# ─────────────────────────────────────────────────────────────────────────────
 class LowRankTranslator(nn.Module):
-    """
-    T_l(h) = h + U_l @ (V_l^T @ h) + b_l
-
-    U_l, V_l ∈ R^{d × r},  b_l ∈ R^d
-    All initialised to 0  →  T_l = identity at start.
-
-    For Llama 3.3 70B:  d=8192, r=64
-      params per layer = 2 × 8192 × 64 + 8192 = 1,056,768  (~1M)
-      total across 80 layers = ~84M  (vs 5.4B for full affine)
-
-    The low-rank structure is equivalent to adding a rank-r update to
-    the identity map, which is sufficient to correct the geometric bias
-    introduced by applying final_norm at non-final layers.
-    """
     def __init__(self, d: int, r: int):
         super().__init__()
         self.U = nn.Parameter(torch.zeros(d, r))
@@ -259,14 +177,9 @@ class LowRankTranslator(nn.Module):
         UVTh = VTh @ self.U.T     # (..., d)
         return h + UVTh + self.b
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  Phase 1: Training
-# ─────────────────────────────────────────────────────────────────────────────
 def train_translators(args, model, tokenizer, final_norm, lm_head,
                       n_layers, d, device):
 
-    # ── Load training CSV ─────────────────────────────────────────────────────
     print(f"\nLoading training CSV: {args.train_csv}")
     rows = []
     with open(args.train_csv, newline="", encoding="utf-8") as f:
@@ -277,7 +190,6 @@ def train_translators(args, model, tokenizer, final_norm, lm_head,
     texts = [r["input_english"] for r in rows[:args.train_n]]
     print(f"  Using {len(texts)} training examples (English)")
 
-    # ── Collect hidden states via forward passes ──────────────────────────────
     # Model stays on GPU in 8-bit (frozen).
     # Hidden states are moved to CPU immediately to free GPU memory.
     print(f"\nCollecting hidden states ({len(texts)} forward passes) ...")
@@ -311,7 +223,6 @@ def train_translators(args, model, tokenizer, final_norm, lm_head,
                 last = hs[torch.arange(bs), seq_lens].float().cpu()
                 hs_by_layer[l].append(last)
 
-    # Concatenate
     final_logits_all = torch.cat(final_logits_list, dim=0)   # (N, vocab)
     final_probs_all  = F.softmax(final_logits_all, dim=-1)   # (N, vocab)
     for l in SAVE_LAYERS:
@@ -320,14 +231,10 @@ def train_translators(args, model, tokenizer, final_norm, lm_head,
     N_train = len(texts)
     print(f"  Hidden states collected. d={d}, N={N_train}")
 
-    # Keep final_norm + lm_head on their GPU — accelerate hooks mean .to("cpu")
-    # doesn't actually detach them and causes device-mismatch errors.
-    # Translators are small (~1M params each) so we train them on the same GPU.
     proj_device = lm_head.weight.device   # cuda:1
     print(f"  Training translators on {proj_device} (final_norm + lm_head stay there)")
 
-    # ── Train translators layer by layer ─────────────────────────────────────
-    # Skip l=0 (embeddings) and l=N_LAYERS (final layer — no correction needed)
+    #skip l=0 (embeddings) and l=N_LAYERS (final layer)
     layers_to_train = [l for l in PROBE_LAYERS if 0 < l < n_layers]
     print(f"\nTraining translators for layers: {layers_to_train}")
     print(f"  rank={args.rank},  epochs={args.epochs},  lr={args.lr}")
@@ -338,7 +245,6 @@ def train_translators(args, model, tokenizer, final_norm, lm_head,
             print(f"  [L{l:3d}] checkpoint found, skipping")
             continue
 
-        # Translator lives on proj_device (cuda:1) — same as final_norm + lm_head
         translator = LowRankTranslator(d, args.rank).to(proj_device)
         opt        = torch.optim.Adam(translator.parameters(), lr=args.lr)
 
@@ -384,23 +290,17 @@ def train_translators(args, model, tokenizer, final_norm, lm_head,
                 best_state = {k: v.cpu().clone()
                               for k, v in translator.state_dict().items()}
 
-        # Save best checkpoint (CPU tensors — device-agnostic)
         torch.save(best_state, ckpt)
         print(f"  [L{l:3d}] ✓ best_loss={best_loss:.5f}  → {ckpt}")
 
     print("\nTraining complete.")
 
 
-# ─────────────────────────────────────────────────────────────────────────────
-#  Phase 2: Evaluation
-# ─────────────────────────────────────────────────────────────────────────────
+#this is eval phase 
 def run_tuned_lens(texts, gt_letters, model, tokenizer,
                    final_norm, lm_head, translators, n_layers, device,
                    label=""):
-    # With device_map="auto" the model is sharded:
-    #   input_device  = cuda:0  (where the embedding layer lives)
-    #   proj_device   = cuda:1  (where final_norm + lm_head live)
-    # Inputs must go to cuda:0; projections stay on cuda:1 (= device arg).
+  
     input_device = torch.device("cuda:0")
 
     n = len(texts)
@@ -429,13 +329,11 @@ def run_tuned_lens(texts, gt_letters, model, tokenizer,
             hs   = out.hidden_states[layer_idx]             # on whichever GPU
             last = hs[torch.arange(bs), seq_lens_cpu].float()  # (bs, d)
 
-            # Apply translator on CPU to save GPU memory
             h_cpu = last.cpu()
             if layer_idx in translators:
                 with torch.no_grad():
                     h_cpu = translators[layer_idx](h_cpu)
 
-            # Project through final_norm → lm_head
             h_dev   = h_cpu.to(device)
             normed  = final_norm(h_dev.to(final_norm.weight.dtype))
             logits  = lm_head(normed).float().cpu()          # (bs, vocab)
@@ -458,7 +356,6 @@ def run_tuned_lens(texts, gt_letters, model, tokenizer,
 def eval_mode(args, model, tokenizer, final_norm, lm_head,
               n_layers, d, device):
 
-    # ── Load translators ──────────────────────────────────────────────────────
     translators = {}
     for l in PROBE_LAYERS:
         if l == 0 or l >= n_layers:
@@ -473,7 +370,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head,
         translators[l] = t
     print(f"Loaded {len(translators)} translators: {sorted(translators)}")
 
-    # ── Load eval CSV ─────────────────────────────────────────────────────────
     print(f"\nLoading eval CSV: {args.csv}")
     rows = []
     with open(args.csv, newline="", encoding="utf-8") as f:
@@ -492,7 +388,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head,
     print("  Quadrant counts:")
     for q in QUAD_ORDER: print(f"    {q}: {quad_counts[q]}")
 
-    # ── Forward passes ────────────────────────────────────────────────────────
     print(f"\nRunning tuned-lens — English ({N} questions) ...")
     en_ranks, en_probs = run_tuned_lens(
         en_texts, gt_letters, model, tokenizer,
@@ -503,7 +398,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head,
         ar_texts, gt_letters, model, tokenizer,
         final_norm, lm_head, translators, n_layers, device, label="AR")
 
-    # ── Save results ──────────────────────────────────────────────────────────
     out_npz = os.path.join(args.out_dir, "tuned_lens_results.npz")
     np.savez(out_npz,
              en_ranks=en_ranks, en_probs=en_probs,
@@ -511,7 +405,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head,
              quadrants=quadrants, layers=np.array(PROBE_LAYERS))
     print(f"\nSaved → {out_npz}")
 
-    # ── Console summary ───────────────────────────────────────────────────────
     print("\n── Mean P(correct) at each probe layer (tuned lens) ──")
     hdr = "  ".join([f"L{l:3d}" for l in PROBE_LAYERS])
     print(f"{'Quadrant / Lang':<25} {hdr}")
@@ -525,7 +418,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head,
             print(f"  {q[:15]:<15} {lname:<8} {vals}")
         print()
 
-    # ── Plot ──────────────────────────────────────────────────────────────────
     print("Generating figure ...")
     fig, axes = plt.subplots(1, 2, figsize=(17, 6), sharey=False)
 
@@ -596,10 +488,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head,
     plt.close()
     print("\nDone.")
 
-
-# ─────────────────────────────────────────────────────────────────────────────
-#  Entry point
-# ─────────────────────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     model, tokenizer, final_norm, lm_head, n_layers, d = \
         load_model_and_tokenizer(args.model_path)
