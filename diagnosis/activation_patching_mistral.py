@@ -1,24 +1,5 @@
 """
-activation_patching_mistral.py
--------------------------------
-Causal activation patching for Mistral-Small-3.2-24B on MedAraBench.
-Updated from activation_patching.py: AutoTokenizer + apply_chat_template,
-AutoModelForCausalLM, E/F tokens included, output to activation_patching_mistral_out.
-
-Logic:
-  Phase 1 — English forward pass, cache last-token hidden state per probe layer.
-  Phase 2 — Arabic baseline (no patching).
-  Phase 3 — For each patch config, inject cached English hidden states into
-             the Arabic forward pass at specified layers via forward hooks,
-             then measure P(correct letter) at model output.
-
-Probe window from tuned lens: commitment emerges at L34–L40.
-
-Usage:
-  python activation_patching_mistral.py \\
-      --csv        mistral_sampled_quadrants.csv \\
-      --model_path /scratch/ca2627/huggingface/models--mistralai--Mistral-Small-3.2-24B-Instruct-2506/snapshots/<hash> \\
-      --out_dir    ./activation_patching_mistral_out
+Causal activation patching for Mistral-Small-3.2-24B on MedAraBench
 """
 
 import os, csv, re, argparse
@@ -36,9 +17,6 @@ parser.add_argument("--max_len",    type=int, default=512)
 args = parser.parse_args()
 os.makedirs(args.out_dir, exist_ok=True)
 
-# Probe layers — hidden_states[L] = output of transformer layer L-1
-# Hook registered on transformer_layers[L-1]
-# Mistral has 40 layers — probe every ~4-8 layers for full coverage
 PROBE_LAYERS = [4, 8, 12, 16, 20, 24, 28, 32, 34, 36, 38, 40]
 
 PATCH_CONFIGS = {
@@ -58,7 +36,6 @@ PATCH_CONFIGS = {
     "patch_L34_40": [34, 36, 38, 40],
 }
 
-# Confirmed Mistral Tekken tokenizer — sequential A-F
 ANSWER_TOKEN_IDS = {
     "A": 1065, "B": 1066, "C": 1067,
     "D": 1068, "E": 1069, "F": 1070,
@@ -79,7 +56,6 @@ def extract_letter(val):
     m = re.search(r'\b([A-F])\b', s)
     return m.group(1) if m else ""
 
-# ── Load CSV — keep only access_gap ───────────────────────────────────────────
 print(f"Loading {args.csv}...")
 rows = []
 with open(args.csv, newline="", encoding="utf-8") as f:
@@ -93,7 +69,6 @@ gt_letters = [extract_letter(r["ground_truth"]) for r in ag_rows]
 N = len(ag_rows)
 print(f"  Total rows: {len(rows)} | access_gap: {N}")
 
-# ── Load model ────────────────────────────────────────────────────────────────
 print("\nLoading Mistral-Small-3.2-24B...")
 from transformers import AutoTokenizer, Mistral3ForConditionalGeneration
 
@@ -111,7 +86,6 @@ model = Mistral3ForConditionalGeneration.from_pretrained(
 model.eval()
 print(f"  Model type: {type(model).__name__}")
 
-# Flexible layer accessor — handles both flat and multimodal-wrapper structures
 def get_transformer_layers(model):
     candidates = [
         ("model.model.language_model.model.layers", lambda m: m.model.language_model.model.layers),
@@ -142,7 +116,6 @@ for letter, tid in ANSWER_TOKEN_IDS.items():
     status = "✓" if decoded.upper() == letter else f"[WARN] decodes as {repr(decoded)}"
     print(f"    {letter} → {tid}  {status}")
 
-# ── Tokenise helper ───────────────────────────────────────────────────────────
 def tokenize_batch(texts):
     all_ids = []
     for t in texts:
@@ -150,8 +123,6 @@ def tokenize_batch(texts):
             {"role": "system", "content": SYSTEM_PROMPT},
             {"role": "user",   "content": t},
         ]
-        # tokenize=False → string, then tokenizer() call (not .encode) so
-        # special tokens are preserved correctly for mistral_common backend
         chat_str = tokenizer.apply_chat_template(
             messages, tokenize=False, add_generation_prompt=True)
         encoded = tokenizer(chat_str)
@@ -171,7 +142,6 @@ def tokenize_batch(texts):
     seq_lens = torch.full((bs,), max_l - 1, dtype=torch.long)
     return input_ids, attn_mask, seq_lens
 
-# ── P(correct) from output logits ────────────────────────────────────────────
 def correct_probs(logits, seq_lens, gt_batch):
     """logits: (bs, seq, vocab)"""
     bs = logits.shape[0]
@@ -182,7 +152,6 @@ def correct_probs(logits, seq_lens, gt_batch):
         result[j] = probs_all[j, seq_lens[j], ANSWER_TOKEN_IDS[gt]].item()
     return result
 
-# ── Phase 1: English forward pass — cache hidden states ──────────────────────
 print(f"\nPhase 1: English forward pass — caching layers {PROBE_LAYERS} ...")
 en_hs        = {L: [] for L in PROBE_LAYERS}
 en_base_prob = []
@@ -212,7 +181,6 @@ for L in PROBE_LAYERS:
 en_base_prob = np.array(en_base_prob)
 print(f"  English baseline mean P(correct): {en_base_prob.mean():.3f}")
 
-# ── Phase 2: Arabic baseline ──────────────────────────────────────────────────
 print(f"\nPhase 2: Arabic baseline (no patching) ...")
 ar_base_prob = []
 
@@ -234,7 +202,6 @@ for i in range(0, N, args.batch_size):
 ar_base_prob = np.array(ar_base_prob)
 print(f"  Arabic baseline mean P(correct): {ar_base_prob.mean():.3f}")
 
-# ── Phase 3: Patching ─────────────────────────────────────────────────────────
 patch_results = {}
 
 for config_name, patch_layers in PATCH_CONFIGS.items():
@@ -281,7 +248,6 @@ for config_name, patch_layers in PATCH_CONFIGS.items():
     patch_results[config_name] = np.array(config_probs)
     print(f"  Mean P(correct): {patch_results[config_name].mean():.3f}")
 
-# ── Save ──────────────────────────────────────────────────────────────────────
 out_npz = os.path.join(args.out_dir, "patching_results.npz")
 save_dict = dict(en_base_prob=en_base_prob, ar_base_prob=ar_base_prob,
                  gt_letters=np.array(gt_letters))
@@ -289,7 +255,6 @@ save_dict.update(patch_results)
 np.savez(out_npz, **save_dict)
 print(f"\nSaved → {out_npz}")
 
-# ── Summary ───────────────────────────────────────────────────────────────────
 ar_mean = ar_base_prob.mean()
 en_mean = en_base_prob.mean()
 gap     = en_mean - ar_mean
@@ -305,7 +270,6 @@ for c in PATCH_CONFIGS:
     print(f"  {c:<22} {m:>10.3f}  {recovery(m):>9.1f}%")
 print(f"  {'en_base':<22} {en_mean:>10.3f}  {'(100%)':>10}")
 
-# ── Figure: Bar chart ─────────────────────────────────────────────────────────
 all_configs = ["ar_base"] + list(PATCH_CONFIGS.keys()) + ["en_base"]
 all_means   = [ar_base_prob.mean()] + [patch_results[c].mean() for c in PATCH_CONFIGS] + [en_base_prob.mean()]
 all_sems    = [ar_base_prob.std() / np.sqrt(N)] + [patch_results[c].std() / np.sqrt(N) for c in PATCH_CONFIGS] + [en_base_prob.std() / np.sqrt(N)]
