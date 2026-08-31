@@ -1,41 +1,8 @@
 """
-plot_mech_motivation_panel.py
------------------------------
-Three-panel mechanistic motivation figure — Mistral-Small-3.2-24B only.
-No panel titles; the figure caption identifies each sub-panel.
-
-  (a) Tuned Lens   : Mean P(correct answer) by quadrant × language
-  (b) Activation Patching : Single-layer recovery % (English → Arabic)
-  (c) KL Divergence Profile : Cross-lingual D_KL per layer (logit lens)
-
-Usage
------
-  python plot_mech_motivation_panel.py \\
-      --tl_npz    path/to/tuned_lens_results.npz \\
-      --patch_npz path/to/patching_results.npz \\
-      --kl_json   path/to/kl_profile.json \\
-      --out_dir   ./mech_motivation_panel
-
-Expected input formats
-----------------------
-tuned_lens_results.npz  (output of tuned_lens_mistral.py --mode eval):
-  en_probs  (N, P) float  — P(correct token) at each probe layer, English
-  ar_probs  (N, P) float  — P(correct token) at each probe layer, Arabic
-  quadrants (N,)   str    — both_correct | access_gap | arabic_only | both_wrong
-  layers    (P,)   int    — actual transformer layer index for each probe point
-
-patching_results.npz  (output of activation_patching_mistral.py):
-  en_base_prob  (N,) float
-  ar_base_prob  (N,) float
-  patch_L{k}    (N,) float  — one key per single-layer patch config
-
-kl_profile.json  (output of probe_kl_profile.py):
-  kl_profile  list[float]  — one KL value per layer (L1..L40, 1-indexed)
-  window.tau  float        — threshold = μ + σ
-  window.mu   float        — baseline mean KL
-  window.std  float        — baseline std KL
-  window.L_kl int          — divergence onset layer (1-indexed)
-  window.L_patch int       — causal boundary layer  (1-indexed)
+Three-panel mechanistic motivation figure for Mistral-Small-3.2-24B only: 
+(a) Tuned Lens   : Mean P(correct answer) by quadrant × language
+(b) Activation Patching : Single-layer recovery % (English → Arabic)
+(c) KL Divergence Profile : Cross-lingual D_KL per layer (logit lens)
 """
 
 import os
@@ -47,7 +14,6 @@ import matplotlib.pyplot as plt
 import matplotlib.lines as mlines
 import matplotlib.patches as mpatches
 
-# ── CLI ────────────────────────────────────────────────────────────────────────
 parser = argparse.ArgumentParser()
 parser.add_argument("--tl_npz",    required=True,
                     help="tuned_lens_results.npz from tuned_lens_mistral.py")
@@ -66,11 +32,6 @@ os.makedirs(args.out_dir, exist_ok=True)
 L_PATCH = args.L_patch
 L_KL    = args.L_kl
 
-# ── Style ──────────────────────────────────────────────────────────────────────
-# Sized for a full-width figure in a two-column NLP paper.
-# At ~7" wide, individual panels render at ~2.1" — font sizes below are
-# calibrated so text remains legible when the figure is scaled to text width.
-
 FS_AXIS  = 10      # axis label
 FS_TICK  = 9      # tick label
 FS_LEG   = 10      # legend
@@ -79,7 +40,6 @@ LW       = 1.5    # primary line width
 LW_REF   = 1.1    # reference / threshold lines
 MS       = 3.5    # marker size
 
-# Quadrant palette — consistent with existing tuned-lens and patching figures
 QUAD_ORDER  = ["both_correct", "access_gap", "arabic_only", "both_wrong"]
 QUAD_COLORS = {
     "both_correct": "#2A9D8F",   # teal
@@ -103,16 +63,12 @@ LP_COLOR    = "#2E7D32"   # green   — L_patch vertical
 LK_COLOR    = "#D4831A"   # orange  — L_kl vertical
 WIN_COLOR   = "#FBE9D0"   # pale orange — LoRA window fill
 
-
-# ══════════════════════════════════════════════════════════════════════════════
-# Panel A — Tuned Lens
-# ══════════════════════════════════════════════════════════════════════════════
 def draw_tuned_lens(ax, npz_path):
     d         = np.load(npz_path, allow_pickle=True)
-    en_probs  = d["en_probs"]               # (N, P)
-    ar_probs  = d["ar_probs"]               # (N, P)
-    quadrants = d["quadrants"].astype(str)  # (N,)
-    layers    = d["layers"]                 # (P,)  actual layer indices
+    en_probs  = d["en_probs"]               
+    ar_probs  = d["ar_probs"]               
+    quadrants = d["quadrants"].astype(str)  
+    layers    = d["layers"]                 
 
     for q in QUAD_ORDER:
         mask = quadrants == q
@@ -133,7 +89,6 @@ def draw_tuned_lens(ax, npz_path):
         ax.fill_between(layers, av - ae, av + ae,
                         color=c, alpha=0.07, zorder=2)
 
-    # Boundary markers
     ax.axvline(L_PATCH, color=LP_COLOR, lw=LW_REF, ls=":", zorder=5)
     ax.axvline(L_KL,    color=LK_COLOR, lw=LW_REF, ls=":", zorder=5)
 
@@ -160,10 +115,6 @@ def draw_tuned_lens(ax, npz_path):
     ]
     return quad_h + style_h
 
-
-# ══════════════════════════════════════════════════════════════════════════════
-# Panel B — Activation Patching
-# ══════════════════════════════════════════════════════════════════════════════
 def draw_patching(ax, npz_path):
     d       = np.load(npz_path, allow_pickle=True)
     en_base = d["en_base_prob"]   # (N,)
@@ -180,7 +131,6 @@ def draw_patching(ax, npz_path):
     def sem_rec(arr):
         return 100.0 * arr.std() / (np.sqrt(N) * gap) if gap > 0 else 0.0
 
-    # Extract single-layer patches: keys matching "patch_L{integer}" exactly
     single = []
     for k in d.files:
         m = re.match(r"^patch_L(\d+)$", k)
@@ -218,7 +168,6 @@ def draw_patching(ax, npz_path):
             arrowprops=dict(arrowstyle="->", color=PATCH_LINE, lw=0.8),
         )
 
-    # L_patch label just right of the vertical line
     ax.text(L_PATCH + 0.7, Y_MAX - 6,
             f"$L_{{\\mathrm{{patch}}}}\\!=\\!{L_PATCH}$",
             fontsize=FS_ANNOT, color=LP_COLOR, va="top")
@@ -243,15 +192,10 @@ def draw_patching(ax, npz_path):
                       label="Arabic baseline (0%)"),
     ]
 
-
-# ══════════════════════════════════════════════════════════════════════════════
-# Panel C — KL Divergence Profile
-# ══════════════════════════════════════════════════════════════════════════════
 def draw_kl_profile(ax, json_path):
     with open(json_path) as f:
         data = json.load(f)
 
-    # probe_kl_profile.py stores layers as L1..L40 (1-indexed)
     kl_mean = np.array(data["kl_profile"], dtype=np.float64)
     layers  = np.arange(1, len(kl_mean) + 1)
     kl_se   = np.zeros_like(kl_mean)   # per-example SE not saved by probe_kl_profile.py
@@ -259,9 +203,7 @@ def draw_kl_profile(ax, json_path):
     w   = data["window"]
     tau = float(w["tau"])
 
-    # LoRA window shading (L_patch → L_kl)
     ax.axvspan(L_PATCH, L_KL, color=WIN_COLOR, alpha=0.85, zorder=0)
-
     ax.plot(layers, kl_mean, color=KL_COLOR, lw=LW, zorder=3,
             label="KL divergence")
     ax.fill_between(layers, kl_mean - kl_se, kl_mean + kl_se,
@@ -274,7 +216,6 @@ def draw_kl_profile(ax, json_path):
     ax.axvline(L_KL,    color=LK_COLOR, lw=LW_REF, ls=":", zorder=5,
                label=f"$L_{{\\mathrm{{KL}}}}={L_KL}$ (divergence onset)")
 
-    # LoRA window legend handle (patch only — no duplicate text)
     win_handle = mpatches.Patch(facecolor=WIN_COLOR, edgecolor="none",
                                 label=f"LoRA window $L_{{{L_PATCH}}}$–$L_{{{L_KL}}}$")
 
@@ -291,10 +232,6 @@ def draw_kl_profile(ax, json_path):
     kl_handles, _ = ax.get_legend_handles_labels()
     return [win_handle] + kl_handles
 
-
-# ══════════════════════════════════════════════════════════════════════════════
-# Assemble & save
-# ══════════════════════════════════════════════════════════════════════════════
 fig, axes = plt.subplots(
     1, 3,
     figsize=(12.0, 3.8),
@@ -313,7 +250,6 @@ for ax, lbl in zip(axes, ["(a)", "(b)", "(c)"]):
             fontsize=7, fontweight="normal",
             va="bottom", ha="left")
 
-# Single shared legend spanning the full figure width — no panel-level overlap
 fig.legend(
     handles=h_tl + h_patch + h_kl,
     loc="lower center",
