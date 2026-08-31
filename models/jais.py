@@ -8,33 +8,12 @@ from transformers import AutoTokenizer, AutoModelForCausalLM
 HF_CACHE = "/scratch/ca2627/huggingface"
 os.environ["HF_HOME"] = HF_CACHE
 
-# Keep your debugging defaults consistent across handlers
 os.environ.setdefault("CUDA_LAUNCH_BLOCKING", "1")
 os.environ.setdefault("TORCH_USE_CUDA_DSA", "1")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 
 class Jais2ChatMCQHandler:
-    """
-    Unified handler for inceptionai/Jais-2-8B-Chat supporting:
-      - MCQ                (task_type="mcq")           -> returns 'A'..'F' or None
-      - Answer generation  (task_type="answer_generation") -> returns str (one line) or ""
-
-    Contract (matches your eval harness):
-      - __init__(model_name, cache_dir, offline)
-      - prompt(sample: dict, instruction: str, max_tokens: int, task_type: str) -> str|None
-      - prompt_batch(samples: List[dict], instruction: str, max_tokens: int, task_type: str)
-
-    Notes:
-      - Prefers tokenizer.apply_chat_template(..., add_generation_prompt=True)
-      - Drops token_type_ids (as per Jais model card example)
-      - Works with options opa/opb/opc/opd/(ope/opf optional) for MCQ
-      - For answer_generation, options are intentionally NOT included in the prompt
-    """
-
-    # Back-compat alias: old code that imported Jais2ChatMCQHandler still works
-    # (see alias defined at bottom of file)
-
     def __init__(
         self,
         model_name: str = "inceptionai/Jais-2-8B-Chat",
@@ -82,7 +61,6 @@ class Jais2ChatMCQHandler:
             use_fast=use_fast,
         )
 
-        # Ensure pad token exists
         if self.tokenizer.pad_token_id is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
@@ -109,9 +87,6 @@ class Jais2ChatMCQHandler:
             reserv = torch.cuda.memory_reserved(i) / 1024**3
             print(f"  GPU {i} after load: {alloc:.2f}GB allocated, {reserv:.2f}GB reserved")
 
-    # -----------------------------
-    # Prompt text builders
-    # -----------------------------
     @staticmethod
     def _build_mcq_text(sample: dict) -> str:
         """Build an MCQ block with stem + lettered options."""
@@ -149,9 +124,6 @@ class Jais2ChatMCQHandler:
             return ""
         return q  # IMPORTANT: no options
 
-    # -----------------------------
-    # System prompts
-    # -----------------------------
     @staticmethod
     def _mcq_system_text(instruction: str) -> str:
         instruction = (instruction or "").strip()
@@ -175,19 +147,15 @@ class Jais2ChatMCQHandler:
         return base
 
     def _plain_prompt(self, system_prompt: str, user_text: str, suffix: str = "Answer:") -> str:
-        # Fallback for tokenizers without chat_template
         return (
             f"{system_prompt}\n\n"
             f"QUESTION:\n{user_text}\n\n"
             f"{suffix}"
         )
 
-    # -----------------------------
-    # Core generation helper
-    # -----------------------------
     def _generate(self, system_prompt: str, user_text: str, max_tokens: int,
                   plain_suffix: str = "Answer:") -> str:
-        """Shared generation path for MCQ and answer-generation. Returns decoded text."""
+        """Shared generation path for MCQ and answer-generation, returns decoded text"""
         torch.cuda.empty_cache()
 
         if self.has_chat_template:
@@ -210,13 +178,11 @@ class Jais2ChatMCQHandler:
                 add_special_tokens=True,
             )
 
-        # Model card example removes token_type_ids
         if isinstance(inputs, dict) and "token_type_ids" in inputs:
             inputs.pop("token_type_ids", None)
         elif hasattr(inputs, "pop") and "token_type_ids" in getattr(inputs, "keys", lambda: [])():
             inputs.pop("token_type_ids", None)
 
-        # Move tensors to model device
         inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
         input_len = inputs["input_ids"].shape[-1]
 
@@ -232,9 +198,6 @@ class Jais2ChatMCQHandler:
         gen_ids = generation[0][input_len:]
         return self.tokenizer.decode(gen_ids, skip_special_tokens=True).strip()
 
-    # -----------------------------
-    # Main API for eval harness
-    # -----------------------------
     def prompt(
         self,
         sample: dict,
@@ -242,15 +205,8 @@ class Jais2ChatMCQHandler:
         max_tokens: int = 12,
         task_type: str = "mcq",
     ):
-        """
-        Unified interface:
-          - task_type="mcq": returns 'A'..'F' or None        (max_tokens default 12 is fine)
-          - task_type="answer_generation": returns str (one line) or ""
-                                           (bump max_tokens, e.g. 128)
-        """
         task_type = (task_type or "mcq").strip().lower()
 
-        # ---------- MCQ ----------
         if task_type == "mcq":
             user_text = self._build_mcq_text(sample)
             if not user_text:
@@ -278,17 +234,12 @@ class Jais2ChatMCQHandler:
             print(f"[Jais2Chat] MCQ raw generated: {repr(raw_text)}")
             upper = raw_text.upper()
 
-            # Prefer strict format: ANSWER: X
             m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
             if m:
                 return m.group(1)
-
-            # Common Arabic equivalent sometimes shows up
             m = re.search(r"(?:الإجابة|الاجابة)\s*[:=]\s*([A-F])", raw_text)
             if m:
                 return m.group(1).upper()
-
-            # Fallback: first standalone A-F
             m = re.search(r"\b([A-F])\b", upper)
             if m:
                 return m.group(1)
@@ -296,7 +247,6 @@ class Jais2ChatMCQHandler:
             print("[Jais2Chat] Could not extract a clean letter.")
             return None
 
-        # ---------- Answer generation ----------
         if task_type == "answer_generation":
             user_text = self._build_ansgen_text(sample)
             if not user_text:
@@ -321,10 +271,7 @@ class Jais2ChatMCQHandler:
             if not raw_text:
                 return ""
 
-            # Strip an optional "Answer:" prefix the model sometimes emits
             cleaned = re.sub(r"^\s*(?:answer|الإجابة|الاجابة)\s*[:=]\s*", "", raw_text, flags=re.IGNORECASE)
-
-            # keep only ONE line
             one_line = cleaned.split("\n")[0].strip()
             print(f"[Jais2Chat] Answer-gen raw (one line): {repr(one_line[:200])}")
             return one_line
