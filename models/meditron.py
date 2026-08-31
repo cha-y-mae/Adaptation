@@ -10,11 +10,6 @@ os.environ.setdefault("TORCH_USE_CUDA_DSA", "1")
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 class Meditron3MCqHandler:
-    """
-    MCQ-only handler for OpenMeditron/Meditron3-70B.
-    Keeps your evaluation setting comparable, but avoids assuming chat/instruct behavior.
-    """
-
     def __init__(
         self,
         model_name: str = "OpenMeditron/Meditron3-70B",
@@ -52,7 +47,6 @@ class Meditron3MCqHandler:
             use_fast=True,  # if this errors, set False
         )
 
-        # Ensure pad token exists
         if self.tokenizer.pad_token_id is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
@@ -96,8 +90,6 @@ class Meditron3MCqHandler:
         return stem + "\n\n" + "\n".join(lines)
 
     def _build_plain_prompt(self, instruction: str, user_text: str) -> str:
-        # Mimic system/user without relying on chat templates.
-        # The "Answer:" anchor is important for base (non-instruct) models.
         instruction = (instruction or "").strip()
         return (
             "You are a medical assistant. Answer the multiple-choice question.\n"
@@ -137,7 +129,6 @@ class Meditron3MCqHandler:
                     add_special_tokens=True,
                 )
 
-            # Move tensors to the model's primary device (works with device_map="auto" in practice)
             inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
             input_len = inputs["input_ids"].shape[-1]
 
@@ -163,12 +154,9 @@ class Meditron3MCqHandler:
         print(f"[Meditron3-70B] MCQ raw generated: {repr(raw_text)}")
         upper = raw_text.upper()
 
-        # Prefer strict format: ANSWER: X
         m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
         if m:
             return m.group(1)
-
-        # Fallback: first standalone A-F
         m = re.search(r"\b([A-F])\b", upper)
         if m:
             return m.group(1)
