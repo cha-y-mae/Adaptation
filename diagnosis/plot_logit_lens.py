@@ -1,8 +1,5 @@
 """
 plot_logit_lens.py  —  regenerate logit lens figure from saved .npz
-Usage:
-  python plot_logit_lens.py --npz ./logit_lens_llama_out/logit_lens_results.npz \
-                            --out ./logit_lens_llama_out
 """
 import argparse, os
 import numpy as np
