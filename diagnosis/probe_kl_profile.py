@@ -1,41 +1,5 @@
 """
-probe_kl_profile.py
---------------------
-Diagnostic: per-layer cross-lingual KL divergence profile on the BASE model
-(no LoRA, no training).
-
-For each transformer layer ℓ = 0..L-1, computes:
-    KL(ℓ) = mean over D_calib of  KL( p^En_ℓ ∥ p^Ar_ℓ )
-
-where p^·_ℓ = softmax( W_U · RMSNorm(h_ℓ) ) is the logit-lens projection
-of the final-token hidden state at layer ℓ.
-
-Outputs
--------
-  <output_dir>/kl_profile.json   — per-layer KL values + derived thresholds
-  <output_dir>/kl_profile.png    — publication-quality plot
-
-Derived quantities (saved in JSON and printed):
-  tau         — threshold = mean(KL) + 1·std(KL)
-  L_kl        — first layer where KL(ℓ) > tau  (divergence onset)
-  L_patch     — provided via --l_patch (from activation patching, default 24)
-  lora_window — [L_kl, L_patch]
-  kl_probe    — L_patch (causal boundary, recommended probe layer)
-
-Usage (single GPU — no torchrun needed):
-    python probe_kl_profile.py \\
-        --data_file  datasets/train/splits/val_task1_translated.json \\
-        --output_dir outputs/kl_profile \\
-        --n_examples 300 \\
-        --l_patch    24
-
-    # Larger calibration set for publication:
-    python probe_kl_profile.py \\
-        --data_file  datasets/train/splits/val_task1_translated.json \\
-        --output_dir outputs/kl_profile \\
-        --n_examples 400 \\
-        --l_patch    24 \\
-        --model_name mistralai/Mistral-Small-3.2-24B-Instruct-2506
+per-layer cross-lingual KL divergence profile on the base model Mistral
 """
 
 import os
@@ -61,11 +25,6 @@ HF_CACHE = "/scratch/ca2627/huggingface"
 os.environ.setdefault("HF_HOME", HF_CACHE)
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
-
-# ---------------------------------------------------------------------------
-# Tokenizer helpers (reused from train_lora_align.py)
-# ---------------------------------------------------------------------------
-
 def load_tokenizer(model_name: str) -> MistralTokenizer:
     if os.path.isdir(model_name):
         return MistralTokenizer.from_file(os.path.join(model_name, "tekken.json"))
@@ -85,18 +44,10 @@ def tokenize_plain(tok: MistralTokenizer, text: str, max_len: int = 512) -> List
     ids = raw.encode(text.strip(), bos=True, eos=False)
     return ids[:max_len]
 
-
-# ---------------------------------------------------------------------------
-# Logit-lens helper (same logic as train_lora_align.py but for bare model)
-# ---------------------------------------------------------------------------
-
 def get_norm_and_lmhead(model):
     """Resolve (RMSNorm, lm_head) from the raw (non-PEFT) model."""
     base = model
 
-    # Mistral3ForConditionalGeneration:
-    #   base.model (Mistral3Model) → .language_model (MistralModel) → .norm
-    #   base.lm_head
     if (hasattr(base, "model") and hasattr(base.model, "language_model")
             and hasattr(base.model.language_model, "norm") and hasattr(base, "lm_head")):
         return base.model.language_model.norm, base.lm_head
@@ -123,16 +74,7 @@ def get_norm_and_lmhead(model):
     _tree(base)
     raise AttributeError("Cannot locate norm/lm_head.")
 
-
-# ---------------------------------------------------------------------------
-# Data loading
-# ---------------------------------------------------------------------------
-
 def load_pairs(data_file: str, n_examples: int, seed: int = 42) -> List[dict]:
-    """
-    Load up to n_examples parallel (full_text_ar, full_text_en) pairs.
-    Skips rows missing either field.
-    """
     with open(data_file, "r", encoding="utf-8") as f:
         rows = json.load(f)
 
@@ -151,11 +93,6 @@ def load_pairs(data_file: str, n_examples: int, seed: int = 42) -> List[dict]:
     print(f"[Data] Using {len(selected)} examples (seed={seed})")
     return selected
 
-
-# ---------------------------------------------------------------------------
-# Core: per-layer KL profile
-# ---------------------------------------------------------------------------
-
 @torch.no_grad()
 def compute_kl_profile(
     model,
@@ -167,12 +104,6 @@ def compute_kl_profile(
     max_len: int = 512,
     dtype=torch.bfloat16,
 ) -> np.ndarray:
-    """
-    Returns kl_profile: np.ndarray of shape (n_layers,)
-    kl_profile[ℓ] = mean KL( p^En_ℓ ∥ p^Ar_ℓ ) over all pairs.
-
-    Uses final-token hidden state at each layer, projected via logit lens.
-    """
     model.eval()
 
     n_pairs = len(pairs)
@@ -205,7 +136,7 @@ def compute_kl_profile(
             n_layers = len(ar_hidden) - 1   # = 40 for Mistral-Small-24B
             kl_accum = np.zeros(n_layers, dtype=np.float64)
 
-        # final token position
+        #the final token positions
         ar_pos = ar_tensor.shape[1] - 1
         en_pos = en_tensor.shape[1] - 1
 
@@ -231,24 +162,11 @@ def compute_kl_profile(
     kl_profile = kl_accum / n_pairs
     return kl_profile
 
-
-# ---------------------------------------------------------------------------
-# Threshold + window derivation
-# ---------------------------------------------------------------------------
-
 def derive_window(kl_profile: np.ndarray, l_patch: int) -> dict:
-    """
-    From the KL profile, derive:
-      tau       = mean + 1·std
-      L_kl      = first layer (1-indexed) where KL > tau
-      lora_window = [L_kl, l_patch]
-      kl_probe  = l_patch  (causal boundary)
-    """
     mu  = float(np.mean(kl_profile))
     std = float(np.std(kl_profile))
     tau = mu + std
 
-    # Layers are 1-indexed (L1..L40); kl_profile[0] = L1
     L_kl = None
     for i, kl in enumerate(kl_profile):
         if kl > tau:
@@ -269,11 +187,6 @@ def derive_window(kl_profile: np.ndarray, l_patch: int) -> dict:
         "kl_probe":    l_patch,
     }
 
-
-# ---------------------------------------------------------------------------
-# Plot
-# ---------------------------------------------------------------------------
-
 def make_plot(kl_profile: np.ndarray, window: dict, output_path: str):
     n = len(kl_profile)
     layers = np.arange(1, n + 1)   # L1..L40
@@ -282,11 +195,10 @@ def make_plot(kl_profile: np.ndarray, window: dict, output_path: str):
 
     ax.plot(layers, kl_profile, color="#2c7bb6", linewidth=1.8, label="KL divergence")
 
-    # threshold line
+    #threshold line
     ax.axhline(window["tau"], color="#d7191c", linestyle="--", linewidth=1.2,
                label=f"τ = μ + σ = {window['tau']:.3f}")
 
-    # L_kl marker
     L_kl   = window["L_kl"]
     L_patch = window["L_patch"]
 
@@ -295,7 +207,6 @@ def make_plot(kl_profile: np.ndarray, window: dict, output_path: str):
     ax.axvline(L_patch, color="#1a9641", linestyle=":", linewidth=1.5,
                label=f"L_patch = L{L_patch}  (causal boundary)")
 
-    # shaded LoRA window
     ax.axvspan(L_kl, L_patch, alpha=0.12, color="#fdae61",
                label=f"LoRA window L{L_kl}–L{L_patch}")
 
@@ -315,11 +226,6 @@ def make_plot(kl_profile: np.ndarray, window: dict, output_path: str):
     plt.savefig(output_path, dpi=150, bbox_inches="tight")
     plt.close()
     print(f"[Plot] Saved → {output_path}")
-
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
 
 def main():
     parser = argparse.ArgumentParser(
@@ -342,20 +248,16 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
     random.seed(args.seed)
 
-    # ── Device ──────────────────────────────────────────────────────────────
     device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
     print(f"[Device] Using {device}")
 
-    # ── Tokenizer ────────────────────────────────────────────────────────────
     print("[INFO] Loading tokenizer...")
     tokenizer = load_tokenizer(args.model_name)
 
-    # ── Data ─────────────────────────────────────────────────────────────────
     pairs = load_pairs(args.data_file, args.n_examples, args.seed)
     if not pairs:
         raise ValueError("No valid parallel pairs found. Check full_text_ar / full_text_en fields.")
 
-    # ── Model ────────────────────────────────────────────────────────────────
     print("[INFO] Loading model (base, no LoRA)...")
     model = Mistral3ForConditionalGeneration.from_pretrained(
         args.model_name,
@@ -368,7 +270,6 @@ def main():
     norm, lm_head = get_norm_and_lmhead(model)
     print(f"[INFO] Model loaded. Profiling {len(pairs)} examples across all layers...")
 
-    # ── KL profile ───────────────────────────────────────────────────────────
     kl_profile = compute_kl_profile(
         model=model,
         norm=norm,
@@ -385,7 +286,6 @@ def main():
         bar = "█" * int(kl * 20)
         print(f"  L{i+1:>2}  {kl:.4f}  {bar}")
 
-    # ── Derive window ────────────────────────────────────────────────────────
     window = derive_window(kl_profile, args.l_patch)
     print(f"\n[Window] τ = {window['tau']:.4f}  (μ={window['mu']:.4f}, σ={window['std']:.4f})")
     print(f"[Window] L_kl    = L{window['L_kl']}  (first layer exceeding τ)")
@@ -393,7 +293,6 @@ def main():
     print(f"[Window] → LoRA window : L{window['lora_window'][0]}–L{window['lora_window'][1]}")
     print(f"[Window] → KL probe    : L{window['kl_probe']}")
 
-    # ── Save JSON ─────────────────────────────────────────────────────────────
     result = {
         "model":      args.model_name,
         "n_examples": len(pairs),
@@ -406,7 +305,6 @@ def main():
         json.dump(result, f, indent=2)
     print(f"[Saved] {json_path}")
 
-    # ── Plot ──────────────────────────────────────────────────────────────────
     plot_path = os.path.join(args.output_dir, "kl_profile.png")
     make_plot(kl_profile, window, plot_path)
 
