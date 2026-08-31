@@ -4,7 +4,6 @@ import re
 import time
 from typing import Optional, Dict, Any
 
-
 def extract_letter_from_text_en(text: str) -> Optional[str]:
     if not text:
         return None
