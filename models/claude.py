@@ -1,35 +1,20 @@
-# models/claude_opus45_mcq.py
 import os
 import re
 from typing import Optional, Dict, Any
-
 import anthropic
 
-
 def extract_letter_from_text(text: str) -> Optional[str]:
-    """Extract a single option letter A-F from model output."""
     if not text:
         return None
     s = str(text).strip().upper()
-
-    # Prefer strict format first
     m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", s)
     if m:
         return m.group(1)
-
-    # Fallback: any standalone A-F
     m = re.search(r"\b([A-F])\b", s) or re.search(r"\b([A-F])(?=[\.\)\]:;\s]|$)", s)
     return m.group(1) if m else None
 
 
 class ClaudeOpus45MCQHandler:
-    """
-    Handler for Claude Opus 4.5 aligned with the eval setup:
-      - task_type="mcq"                  -> returns 'A'..'F' or None
-      - task_type="answer_generation"    -> returns generated text (one line) or ""
-      - task_type="dialogue_completion"  -> returns the missing final doctor turn
-                                            (one line, "ANSWER:" stripped) or ""
-    """
     def __init__(
         self,
         api_key: Optional[str] = None,
@@ -41,9 +26,7 @@ class ClaudeOpus45MCQHandler:
         api_key = api_key or os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
             raise ValueError("ANTHROPIC_API_KEY is missing (export ANTHROPIC_API_KEY=...).")
-
         chosen_model = model or model_name or "claude-opus-4-5-20250901"
-
         try:
             if max_retries is not None:
                 self.client = anthropic.Anthropic(api_key=api_key, max_retries=int(max_retries))
@@ -56,13 +39,6 @@ class ClaudeOpus45MCQHandler:
 
     @staticmethod
     def _build_mcq_text(sample: Dict[str, Any]) -> str:
-        """
-        Build the question+options block from your JSON sample.
-        Expected:
-          sample["question"]
-          sample["opa"], sample["opb"], sample["opc"], sample["opd"]
-          optional: sample["ope"], sample["opf"]
-        """
         stem = (sample.get("question") or "").strip()
         if not stem:
             return ""
@@ -97,11 +73,6 @@ class ClaudeOpus45MCQHandler:
 
     @staticmethod
     def _build_dialogue_text(sample: Dict[str, Any]) -> str:
-        """
-        Task 3 input: the doctor-patient dialogue with the final doctor turn
-        already removed. Reads from PascalCase 'Dialogue' (the Task-3 dataset
-        schema) with snake_case fallbacks.
-        """
         for key in ("Dialogue", "dialogue", "conversation", "context"):
             v = sample.get(key)
             if v is None:
@@ -128,7 +99,6 @@ class ClaudeOpus45MCQHandler:
         return ""
 
     def _call_api(self, system_prompt: str, user_text: str, max_tokens: int, temperature: float) -> str:
-        """Single Anthropic call -> concatenated text from the response. '' on empty."""
         resp = self.client.messages.create(
             model=self.model,
             max_tokens=int(max_tokens),
@@ -157,14 +127,6 @@ class ClaudeOpus45MCQHandler:
         task_type: Optional[str] = None,
         **kwargs,
     ):
-        """
-        - sample: dict record
-        - instruction: shared instruction text
-        - returns:
-            mcq                 -> 'A'..'F' or None
-            answer_generation   -> one-line generated text or ""
-            dialogue_completion -> one-line generated doctor turn (no "ANSWER:" prefix) or ""
-        """
         task_type = (task_type or "mcq").strip().lower()
         system_prompt = (instruction or "").strip()
 
@@ -216,9 +178,6 @@ class ClaudeOpus45MCQHandler:
                 if not raw:
                     return ""
 
-                # task3-MSA.txt mandates "exactly ONE line starting with ANSWER:".
-                # Keep one line, then strip the "ANSWER:" / "ANSWER =" prefix so what
-                # gets written matches the gold reference and what the judge expects.
                 one_line = raw.split("\n")[0].strip()
                 m = re.match(r"^\s*ANSWER\s*[:=]\s*(.*)$", one_line, flags=re.IGNORECASE)
                 if m:
