@@ -1,31 +1,5 @@
 """
-activation_patching_llama.py
-----------------------------
-Causal activation patching for Llama 3.3 70B on MedAraBench access_gap questions.
-Adapted from activation_patching.py (Mistral-Small-3.2-24B).
-
-Logic:
-  Phase 1 — English forward pass, cache last-token hidden state per probe layer.
-  Phase 2 — Arabic baseline (no patching).
-  Phase 3 — For each patch config, inject cached English hidden states into
-             Arabic forward pass at specified layers via forward hooks, then
-             measure P(correct letter) at model output.
-
-For Llama 3.3 70B (80 layers), the expected pattern is:
-  - Knowledge encoded by ~L56 (analogous to Mistral's L38)
-  - Output commitment failure near L72–79 (analogous to L38–40 in Mistral)
-  - Probe window: {56, 60, 64, 68, 72, 76, 79}
-
-Architecture paths (LlamaForCausalLM — no multimodal wrapper):
-  model.model.layers[i]   — i-th LlamaDecoderLayer (0-indexed)
-  model.model.norm        — final RMSNorm
-  model.lm_head           — unembedding Linear
-
-Usage:
-  python activation_patching_llama.py \\
-      --csv      llama_sampled_quadrants.csv \\
-      --model_path /scratch/ca2627/huggingface/models--meta-llama--Llama-3.3-70B-Instruct/snapshots/<hash> \\
-      --out_dir  ./logit_lens_llama_out
+Causal activation patching for Llama 3.3 70B on MedAraBench access_gap questions
 """
 
 import os
@@ -86,7 +60,6 @@ def extract_letter(val):
     m = re.search(r'\b([A-F])\b', s)
     return m.group(1) if m else ""
 
-# ── Load CSV — keep only access_gap ──────────────────────────────────────────
 print(f"Loading {args.csv}...")
 rows = []
 with open(args.csv, newline="", encoding="utf-8") as f:
@@ -100,7 +73,6 @@ gt_letters = [extract_letter(r["ground_truth"]) for r in ag_rows]
 N = len(ag_rows)
 print(f"  Total rows: {len(rows)} | access_gap: {N}")
 
-# ── Load model ────────────────────────────────────────────────────────────────
 print("\nLoading Llama 3.3 70B...")
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 
@@ -137,9 +109,6 @@ assert n_layers == 80, f"Expected 80 layers for Llama 3.3 70B, got {n_layers}"
 for L in PROBE_LAYERS:
     assert 1 <= L <= n_layers, f"Probe layer {L} out of range [1, {n_layers}]"
 
-# ── Answer token IDs ──────────────────────────────────────────────────────────
-# Llama 3.3 70B bare letter token IDs (confirmed): A=32, B=33, C=34, D=35
-# E=36, F=37 follow the same sequential pattern.
 ANSWER_TOKEN_IDS = {"A": 32, "B": 33, "C": 34, "D": 35, "E": 36, "F": 37}
 print(f"  Answer token IDs: {ANSWER_TOKEN_IDS}")
 for letter, tid in ANSWER_TOKEN_IDS.items():
@@ -147,7 +116,6 @@ for letter, tid in ANSWER_TOKEN_IDS.items():
     if decoded.upper() != letter:
         print(f"  [WARN] Token {tid} decodes as {repr(decoded)}, not '{letter}'")
 
-# ── Tokenise helper ───────────────────────────────────────────────────────────
 def tokenize_batch(texts):
     all_ids = []
     for t in texts:
@@ -177,7 +145,6 @@ def tokenize_batch(texts):
     seq_lens = attn_mask.sum(dim=1) - 1
     return input_ids, attn_mask, seq_lens
 
-# ── P(correct) from output logits ────────────────────────────────────────────
 def correct_probs(logits, seq_lens, gt_batch):
     """logits: (bs, seq, vocab)"""
     bs = logits.shape[0]
@@ -189,7 +156,6 @@ def correct_probs(logits, seq_lens, gt_batch):
         result[j] = probs_all[j, seq_lens[j], tid].item()
     return result
 
-# ── Phase 1: English forward pass — cache hidden states ──────────────────────
 print(f"\nPhase 1: English forward pass — caching layers {PROBE_LAYERS}...")
 en_hs        = {L: [] for L in PROBE_LAYERS}
 en_base_prob = []
@@ -223,7 +189,6 @@ for L in PROBE_LAYERS:
 en_base_prob = np.array(en_base_prob)
 print(f"  English baseline mean P(correct): {en_base_prob.mean():.3f}")
 
-# ── Phase 2: Arabic baseline ──────────────────────────────────────────────────
 print(f"\nPhase 2: Arabic baseline (no patching)...")
 ar_base_prob = []
 
@@ -245,7 +210,6 @@ for i in range(0, N, args.batch_size):
 ar_base_prob = np.array(ar_base_prob)
 print(f"  Arabic baseline mean P(correct): {ar_base_prob.mean():.3f}")
 
-# ── Phase 3: Patching ─────────────────────────────────────────────────────────
 patch_results = {}
 
 for config_name, patch_layers in PATCH_CONFIGS.items():
@@ -304,7 +268,6 @@ for config_name, patch_layers in PATCH_CONFIGS.items():
     patch_results[config_name] = np.array(config_probs)
     print(f"  Mean P(correct): {patch_results[config_name].mean():.3f}")
 
-# ── Save ──────────────────────────────────────────────────────────────────────
 out_npz = os.path.join(args.out_dir, "patching_results.npz")
 save_dict = dict(en_base_prob=en_base_prob, ar_base_prob=ar_base_prob,
                  gt_letters=np.array(gt_letters))
@@ -312,7 +275,6 @@ save_dict.update(patch_results)
 np.savez(out_npz, **save_dict)
 print(f"\nSaved → {out_npz}")
 
-# ── Summary ───────────────────────────────────────────────────────────────────
 ar_mean = ar_base_prob.mean()
 en_mean = en_base_prob.mean()
 gap     = en_mean - ar_mean
@@ -328,7 +290,6 @@ for c in PATCH_CONFIGS:
     print(f"  {c:<22} {m:>16.3f}  {recovery(m):>9.1f}%")
 print(f"  {'en_base':<22} {en_mean:>16.3f}  {'(100%)':>10}")
 
-# ── Figure ────────────────────────────────────────────────────────────────────
 all_configs = ["ar_base"] + list(PATCH_CONFIGS.keys()) + ["en_base"]
 all_means   = ([ar_base_prob.mean()] +
                [patch_results[c].mean() for c in PATCH_CONFIGS] +
