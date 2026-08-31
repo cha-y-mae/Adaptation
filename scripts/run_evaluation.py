@@ -1,18 +1,10 @@
 """
-This script runs an evaluation experiment defined by a yaml config:
-- loads data (JSON list of dicts)
-- queries a model handler (single or batch)
-- saves predictions
-- evaluates partial outputs on interruption, final outputs on success
-
-Supported task types:
-- mcq: returns a single letter (A-F), metric = accuracy
-- answer_generation: returns free-form text, metrics = BLEU/ROUGE/BERTScore (handled in evals/evaluator.py)
-- dialogue_completion: returns the missing final doctor turn, metrics = BLEU/ROUGE/BERTScore + judge
-
-Optional debug output:
-- If output.debug_path is set in the YAML, this script will save per-example debug rows
-  (useful for handlers like AutoCAP that expose internal planning/voting metadata).
+This script runs an evaluation experiment defined by a yaml config. It loads data (JSON list of dicts), queries a model handler (single or batch), 
+saves predictions and evaluates outputs. 
+Supported task types: 
++ mcq: returns a single letter (A-F), metric = accuracy
++ answer_generation: returns free-form text, metrics = BLEU/ROUGE/BERTScore (handled in evals/evaluator.py)
++ dialogue_completion: returns the missing final doctor turn, metrics = BLEU/ROUGE/BERTScore + judge
 """
 
 import sys
@@ -32,16 +24,7 @@ from scripts.utils import load_config, save_predictions  # noqa: E402
 from models import load_model_handler  # noqa: E402
 from evals.evaluator import evaluate, split_prediction  # noqa: E402
 
-
-# -------------------------
-# Allowed task types
-# -------------------------
 ALLOWED_TASK_TYPES = {"mcq", "answer_generation", "dialogue_completion"}
-
-
-# -------------------------
-# Field-name pickers (datasets vary in casing across tasks)
-# -------------------------
 def _pick(item: dict, *keys):
     """Return first non-empty value among keys, else None."""
     for k in keys:
@@ -53,10 +36,6 @@ def _pick(item: dict, *keys):
         return v
     return None
 
-
-# -------------------------
-# Input builders
-# -------------------------
 def build_mcq_text(item: dict) -> str:
     """Build a readable MCQ block from the dataset schema."""
     stem = (item.get("question") or "").strip()
@@ -69,7 +48,6 @@ def build_mcq_text(item: dict) -> str:
         "E": item.get("ope"),
         "F": item.get("opf"),
     }
-
     lines = []
     for letter in ["A", "B", "C", "D", "E", "F"]:
         txt = option_map.get(letter)
@@ -86,24 +64,16 @@ def build_mcq_text(item: dict) -> str:
 
 
 def build_ansgen_text(item: dict) -> str:
-    """Build the input text for answer_generation."""
+    """Build the input text for answer_generation"""
     return (item.get("question") or "").strip()
 
-
 def build_dialogue_text(item: dict) -> str:
-    """
-    Build the input text for dialogue_completion.
-
-    Task-3 dataset uses PascalCase keys (e.g. 'Dialogue'). Falls back to
-    snake_case for forward compatibility.
-    """
     v = _pick(item, "Dialogue", "dialogue", "conversation", "context")
     if v is None:
         return ""
     if isinstance(v, str):
         return v.strip()
     if isinstance(v, list):
-        # list of turn dicts/strings -> render as "role: text"
         lines = []
         for t in v:
             if isinstance(t, dict):
@@ -119,20 +89,9 @@ def build_dialogue_text(item: dict) -> str:
         return "\n".join(lines)
     return ""
 
-
-# -------------------------
-# Hard GT selection
-# -------------------------
 LETTER_SET = {"A", "B", "C", "D", "E", "F"}
 
-
 def get_ground_truth_or_die(item: Dict[str, Any], task_type: str, item_id: str) -> str:
-    """
-    Hard rule:
-      - mcq:                  ground_truth = item['answer'] (letter)
-      - answer_generation:    ground_truth = item['answer_text'] (text) and MUST NOT be a letter.
-      - dialogue_completion:  ground_truth = item['Gold Response'] (text), the held-out final doctor turn.
-    """
     if task_type == "mcq":
         gt = (item.get("answer") or "").strip().upper()
         if not gt:
@@ -145,7 +104,6 @@ def get_ground_truth_or_die(item: Dict[str, Any], task_type: str, item_id: str) 
                 f"[FATAL] answer_generation requires 'answer_text' but key is missing for id={item_id}. "
                 f"Available keys={list(item.keys())}"
             )
-
         gt = str(item["answer_text"]).strip()
         if not gt:
             raise RuntimeError(f"[FATAL] answer_generation 'answer_text' is empty for id={item_id}")
@@ -169,16 +127,11 @@ def get_ground_truth_or_die(item: Dict[str, Any], task_type: str, item_id: str) 
 
     raise ValueError(f"unsupported task_type={task_type!r} in get_ground_truth_or_die")
 
-
-# -------------------------
-# Validators
-# -------------------------
 def is_valid_mcq_item(item: dict) -> bool:
     stem = (item.get("question") or "").strip()
     if not stem:
         return False
     return all((item.get(k) for k in ["opa", "opb", "opc", "opd"]))
-
 
 def is_valid_ansgen_item(item: dict) -> bool:
     q = (item.get("question") or "").strip()
@@ -186,24 +139,12 @@ def is_valid_ansgen_item(item: dict) -> bool:
         return False
     return "answer_text" in item and str(item["answer_text"]).strip() != ""
 
-
 def is_valid_dialogue_item(item: dict) -> bool:
-    """
-    HARD requirements for the model run:
-      - Dialogue        (input)
-      - Gold Response   (BERTScore reference)
-
-    The judge metadata fields (Primary Reasoning Objective, Red Flag Symptoms)
-    are SOFT — if missing, the script logs a one-time warning and writes an
-    empty string for that column. The judge prompt is written to handle empty
-    metadata gracefully.
-    """
     if not build_dialogue_text(item):
         return False
     if _pick(item, "Gold Response", "gold_response", "answer_text") is None:
         return False
     return True
-
 
 def explain_invalid(item: dict, task_type: str) -> str:
     """Return a human-readable reason why an item failed validation."""
@@ -232,7 +173,6 @@ def explain_invalid(item: dict, task_type: str) -> str:
 
     return f"unknown task_type={task_type}"
 
-
 def is_valid_item(item: dict, task_type: str) -> bool:
     if task_type == "mcq":
         return is_valid_mcq_item(item)
@@ -242,23 +182,14 @@ def is_valid_item(item: dict, task_type: str) -> bool:
         return is_valid_dialogue_item(item)
     return False
 
-
-# -------------------------
-# Per-task metadata to pass through to the predictions CSV
-# -------------------------
 def extra_columns_for_judge(item: dict, task_type: str) -> dict:
-    """
-    Pull judge-side metadata into the predictions CSV. For dialogue_completion
-    we want Primary Reasoning Objective and Red Flag Symptoms — but they're
-    SOFT requirements. Missing -> empty string (the judge handles this fine).
-    """
     if task_type != "dialogue_completion":
         return {}
     pro = _pick(item, "Primary Reasoning Objective", "primary_reasoning_objective") or ""
     rfs = _pick(
         item,
-        "Red Flag Symptom",          # actual key in MSA dataset (singular)
-        "Red Flag Symptoms",         # plural, in case other variants use it
+        "Red Flag Symptom",          
+        "Red Flag Symptoms",         
         "red_flag_symptom",
         "red_flag_symptoms",
         "red_flags",
@@ -270,24 +201,9 @@ def extra_columns_for_judge(item: dict, task_type: str) -> dict:
         "red_flag_symptoms": str(rfs).strip(),
     }
 
-
-# -------------------------
-# Dataset loader (handles wrapped shapes)
-# -------------------------
 DATASET_WRAPPER_KEYS = ("data", "records", "items", "examples", "rows", "dataset")
 
-
 def load_dataset_safely(path: str) -> list:
-    """
-    Load a JSON dataset that may be:
-      - a bare list of dicts:                     [ {...}, {...}, ... ]
-      - a dict wrapping the list under a key:     { "data": [ {...}, ... ] }
-                                                  { "records": [ ... ] }, etc.
-
-    Returns the list of dict records and logs which shape was found.
-    Raises a clear RuntimeError on anything else (bare dict, list of strings,
-    non-list-non-dict at top level, etc.).
-    """
     with open(path, "r", encoding="utf-8") as f:
         raw = json.load(f)
 
@@ -332,19 +248,11 @@ def load_dataset_safely(path: str) -> list:
         f"expected list of dicts or {{'data': [...]}}-style wrapper."
     )
 
-
-# -------------------------
-# Debug helpers
-# -------------------------
 def save_debug_jsonl(rows, path: str):
     with open(path, "w", encoding="utf-8") as f:
         for row in rows:
             f.write(json.dumps(row, ensure_ascii=False) + "\n")
 
-
-# -------------------------
-# Main experiment
-# -------------------------
 def run_experiment(config_path: str):
     logging.info(f"loading config from {config_path}")
     config = load_config(config_path)
@@ -388,15 +296,11 @@ def run_experiment(config_path: str):
     )
 
     dataset = load_dataset_safely(dataset_path)
-
-    # Diagnostic: show the keys present in the first dataset item so any
-    # field-name mismatch is obvious from the log.
     logging.info(
         f"[DEBUG] dataset size={len(dataset)}; "
         f"first-item keys={list(dataset[0].keys())}"
     )
 
-    # Soft-warn ONCE if Task-3 judge metadata fields are missing on the first item.
     if task_type == "dialogue_completion":
         if _pick(dataset[0], "Primary Reasoning Objective", "primary_reasoning_objective") is None:
             logging.warning(
@@ -446,7 +350,6 @@ def run_experiment(config_path: str):
             save_debug_jsonl(debug_rows, path)
 
     def finalize_and_eval(path_for_eval, debug_path_for_eval=None):
-        # Bail out cleanly when there's nothing to save or evaluate.
         if not predictions:
             logging.info(
                 "[partial] no predictions accumulated; nothing to save or evaluate"
@@ -495,9 +398,6 @@ def run_experiment(config_path: str):
     use_batch = hasattr(model_handler, "prompt_batch")
     wants_debug = bool(debug_path)
 
-    # -------------------------
-    # Per-item record builder (single source of truth, used by both paths)
-    # -------------------------
     def build_record(item: dict, prediction, item_id: str, task_type: str) -> dict:
         gt = get_ground_truth_or_die(item, task_type, item_id)
 
@@ -537,9 +437,6 @@ def run_experiment(config_path: str):
         else:
             logging.warning(f"[{task_type}] invalid item #{idx}; skipping")
 
-    # -------------------------
-    # Batch path
-    # -------------------------
     if use_batch:
         logging.info(f"using prompt_batch batch_size={batch_size}")
 
@@ -605,9 +502,6 @@ def run_experiment(config_path: str):
 
                 predictions.append(record)
 
-    # -------------------------
-    # Single-example path
-    # -------------------------
     else:
         logging.info("using prompt per-example")
 
@@ -683,7 +577,6 @@ def run_experiment(config_path: str):
     logging.info(f"metrics:{json.dumps(m, indent=4, ensure_ascii=False)}")
 
     finished = True
-
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.INFO, format="%(asctime)s|%(levelname)s|%(message)s")
