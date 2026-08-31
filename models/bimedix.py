@@ -1,14 +1,5 @@
 """
-BiMediX MCQ / answer-generation handler.
-
-Sharded across N visible CUDA devices using HF `device_map="auto"` with
-no CPU offload. Adds batched inference via `prompt_batch()` and optional
-4-bit quantization via `load_in_4bit=True`.
-
-REssources needed to load and run:
-2× 80 = 160 GiB of VRAM, which comfortably fits Mixtral-8x7B bf16 (~93 GiB weights)
-
-
+rssources needed to load & run 2× 80 = 160 GiB of VRAM, which comfortably fits Mixtral-8x7B bf16 (~93 GiB weights)
 """
 
 import gc
@@ -25,11 +16,8 @@ os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 LETTER_SET = {"A", "B", "C", "D", "E", "F"}
 
-# Approx. fp16/bf16 weight size of Mixtral-8x7B (upper bound for BiMediX-Bi).
 _MIXTRAL_8X7B_BF16_GB = 93.0
-# Approx. 4-bit (nf4 + double-quant) weight size.
 _MIXTRAL_8X7B_4BIT_GB = 24.0
-
 
 def extract_letter_from_text(text: str) -> Optional[str]:
     if not text:
@@ -48,7 +36,6 @@ def extract_letter_from_text(text: str) -> Optional[str]:
             return m.group(1)
     return None
 
-
 def _flash_attention_available() -> bool:
     try:
         import flash_attn  # noqa: F401
@@ -58,10 +45,6 @@ def _flash_attention_available() -> bool:
 
 
 def _auto_per_gpu_cap(headroom_frac: float = 0.90) -> Dict[int, str]:
-    """
-    Build a max_memory dict sized to each visible GPU's actual capacity,
-    leaving `1 - headroom_frac` free for activations + KV cache.
-    """
     mm: Dict[int, str] = {}
     for i in range(torch.cuda.device_count()):
         total_gb = torch.cuda.get_device_properties(i).total_memory / (1024**3)
@@ -71,13 +54,6 @@ def _auto_per_gpu_cap(headroom_frac: float = 0.90) -> Dict[int, str]:
 
 
 class BiMediXMCQHandler:
-    """
-    BiMediX handler sharded across multiple GPUs.
-      - task_type="mcq"               -> returns 'A'..'F' or None
-      - task_type="answer_generation" -> returns generated text (one line) or ""
-      - prompt_batch(samples, ...)    -> list of predictions (same order)
-    """
-
     def __init__(
         self,
         model_name: str = "BiMediX/BiMediX-Bi",
@@ -114,7 +90,6 @@ class BiMediXMCQHandler:
         else:
             os.environ.pop("HF_HUB_OFFLINE", None)
 
-        # -------- CUDA perf knobs --------
         torch.backends.cuda.matmul.allow_tf32 = True
         torch.backends.cudnn.allow_tf32 = True
         try:
@@ -137,15 +112,12 @@ class BiMediXMCQHandler:
             total_visible_gb += total_gb
             print(f"  GPU {i}: {name} ({total_gb:.0f} GiB)")
 
-        # -------- Build max_memory --------
         if per_gpu_memory is None:
             max_memory = _auto_per_gpu_cap(headroom_frac=headroom_frac)
         else:
             max_memory = {i: per_gpu_memory for i in range(num_gpus)}
         print(f"[BiMediX] max_memory = {max_memory}  (no CPU offload)")
 
-        # -------- Memory feasibility check --------
-        # Parse GiB numbers back out so we can sanity check.
         def _parse_gib(s: str) -> float:
             m = re.match(r"\s*([\d.]+)\s*GiB", s, flags=re.IGNORECASE)
             return float(m.group(1)) if m else 0.0
@@ -174,7 +146,6 @@ class BiMediXMCQHandler:
                 f"  (C) Raise per_gpu_memory only if your GPUs actually have more VRAM."
             )
 
-        # -------- Quantization config --------
         quant_config = None
         if load_in_4bit or load_in_8bit:
             try:
@@ -196,7 +167,6 @@ class BiMediXMCQHandler:
                 quant_config = BitsAndBytesConfig(load_in_8bit=True)
                 print("[BiMediX] Using 8-bit quantization.")
 
-        # -------- Tokenizer --------
         print("[BiMediX] Loading tokenizer...")
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_name,
@@ -210,12 +180,10 @@ class BiMediXMCQHandler:
         # left padding for correct batched decoder-only generation
         self.tokenizer.padding_side = "left"
 
-        # -------- Attention impl --------
         if attn_implementation is None:
             attn_implementation = "flash_attention_2" if _flash_attention_available() else "sdpa"
         print(f"[BiMediX] attn_implementation = {attn_implementation}")
 
-        # -------- Model load (sharded, no CPU) --------
         print("[BiMediX] Loading model (sharded)...")
         load_kwargs: Dict[str, Any] = dict(
             cache_dir=self.cache_dir,
@@ -226,7 +194,7 @@ class BiMediXMCQHandler:
             trust_remote_code=True,
             attn_implementation=attn_implementation,
         )
-        # New API: `dtype=` (torch_dtype is deprecated in recent transformers)
+        
         try:
             if quant_config is None:
                 load_kwargs["dtype"] = torch.bfloat16
@@ -242,7 +210,6 @@ class BiMediXMCQHandler:
 
         self.model.eval()
 
-        # Sanity: nothing on CPU/disk.
         dmap = getattr(self.model, "hf_device_map", {}) or {}
         bad = [(k, v) for k, v in dmap.items() if v in ("cpu", "disk")]
         if bad:
@@ -266,7 +233,6 @@ class BiMediXMCQHandler:
         self.has_chat_template = bool(getattr(self.tokenizer, "chat_template", None))
         print(f"[BiMediX] chat_template? {self.has_chat_template}")
 
-        # Send inputs to the embedding layer's device.
         embed_device = None
         for k, v in dmap.items():
             if "embed" in k.lower():
@@ -283,9 +249,6 @@ class BiMediXMCQHandler:
         if self.tokenizer.eos_token_id is not None:
             self.stop_token_ids.append(self.tokenizer.eos_token_id)
 
-    # -----------------------------------------------------------
-    # Prompt / text builders
-    # -----------------------------------------------------------
     @staticmethod
     def _build_mcq_text(sample: Dict[str, Any]) -> str:
         stem = (sample.get("question") or "").strip()
@@ -368,19 +331,7 @@ class BiMediXMCQHandler:
             return self._build_plain_prompt_mcq(system_prompt, user_text)
         return self._build_plain_prompt_ansgen(system_prompt, user_text)
 
-    # -----------------------------------------------------------
-    # Core generation
-    # -----------------------------------------------------------
     def _tokenize_batch(self, prompt_strs: List[str]):
-        """
-        Tokenize a batch with correct handling of BOS.
-
-        If the prompt string already begins with the tokenizer's BOS marker
-        (which is what `apply_chat_template` produces for Llama / Mixtral:
-        `<s>[INST] ... [/INST]`), we MUST set add_special_tokens=False —
-        otherwise the tokenizer prepends a second BOS and the model will
-        typically emit EOS immediately.
-        """
         bos = self.tokenizer.bos_token
         if bos and all(isinstance(s, str) and s.startswith(bos) for s in prompt_strs):
             add_special = False
@@ -419,9 +370,6 @@ class BiMediXMCQHandler:
         gen_ids = output_ids[:, input_len:]
         return self.tokenizer.batch_decode(gen_ids, skip_special_tokens=True)
 
-    # -----------------------------------------------------------
-    # Single-sample paths (backward compatibility)
-    # -----------------------------------------------------------
     def _generate_once_mcq(self, sample, instruction, max_tokens, temperature, plain_retry=False):
         user_text = self._build_mcq_text(sample)
         if not user_text:
@@ -445,16 +393,9 @@ class BiMediXMCQHandler:
 
     @staticmethod
     def _clean_ansgen_output(raw_text: str) -> str:
-        """
-        Clean a raw model output for answer generation:
-          - strip leading 'Answer:' / 'ANSWER:' / 'الإجابة:' echoes
-          - strip surrounding quotes/whitespace
-          - DO NOT truncate to first line; callers want the full answer for BERTscore.
-        """
         if not raw_text:
             return ""
         s = raw_text.strip()
-        # Common English / Arabic lead-ins the model may echo.
         lead_patterns = [
             r"^\s*ANSWER\s*[:=]\s*",
             r"^\s*الإجابة\s*[:=]?\s*",
@@ -462,7 +403,6 @@ class BiMediXMCQHandler:
         ]
         for pat in lead_patterns:
             s = re.sub(pat, "", s, flags=re.IGNORECASE).strip()
-        # Strip paired wrapping quotes if present.
         if len(s) >= 2 and s[0] == s[-1] and s[0] in ("\"", "'", "”", "“"):
             s = s[1:-1].strip()
         return s
@@ -488,9 +428,6 @@ class BiMediXMCQHandler:
         finally:
             self.use_plain_prompt = original_plain
 
-    # -----------------------------------------------------------
-    # Public single-sample API
-    # -----------------------------------------------------------
     def prompt(
         self,
         sample: Dict[str, Any],
@@ -529,9 +466,6 @@ class BiMediXMCQHandler:
                 f"Unsupported task_type={task_type}. Expected 'mcq' or 'answer_generation'."
             )
 
-    # -----------------------------------------------------------
-    # Batched API
-    # -----------------------------------------------------------
     def prompt_batch(
         self,
         samples: List[Dict[str, Any]],
@@ -625,7 +559,6 @@ class BiMediXMCQHandler:
                         out_map[i] = (raw, cleaned)
             return out_map
 
-        # -------- Pass 1: chat template (or whatever the handler is configured with) --------
         prompt_strs_1 = _build_prompts(use_plain=self.use_plain_prompt)
         pass1 = _run_pass(prompt_strs_1)
 
@@ -638,7 +571,6 @@ class BiMediXMCQHandler:
                 continue
             raw, value = raw_cleaned
             results[i] = value
-            # Consider a sample 'empty' if the model produced nothing meaningful.
             is_empty = (value is None) if task_type == "mcq" else (not value)
             if is_empty:
                 empty_indices.append(i)
@@ -647,7 +579,6 @@ class BiMediXMCQHandler:
                 print(f"[BiMediX] id={sid} ansgen_raw={raw[:300]!r} cleaned={value[:300]!r}",
                       flush=True)
 
-        # -------- Pass 2: plain-prompt retry on empties --------
         if empty_indices and not self.use_plain_prompt:
             print(f"[BiMediX] {len(empty_indices)} empty outputs → retrying with plain prompt",
                   flush=True)
