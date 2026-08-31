@@ -1,336 +1,6 @@
 '''
-
-This script implements metrics for mcq and answer_generation evaluation. It provides bleu/rouge/bertscore metrics
-
-
-
-import re
-from typing import List, Optional, Dict, Any
-import numpy as np
-from nltk.translate.bleu_score import sentence_bleu, SmoothingFunction
-from nltk.tokenize import word_tokenize
-from rouge_score import rouge_scorer
-
-try:
-    import bert_score
-except Exception:
-    bert_score = None
-
-try:
-    from bleurt import score as bleurt_score
-except Exception:
-    bleurt_score = None
-
-#------------------------------------------Task 1 ----------------------------------------------#
-
-def extract_letter(text):
-    if not text:
-        return None
-    t = str(text).strip()
-
-    m = re.search(r"(?i)\banswer(?:\s*is)?\s*[:：]?\s*([A-F])\b", t)
-    if m:
-        return m.group(1).upper()
-
-    first = next((ln for ln in t.splitlines() if ln.strip()), "")
-    m = re.match(r"^\s*([A-Fa-f])\s*[\.\)]?\s*$", first)
-    if m:
-        return m.group(1).upper()
-
-    m = re.match(r"^\s*([A-Fa-f])\s*$", t)
-    if m:
-        return m.group(1).upper()
-
-    return None
-
-
-def calculate_accuracy(predictions, ground_truths):
-    correct = 0
-    total = 0
-
-    for p, g in zip(predictions, ground_truths):
-        total += 1
-        p_letter = extract_letter(p) if p is not None else None
-        g_letter = extract_letter(g)
-
-        if p_letter and g_letter and p_letter == g_letter:
-            correct += 1
-
-    return correct / total if total > 0 else 0.0
-
-
-#------------------------------------------Task 2 ----------------------------------------------#
-
-def _safe_tokenize(text: str, lang: str = "en") -> List[str]:
-    text = "" if text is None else str(text).strip()
-    if not text:
-        return []
-
-    # Arabic: safer than NLTK punkt requirements
-    if lang.lower().startswith("ar"):
-        return re.findall(r"\w+|[^\w\s]", text, flags=re.UNICODE)
-
-    try:
-        return word_tokenize(text)
-    except Exception:
-        return re.findall(r"\w+|[^\w\s]", text, flags=re.UNICODE)
-
-
-def _normalize_arabic(text: str) -> str:
-    if text is None:
-        return ""
-    text = str(text)
-    text = re.sub(r"[\u064B-\u0652]", "", text)  # remove diacritics
-    text = text.replace("آ", "ا").replace("أ", "ا").replace("إ", "ا")
-    text = text.replace("ى", "ي").replace("ؤ", "و").replace("ئ", "ي")
-    text = text.replace("ة", "ه")
-    text = re.sub(r"\s+", " ", text).strip()
-    return text
-
-
-def calculate_bleu(predictions: List[str], references: List[str], lang: str = "ar") -> float:
-    smoothie = SmoothingFunction().method1
-    scores = []
-
-    for hyp, ref in zip(predictions, references):
-        hyp = "" if hyp is None else str(hyp)
-        ref = "" if ref is None else str(ref)
-
-        if lang.lower().startswith("ar"):
-            hyp = _normalize_arabic(hyp)
-            ref = _normalize_arabic(ref)
-
-        ref_tokens = _safe_tokenize(ref, lang=lang)
-        hyp_tokens = _safe_tokenize(hyp, lang=lang)
-
-        if not ref_tokens and not hyp_tokens:
-            scores.append(1.0)
-            continue
-        if not ref_tokens or not hyp_tokens:
-            scores.append(0.0)
-            continue
-
-        bleu = sentence_bleu([ref_tokens], hyp_tokens, smoothing_function=smoothie)
-        scores.append(float(bleu))
-
-    return float(sum(scores) / len(scores)) if scores else 0.0
-
-
-def calculate_rouge(predictions: List[str], references: List[str], lang: str = "en") -> Dict[str, float]:
-    # stemming is English-centric; disable for Arabic
-    use_stemmer = not lang.lower().startswith("ar")
-    scorer = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=use_stemmer)
-
-    r1 = r2 = rl = 0.0
-    n = 0
-
-    for hyp, ref in zip(predictions, references):
-        hyp = "" if hyp is None else str(hyp)
-        ref = "" if ref is None else str(ref)
-
-        if lang.lower().startswith("ar"):
-            hyp = _normalize_arabic(hyp)
-            ref = _normalize_arabic(ref)
-
-        if not hyp and not ref:
-            r1 += 1.0; r2 += 1.0; rl += 1.0
-            n += 1
-            continue
-
-        scores = scorer.score(ref, hyp)
-        r1 += scores["rouge1"].fmeasure
-        r2 += scores["rouge2"].fmeasure
-        rl += scores["rougeL"].fmeasure
-        n += 1
-
-    n = n or 1
-    return {"rouge1": r1 / n, "rouge2": r2 / n, "rougeL": rl / n}
-
-
-def calculate_bert_score(
-    predictions: List[str],
-    references: List[str],
-    lang: str = "ar",
-    model_type: Optional[str] = None,
-    device: str = "cpu",
-    rescale_with_baseline: bool = True,
-) -> Optional[Dict[str, float]]:
-    # NOTE: with the default model_type=None and lang="ar", bert-score falls
-    # back to bert-base-multilingual-cased. That's OK as a baseline but weak
-    # for Arabic; consider passing model_type="UBC-NLP/MARBERT" (and then
-    # setting rescale_with_baseline=False, since no baseline exists for it).
-    if bert_score is None:
-        return None
-
-    hyps = ["" if p is None else str(p) for p in predictions]
-    refs = ["" if r is None else str(r) for r in references]
-
-    # Apply the same Arabic normalization we use for BLEU/ROUGE so alef/yaa/
-    # taa-marbuta variants don't penalize semantically-equivalent outputs.
-    if lang.lower().startswith("ar"):
-        hyps = [_normalize_arabic(h) for h in hyps]
-        refs = [_normalize_arabic(r) for r in refs]
-
-    if not hyps or not refs:
-        return None
-
-    try:
-        P, R, F1 = bert_score.score(
-            hyps,
-            refs,
-            lang=lang,
-            model_type=model_type,
-            device=device,
-            rescale_with_baseline=rescale_with_baseline,
-            verbose=False,
-        )
-        # IMPORTANT: do NOT clip to [0, 1]. With rescale_with_baseline=True
-        # the scores are designed to sit near 0 for random pairs and can be
-        # legitimately negative; clipping floors those to 0 and destroys
-        # signal. Trust the raw values.
-        p = P.detach().cpu().numpy()
-        r = R.detach().cpu().numpy()
-        f1 = F1.detach().cpu().numpy()
-
-        return {
-            "bert_precision": float(p.mean()),
-            "bert_recall": float(r.mean()),
-            "bert_f1": float(f1.mean()),
-        }
-    except Exception as e:
-        print(f"[bert_score] failed: {type(e).__name__}: {e}")
-        return None
-
-def calculate_bleu_per_example(
-    predictions: List[str],
-    references: List[str],
-    lang: str = "ar",
-) -> List[float]:
-    smoothie = SmoothingFunction().method1
-    scores = []
-
-    for hyp, ref in zip(predictions, references):
-        hyp = "" if hyp is None else str(hyp)
-        ref = "" if ref is None else str(ref)
-
-        if lang.lower().startswith("ar"):
-            hyp = _normalize_arabic(hyp)
-            ref = _normalize_arabic(ref)
-
-        ref_tokens = _safe_tokenize(ref, lang=lang)
-        hyp_tokens = _safe_tokenize(hyp, lang=lang)
-
-        if not ref_tokens and not hyp_tokens:
-            scores.append(1.0)
-            continue
-        if not ref_tokens or not hyp_tokens:
-            scores.append(0.0)
-            continue
-
-        bleu = sentence_bleu([ref_tokens], hyp_tokens, smoothing_function=smoothie)
-        scores.append(float(bleu))
-
-    return scores
-
-
-def calculate_rouge_per_example(
-    predictions: List[str],
-    references: List[str],
-    lang: str = "en",
-) -> List[Dict[str, float]]:
-    use_stemmer = not lang.lower().startswith("ar")
-    scorer = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=use_stemmer)
-
-    rows = []
-
-    for hyp, ref in zip(predictions, references):
-        hyp = "" if hyp is None else str(hyp)
-        ref = "" if ref is None else str(ref)
-
-        if lang.lower().startswith("ar"):
-            hyp = _normalize_arabic(hyp)
-            ref = _normalize_arabic(ref)
-
-        if not hyp and not ref:
-            rows.append({
-                "rouge1": 1.0,
-                "rouge2": 1.0,
-                "rougeL": 1.0,
-            })
-            continue
-
-        scores = scorer.score(ref, hyp)
-        rows.append({
-            "rouge1": float(scores["rouge1"].fmeasure),
-            "rouge2": float(scores["rouge2"].fmeasure),
-            "rougeL": float(scores["rougeL"].fmeasure),
-        })
-
-    return rows
-
-def calculate_bert_score_per_example(
-    predictions: List[str],
-    references: List[str],
-    lang: str = "ar",
-    model_type: Optional[str] = None,
-    device: str = "cpu",
-    rescale_with_baseline: bool = True,
-) -> Optional[List[Dict[str, float]]]:
-    if bert_score is None:
-        return None
-
-    hyps = ["" if p is None else str(p) for p in predictions]
-    refs = ["" if r is None else str(r) for r in references]
-
-    if lang.lower().startswith("ar"):
-        hyps = [_normalize_arabic(h) for h in hyps]
-        refs = [_normalize_arabic(r) for r in refs]
-
-    if not hyps or not refs:
-        return None
-
-    try:
-        P, R, F1 = bert_score.score(
-            hyps,
-            refs,
-            lang=lang,
-            model_type=model_type,
-            device=device,
-            rescale_with_baseline=rescale_with_baseline,
-            verbose=False,
-        )
-
-        # No clipping — see note in calculate_bert_score.
-        p = P.detach().cpu().numpy()
-        r = R.detach().cpu().numpy()
-        f1 = F1.detach().cpu().numpy()
-
-        rows = []
-        for pi, ri, f1i in zip(p, r, f1):
-            rows.append({
-                "bert_precision": float(pi),
-                "bert_recall": float(ri),
-                "bert_f1": float(f1i),
-            })
-        return rows
-
-    except Exception as e:
-        print(f"[bert_score] failed: {type(e).__name__}: {e}")
-        return None
-
+This script implements metrics for mcq and answer_generation evaluation.
 '''
-'''
-
-This script implements metrics for mcq and answer_generation evaluation. It provides bleu/rouge/bertscore metrics
-
-'''
-
-'''
-
-This script implements metrics for mcq and answer_generation evaluation. It provides bleu/rouge/bertscore metrics
-
-'''
-
 import os
 import re
 from typing import List, Optional, Dict, Any
@@ -349,32 +19,11 @@ try:
 except Exception:
     bleurt_score = None
 
-
-''' Default BERTScore backbone. Arabic-specific encoders (AraBERT, ARBERTv2, MARBERT) give more discriminative embeddings for Arabic medical text than
-# multilingual encoders like mBERT or XLM-R  which produce smoother, topically-clustered embeddings that inflate scores for clinically-wrong
-# but topically-similar answers. Picking AraBERT-large-v02 as default: MSA-focused (appropriate for medical  exam content), segmentation-aware, bert-large architecture (24 layers).
-#   aubmindlab/bert-large-arabertv02      num_layers=18   (default; MSA, largest)
-#   aubmindlab/bert-base-arabertv02       num_layers=9    (MSA, ~5x faster)
-#   UBC-NLP/ARBERTv2                      num_layers=9    (MSA, newer)
-#   UBC-NLP/MARBERT                       num_layers=9    (MSA + dialect + tweets)
-#   CAMeL-Lab/bert-base-arabic-camelbert-msa  num_layers=9   (MSA-only)
-#
-# !!!!!! None of these have baselines shipped with bert-score, SO rescale_with_baseline MUST be False -- otherwise you get a warning and
-'''
-
-
-
 DEFAULT_BERT_MODEL = "aubmindlab/bert-large-arabertv02"
 DEFAULT_BERT_NUM_LAYERS = 18
 
 
 def check_bertscore_baselines() -> None:
-    """Print all (lang, model) baseline files shipped by your bert-score install.
-
-    Run this once to confirm whether xlm-roberta-large + ar is available for
-    rescale_with_baseline=True. If not, either accept raw scores or switch
-    rescale_with_baseline to False explicitly.
-    """
     if bert_score is None:
         print("[bert_score] not installed")
         return
@@ -386,9 +35,6 @@ def check_bertscore_baselines() -> None:
         p = os.path.join(base, lang)
         if os.path.isdir(p):
             print(f"  {lang}: {sorted(os.listdir(p))}")
-
-
-#------------------------------------------Task 1 ----------------------------------------------#
 
 def extract_letter(text):
     if not text:
@@ -426,14 +72,12 @@ def calculate_accuracy(predictions, ground_truths):
     return correct / total if total > 0 else 0.0
 
 
-#------------------------------------------Task 2 ----------------------------------------------#
-
+#task2
 def _safe_tokenize(text: str, lang: str = "en") -> List[str]:
     text = "" if text is None else str(text).strip()
     if not text:
         return []
 
-    # Arabic: safer than NLTK punkt requirements
     if lang.lower().startswith("ar"):
         return re.findall(r"\w+|[^\w\s]", text, flags=re.UNICODE)
 
@@ -482,9 +126,8 @@ def calculate_bleu(predictions: List[str], references: List[str], lang: str = "a
 
     return float(sum(scores) / len(scores)) if scores else 0.0
 
-
 def calculate_rouge(predictions: List[str], references: List[str], lang: str = "en") -> Dict[str, float]:
-    # stemming is English-centric; disable for Arabic
+    #disable stemming for Arabic
     use_stemmer = not lang.lower().startswith("ar")
     scorer = rouge_scorer.RougeScorer(["rouge1", "rouge2", "rougeL"], use_stemmer=use_stemmer)
 
@@ -533,8 +176,7 @@ def calculate_bert_score(
     hyps = ["" if p is None else str(p) for p in predictions]
     refs = ["" if r is None else str(r) for r in references]
 
-    # Apply the same Arabic normalization we use for BLEU/ROUGE so alef/yaa/
-    # taa-marbuta variants don't penalize semantically-equivalent outputs.
+    #apply arabic normalization
     if lang.lower().startswith("ar"):
         hyps = [_normalize_arabic(h) for h in hyps]
         refs = [_normalize_arabic(r) for r in refs]
@@ -553,10 +195,6 @@ def calculate_bert_score(
             rescale_with_baseline=rescale_with_baseline,
             verbose=False,
         )
-        # IMPORTANT: do NOT clip to [0, 1]. With rescale_with_baseline=True
-        # the scores are designed to sit near 0 for random pairs and can be
-        # legitimately negative; clipping floors those to 0 and destroys
-        # signal. Trust the raw values.
         p = P.detach().cpu().numpy()
         r = R.detach().cpu().numpy()
         f1 = F1.detach().cpu().numpy()
