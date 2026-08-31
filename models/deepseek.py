@@ -5,12 +5,6 @@ from openai import OpenAI
 
 
 class DeepSeekV32MCQHandler:
-    """
-    DeepSeek V3.2 handler aligned with the Claude Opus 4.5 handler:
-      - task_type="mcq"               -> returns 'A'..'F' or None
-      - task_type="answer_generation" -> returns generated text (one line) or ""
-    """
-
     def __init__(
         self,
         api_key: str,
@@ -26,9 +20,6 @@ class DeepSeekV32MCQHandler:
         self.model_name = model_name
         self.max_retries = max_retries
 
-    # -----------------------------------------------------------
-    # Build MCQ text
-    # -----------------------------------------------------------
     @staticmethod
     def _build_mcq_text(sample: Dict[str, Any]) -> str:
         stem = (sample.get("question") or "").strip()
@@ -52,17 +43,11 @@ class DeepSeekV32MCQHandler:
                 lines.append(f"{letter}) {txt}")
         return stem + "\n\n" + "\n".join(lines)
 
-    # -----------------------------------------------------------
-    # Build answer-generation text (no options, just the question)
-    # -----------------------------------------------------------
     @staticmethod
     def _build_ansgen_text(sample: Dict[str, Any]) -> str:
         q = (sample.get("question") or "").strip()
         return q
 
-    # -----------------------------------------------------------
-    # Prompt structure for MCQ (unchanged)
-    # -----------------------------------------------------------
     def _build_mcq_user_block(self, instruction: str, user_text: str) -> str:
         instruction = (instruction or "").strip()
         parts = []
@@ -76,9 +61,6 @@ class DeepSeekV32MCQHandler:
         parts.append("Answer:")
         return "\n".join(parts).strip()
 
-    # -----------------------------------------------------------
-    # Prompt structure for answer generation
-    # -----------------------------------------------------------
     def _build_ansgen_user_block(self, instruction: str, user_text: str) -> str:
         instruction = (instruction or "").strip()
         parts = []
@@ -90,9 +72,6 @@ class DeepSeekV32MCQHandler:
         parts.append("Answer:")
         return "\n".join(parts).strip()
 
-    # -----------------------------------------------------------
-    # Letter extractor (MCQ only)
-    # -----------------------------------------------------------
     def _extract_letter(self, text: str) -> Optional[str]:
         if not text:
             return None
@@ -105,9 +84,6 @@ class DeepSeekV32MCQHandler:
             return m.group(1)
         return None
 
-    # -----------------------------------------------------------
-    # API call with retries
-    # -----------------------------------------------------------
     def _call_api(self, user_block: str, max_tokens: int) -> Optional[str]:
         last_err = None
         for i in range(self.max_retries):
@@ -130,9 +106,6 @@ class DeepSeekV32MCQHandler:
         print(f"[DeepSeekV32MCQ] API failed after retries: {last_err}")
         return None
 
-    # -----------------------------------------------------------
-    # Main Entry
-    # -----------------------------------------------------------
     def prompt(
         self,
         sample: Dict[str, Any],
@@ -143,7 +116,6 @@ class DeepSeekV32MCQHandler:
     ):
         task_type = (task_type or "mcq").strip().lower()
 
-        # ----------------------- MCQ -----------------------
         if task_type == "mcq":
             mcq_text = self._build_mcq_text(sample)
             if not mcq_text:
@@ -159,19 +131,18 @@ class DeepSeekV32MCQHandler:
                 print("[DeepSeekV32MCQ] Could not extract clean A-F letter.")
             return letter
 
-        # ---------------- Answer generation ----------------
         elif task_type == "answer_generation":
             user_text = self._build_ansgen_text(sample)
             if not user_text:
                 print("[DeepSeekV32MCQ] Empty question; cannot build answer-generation prompt.")
                 return ""
-            # Give generation enough room; callers can still override.
+                
             gen_max_tokens = max_tokens if max_tokens and max_tokens > 32 else 256
             user_block = self._build_ansgen_user_block(instruction, user_text)
             raw = self._call_api(user_block, max_tokens=gen_max_tokens)
             if not raw:
                 return ""
-            # Strip a leading "Answer:" / "ANSWER:" if the model echoes it.
+ 
             cleaned = re.sub(r"^\s*ANSWER\s*[:=]\s*", "", raw, flags=re.IGNORECASE).strip()
             one_line = cleaned.split("\n")[0].strip()
             print(f"[DeepSeekV32MCQ] Answer-gen raw (one line): {repr(one_line[:200])}")
@@ -182,9 +153,6 @@ class DeepSeekV32MCQHandler:
                 f"Unsupported task_type={task_type}. Expected 'mcq' or 'answer_generation'."
             )
 
-    # -----------------------------------------------------------
-    # Batch
-    # -----------------------------------------------------------
     def prompt_batch(
         self,
         samples: List[Dict[str, Any]],
