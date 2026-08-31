@@ -1,119 +1,81 @@
-# Language-Aware Adaptation of General-Purpose LLMs for Arabic Medical Tasks
+# Bridging the English-Arabic Medical Knowledge Gap
 
-This repository contains the experimental codebase for running and evaluating
-LLM adaptation experiments on multiple tasks (mcq and answer generation),
-driven by yaml configuration files.
+This repository provides the code for **TLoRA (Targeted Low-Rank Adaptation)**, described in the paper ["Bridging the English-Arabic Medical Knowledge Gap: Targeted Low-Rank Adaptation via Causal Layer Selection"](https://arxiv.org/abs/2608.00207v1), accepted to Findings of EMNLP 2026. We show that Arabic medical knowledge is present in intermediate LLM representations but fails to surface at the output, and use mechanistic interpretability methods to localize this failure to a specific layer window. TLoRA restricts LoRA adaptation to that window, outperforming full-network LoRA and other baselines on Arabic medical QA. We also introduce **AraClinicDialog**, a clinician-constructed Arabic medical dialogue benchmark in MSA with validated variants across four Arabic dialects.
 
-## 1. Environment Setup
+## Installation
 
-This project uses **Conda**.
-**The Conda environment must be activated before running any scripts.**
+Clone the repo:
 
-### Create the environment
-
-```bash
-conda create -n adaptation python=3.10
+```
+git clone https://github.com/cha-y-mae/Adaptation.git
+cd Adaptation
 ```
 
-### Activate the environment
+Create a virtual environment (Python 3.<X> or above) and install the requirements:
 
-```bash
-conda activate adaptation
 ```
-
-### Install dependencies
-
-```bash
+conda create -n adaptation python=3.<X> && conda activate adaptation
 pip install -r requirements.txt
 ```
 
----
+<!-- TODO: fill in the minimum Python version, and add any HF/API token setup instructions here if scripts require huggingface-cli login or an API key (e.g. for GPT-4o / Claude / Gemini baselines). -->
 
-## 2. Repository Structure 
+## Repository structure
 
-## Repository Structure
-
-```text
+```
 Adaptation/
-├── configs/                # YAML configs per task & model
-│   ├── task1/
-│   │   └── gpt5.yaml
-│   └── task2/
-│       └── gpt5.yaml
-│
-├── datasets/
-│   └── qa/                 # Task 1 & Task 2 datasets
-│       ├── arastem.json
-│       ├── medarabench.json
-│       ├── medarabiq.json
-│       ├── mmlu-arabic.json
-│
-├── evals/                  # Evaluation scripts
-│   ├── evaluator.py
-│   ├── metrics.py
-│   └── __init__.py
-│
-├── models/                 # Model handlers / wrappers
-│   ├── llama70.py
-│   ├── meditron70_handler.py
-│   ├── openai_handler.py
-│   └── __init__.py
-│
-├── prompts/                # Prompt templates per task
-│   ├── task1.txt
-│   └── task2.txt
-│
-├── scripts/                # Entry-point scripts
-│   ├── run_evaluation.py
-│   ├── utils.py
-│   └── __init__.py
-│
-├── results/
-│   ├── metrics/            # Aggregated evaluation results
-│   │   ├── task1/
-│   │   └── task2/
-│   └── predictions/        # Model outputs / predictions
-│       ├── task1/
-│       └── task2/
-│
-└── README.md
+├── configs/      # experiment config files (model, layer window, learning rate, etc.)
+├── datasets/     # dataset files 
+├── diagnosis/    # tuned lens probing, causal activation patching, KL-divergence profiling scripts 
+├── evals/        # evaluation scripts and metrics
+├── models/       # model scripts for TLoRA and baselines
+├── prompts/      # system prompts used for each task
+├── scripts/      # entry-point scripts for running the pipeline
+├── results/      # generated outputs 
+└── requirements.txt
 ```
 
-## 3. Running an Experiment
-
-### Set API Keys
-
-Make sure the required API keys are set as environment variables:
-
-```bash
-export OPENAI_API_KEY="your_openai_api_key_here"
-export HF_KEY="your_openai_api_key_here"
-```
-
-### Set environment variables for variables/caching
-
-```bash
-HF_HOME=/scratch/$USER/huggingface
-HF_HUB_CACHE=/scratch/$USER/huggingface/hub
-TRANSFORMERS_CACHE=/scratch/$USER/huggingface/transformers
-```
-
-### Configure the Experiment
-
-Configuration files are stored under the `configs/` directory.
-Each config defines:
-
-* model type and model name
-* dataset paths
-* prompt/task settings
+## Usage
 
 
-### Run the Experiment
 
-Always run experiments **from the root directory of the repository**. Same command below: 
-
-```bash
-python scripts/run_evaluation.py configs/task1/gpt5.yaml
+### 1. Mechanistic diagnosis (tuned lens + causal activation patching)
 
 ```
+python diagnosis/<script>.py --config configs/<diagnosis_config>.yaml
+```
 
+### 2. Train TLoRA
+
+```
+python scripts/<train_script>.py --config configs/<tlora_config>.yaml
+```
+
+### 3. Evaluate
+
+```
+python evals/<eval_script>.py --config configs/<eval_config>.yaml --task {mcqa,generation,dialogue}
+```
+
+## Reproducing results
+
+All headline numbers reported in the paper (Tables 1–3 and appendix Tables S18–S24) can be reproduced by running the relevant config.
+
+## AraClinicDialog
+
+AraClinicDialog is our clinician-constructed Arabic medical dialogue benchmark, released in `datasets/`. <!-- TODO: confirm exact path/access instructions, and add license/usage terms for the dataset itself if different from the code license. -->
+
+## Citing this work
+
+```bibtex
+@inproceedings{abouzahir2026bridging,
+      title={Bridging the {E}nglish-{A}rabic Medical Knowledge Gap: Targeted Low-Rank Adaptation via Causal Layer Selection},
+      author={Abouzahir, Chaimae and Khan, Musa and Ali-Hassan, Hala and Ma, Congbo and Saleh, Khaled and Sadqi, Yousra and Mallat, Jihad and Al-Eisawi, Walid and Habash, Nizar and Shamout, Farah E.},
+      booktitle={Findings of the Association for Computational Linguistics: EMNLP 2026},
+      year={2026},
+      url={https://openreview.net/forum?id=GLWhomy55Q},
+}
+```
+## Contact
+
+Please direct any questions to ca2627@nyu.edu.
