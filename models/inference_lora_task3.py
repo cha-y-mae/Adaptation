@@ -11,12 +11,10 @@ from mistral_common.protocol.instruct.request import ChatCompletionRequest
 from mistral_common.tokens.tokenizers.mistral import MistralTokenizer
 from transformers import Mistral3ForConditionalGeneration, BitsAndBytesConfig
 from peft import PeftModel
-
 from evals.metrics import calculate_bert_score
 
-
 def parse_dialogue_prediction(raw: str) -> str:
-    """Extract text after 'ANSWER: ' prefix. Falls back to full raw text."""
+    """Extract text after 'ANSWER: ' prefix. Falls back to full raw text"""
     if not raw:
         return ""
     for line in raw.splitlines():
@@ -36,14 +34,6 @@ os.environ.setdefault("HF_HOME", HF_CACHE)
 os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 os.environ.setdefault("CUDA_LAUNCH_BLOCKING", "1")
 os.environ.setdefault("TORCH_USE_CUDA_DSA", "1")
-
-
-# ---------------------------------------------------------------------------
-# Build the user-facing text from the dialogue field.
-# Handles two common formats:
-#   (a) String — already formatted, used as-is.
-#   (b) List of dicts with "role"/"content" or "speaker"/"utterance" keys.
-# ---------------------------------------------------------------------------
 
 def build_dialogue_text(item: dict) -> str:
     dialogue = item.get("Dialogue", "")
@@ -78,11 +68,6 @@ def build_dialogue_text(item: dict) -> str:
 
     return ""
 
-
-# ---------------------------------------------------------------------------
-# Inference class — identical to Task 2 except generate_raw uses dialogue text
-# ---------------------------------------------------------------------------
-
 class MistralLoRADialogueInference:
     def __init__(
         self,
@@ -116,7 +101,7 @@ class MistralLoRADialogueInference:
                 raise ValueError(
                     f"offline=True but base_model is not a local directory: {self.base_model}"
                 )
-            self.tokenizer = MistralTokenizer.from_hf_hub(self.base_model)
+            self.tokenizer = MistralTokenizer.from_file("/scratch/ca2627/hf_models/mistral_small_3_2_24b_2506/tekken.json")
 
         print("[INFO] Loading base model...")
         if self.use_4bit:
@@ -194,11 +179,6 @@ class MistralLoRADialogueInference:
         finally:
             torch.cuda.empty_cache()
 
-
-# ---------------------------------------------------------------------------
-# Main
-# ---------------------------------------------------------------------------
-
 def main():
     parser = argparse.ArgumentParser(description="LoRA inference — Task 3 Dialogue Completion")
     parser.add_argument("--test_file",        type=str, required=True)
@@ -216,14 +196,11 @@ def main():
                         help="Device for BERTScore (e.g. 'cuda:0' or 'cpu')")
     args = parser.parse_args()
 
-    # ── Load instruction ──────────────────────────────────────────────────────
     with open(args.instruction_file, "r", encoding="utf-8") as f:
         instruction = f.read().strip()
 
-    # ── Load data ─────────────────────────────────────────────────────────────
     dataset = load_json(args.test_file)
 
-    # ── Run inference ─────────────────────────────────────────────────────────
     runner = MistralLoRADialogueInference(
         base_model=args.base_model,
         adapter_path=args.adapter_path,
@@ -253,7 +230,6 @@ def main():
             "raw_output":   raw_pred,   # keep for debugging
         })
 
-    # ── Save predictions CSV ──────────────────────────────────────────────────
     output_dir = os.path.dirname(args.output_file)
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
@@ -265,7 +241,6 @@ def main():
 
     print(f"[INFO] Saved predictions CSV to {args.output_file}")
 
-    # ── BERTScore ─────────────────────────────────────────────────────────────
     predictions   = [r["prediction"]   for r in outputs]
     ground_truths = [r["ground_truth"] for r in outputs]
 
@@ -282,7 +257,6 @@ def main():
         print("[WARN] BERTScore failed or bert_score not installed.")
         bert_metrics = {}
 
-    # ── Save metrics JSON ─────────────────────────────────────────────────────
     metrics_dir = os.path.dirname(args.metrics_file)
     if metrics_dir:
         os.makedirs(metrics_dir, exist_ok=True)
