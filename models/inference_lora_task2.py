@@ -25,7 +25,6 @@ os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 os.environ.setdefault("CUDA_LAUNCH_BLOCKING", "1")
 os.environ.setdefault("TORCH_USE_CUDA_DSA", "1")
 
-# ── Judge constants (mirrored from run_judge.py) ────────────────────────────
 JUDGE_MODEL      = "gpt-4o"
 JUDGE_MAX_TOKENS = 50
 JUDGE_TEMP       = 0
@@ -48,9 +47,6 @@ DEFAULT_JUDGE_USER = (
     "Respond with exactly one of: [Correct] or [Incorrect]."
 )
 
-
-# ── Helpers ─────────────────────────────────────────────────────────────────
-
 def load_json(path: str) -> List[dict]:
     with open(path, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -58,14 +54,11 @@ def load_json(path: str) -> List[dict]:
         raise ValueError(f"Expected JSON list in {path}")
     return data
 
-
 def build_ansgen_text(item: dict) -> str:
     """Question only — no options."""
     return (item.get("question") or "").strip()
 
-
 def load_judge_prompt(prompt_path: Optional[str]):
-    """Load system + user template from a txt file (--- separator), or return defaults."""
     if not prompt_path:
         return DEFAULT_JUDGE_SYSTEM, DEFAULT_JUDGE_USER
     with open(prompt_path, "r", encoding="utf-8") as f:
@@ -74,7 +67,6 @@ def load_judge_prompt(prompt_path: Optional[str]):
         system_part, user_part = content.split("---", 1)
         return system_part.strip(), user_part.strip()
     return DEFAULT_JUDGE_SYSTEM, content.strip()
-
 
 def parse_label(raw: str) -> str:
     m = re.search(r"\[([^\]]+)\]", raw)
@@ -90,7 +82,6 @@ def parse_label(raw: str) -> str:
             return label
     logging.warning(f"[judge] could not parse label from: {repr(raw)}")
     return ""
-
 
 def call_judge(client, system_prompt: str, user_template: str,
                question_stem: str, reference_answer: str, generated_answer: str) -> str:
@@ -118,7 +109,6 @@ def call_judge(client, system_prompt: str, user_template: str,
     logging.error("[judge] all retries exhausted — returning empty label")
     return ""
 
-
 def compute_judge_metrics(labels: list) -> dict:
     total  = len(labels)
     valid  = [l for l in labels if l in VALID_LABELS]
@@ -139,9 +129,6 @@ def compute_judge_metrics(labels: list) -> dict:
         "judge_incorrect": counts["Incorrect"],
         **pcts,
     }
-
-
-# ── Inference class ──────────────────────────────────────────────────────────
 
 class MistralLoRAAnsgенInference:
     def __init__(
@@ -254,9 +241,6 @@ class MistralLoRAAnsgенInference:
         finally:
             torch.cuda.empty_cache()
 
-
-# ── Main ─────────────────────────────────────────────────────────────────────
-
 def main():
     logging.basicConfig(level=logging.INFO, format="%(asctime)s|%(levelname)s|%(message)s")
 
@@ -283,14 +267,11 @@ def main():
                              "Judge is skipped if neither is set.")
     args = parser.parse_args()
 
-    # ── Load instruction ──────────────────────────────────────────────────────
     with open(args.instruction_file, "r", encoding="utf-8") as f:
         instruction = f.read().strip()
 
-    # ── Load data ─────────────────────────────────────────────────────────────
     dataset = load_json(args.test_file)
 
-    # ── Run inference ─────────────────────────────────────────────────────────
     runner = MistralLoRAAnsgенInference(
         base_model=args.base_model,
         adapter_path=args.adapter_path,
@@ -310,7 +291,9 @@ def main():
         )
         pred_main, _ = split_prediction(raw_pred, "answer_generation")
         pred_out  = "" if pred_main is None else pred_main
-        gt        = (item.get("answer") or "").strip()
+        answer_key = (item.get("answer") or "").strip()
+        options    = item.get("options") or {}
+        gt         = options.get(answer_key, answer_key).strip()
 
         outputs.append({
             "id":           item_id,
@@ -319,7 +302,6 @@ def main():
             "ground_truth": gt,
         })
 
-    # ── Save predictions CSV ─────────────────────────────────────────────────
     output_dir = os.path.dirname(args.output_file)
     if output_dir:
         os.makedirs(output_dir, exist_ok=True)
@@ -331,7 +313,6 @@ def main():
 
     print(f"[INFO] Saved predictions CSV to {args.output_file}")
 
-    # ── BERTScore ─────────────────────────────────────────────────────────────
     predictions  = [r["prediction"]   for r in outputs]
     ground_truths = [r["ground_truth"] for r in outputs]
 
@@ -348,7 +329,6 @@ def main():
         print("[WARN] BERTScore failed or bert_score not installed.")
         bert_metrics = {}
 
-    # ── LLM-as-Judge (optional) ───────────────────────────────────────────────
     api_key = args.openai_api_key or os.environ.get("OPENAI_API_KEY")
     judge_metrics = {}
 
@@ -384,7 +364,6 @@ def main():
         print("[INFO] No OpenAI API key found — skipping judge. "
               "Pass --openai_api_key or set OPENAI_API_KEY to enable.")
 
-    # ── Save combined metrics JSON ────────────────────────────────────────────
     metrics_dir = os.path.dirname(args.metrics_file)
     if metrics_dir:
         os.makedirs(metrics_dir, exist_ok=True)
@@ -396,7 +375,6 @@ def main():
 
     print(f"[INFO] Saved metrics JSON to {args.metrics_file}")
     print(f"[INFO] All metrics: {json.dumps(all_metrics, ensure_ascii=False, indent=2)}")
-
 
 if __name__ == "__main__":
     main()
