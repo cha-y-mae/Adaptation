@@ -11,16 +11,6 @@ os.environ.setdefault("PYTORCH_CUDA_ALLOC_CONF", "expandable_segments:True")
 
 
 class FalconH1MCQHandler:
-    """
-    MCQ-only handler for tiiuae/Falcon-H1-7B-Instruct.
-
-    Design goals:
-    - Keep eval prompt construction comparable to your other handlers.
-    - Prefer tokenizer chat template if available (Falcon-H1 provides one).
-    - Fall back to a plain prompt anchored with "Answer:" if chat template isn't present.
-    - Return a single letter A–F.
-    """
-
     def __init__(
         self,
         model_name: str = "tiiuae/Falcon-H1-7B-Instruct",
@@ -52,8 +42,6 @@ class FalconH1MCQHandler:
         if num_gpus == 0:
             raise RuntimeError("No CUDA GPUs available.")
 
-        # Falcon-H1 may rely on newer Transformers internals; trust_remote_code is a safe guard
-        # in case the repo ships custom modeling code.
         print("[Falcon-H1-7B-Instruct] Loading tokenizer...")
         self.tokenizer = AutoTokenizer.from_pretrained(
             self.model_name,
@@ -63,7 +51,6 @@ class FalconH1MCQHandler:
             trust_remote_code=True,
         )
 
-        # Ensure pad token exists (common for causal LMs)
         if self.tokenizer.pad_token_id is None:
             self.tokenizer.pad_token = self.tokenizer.eos_token
 
@@ -111,7 +98,6 @@ class FalconH1MCQHandler:
         return stem + "\n\n" + "\n".join(lines)
 
     def _build_plain_prompt(self, instruction: str, user_text: str) -> str:
-        # Same style as your Meditron handler: system-ish header + Answer: anchor.
         instruction = (instruction or "").strip()
         return (
             "You are a medical assistant. Answer the multiple-choice question.\n"
@@ -127,13 +113,9 @@ class FalconH1MCQHandler:
             return None
 
         upper = raw_text.strip().upper()
-
-        # Prefer strict format
         m = re.search(r"\bANSWER\s*[:=]\s*([A-F])\b", upper)
         if m:
             return m.group(1)
-
-        # Fallback: first standalone A-F
         m = re.search(r"\b([A-F])\b", upper)
         if m:
             return m.group(1)
@@ -150,7 +132,6 @@ class FalconH1MCQHandler:
             torch.cuda.empty_cache()
 
             if self.has_chat_template:
-                # Keep the same eval setup: system=instruction, user=question/options
                 messages = [
                     {"role": "system", "content": (instruction or "").strip()},
                     {"role": "user", "content": user_text},
@@ -170,7 +151,6 @@ class FalconH1MCQHandler:
                     add_special_tokens=True,
                 )
 
-            # Move tensors to the model's primary device
             inputs = {k: v.to(self.model.device) for k, v in inputs.items()}
             input_len = inputs["input_ids"].shape[-1]
 
