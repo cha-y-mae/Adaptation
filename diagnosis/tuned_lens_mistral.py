@@ -1,50 +1,5 @@
 """
-tuned_lens_mistral.py
----------------------
-Tuned-lens analysis for Mistral-Small-3.2-24B-Instruct-2506 on MedAraBench.
-
-Architecture notes
-──────────────────
-  Mistral3ForConditionalGeneration (multimodal wrapper)
-    └─ model.model                        Mistral3Model
-         └─ model.model.language_model    MistralForCausalLM
-              ├─ .model.layers[0..39]     40 × MistralDecoderLayer
-              ├─ .model.norm              final RMSNorm
-              └─ .lm_head                Linear(5120→131072, no bias)
-  model.lm_head also exists at top level (tied embed weights) — use
-  model.model.language_model.lm_head instead to be safe.
-
-Tokenizer: mistral_common MistralTokenizer loaded from tekken.json
-Answer token IDs (Tekken): A=1065, B=1066, C=1067, D=1068
-
-Two-phase workflow
-──────────────────
-Phase 1  --mode train
-    Collect hidden states at every probe layer, fit one AffineTranslator
-    T_l per layer to minimise KL( tuned_l ‖ final ).
-
-Phase 2  --mode eval
-    Load translators, run tuned-lens forward passes on sampled-quadrants
-    CSV, record P(correct) per layer per quadrant × language.
-
-Usage
-─────
-  # Phase 1 – train
-  python tuned_lens_mistral.py \\
-      --mode       train \\
-      --train_csv  mistral_sampled_quadrants.csv \\
-      --model_path /scratch/ca2627/huggingface/models--mistralai--Mistral-Small-3.2-24B-Instruct-2506/snapshots/95a6d26c4bfb886c58daf9d3f7332c857cb27b43 \\
-      --lens_dir   ./tuned_lens_mistral \\
-      --train_n    400 \\
-      --epochs     10
-
-  # Phase 2 – eval
-  python tuned_lens_mistral.py \\
-      --mode       eval \\
-      --csv        mistral_sampled_quadrants.csv \\
-      --model_path /scratch/ca2627/huggingface/models--mistralai--Mistral-Small-3.2-24B-Instruct-2506/snapshots/95a6d26c4bfb886c58daf9d3f7332c857cb27b43 \\
-      --lens_dir   ./tuned_lens_mistral \\
-      --out_dir    ./tuned_lens_mistral_out
+Tuned-lens analysis for Mistral-Small-3.2-24B-Instruct-2506 on MedAraBench!
 """
 
 import os, csv, re, argparse, math
@@ -57,14 +12,13 @@ import matplotlib.lines as mlines
 from collections import defaultdict
 from tqdm import tqdm
 
-# ── CLI ───────────────────────────────────────────────────────────────────────
 parser = argparse.ArgumentParser()
 parser.add_argument("--mode",        required=True, choices=["train", "eval"])
 parser.add_argument("--model_path",  required=True)
 parser.add_argument("--lens_dir",    default="./tuned_lens_mistral")
 parser.add_argument("--max_len",     type=int, default=512)
 
-# train-only
+#train-only
 parser.add_argument("--train_csv",   default=None)
 parser.add_argument("--train_n",     type=int, default=400)
 parser.add_argument("--epochs",      type=int, default=10)
@@ -72,7 +26,7 @@ parser.add_argument("--lr",          type=float, default=1e-3)
 parser.add_argument("--reg",         type=float, default=1e-4)
 parser.add_argument("--train_batch", type=int, default=4)
 
-# eval-only
+#eval-only
 parser.add_argument("--csv",         default=None)
 parser.add_argument("--out_dir",     default="./tuned_lens_mistral_out")
 parser.add_argument("--batch_size",  type=int, default=1)
@@ -82,14 +36,10 @@ os.makedirs(args.lens_dir, exist_ok=True)
 if args.mode == "eval":
     os.makedirs(args.out_dir, exist_ok=True)
 
-# ── Probe layers (40-layer model) ─────────────────────────────────────────────
-# hidden_states[0]  = embedding output
-# hidden_states[l]  = output of transformer layer l-1   (l=1..40)
-# hidden_states[40] = output of final layer 39 → feeds into final_norm
 PROBE_LAYERS = [0, 4, 8, 12, 16, 20, 24, 28, 32, 34, 36, 38, 39, 40]
 N_LAYERS     = 40
 
-# Confirmed by diagnose-mistral.py: bare letter tokens in Tekken tokenizer
+#bare letter tokens in Tekken tokenizer
 ANSWER_TOKEN_IDS = {"A": 1065, "B": 1066, "C": 1067, "D": 1068}
 
 QUAD_ORDER  = ["both_correct", "access_gap", "arabic_only", "both_wrong"]
@@ -113,7 +63,6 @@ SYSTEM_PROMPT = (
     "Do not explain your answer."
 )
 
-# ── Helpers ───────────────────────────────────────────────────────────────────
 def extract_letter(val):
     if not val or not isinstance(val, str): return ""
     s = val.strip().upper()
@@ -123,15 +72,7 @@ def extract_letter(val):
     return m.group(1) if m else ""
 
 
-# ── Model + tokenizer loading ─────────────────────────────────────────────────
 def load_model_and_tokenizer(model_path):
-    """
-    Load Mistral3ForConditionalGeneration in bfloat16.
-    Returns (model, tokenizer, final_norm, lm_head, pad_id).
-
-    final_norm  : model.model.language_model.model.norm
-    lm_head     : model.model.language_model.lm_head
-    """
     from mistral_common.tokens.tokenizers.mistral import MistralTokenizer as MCTokenizer
     from transformers import Mistral3ForConditionalGeneration
 
@@ -151,10 +92,7 @@ def load_model_and_tokenizer(model_path):
     model.eval()
     print(f"  type: {type(model).__name__}")
 
-    # ── Resolve architecture paths robustly ───────────────────────────────────
     def _get_norm(m):
-        # Confirmed path for Mistral3ForConditionalGeneration (via named_children probe):
-        #   model.model.language_model.norm  (no extra .model wrapper)
         for path, accessor in [
             ("model.model.language_model.norm",
              lambda m: m.model.language_model.norm),
@@ -173,7 +111,7 @@ def load_model_and_tokenizer(model_path):
         raise RuntimeError("Cannot find final_norm in model. Check architecture.")
 
     def _get_lm_head(m):
-        # model.lm_head exists at top level (confirmed by diagnose output)
+        #model.lm_head exists at top level , confirmed by diagnose output
         for path, accessor in [
             ("model.lm_head",
              lambda m: m.lm_head),
@@ -213,13 +151,7 @@ def load_model_and_tokenizer(model_path):
 
     return model, tokenizer, final_norm, lm_head, n_layers, pad_id
 
-
-# ── Tokenisation ──────────────────────────────────────────────────────────────
 def tokenize_batch(texts, tokenizer, pad_id, max_len):
-    """
-    Use mistral_common to apply the instruct template, then pad left.
-    Returns (input_ids CPU, attn_mask CPU, seq_lens CPU).
-    """
     from mistral_common.protocol.instruct.messages import UserMessage, SystemMessage
     from mistral_common.protocol.instruct.request import ChatCompletionRequest
 
@@ -246,14 +178,7 @@ def tokenize_batch(texts, tokenizer, pad_id, max_len):
     seq_lens = mask.sum(dim=1) - 1   # index of last real token (keep on CPU)
     return inp, mask, seq_lens
 
-
-# ── Affine Translator ─────────────────────────────────────────────────────────
 class AffineTranslator(nn.Module):
-    """
-    T_l(h) = h + W_l @ h + b_l
-    W_l zero-initialised → identity at start.
-    Trained to minimise KL(p_translated ‖ p_final) + λ||W_l||²_F
-    """
     def __init__(self, d: int):
         super().__init__()
         self.W = nn.Parameter(torch.zeros(d, d))
@@ -262,8 +187,6 @@ class AffineTranslator(nn.Module):
     def forward(self, h: torch.Tensor) -> torch.Tensor:
         return h + h @ self.W.T + self.b
 
-
-# ── Phase 1: Training ─────────────────────────────────────────────────────────
 def train_translators(args, model, tokenizer, final_norm, lm_head, n_layers, pad_id):
     # Input device is always cuda:0 (embeddings live there under device_map="auto")
     input_device = torch.device("cuda:0")
@@ -272,7 +195,6 @@ def train_translators(args, model, tokenizer, final_norm, lm_head, n_layers, pad
 
     print(f"\nTraining — input_device={input_device}, proj_device={proj_device}")
 
-    # ── Load training data ────────────────────────────────────────────────────
     print(f"Loading training CSV: {args.train_csv}")
     rows = []
     with open(args.train_csv, newline="", encoding="utf-8") as f:
@@ -281,7 +203,6 @@ def train_translators(args, model, tokenizer, final_norm, lm_head, n_layers, pad
     texts = [r["input_english"] for r in rows[:args.train_n]]
     print(f"  Using {len(texts)} training examples")
 
-    # ── Collect hidden states (one pass, all saved on CPU) ────────────────────
     print("\nCollecting hidden states ...")
     hs_by_layer       = defaultdict(list)
     final_logits_list = []
@@ -303,19 +224,19 @@ def train_translators(args, model, tokenizer, final_norm, lm_head, n_layers, pad
             # Final logits at last-token position
             fin_log = out.logits[
                 torch.arange(bs), seq_lens
-            ].float().cpu()                                    # (bs, vocab)
+            ].float().cpu()                                    #(bs, vocab)
             final_logits_list.append(fin_log)
 
             for l in LAYERS_TO_SAVE:
-                hs   = out.hidden_states[l]                    # (bs, seq, d)
+                hs   = out.hidden_states[l]                    #(bs, seq, d)
                 last = hs[torch.arange(bs), seq_lens].float().cpu()
                 hs_by_layer[l].append(last)
 
-    final_logits_all = torch.cat(final_logits_list, dim=0)     # (N, vocab)
+    final_logits_all = torch.cat(final_logits_list, dim=0)     #(N, vocab)
     final_probs_all  = F.softmax(final_logits_all, dim=-1)
 
     for l in PROBE_LAYERS:
-        hs_by_layer[l] = torch.cat(hs_by_layer[l], dim=0)     # (N, d)
+        hs_by_layer[l] = torch.cat(hs_by_layer[l], dim=0)     #(N, d)
 
     N_train = final_probs_all.shape[0]
     d = hs_by_layer[PROBE_LAYERS[0]].shape[-1]
@@ -326,7 +247,6 @@ def train_translators(args, model, tokenizer, final_norm, lm_head, n_layers, pad
     # Instead we move translator + batches to proj_device during training.
     norm_dtype = next(final_norm.parameters()).dtype
 
-    # ── Train one translator per non-trivial probe layer ─────────────────────
     layers_to_train = [l for l in PROBE_LAYERS if 0 < l < n_layers]
     print(f"\nTraining translators for layers: {layers_to_train}")
 
@@ -381,8 +301,6 @@ def train_translators(args, model, tokenizer, final_norm, lm_head, n_layers, pad
 
     print("\nTraining complete.")
 
-
-# ── Phase 2: Evaluation ───────────────────────────────────────────────────────
 def run_tuned_lens(texts, gt_letters, model, tokenizer, final_norm, lm_head,
                    translators, n_layers, pad_id, label=""):
     input_device = torch.device("cuda:0")
@@ -439,7 +357,6 @@ def run_tuned_lens(texts, gt_letters, model, tokenizer, final_norm, lm_head,
 
 
 def eval_mode(args, model, tokenizer, final_norm, lm_head, n_layers, pad_id):
-    # ── Load translators ──────────────────────────────────────────────────────
     d = lm_head.weight.shape[1]
     translators = {}
     for l in PROBE_LAYERS:
@@ -455,7 +372,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head, n_layers, pad_id):
         translators[l] = t
     print(f"Loaded {len(translators)} translators: {sorted(translators.keys())}")
 
-    # ── Load eval CSV ─────────────────────────────────────────────────────────
     print(f"\nLoading eval CSV: {args.csv}")
     rows = []
     with open(args.csv, newline="", encoding="utf-8") as f:
@@ -475,7 +391,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head, n_layers, pad_id):
     for q in QUAD_ORDER:
         print(f"    {q}: {quad_counts[q]}")
 
-    # ── Forward passes ────────────────────────────────────────────────────────
     print(f"\nRunning tuned-lens — English ({N} questions) ...")
     en_ranks, en_probs = run_tuned_lens(
         en_texts, gt_letters, model, tokenizer, final_norm, lm_head,
@@ -486,7 +401,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head, n_layers, pad_id):
         ar_texts, gt_letters, model, tokenizer, final_norm, lm_head,
         translators, n_layers, pad_id, label="AR")
 
-    # ── Save ──────────────────────────────────────────────────────────────────
     out_npz = os.path.join(args.out_dir, "tuned_lens_results.npz")
     np.savez(out_npz,
              en_ranks=en_ranks, en_probs=en_probs,
@@ -494,7 +408,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head, n_layers, pad_id):
              quadrants=quadrants, layers=np.array(PROBE_LAYERS))
     print(f"\nSaved → {out_npz}")
 
-    # ── Console summary ───────────────────────────────────────────────────────
     print("\n── Mean P(correct) at each probe layer (tuned lens) ──")
     header = "  ".join([f"L{l:2d}" for l in PROBE_LAYERS])
     print(f"{'Quadrant / Lang':<25} {header}")
@@ -508,8 +421,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head, n_layers, pad_id):
             print(f"  {q[:15]:<15} {lang_name:<8} {vals}")
         print()
 
-    # ── Plot ──────────────────────────────────────────────────────────────────
-    # Probability only (rank uninformative with vocab=131K)
     print("Generating figure ...")
     fig, ax = plt.subplots(figsize=(10, 6))
 
@@ -563,7 +474,6 @@ def eval_mode(args, model, tokenizer, final_norm, lm_head, n_layers, pad_id):
     print("\nDone.")
 
 
-# ── Entry point ───────────────────────────────────────────────────────────────
 if __name__ == "__main__":
     model, tokenizer, final_norm, lm_head, n_layers, pad_id = \
         load_model_and_tokenizer(args.model_path)
