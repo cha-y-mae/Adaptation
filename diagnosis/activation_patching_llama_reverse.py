@@ -1,19 +1,5 @@
 """
-activation_patching_llama_reverse.py
---------------------------------------
-Reverse causal activation patching for Llama 3.3 70B on MedAraBench.
-Direction: Arabic → English  (AR hidden states injected into EN forward pass)
-
-  Phase 1 — Arabic forward pass, cache last-token hidden state per probe layer.
-  Phase 2 — English baseline (no patching).
-  Phase 3 — Inject cached Arabic hidden states into English forward pass,
-             measure P(correct letter). Metric = degradation %.
-
-Usage:
-  python activation_patching_llama_reverse.py \\
-      --csv        llama_sampled_quadrants.csv \\
-      --model_path /scratch/ca2627/huggingface/models--meta-llama--Llama-3.3-70B-Instruct/snapshots/<hash> \\
-      --out_dir    ./activation_patching_llama_reverse_out
+Reverse causal activation patching for Llama 3.3 70B on MedAraBench
 """
 
 import os, csv, re, argparse
@@ -69,7 +55,6 @@ def extract_letter(val):
     m = re.search(r'\b([A-F])\b', s)
     return m.group(1) if m else ""
 
-# ── Load CSV ──────────────────────────────────────────────────────────────────
 print(f"Loading {args.csv}...")
 rows = []
 with open(args.csv, newline="", encoding="utf-8") as f:
@@ -83,7 +68,6 @@ gt_letters = [extract_letter(r["ground_truth"]) for r in ag_rows]
 N = len(ag_rows)
 print(f"  Total rows: {len(rows)} | access_gap: {N}")
 
-# ── Load model ────────────────────────────────────────────────────────────────
 print("\nLoading Llama 3.3 70B...")
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 
@@ -125,7 +109,6 @@ for letter, tid in ANSWER_TOKEN_IDS.items():
     if decoded.upper() != letter:
         print(f"  [WARN] Token {tid} decodes as {repr(decoded)}, not '{letter}'")
 
-# ── Tokenise helper ───────────────────────────────────────────────────────────
 def tokenize_batch(texts):
     all_ids = []
     for t in texts:
@@ -161,7 +144,6 @@ def correct_probs(logits, seq_lens, gt_batch):
         result[j] = probs_all[j, seq_lens[j], ANSWER_TOKEN_IDS[gt]].item()
     return result
 
-# ── Phase 1: Arabic forward pass — cache hidden states ────────────────────────
 print(f"\nPhase 1: Arabic forward pass — caching layers {PROBE_LAYERS} ...")
 ar_hs        = {L: [] for L in PROBE_LAYERS}
 ar_base_prob = []
@@ -191,7 +173,6 @@ for L in PROBE_LAYERS:
 ar_base_prob = np.array(ar_base_prob)
 print(f"  Arabic baseline mean P(correct): {ar_base_prob.mean():.3f}")
 
-# ── Phase 2: English baseline ─────────────────────────────────────────────────
 print(f"\nPhase 2: English baseline (no patching) ...")
 en_base_prob = []
 
@@ -213,7 +194,6 @@ for i in range(0, N, args.batch_size):
 en_base_prob = np.array(en_base_prob)
 print(f"  English baseline mean P(correct): {en_base_prob.mean():.3f}")
 
-# ── Phase 3: Reverse patching — inject Arabic into English ────────────────────
 patch_results = {}
 
 for config_name, patch_layers in PATCH_CONFIGS.items():
@@ -265,7 +245,6 @@ for config_name, patch_layers in PATCH_CONFIGS.items():
     patch_results[config_name] = np.array(config_probs)
     print(f"  Mean P(correct): {patch_results[config_name].mean():.3f}")
 
-# ── Save ──────────────────────────────────────────────────────────────────────
 out_npz = os.path.join(args.out_dir, "patching_results_reverse.npz")
 save_dict = dict(en_base_prob=en_base_prob, ar_base_prob=ar_base_prob,
                  gt_letters=np.array(gt_letters))
@@ -273,7 +252,6 @@ save_dict.update(patch_results)
 np.savez(out_npz, **save_dict)
 print(f"\nSaved → {out_npz}")
 
-# ── Summary ───────────────────────────────────────────────────────────────────
 ar_mean = ar_base_prob.mean()
 en_mean = en_base_prob.mean()
 gap     = en_mean - ar_mean
@@ -289,7 +267,6 @@ for c in PATCH_CONFIGS:
     print(f"  {c:<22} {m:>10.3f}  {degradation(m):>11.1f}%")
 print(f"  {'ar_base':<22} {ar_mean:>10.3f}  {'(100%)':>12}")
 
-# ── Figure ────────────────────────────────────────────────────────────────────
 PALETTE = {'Base': '#87CEEB', 'CoT': '#2A9D8F',
            'IR': '#0D3349', 'AP': '#F4C430', 'FS': '#F07C00', 'MP': '#C0392B'}
 _PATCH_CMAP = LinearSegmentedColormap.from_list(
