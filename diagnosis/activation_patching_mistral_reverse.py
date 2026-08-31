@@ -1,30 +1,5 @@
 """
-activation_patching_mistral_reverse.py
-----------------------------------------
-Reverse causal activation patching for Mistral-Small-3.2-24B on MedAraBench.
-
-Direction: Arabic → English  (opposite of the forward script)
-  Phase 1 — Arabic forward pass, cache last-token hidden state per probe layer.
-  Phase 2 — English baseline (no patching).
-  Phase 3 — For each patch config, inject cached Arabic hidden states into
-             the English forward pass via forward hooks, measure P(correct letter).
-
-Interpretation:
-  Forward patching (EN→AR) measures how much English representations *help* Arabic.
-  Reverse patching (AR→EN) measures how much Arabic representations *hurt* English.
-  If reverse patching degrades English performance symmetrically, the effect is
-  bidirectional and the hidden states carry genuine language-specific information.
-  If English is robust to Arabic injection, it suggests English context is doing
-  heavy lifting that Arabic context cannot override.
-
-  Degradation % = (en_base − patched) / (en_base − ar_base) × 100
-  (0% = no degradation; 100% = patched English drops to Arabic level)
-
-Usage:
-  python activation_patching_mistral_reverse.py \\
-      --csv        mistral_sampled_quadrants.csv \\
-      --model_path /scratch/ca2627/huggingface/models--mistralai--Mistral-Small-3.2-24B-Instruct-2506/snapshots/<hash> \\
-      --out_dir    ./activation_patching_mistral_reverse_out
+Reverse causal activation patching for Mistral-Small-3.2-24B on MedAraBench
 """
 
 import os, csv, re, argparse
@@ -42,7 +17,6 @@ parser.add_argument("--max_len",    type=int, default=512)
 args = parser.parse_args()
 os.makedirs(args.out_dir, exist_ok=True)
 
-# Same probe layers as forward script
 PROBE_LAYERS = [4, 8, 12, 16, 20, 24, 28, 32, 34, 36, 38, 40]
 
 PATCH_CONFIGS = {
@@ -82,7 +56,6 @@ def extract_letter(val):
     m = re.search(r'\b([A-F])\b', s)
     return m.group(1) if m else ""
 
-# ── Load CSV — keep only access_gap ───────────────────────────────────────────
 print(f"Loading {args.csv}...")
 rows = []
 with open(args.csv, newline="", encoding="utf-8") as f:
@@ -96,7 +69,6 @@ gt_letters = [extract_letter(r["ground_truth"]) for r in ag_rows]
 N = len(ag_rows)
 print(f"  Total rows: {len(rows)} | access_gap: {N}")
 
-# ── Load model ────────────────────────────────────────────────────────────────
 print("\nLoading Mistral-Small-3.2-24B...")
 from transformers import AutoTokenizer, Mistral3ForConditionalGeneration
 
@@ -143,7 +115,6 @@ for letter, tid in ANSWER_TOKEN_IDS.items():
     status = "✓" if decoded.upper() == letter else f"[WARN] decodes as {repr(decoded)}"
     print(f"    {letter} → {tid}  {status}")
 
-# ── Tokenise helper ───────────────────────────────────────────────────────────
 def tokenize_batch(texts):
     all_ids = []
     for t in texts:
@@ -179,8 +150,6 @@ def correct_probs(logits, seq_lens, gt_batch):
         result[j] = probs_all[j, seq_lens[j], ANSWER_TOKEN_IDS[gt]].item()
     return result
 
-# ── Phase 1: Arabic forward pass — cache hidden states ────────────────────────
-# NOTE: Reversed from forward script — we cache Arabic, not English.
 print(f"\nPhase 1: Arabic forward pass — caching layers {PROBE_LAYERS} ...")
 ar_hs        = {L: [] for L in PROBE_LAYERS}
 ar_base_prob = []
@@ -210,8 +179,6 @@ for L in PROBE_LAYERS:
 ar_base_prob = np.array(ar_base_prob)
 print(f"  Arabic baseline mean P(correct): {ar_base_prob.mean():.3f}")
 
-# ── Phase 2: English baseline ─────────────────────────────────────────────────
-# NOTE: Reversed from forward script — English is now the "clean" run we perturb.
 print(f"\nPhase 2: English baseline (no patching) ...")
 en_base_prob = []
 
@@ -233,7 +200,6 @@ for i in range(0, N, args.batch_size):
 en_base_prob = np.array(en_base_prob)
 print(f"  English baseline mean P(correct): {en_base_prob.mean():.3f}")
 
-# ── Phase 3: Reverse patching — inject Arabic into English ────────────────────
 patch_results = {}
 
 for config_name, patch_layers in PATCH_CONFIGS.items():
@@ -246,7 +212,7 @@ for config_name, patch_layers in PATCH_CONFIGS.items():
         bs       = len(batch_en)
         input_ids, attn_mask, seq_lens = tokenize_batch(batch_en)
 
-        # Arabic activations injected into English forward pass
+        #arabic activations injected into english forward pass
         batch_ar_hs = {L: torch.tensor(ar_hs[L][i : i + bs]) for L in patch_layers}
 
         handles = []
@@ -281,7 +247,6 @@ for config_name, patch_layers in PATCH_CONFIGS.items():
     patch_results[config_name] = np.array(config_probs)
     print(f"  Mean P(correct): {patch_results[config_name].mean():.3f}")
 
-# ── Save ──────────────────────────────────────────────────────────────────────
 out_npz = os.path.join(args.out_dir, "patching_results_reverse.npz")
 save_dict = dict(en_base_prob=en_base_prob, ar_base_prob=ar_base_prob,
                  gt_letters=np.array(gt_letters))
@@ -289,7 +254,6 @@ save_dict.update(patch_results)
 np.savez(out_npz, **save_dict)
 print(f"\nSaved → {out_npz}")
 
-# ── Summary ───────────────────────────────────────────────────────────────────
 ar_mean = ar_base_prob.mean()
 en_mean = en_base_prob.mean()
 gap     = en_mean - ar_mean
@@ -306,7 +270,6 @@ for c in PATCH_CONFIGS:
     print(f"  {c:<22} {m:>10.3f}  {degradation(m):>11.1f}%")
 print(f"  {'ar_base':<22} {ar_mean:>10.3f}  {'(100%)':>12}")
 
-# ── Figure ────────────────────────────────────────────────────────────────────
 PALETTE = {
     'Base': '#87CEEB',
     'CoT':  '#2A9D8F',
