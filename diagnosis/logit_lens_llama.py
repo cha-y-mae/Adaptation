@@ -1,38 +1,5 @@
 """
-logit_lens_llama.py
--------------------
-Logit lens analysis for Llama 3.3 70B on MedAraBench.
-Adapted from logit_lens.py (Mistral-Small-3.2-24B).
-
-Key differences:
-  - LlamaForCausalLM (simpler path than Mistral's multimodal wrapper)
-  - AutoTokenizer + apply_chat_template (not MistralTokenizer)
-  - 4-bit quantization (70B doesn't fit in bfloat16 on 80GB)
-  - 80 transformer layers → probe at {0,8,16,24,32,40,48,56,64,72,79}
-  - Answer token IDs computed dynamically from Llama tokenizer
-
-Input CSV must have columns:
-  id, quadrant, ground_truth, input_english, input_arabic
-
-Generate it with:
-  python compute_kag_stats.py \\
-      --english_file llama-70b-english.csv \\
-      --arabic_file  llama-70b-arabic.csv \\
-      --ref_english  mistral3.2-24b-merged.csv \\
-      --ref_arabic   mistral3.2_ar_merged.csv \\
-      --model "Llama 3.3 70B" \\
-      --output_csv   llama_quadrants_full.csv
-
-Then sample 100 per quadrant:
-  python sample_quadrants.py \\
-      --input llama_quadrants_full.csv \\
-      --output llama_sampled_quadrants.csv
-
-Usage:
-  python logit_lens_llama.py \\
-      --csv      llama_sampled_quadrants.csv \\
-      --model_path /scratch/ca2627/huggingface/models--meta-llama--Llama-3.3-70B-Instruct/snapshots/<hash> \\
-      --out_dir  ./logit_lens_llama_out
+logit lens analysis for Llama 3.3 70B on MedAraBench.
 """
 
 import os
@@ -59,9 +26,7 @@ os.makedirs(args.out_dir, exist_ok=True)
 # Probe layers — 80 transformer layers total for Llama 3.3 70B
 # hidden_states[0] = embedding, hidden_states[L] = output of transformer layer L-1
 PROBE_LAYERS = [0, 8, 16, 24, 32, 40, 48, 56, 64, 72, 79, 80]
-# Note: hidden_states[80] = output of the final transformer layer (layer 79),
-# which is what the model actually uses for prediction via final_norm + lm_head.
-# hidden_states[79] = output of layer 78 — one layer too early.
+#note: hidden_states[80] = output of the final transformer layer (layer 79),
 
 QUAD_ORDER  = ["both_correct", "access_gap", "arabic_only", "both_wrong"]
 QUAD_COLORS = {
@@ -92,7 +57,6 @@ def extract_letter(val):
     m = re.search(r'\b([A-F])\b', s)
     return m.group(1) if m else ""
 
-# ── Load CSV ──────────────────────────────────────────────────────────────────
 print(f"Loading {args.csv}...")
 rows = []
 with open(args.csv, newline="", encoding="utf-8") as f:
@@ -112,7 +76,6 @@ print("  Quadrant breakdown:")
 for q in QUAD_ORDER:
     print(f"    {q}: {quad_counts[q]}")
 
-# ── Load model ────────────────────────────────────────────────────────────────
 print("\nLoading Llama 3.3 70B...")
 from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 
@@ -143,21 +106,11 @@ model.eval()
 print("  Model loaded.")
 print(f"  Transformer layers: {len(model.model.layers)}")   # should be 80
 
-# Paths for Llama are simple (no multimodal wrapper):
-#   model.model.layers  — 80 × LlamaDecoderLayer
-#   model.model.norm    — final LlamaRMSNorm
-#   model.lm_head       — unembedding Linear (no bias)
 final_norm = model.model.norm
 lm_head    = model.lm_head
 print(f"  final_norm: {type(final_norm).__name__}")
 print(f"  lm_head   : {type(lm_head).__name__}  ({lm_head.weight.shape})")
 
-# ── Answer token IDs ─────────────────────────────────────────────────────────
-# With a constrained "letter-only" system prompt the model outputs the bare
-# letter as its first token (A=32, B=33, C=34, D=35) rather than starting
-# with "The correct answer is…".  Diagnostic confirmed: space-prefixed tokens
-# (362/426/356/423) get ~0 probability at position 0 in English; bare tokens
-# are what actually appear in the output distribution for both languages.
 answer_token_ids = {
     "A": 32,
     "B": 33,
@@ -166,15 +119,12 @@ answer_token_ids = {
 }
 print(f"  Answer token IDs (bare letters): {answer_token_ids}")
 
-# Verify they decode back correctly
 for letter, tid in answer_token_ids.items():
     decoded = tokenizer.decode([tid]).strip()
     if decoded.upper() != letter:
         print(f"  [WARN] Token {tid} decodes as {repr(decoded)}, not '{letter}'")
 
-# ── Tokenise helper ───────────────────────────────────────────────────────────
 def tokenize_batch(texts):
-    """Apply Llama chat template and return padded tensors."""
     all_input_ids = []
     for t in texts:
         messages = [
@@ -185,8 +135,6 @@ def tokenize_batch(texts):
             messages, tokenize=True, add_generation_prompt=True,
             return_tensors=None,
         )
-        # apply_chat_template may return a BatchEncoding (transformers) or
-        # tokenizers.Encoding (Rust backend) instead of a plain list.
         if not isinstance(ids, list):
             try:
                 ids = ids['input_ids']   # BatchEncoding → dict-style access
@@ -209,12 +157,7 @@ def tokenize_batch(texts):
     seq_lens = attn_mask.sum(dim=1) - 1   # index of last real token
     return input_ids, attn_mask, seq_lens
 
-# ── Logit lens ────────────────────────────────────────────────────────────────
 def run_logit_lens(texts, gt_letters_batch, label=""):
-    """
-    At each probe layer, project last-token hidden state through final norm
-    + lm_head and measure rank and probability of the correct answer letter.
-    """
     n = len(texts)
     all_ranks = np.zeros((n, len(PROBE_LAYERS)), dtype=np.int32)
     all_probs = np.zeros((n, len(PROBE_LAYERS)), dtype=np.float32)
@@ -259,14 +202,12 @@ def run_logit_lens(texts, gt_letters_batch, label=""):
 
     return all_ranks, all_probs
 
-# ── Run ───────────────────────────────────────────────────────────────────────
 print(f"\nRunning logit lens — English ({N} questions)...")
 en_ranks, en_probs = run_logit_lens(en_texts, gt_letters, label="EN")
 
 print(f"\nRunning logit lens — Arabic ({N} questions)...")
 ar_ranks, ar_probs = run_logit_lens(ar_texts, gt_letters, label="AR")
 
-# ── Save ──────────────────────────────────────────────────────────────────────
 out_npz = os.path.join(args.out_dir, "logit_lens_results.npz")
 np.savez(out_npz,
          en_ranks=en_ranks, en_probs=en_probs,
@@ -274,7 +215,6 @@ np.savez(out_npz,
          quadrants=quadrants, layers=np.array(PROBE_LAYERS))
 print(f"\nSaved → {out_npz}")
 
-# ── Summary ───────────────────────────────────────────────────────────────────
 print("\n── Mean P(correct) at each probe layer ──")
 header = "  ".join([f"L{l:2d}" for l in PROBE_LAYERS])
 print(f"{'Quadrant / Lang':<25} {header}")
@@ -286,7 +226,6 @@ for q in QUAD_ORDER:
         print(f"  {q[:15]:<15} {lang:<8} {vals}")
     print()
 
-# ── Plot ──────────────────────────────────────────────────────────────────────
 print("Generating figure...")
 fig, axes = plt.subplots(1, 2, figsize=(16, 6), sharey=False)
 
